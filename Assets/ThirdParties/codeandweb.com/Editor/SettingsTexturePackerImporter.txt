@@ -1,0 +1,165 @@
+version: 2
+importPivots: 1
+tpsheetFileNames:
+- Assets/Bundles/M1H1/Sprites/Gameplay/M1H1Gameplay.tpsheet
+- Assets/Bundles/M1H1/Sprites/item.tpsheet
+- Assets/Bundles/M1H1/Sprites/item-cut.tpsheet
+- Assets/Bundles/M1H1/Sprites/map1coin.tpsheet
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.tpsheet
+- Assets/Projects/Textures/Items/item-jungle.tpsheet
+- Assets/Projects/Textures/Items/item-jungle-2.tpsheet
+- Assets/Projects/Textures/Items/item-snow.tpsheet
+- Assets/Projects/Textures/Minigame/Popu win/win.tpsheet
+- Assets/Projects/Textures/UI/Double Reward/double_reward.tpsheet
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
+- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.tpsheet
+- Assets/Projects/Textures/UI/Gift/gift-popup.tpsheet
+- Assets/Projects/Textures/UI/lottery/lottery.tpsheet
+- Assets/Projects/Textures/UI/Main menu/main_menu.tpsheet
+- Assets/Projects/Textures/UI/Pause and Revive/pause_revive.tpsheet
+- Assets/Projects/Textures/UI/Popup/daily_gift.tpsheet
+- Assets/Projects/Textures/UI/Popup/DailyGift/daily_gift.tpsheet
+- Assets/Projects/Textures/UI/Popup/Gift/gift-popup.tpsheet
+- Assets/Projects/Textures/UI/Popup/Pause and Revive/pause_revive.tpsheet
+- Assets/Projects/Textures/UI/Popup/SelectLevel/select_level.tpsheet
+- Assets/Projects/Textures/UI/Popup/Shop/shop.tpsheet
+- Assets/Projects/Textures/UI/Popup/SpecialOffer/special_offer.tpsheet
+- Assets/Projects/Textures/UI/Popup/subscription info/subscription_info.tpsheet
+- Assets/Projects/Textures/UI/Popup/Wheel/wheel.tpsheet
+- Assets/Projects/Textures/UI/SelectLevel/select_level.tpsheet
+- Assets/Projects/Textures/UI/Shop/shop.tpsheet
+- Assets/Projects/Textures/UI/SpecialOffer/special_offer.tpsheet
+- Assets/Projects/Textures/UI/subscription info/subscription_info.tpsheet
+- Assets/Projects/Textures/UI/Wheel/wheel.tpsheet
+- Assets/SpriteExportFile/gameplay.tpsheet
+- Assets/Sprites/catalog/catalog.tpsheet
+- Assets/Sprites/gameplay/popup_pause_play_lose_win.tpsheet
+- Assets/Sprites/gameplay/ui-gameplay.tpsheet
+- Assets/Sprites/main_menu/main_menu.tpsheet
+- Assets/Sprites/share_all.tpsheet
+- Assets/TextMesh Pro/Resources/Sprite Assets/location_number.tpsheet
+- Assets/Textures/Items/items.tpsheet
+- Assets/Textures/NewTheme/ItemStyle2.tpsheet
+- Assets/Textures/UI/congratulation/congratulation.tpsheet
+- Assets/Textures/UI/daily gift + luckyspin/dailygift+luckyspin.tpsheet
+- Assets/Textures/UI/Gameplay/Pause.tpsheet
+- Assets/Textures/UI/Gameplay/revive.tpsheet
+- Assets/Textures/UI/Gift/gift.tpsheet
+- Assets/Textures/UI/Main menu/main menu.tpsheet
+- Assets/Textures/UI/mission/mission.tpsheet
+- Assets/Textures/UI/nut co ban/nut co ban.tpsheet
+- Assets/Textures/UI/rating/rate.tpsheet
+- Assets/Textures/UI/shop + lucky spin/shop_luckspin.tpsheet
+- Assets/Textures/UI/SkinView/SkinView.tpsheet
+- Assets/Textures/UI/SpecialOffer/specialOffer.tpsheet
+- Assets/ui_gameplay.tpsheet
+- Assets/ui_home.tpsheet
+textureFileNames:
+- Assets/Bundles/M1H1/Sprites/Gameplay/M1H1Gameplay.png
+- Assets/Bundles/M1H1/Sprites/item.png
+- Assets/Bundles/M1H1/Sprites/item-cut.png
+- Assets/Bundles/M1H1/Sprites/map1coin.png
+- Assets/codeandweb.com/Example/SpriteSheet/sprites.png
+- Assets/Projects/Textures/Items/item-jungle.png
+- Assets/Projects/Textures/Items/item-jungle-2.png
+- Assets/Projects/Textures/Items/item-snow.png
+- Assets/Projects/Textures/Minigame/Popu win/win.png
+- Assets/Projects/Textures/UI/Double Reward/double_reward.png
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
+- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.png
+- Assets/Projects/Textures/UI/Gift/gift-popup.png
+- Assets/Projects/Textures/UI/lottery/lottery.png
+- Assets/Projects/Textures/UI/Main menu/main_menu.png
+- Assets/Projects/Textures/UI/Pause and Revive/pause_revive.png
+- Assets/Projects/Textures/UI/Popup/daily_gift.png
+- Assets/Projects/Textures/UI/Popup/DailyGift/daily_gift.png
+- Assets/Projects/Textures/UI/Popup/Gift/gift-popup.png
+- Assets/Projects/Textures/UI/Popup/Pause and Revive/pause_revive.png
+- Assets/Projects/Textures/UI/Popup/SelectLevel/select_level.png
+- Assets/Projects/Textures/UI/Popup/Shop/shop.png
+- Assets/Projects/Textures/UI/Popup/SpecialOffer/special_offer.png
+- Assets/Projects/Textures/UI/Popup/subscription info/subscription_info.png
+- Assets/Projects/Textures/UI/Popup/Wheel/wheel.png
+- Assets/Projects/Textures/UI/SelectLevel/select_level.png
+- Assets/Projects/Textures/UI/Shop/shop.png
+- Assets/Projects/Textures/UI/SpecialOffer/special_offer.png
+- Assets/Projects/Textures/UI/subscription info/subscription_info.png
+- Assets/Projects/Textures/UI/Wheel/wheel.png
+- Assets/SpriteExportFile/gameplay.png
+- Assets/Sprites/catalog/catalog.png
+- Assets/Sprites/gameplay/popup_pause_play_lose_win.png
+- Assets/Sprites/gameplay/ui-gameplay.png
+- Assets/Sprites/main_menu/main_menu.png
+- Assets/Sprites/share_all.png
+- Assets/TextMesh Pro/Resources/Sprite Assets/location_number.png
+- Assets/Textures/Items/items.png
+- Assets/Textures/NewTheme/ItemStyle2.png
+- Assets/Textures/UI/congratulation/congratulation.png
+- Assets/Textures/UI/daily gift + luckyspin/dailygift+luckyspin.png
+- Assets/Textures/UI/Gameplay/Pause.png
+- Assets/Textures/UI/Gameplay/revive.png
+- Assets/Textures/UI/Gift/gift.png
+- Assets/Textures/UI/Main menu/main menu.png
+- Assets/Textures/UI/mission/mission.png
+- Assets/Textures/UI/nut co ban/nut co ban.png
+- Assets/Textures/UI/rating/rate.png
+- Assets/Textures/UI/shop + lucky spin/shop_luckspin.png
+- Assets/Textures/UI/SkinView/SkinView.png
+- Assets/Textures/UI/SpecialOffer/specialOffer.png
+- Assets/ui_gameplay.png
+- Assets/ui_home.png
+normalmapFileNames:
+- 
+- 
+- 
+- 
+- Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+enableDebugOutput: 0
