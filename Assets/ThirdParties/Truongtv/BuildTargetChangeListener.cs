@@ -18,10 +18,11 @@ namespace ThirdParties.Truongtv
         public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
             Debug.Log("OnActiveBuildTargetChanged "+newTarget);
-            OnAdServiceChange(GetProperties("adService"));
+            OnAdServiceChange(GetProperties("ad_service"));
             OnLogServiceChange(GetProperties("log"));
-            OnRemoteServiceChange(GetProperties("remoteConfig"));
+            OnRemoteServiceChange(GetProperties("remote_config"));
             OnRateServiceChange(GetProperties("rate"));
+            OnCloudMessagingServiceChange(GetProperties("cloud_message"));
         }
         private string GetProperties(string property)
         {
@@ -54,7 +55,7 @@ namespace ThirdParties.Truongtv
                     symbolList.Add(DefineSymbol.MaxSymbol);
                     break;
             }
-            SaveProperties("adService", adService.ToString());
+            SaveProperties("ad_service", adService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
@@ -96,7 +97,7 @@ namespace ThirdParties.Truongtv
                     symbolList.Add(DefineSymbol.RemoteUnity);
                     break;
             }
-            SaveProperties("remoteConfig", remoteConfigService.ToString());
+            SaveProperties("remote_config", remoteConfigService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
@@ -110,6 +111,18 @@ namespace ThirdParties.Truongtv
                 symbolList.Add(DefineSymbol.InAppReview);
             }
             SaveProperties("rate",  ratingService.ToString());
+            DefineSymbol.UpdateDefineSymbols(symbolList);
+        }
+        private void OnCloudMessagingServiceChange(string data)
+        {
+            var cloudMessagingService = data==string.Empty? CloudMessagingService.None:(CloudMessagingService)Enum.Parse(typeof(CloudMessagingService), data);
+            var symbolList = DefineSymbol.GetAllDefineSymbols();
+            symbolList.Remove(DefineSymbol.InAppReview);
+            if (cloudMessagingService == CloudMessagingService.Firebase)
+            {
+                symbolList.Add(DefineSymbol.FirebaseMessaging);
+            }
+            SaveProperties("cloud_message", cloudMessagingService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
         private static void SaveProperties(string property, string value)

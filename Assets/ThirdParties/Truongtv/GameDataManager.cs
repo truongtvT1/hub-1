@@ -10,6 +10,8 @@ namespace ThirdParties.Truongtv
         [SerializeField,FoldoutGroup("Game Setting")] public bool cheated = false;
         [SerializeField, FoldoutGroup("Game Setting")] public bool debugger = false;
         [HideInInspector]public string versionReview;
+        public static int BlockAdTime = 30;
+        public static int CheckInternetPerLevel = 10;
         private static GameDataManager _instance;
         public static GameDataManager Instance => _instance;
         
@@ -34,7 +36,7 @@ namespace ThirdParties.Truongtv
 
         private void OnFetchDataComplete(RemoteConfigManager manager)
         {
-            
+            Debug.Log("fetch complete");
         }
     }
     

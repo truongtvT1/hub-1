@@ -61,7 +61,7 @@ namespace ThirdParties.Truongtv.AdsManager
 
         private bool IsInterstitialAvailableToShow()
         {
-            if (DateTime.Now.Subtract(_lastTimeInterstitialShow).TotalSeconds < Config.BlockAdTime)
+            if (DateTime.Now.Subtract(_lastTimeInterstitialShow).TotalSeconds < GameDataManager.BlockAdTime)
                 return false;
             return true;
         }
@@ -135,6 +135,7 @@ namespace ThirdParties.Truongtv.AdsManager
                 {
                     {"cause","no_internet"}
                 });
+                _countLevel++;
                 return;
             }
             if (!IsRewardVideoLoaded())

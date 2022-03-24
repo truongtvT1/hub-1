@@ -1,40 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using NotificationSamples;
-#if UNITY_ANDROID
-using Unity.Notifications.Android;
-#endif
-using UnityEngine;
 using Random = UnityEngine.Random;
-
+#if USING_FIREBASE_MESSAGING
+using Firebase.Messaging;
+#endif
 namespace ThirdParties.Truongtv.Notification
 {
     public class MobileNotification : GameNotificationsManager
     {
-        private static MobileNotification _instance;
-        public static MobileNotification Instance => _instance;
+        public static MobileNotification Instance ;
         private readonly List<IGameNotification> _listNotifications = new List<IGameNotification>();
         private GameNotificationChannel[] _defaultNotificationChannels;
 #region Private
 
         private void Awake()
         {
-            if (_instance != null)
+            if (Instance != null)
             {
-                Destroy(_instance.gameObject);
+                Destroy(Instance);
             }
-
-            _instance = this;
+            Instance = this;
         }
-
-        private void Start()
+        public void Init()
         {
             if (!Initialized)
             {
                 InitChannels();
+#if USING_FIREBASE_MESSAGING
+            FirebaseMessaging.TokenReceived += OnTokenReceived;
+            FirebaseMessaging.MessageReceived += OnMessageReceived;
+#endif
             }
+            
+        }
+#if USING_FIREBASE_MESSAGING
+        private void OnTokenReceived(object sender, TokenReceivedEventArgs token) {
+            Debug.Log("Received Registration Token: " + token.Token);
         }
 
+        private void OnMessageReceived(object sender, MessageReceivedEventArgs e) {
+            Debug.Log("Received a new message from: " + e.Message.From);
+        }
+#endif
         private void InitChannels()
         {
             _defaultNotificationChannels = new[]
@@ -48,22 +56,6 @@ namespace ThirdParties.Truongtv.Notification
             };
             Initialize(_defaultNotificationChannels);
             CancelAllNotifications();
-
-#if UNITY_ANDROID
-            AndroidNotificationCenter.CancelAllScheduledNotifications();
-
-            void ReceivedNotificationHandler(AndroidNotificationIntentData data)
-            {
-                var msg = "Notification received : " + data.Id + "\n";
-                msg += "\n Notification received: ";
-                msg += "\n .Title: " + data.Notification.Title;
-                msg += "\n .Body: " + data.Notification.Text;
-                msg += "\n .Channel: " + data.Channel;
-                Debug.Log(msg);
-            }
-            AndroidNotificationCenter.OnNotificationReceived += ReceivedNotificationHandler;
-
-#endif
             PlayGameReminder(1);
             PlayGameReminder(3);
         }

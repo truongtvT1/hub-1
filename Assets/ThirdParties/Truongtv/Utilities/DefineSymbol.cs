@@ -28,9 +28,11 @@ namespace ThirdParties.Truongtv.Utilities
         #endregion
 
         #region Rate
-
         public const string InAppReview = "USING_IN_APP_REVIEW";
+        #endregion
 
+        #region Cloud Messaging
+        public const string FirebaseMessaging = "USING_FIREBASE_MESSAGING";
         #endregion
 
         private static string GetAllDefineSymbol()

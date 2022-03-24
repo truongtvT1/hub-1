@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv.AdsManager;
 using ThirdParties.Truongtv.LogManager;
+using ThirdParties.Truongtv.Notification;
 using ThirdParties.Truongtv.Rating;
 using ThirdParties.Truongtv.RemoteConfig;
 using ThirdParties.Truongtv.Utilities;
@@ -16,27 +17,26 @@ namespace ThirdParties.Truongtv
     [RequireComponent(typeof(LogEventManager))]
     [RequireComponent(typeof(RatingHelper))]
     [RequireComponent(typeof(RemoteConfigManager))]
+    [RequireComponent(typeof(MobileNotification))]
     public class GameServiceManager : MonoBehaviour
     {
         [SerializeField, OnValueChanged(nameof(OnAdServiceChange))]
         private AdService adService;
-
         [SerializeField, OnValueChanged(nameof(OnLogServiceChange))]
         private LogService logService;
-
         [SerializeField, OnValueChanged(nameof(OnRemoteServiceChange))]
         private RemoteConfigService remoteConfigService;
-
         [SerializeField, OnValueChanged(nameof(OnRateServiceChange))]
         private RatingService ratingService;
-
+        [SerializeField, OnValueChanged(nameof(OnCloudMessagingServiceChange))]
+        private CloudMessagingService cloudMessagingService;
         [HideInInspector] public AdManager adManager;
         [HideInInspector] public LogEventManager logEventManager;
         [HideInInspector] public RatingHelper ratingHelper;
         [HideInInspector] public RemoteConfigManager remoteConfigManager;
+        [HideInInspector] public MobileNotification mobileNotification;
         public static Action<RemoteConfigManager> FetchComplete;
-
-        private const string XmlPath = "ThirdParties/Truongtv/CustomService.xml";
+        
         public static GameServiceManager Instance;
 
         public void Awake()
@@ -50,11 +50,26 @@ namespace ThirdParties.Truongtv
             logEventManager = GetComponent<LogEventManager>();
             ratingHelper = GetComponent<RatingHelper>();
             remoteConfigManager = GetComponent<RemoteConfigManager>();
+            mobileNotification = GetComponent<MobileNotification>();
         }
 
         private void Start()
         {
             remoteConfigManager.fetchComplete += FetchComplete;
+            adManager.Init();
+            #if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
+             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
+                remoteConfigManager.Init();
+                logEventManager.Init();
+                mobileNotification.Init();
+            });
+            #else
+            remoteConfigManager.Init();
+            logEventManager.Init();
+            mobileNotification.Init();
+            #endif
+            
         }
 #if UNITY_EDITOR
         private void OnAdServiceChange()
@@ -80,7 +95,7 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("adService", adService.ToString());
+            SaveProperties("adS_service", adService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
@@ -122,7 +137,7 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("remoteConfig", remoteConfigService.ToString());
+            SaveProperties("remote_config", remoteConfigService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
@@ -139,8 +154,22 @@ namespace ThirdParties.Truongtv
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
+        private void OnCloudMessagingServiceChange()
+        {
+            var symbolList = DefineSymbol.GetAllDefineSymbols();
+            symbolList.Remove(DefineSymbol.InAppReview);
+            if (cloudMessagingService == CloudMessagingService.Firebase)
+            {
+                symbolList.Add(DefineSymbol.FirebaseMessaging);
+            }
+
+            SaveProperties("cloud_message", cloudMessagingService.ToString());
+            DefineSymbol.UpdateDefineSymbols(symbolList);
+        }
+
         private static void SaveProperties(string property, string value)
         {
+            var XmlPath = "ThirdParties/Truongtv/CustomService.xml";
             var path = Path.Combine(Application.dataPath, XmlPath);
             if (!File.Exists(path))
             {
@@ -189,5 +218,10 @@ namespace ThirdParties.Truongtv
     {
         OpenLink,
         InApp
+    }
+
+    enum CloudMessagingService
+    {
+        None,Firebase
     }
 }
