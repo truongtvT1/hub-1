@@ -30,6 +30,8 @@ namespace ThirdParties.Truongtv
         private RatingService ratingService;
         [SerializeField, OnValueChanged(nameof(OnCloudMessagingServiceChange))]
         private CloudMessagingService cloudMessagingService;
+        [SerializeField, OnValueChanged(nameof(OnCloudMessagingServiceChange))]
+        private AssetBundleDelivery assetBundleDelivery;
         [HideInInspector] public AdManager adManager;
         [HideInInspector] public LogEventManager logEventManager;
         [HideInInspector] public RatingHelper ratingHelper;
@@ -167,6 +169,25 @@ namespace ThirdParties.Truongtv
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
+        private void OnAssetBundleServiceChange()
+        {
+            var symbolList = DefineSymbol.GetAllDefineSymbols();
+            symbolList.Remove(DefineSymbol.StoreBundle);
+            symbolList.Remove(DefineSymbol.CustomServerBundle);
+            switch (assetBundleDelivery)
+            {
+                case AssetBundleDelivery.None:
+                    break;
+                case AssetBundleDelivery.Store:
+                    symbolList.Add(DefineSymbol.StoreBundle);
+                    break;
+                case AssetBundleDelivery.Custom:
+                    symbolList.Add(DefineSymbol.CustomServerBundle);
+                    break;
+            }
+            SaveProperties("asset_bundle", assetBundleDelivery.ToString());
+            DefineSymbol.UpdateDefineSymbols(symbolList);
+        }
         private static void SaveProperties(string property, string value)
         {
             var XmlPath = "ThirdParties/Truongtv/CustomService.xml";
@@ -223,5 +244,10 @@ namespace ThirdParties.Truongtv
     enum CloudMessagingService
     {
         None,Firebase
+    }
+
+    enum AssetBundleDelivery
+    {
+        None,Store,Custom
     }
 }

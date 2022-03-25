@@ -35,6 +35,12 @@ namespace ThirdParties.Truongtv.Utilities
         public const string FirebaseMessaging = "USING_FIREBASE_MESSAGING";
         #endregion
 
+        #region AssetBundle
+        public const string StoreBundle = "USING_STORE_BUNDLE";
+        public const string CustomServerBundle = "USING_CUSTOM_SERVER_BUNDLE";
+
+        #endregion
+
         private static string GetAllDefineSymbol()
         {
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;

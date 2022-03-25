@@ -27,6 +27,7 @@ namespace ThirdParties.Truongtv
             Application.targetFrameRate = 300;
             versionReview = Application.version;
             GameServiceManager.FetchComplete += OnFetchDataComplete;
+            var data = ES3.Load("user_info");
         }
         
         public bool IsPurchaseBlockAd()

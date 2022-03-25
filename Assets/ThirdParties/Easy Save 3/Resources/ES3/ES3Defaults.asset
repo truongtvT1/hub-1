@@ -36,11 +36,16 @@ MonoBehaviour:
     - MoreMountains.NiceVibrations.Demos
     - Sirenix.OdinInspector.CompatibilityLayer
     - MoreMountains.NiceVibrations
+    - Google.Play.Core
+    - Google.Play.Common
+    - Google.Play.Review
+    - Google.Play.AssetDelivery
     - PsdPlugin
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - spine-unity-editor
     - MoreMountains.NiceVibrations.Editor
     - spine-unity-examples-editor
+    - Google.Android.AppBundle.Editor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
