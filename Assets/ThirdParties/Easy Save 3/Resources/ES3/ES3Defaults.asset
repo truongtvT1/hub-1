@@ -17,10 +17,10 @@ MonoBehaviour:
     path: dat.io
     encryptionType: 0
     compressionType: 0
-    encryptionPassword: password
+    encryptionPassword: 
     directory: 0
     format: 0
-    prettyPrint: 0
+    prettyPrint: 1
     bufferSize: 2048
     saveChildren: 1
     typeChecking: 1
@@ -29,23 +29,23 @@ MonoBehaviour:
     referenceMode: 2
     serializationDepthLimit: 64
     assemblyNames:
+    - Google.Play.Review
     - Assembly-CSharp
+    - Google.Play.AssetDelivery
     - MoreMountains.NiceVibrations.Haptics
     - spine-unity-examples
     - spine-unity
     - MoreMountains.NiceVibrations.Demos
-    - Sirenix.OdinInspector.CompatibilityLayer
-    - MoreMountains.NiceVibrations
     - Google.Play.Core
     - Google.Play.Common
-    - Google.Play.Review
-    - Google.Play.AssetDelivery
+    - Sirenix.OdinInspector.CompatibilityLayer
+    - MoreMountains.NiceVibrations
+    - Google.Android.AppBundle.Editor
     - PsdPlugin
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - spine-unity-editor
     - MoreMountains.NiceVibrations.Editor
     - spine-unity-examples-editor
-    - Google.Android.AppBundle.Editor
     showAdvancedSettings: 1
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

@@ -152,8 +152,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e61f109eb8d42bd868d182eb9562c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
   cheated: 0
   debugger: 0
+  skinData: {fileID: 11400000, guid: 927749abf6aa67046ab6f3e12d6957fd, type: 2}
+  startSkin:
+  - accessories/backpack
   versionReview: 
 --- !u!4 &353174989
 Transform:

@@ -19,7 +19,7 @@ namespace ThirdParties.Truongtv.AdsManager
             #elif USING_ADMOB
             _adClient = new AdMobClient();
             #elif USING_IRON_SOURCE
-            _adClient = new AdMobClient();
+            _adClient = new IronSourceAdClient();
             #else
             _adClient = new EditorAdClient();
             #endif

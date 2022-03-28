@@ -6,9 +6,11 @@ namespace ThirdParties.Truongtv.BundleService
 {
     public interface IBundleDeliveryService
     {
-        long GetDownloadSize(string bundleName);
+        void GetDownloadSize(string bundleName,Action<long> complete=null,Action failed = null);
         void UnloadBundle(string bundleName);
-        IEnumerator<AssetBundle> DownLoadBundle(string bundleName, Action<float> progressCallback=null);
+        void DownLoadBundle(string bundleName, Action<float> progressCallback=null,Action<AssetBundle> complete=null,Action failed = null);
         bool IsDownLoaded(string bundleName);
+        void LoadLocalBundle(string bundleName,Action<long> complete=null,Action failed = null);
+        
     }
 }

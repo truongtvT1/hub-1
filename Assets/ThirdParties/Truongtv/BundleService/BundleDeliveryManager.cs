@@ -8,7 +8,7 @@ namespace ThirdParties.Truongtv.BundleService
         private IBundleDeliveryService _bundleService;
         private void Start()
         {
-            StartCoroutine(_bundleService.GetDownloadSize("a"));
+            //StartCoroutine(_bundleService.GetDownloadSize("a"));
         }
     }
 }
