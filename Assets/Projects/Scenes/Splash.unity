@@ -164,9 +164,11 @@ MonoBehaviour:
   cheated: 0
   debugger: 0
   skinData: {fileID: 11400000, guid: 927749abf6aa67046ab6f3e12d6957fd, type: 2}
+  remoteConfigValue:
+    versionReview: 
+    blockAdTime: 30
   startSkin:
   - accessories/backpack
-  versionReview: 
 --- !u!4 &353174989
 Transform:
   m_ObjectHideFlags: 0
@@ -304,12 +306,7 @@ MonoBehaviour:
   remoteConfigService: 0
   ratingService: 1
   cloudMessagingService: 0
-  assetBundleDelivery: 0
-  adManager: {fileID: 0}
-  logEventManager: {fileID: 0}
-  ratingHelper: {fileID: 0}
-  remoteConfigManager: {fileID: 0}
-  mobileNotification: {fileID: 0}
+  iapService: 0
 --- !u!114 &772000253
 MonoBehaviour:
   m_ObjectHideFlags: 0

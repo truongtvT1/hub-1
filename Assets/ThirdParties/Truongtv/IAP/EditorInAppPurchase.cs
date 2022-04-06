@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Truongtv.Services.IAP;
 
-namespace ThirdParties.Truongtv.IapManager
+namespace ThirdParties.Truongtv.IAP
 {
     public class EditorInAppPurchase : IPaymentService
     {

@@ -130,7 +130,6 @@ namespace ThirdParties.Truongtv.Notification
             SendNotification("Free Spin await! 🎁 ", data[Random.Range(0, 3)]
                 , deliveryTime, channelId: NotificationChannel.ReminderChannel.ToString());
         }
-        
         public void DailyRewardResetReminder(bool receive)
         {
             int playReminderHour = 8;

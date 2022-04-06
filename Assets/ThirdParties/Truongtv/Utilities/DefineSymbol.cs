@@ -41,6 +41,10 @@ namespace ThirdParties.Truongtv.Utilities
 
         #endregion
 
+        #region IAP
+        public const string IAP = "USING_IAP";
+        public const string UDP = "USING_UDP";
+        #endregion
         private static string GetAllDefineSymbol()
         {
             var buildTargetGroup = EditorUserBuildSettings.selectedBuildTargetGroup;

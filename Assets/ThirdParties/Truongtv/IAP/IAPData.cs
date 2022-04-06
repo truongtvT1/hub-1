@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ThirdParties.Truongtv.IapManager
+namespace ThirdParties.Truongtv.IAP
 {
     [CreateAssetMenu(fileName = "IAPData", menuName = "Truongtv/GameSetting/IAPData", order = 1)]
     public class IAPData : ScriptableObject

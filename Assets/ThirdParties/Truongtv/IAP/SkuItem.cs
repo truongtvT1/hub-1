@@ -1,10 +1,11 @@
 ﻿
 
 using System;
+
 #if USING_IAP
 using UnityEngine.Purchasing;
 #endif
-namespace ThirdParties.Truongtv.IapManager
+namespace ThirdParties.Truongtv.IAP
 {
     [Serializable]
     public class SkuItem

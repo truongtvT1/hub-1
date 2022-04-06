@@ -5,7 +5,7 @@ using Truongtv.Services.IAP;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Security;
-namespace ThirdParties.Truongtv.IapManager
+namespace ThirdParties.Truongtv.IAP
 {
     public class UnityInAppPurchase:IStoreListener,IPaymentService
     {

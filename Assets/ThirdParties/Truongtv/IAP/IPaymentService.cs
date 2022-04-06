@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Truongtv.Services.IAP
+namespace ThirdParties.Truongtv.IAP
 {
     public interface IPaymentService
     {

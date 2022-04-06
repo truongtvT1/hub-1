@@ -61,7 +61,7 @@ namespace ThirdParties.Truongtv.AdsManager
 
         private bool IsInterstitialAvailableToShow()
         {
-            if (DateTime.Now.Subtract(_lastTimeInterstitialShow).TotalSeconds < GameDataManager.BlockAdTime)
+            if (DateTime.Now.Subtract(_lastTimeInterstitialShow).TotalSeconds < GameDataManager.Instance.remoteConfigValue.blockAdTime)
                 return false;
             return true;
         }
@@ -71,7 +71,7 @@ namespace ThirdParties.Truongtv.AdsManager
         public void ShowBanner(Action<bool> result = null)
         {
 #if UNITY_IOS|| UNITY_IPHONE
-            if (GameDataManager.Instance.versionReview.Equals(Application.version))
+            if (GameDataManager.Instance.remoteConfigValue.versionReview.Equals(Application.version))
             {
                 result?.Invoke(false);
                 return;
@@ -106,7 +106,7 @@ namespace ThirdParties.Truongtv.AdsManager
             {
                 ShowInterstitial(result =>
                 {
-                    GameServiceManager.Instance.logEventManager.LogEvent("ads_interstitial");
+                    GameServiceManager.Instance.LogEvent("ads_interstitial");
                     adResult?.Invoke();
                 });
             }
@@ -124,14 +124,14 @@ namespace ThirdParties.Truongtv.AdsManager
                 adResult?.Invoke();
                 return;
             }
-            GameServiceManager.Instance.logEventManager.LogEvent("ads_reward_click",new Dictionary<string, object>
+            GameServiceManager.Instance.LogEvent("ads_reward_click",new Dictionary<string, object>
             {
                 {"reward_for",location}
             });
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
                 PopupController.Instance.ShowNoInternet();
-                GameServiceManager.Instance.logEventManager.LogEvent("ads_reward_fail",new Dictionary<string, object>
+                GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
                 {
                     {"cause","no_internet"}
                 });
@@ -141,9 +141,9 @@ namespace ThirdParties.Truongtv.AdsManager
             if (!IsRewardVideoLoaded())
             {
                 PopupController.Instance.ShowToast("Ads is still coming. Please try again later.");
-                GameServiceManager.Instance.logEventManager.LogEvent("ads_reward_fail",new Dictionary<string, object>
+                GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
                 {
-                    {"cause","no_ad"}
+                    {"cause","no_fill"}
                 });
                 return;
             }
@@ -151,14 +151,17 @@ namespace ThirdParties.Truongtv.AdsManager
             {
                 if (!result)
                 {
-                    GameServiceManager.Instance.logEventManager.LogEvent("ads_reward_fail",new Dictionary<string, object>
+                    GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
                     {
                         {"cause","not_complete"}
                     });
                     return;
                 }
                 adResult?.Invoke();
-                GameServiceManager.Instance.logEventManager.LogEvent("ads_reward_complete");
+                GameServiceManager.Instance.LogEvent("ads_reward_complete",new Dictionary<string, object>
+                {
+                    {"reward_for",location}
+                });
             });
         }
         #endregion

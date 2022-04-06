@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using Sirenix.OdinInspector;
 using Truongtv.PopUpController;
-using Truongtv.Services.IAP;
 using UnityEngine;
 
-namespace ThirdParties.Truongtv.IapManager
+namespace ThirdParties.Truongtv.IAP
 {
     public class IapManager :MonoBehaviour
     {

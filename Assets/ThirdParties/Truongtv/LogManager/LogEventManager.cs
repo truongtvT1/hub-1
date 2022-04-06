@@ -19,8 +19,6 @@ namespace ThirdParties.Truongtv.LogManager
         {
             _logService.LogEvent(eventName,parameters);
         }
-    
-    
         public void LogEvent(string eventName)
         {
             _logService.LogEvent(eventName);
