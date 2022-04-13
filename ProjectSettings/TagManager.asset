@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 2396802909
+    locked: 0
+  - name: Popup
+    uniqueID: 2751698565
+    locked: 0
+  - name: Currency
+    uniqueID: 2532352831
+    locked: 0
+  - name: Notification
+    uniqueID: 1452613177
+    locked: 0

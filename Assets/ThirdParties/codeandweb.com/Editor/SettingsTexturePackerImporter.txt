@@ -10,12 +10,14 @@ tpsheetFileNames:
 - Assets/Projects/Textures/Items/item-jungle-2.tpsheet
 - Assets/Projects/Textures/Items/item-snow.tpsheet
 - Assets/Projects/Textures/Minigame/Popu win/win.tpsheet
+- Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.tpsheet
 - Assets/Projects/Textures/UI/Double Reward/double_reward.tpsheet
-- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/GamePlay/UI-Ingame.tpsheet
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/Gift/gift-popup.tpsheet
 - Assets/Projects/Textures/UI/lottery/lottery.tpsheet
 - Assets/Projects/Textures/UI/Main menu/main_menu.tpsheet
+- Assets/Projects/Textures/UI/Menu/menu.tpsheet
 - Assets/Projects/Textures/UI/Pause and Revive/pause_revive.tpsheet
 - Assets/Projects/Textures/UI/Popup/daily_gift.tpsheet
 - Assets/Projects/Textures/UI/Popup/DailyGift/daily_gift.tpsheet
@@ -64,12 +66,14 @@ textureFileNames:
 - Assets/Projects/Textures/Items/item-jungle-2.png
 - Assets/Projects/Textures/Items/item-snow.png
 - Assets/Projects/Textures/Minigame/Popu win/win.png
+- Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.png
 - Assets/Projects/Textures/UI/Double Reward/double_reward.png
-- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
 - Assets/Projects/Textures/UI/GamePlay/UI-Ingame.png
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
 - Assets/Projects/Textures/UI/Gift/gift-popup.png
 - Assets/Projects/Textures/UI/lottery/lottery.png
 - Assets/Projects/Textures/UI/Main menu/main_menu.png
+- Assets/Projects/Textures/UI/Menu/menu.png
 - Assets/Projects/Textures/UI/Pause and Revive/pause_revive.png
 - Assets/Projects/Textures/UI/Popup/daily_gift.png
 - Assets/Projects/Textures/UI/Popup/DailyGift/daily_gift.png
@@ -114,6 +118,8 @@ normalmapFileNames:
 - 
 - 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
 - 
 - 
 - 
