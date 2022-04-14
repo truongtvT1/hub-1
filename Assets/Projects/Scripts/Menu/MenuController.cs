@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Projects.Scripts.Hub;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +19,7 @@ namespace Projects.Scripts.Menu
         }
 
         [SerializeField] private Button playButton, settingButton, switchButton, specialOfferButton, noAdButton, roomButton,userInfoButton,leaderBoardButton;
-
+        [SerializeField] private CharacterAnimationGraphic mainCharacter;
         private void Start()
         {
             playButton.onClick.AddListener(OnPlayButtonClick);
@@ -28,8 +30,13 @@ namespace Projects.Scripts.Menu
             roomButton.onClick.AddListener(OnRoomButtonClick);
             userInfoButton.onClick.AddListener(OnUserInfoButtonClick);
             leaderBoardButton.onClick.AddListener(OnLeaderBoardButtonClick);
+            mainCharacter.UpdateSkin(GameDataManager.Instance.GetCurrentSkin());
+            mainCharacter.SetSkinColor(GameDataManager.Instance.GetSkinColor());
+            Debug.Log(GameDataManager.Instance.GetSkinColor());
             GameServiceManager.Instance.ShowBanner();
         }
+
+        #region Button Event
 
         private void OnPlayButtonClick()
         {
@@ -38,7 +45,7 @@ namespace Projects.Scripts.Menu
 
         private void OnSwitchButtonClick()
         {
-            
+            PopupMenuController.Instance.ShowPopupCustomizeCharacter();
         }
 
         private void OnSpecialOfferButtonClick()
@@ -68,6 +75,16 @@ namespace Projects.Scripts.Menu
         private void OnLeaderBoardButtonClick()
         {
             PopupMenuController.Instance.ShowPopupLeaderBoard();
+        }
+        
+        
+
+        #endregion
+
+        public void UpdateCharacter()
+        {
+            mainCharacter.UpdateSkin(GameDataManager.Instance.GetCurrentSkin());
+            mainCharacter.SetSkinColor(GameDataManager.Instance.GetSkinColor());
         }
     }
 }

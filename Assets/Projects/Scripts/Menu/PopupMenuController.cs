@@ -11,6 +11,7 @@ namespace Projects.Scripts.Menu
         
         [SerializeField] private PopupSetting popupSetting;
         [SerializeField] private PopupLeaderBoard popupLeaderBoard;
+        [SerializeField] private PopupCustomizeCharacter popupCustomizeCharacter;
         private PopupController _controller;
 
         private void Awake()
@@ -33,6 +34,12 @@ namespace Projects.Scripts.Menu
             popupLeaderBoard.gameObject.SetActive(true);
             popupLeaderBoard.Init();
             popupLeaderBoard.Show(_controller);
+        }
+        public void ShowPopupCustomizeCharacter()
+        {
+            popupCustomizeCharacter.gameObject.SetActive(true);
+            popupCustomizeCharacter.Init();
+            popupCustomizeCharacter.Show(_controller);
         }
     }
 }

@@ -113,6 +113,9 @@ TextureImporter:
   - first:
       213: 5488255541964834298
     second: skin_square
+  - first:
+      213: 4404509396548255454
+    second: choose 1
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -193,8 +196,8 @@ TextureImporter:
       name: 200
       rect:
         serializedVersion: 2
-        x: 241
-        y: 75
+        x: 307
+        y: 478
         width: 84
         height: 45
       alignment: 0
@@ -214,8 +217,8 @@ TextureImporter:
       name: ads icon
       rect:
         serializedVersion: 2
-        x: 951
-        y: 646
+        x: 635
+        y: 4
         width: 66
         height: 57
       alignment: 0
@@ -274,11 +277,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: choose
+      name: choose 1
       rect:
         serializedVersion: 2
         x: 703
         y: 707
+        width: 252
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edef027c5f5ff1d30800000000000000
+      internalID: 4404509396548255454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: choose
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 469
         width: 252
         height: 234
       alignment: 0
@@ -298,8 +322,8 @@ TextureImporter:
       name: cloak off
       rect:
         serializedVersion: 2
-        x: 395
-        y: 310
+        x: 489
+        y: 251
         width: 148
         height: 86
       alignment: 0
@@ -319,7 +343,7 @@ TextureImporter:
       name: cloak
       rect:
         serializedVersion: 2
-        x: 547
+        x: 307
         y: 527
         width: 150
         height: 89
@@ -382,8 +406,8 @@ TextureImporter:
       name: glasses off
       rect:
         serializedVersion: 2
-        x: 395
-        y: 220
+        x: 641
+        y: 251
         width: 148
         height: 86
       alignment: 0
@@ -403,8 +427,8 @@ TextureImporter:
       name: glasses
       rect:
         serializedVersion: 2
-        x: 547
-        y: 434
+        x: 481
+        y: 42
         width: 150
         height: 89
       alignment: 0
@@ -424,8 +448,8 @@ TextureImporter:
       name: hair off
       rect:
         serializedVersion: 2
-        x: 701
-        y: 201
+        x: 724
+        y: 161
         width: 148
         height: 86
       alignment: 0
@@ -445,7 +469,7 @@ TextureImporter:
       name: hair
       rect:
         serializedVersion: 2
-        x: 547
+        x: 489
         y: 341
         width: 150
         height: 89
@@ -466,8 +490,8 @@ TextureImporter:
       name: hand off
       rect:
         serializedVersion: 2
-        x: 547
-        y: 158
+        x: 793
+        y: 251
         width: 148
         height: 86
       alignment: 0
@@ -487,8 +511,8 @@ TextureImporter:
       name: hand
       rect:
         serializedVersion: 2
-        x: 241
-        y: 307
+        x: 570
+        y: 158
         width: 150
         height: 89
       alignment: 0
@@ -592,8 +616,8 @@ TextureImporter:
       name: none
       rect:
         serializedVersion: 2
-        x: 701
-        y: 291
+        x: 489
+        y: 434
         width: 184
         height: 182
       alignment: 0
@@ -614,7 +638,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 257
+        y: 19
         width: 236
         height: 216
       alignment: 0
@@ -634,8 +658,8 @@ TextureImporter:
       name: Rounded dc
       rect:
         serializedVersion: 2
-        x: 703
-        y: 477
+        x: 1
+        y: 239
         width: 244
         height: 226
       alignment: 0
@@ -676,8 +700,8 @@ TextureImporter:
       name: skin lock
       rect:
         serializedVersion: 2
-        x: 1
-        y: 37
+        x: 241
+        y: 19
         width: 236
         height: 216
       alignment: 0
@@ -697,8 +721,8 @@ TextureImporter:
       name: skin off
       rect:
         serializedVersion: 2
-        x: 395
-        y: 130
+        x: 797
+        y: 379
         width: 148
         height: 86
       alignment: 0
@@ -718,8 +742,8 @@ TextureImporter:
       name: skin
       rect:
         serializedVersion: 2
-        x: 547
-        y: 248
+        x: 643
+        y: 341
         width: 150
         height: 89
       alignment: 0
@@ -739,8 +763,8 @@ TextureImporter:
       name: skin_square
       rect:
         serializedVersion: 2
-        x: 307
-        y: 400
+        x: 249
+        y: 249
         width: 236
         height: 216
       alignment: 0
@@ -760,8 +784,8 @@ TextureImporter:
       name: suit off
       rect:
         serializedVersion: 2
-        x: 241
-        y: 124
+        x: 789
+        y: 71
         width: 148
         height: 86
       alignment: 0
@@ -781,8 +805,8 @@ TextureImporter:
       name: suit
       rect:
         serializedVersion: 2
-        x: 241
-        y: 214
+        x: 635
+        y: 65
         width: 150
         height: 89
       alignment: 0
@@ -823,8 +847,8 @@ TextureImporter:
       name: ticket
       rect:
         serializedVersion: 2
-        x: 889
-        y: 286
+        x: 481
+        y: 135
         width: 85
         height: 110
       alignment: 0
@@ -844,8 +868,8 @@ TextureImporter:
       name: unlock
       rect:
         serializedVersion: 2
-        x: 853
-        y: 245
+        x: 481
+        y: 1
         width: 146
         height: 37
       alignment: 0
@@ -865,8 +889,8 @@ TextureImporter:
       name: v
       rect:
         serializedVersion: 2
-        x: 889
-        y: 400
+        x: 876
+        y: 174
         width: 88
         height: 73
       alignment: 0

@@ -274,6 +274,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../Sprites/customize character/choose 1.png</key>
             <key type="filename">../Sprites/customize character/choose.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>

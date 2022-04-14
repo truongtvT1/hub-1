@@ -12,8 +12,8 @@ tpsheetFileNames:
 - Assets/Projects/Textures/Minigame/Popu win/win.tpsheet
 - Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.tpsheet
 - Assets/Projects/Textures/UI/Double Reward/double_reward.tpsheet
-- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
+- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/Gift/gift-popup.tpsheet
 - Assets/Projects/Textures/UI/lottery/lottery.tpsheet
 - Assets/Projects/Textures/UI/Main menu/main_menu.tpsheet
@@ -68,8 +68,8 @@ textureFileNames:
 - Assets/Projects/Textures/Minigame/Popu win/win.png
 - Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.png
 - Assets/Projects/Textures/UI/Double Reward/double_reward.png
-- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.png
 - Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
+- Assets/Projects/Textures/UI/GamePlay/UI-Ingame.png
 - Assets/Projects/Textures/UI/Gift/gift-popup.png
 - Assets/Projects/Textures/UI/lottery/lottery.png
 - Assets/Projects/Textures/UI/Main menu/main_menu.png
