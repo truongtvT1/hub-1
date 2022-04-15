@@ -5,6 +5,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using Spine;
 using Spine.Unity;
+using ThirdParties.Truongtv;
 using ThirdParties.Truongtv.AdsManager;
 using ThirdParties.Truongtv.SoundManager;
 using TMPro;
@@ -25,10 +26,8 @@ namespace MiniGame.SquidGame
         [FoldoutGroup("UI")] public Button pauseButton;
         public float gameDuration, greenDuration, redDuration, ballMoveSpeed, ballRollSpeed;
         [Range(0, .3f)] public float difficultyDelta;
-
         [SpineAnimation(dataField = nameof(animBoss))]
         public string idle, redLight, greenLight;
-
         public SkeletonAnimation animBoss, animStaff1, animStaff2;
 
         // public BallAnimation ballAnim;
@@ -48,13 +47,7 @@ namespace MiniGame.SquidGame
         private float gameTimeCount, backUpPitchShift;
         private int level;
 
-        public enum GameState
-        {
-            Playing,
-            Pause,
-            End,
-            None
-        }
+        
 
         private void Awake()
         {
@@ -85,6 +78,7 @@ namespace MiniGame.SquidGame
             // difficultyDelta = difficultyDelta + GameDataManager.Instance.GetSquidLevelDifficulty();
             Debug.Log("difficult delta: " + difficultyDelta);
             StartCoroutine(Init());
+            GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object>{{"red_line",level}});
         }
 
         public void Pause()

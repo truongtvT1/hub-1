@@ -31,14 +31,14 @@ namespace MiniGame.SquidGame
             _controller = controller;
             _controller.onRedLight += () =>
             {
-                if (!isDead && _controller.state != SquidGameController.GameState.End && _controller.state != SquidGameController.GameState.Pause)
+                if (!isDead && _controller.state != GameState.End && _controller.state != GameState.Pause)
                 {
                     _coroutineRed = StartCoroutine(RedLight());
                 }
             };
             _controller.onGreenLight += () =>
             {
-                if (!isDead && _controller.state != SquidGameController.GameState.End && _controller.state != SquidGameController.GameState.Pause)
+                if (!isDead && _controller.state != GameState.End && _controller.state != GameState.Pause)
                 {
                     _coroutineGreen = StartCoroutine(GreenLight());
                 }
