@@ -100,7 +100,6 @@ namespace MoreMountains.Tools
         /// <param name="newStateName"></param>
         public virtual void TransitionToState(string newStateName)
         {
-           // Debug.Log("transition to state :"+newStateName);
             if (CurrentState == null)
             {
                 CurrentState = FindState(newStateName);
@@ -159,11 +158,11 @@ namespace MoreMountains.Tools
         public virtual void ResetBrain()
         {
 	        //InitializeDecisions();
-            isOrderAccepted = false;
-            isOrderCanceled = false;
-            isReachedTarget = false;
-            isEndStayInRoomTime = false;
-            isHaveOrderInRoom = false;
+            // isOrderAccepted = false;
+            // isOrderCanceled = false;
+            // isReachedTarget = false;
+            // isEndStayInRoomTime = false;
+            // isHaveOrderInRoom = false;
             if (CurrentState != null)
             {
                 CurrentState.ExitState(this);

@@ -27,7 +27,6 @@ namespace MiniGame
 
         private void Start()
         {
-            player = PlayerController.Instance;
             if (pauseButton) 
             {
                 pauseButton.onClick.AddListener(() =>
@@ -41,7 +40,7 @@ namespace MiniGame
         public void StartGame(string game = null, int level = 0)
         {
             state = GameState.Playing;
-            GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{game, "lv_" + level}});
+            // GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{game, "lv_" + level}});
         }
         
         #region Controller

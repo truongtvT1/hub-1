@@ -13,11 +13,12 @@ public class ActionJump : AIAction
         base.PerformAction(_brain);
         if (jumpTime < maxJumpTime)
         {
+            Jump(_brain);
             jumpTime += Time.deltaTime;
         }
         else
         {
-            Jump(_brain);
+            _brain.PlayerController.JumpEnd();
             jumpTime = 0;
         }
     }
@@ -26,15 +27,12 @@ public class ActionJump : AIAction
     {
         base.OneTimeAction(_brain);
         jumpCount = 0;
-        Jump(_brain);
     }
 
+    
+    
     void Jump(AIBrain brain)
     {
-        if (jumpCount < maxJumpCount)
-        {
-            brain.PlayerController.JumpStart();
-            jumpCount++;
-        }
+        brain.PlayerController.JumpStart();
     }
 }

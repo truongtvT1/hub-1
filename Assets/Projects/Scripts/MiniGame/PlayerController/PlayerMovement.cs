@@ -53,8 +53,10 @@ namespace MiniGame
         private void Update()
         {
             
+            
+            
             #region Check Ground
-
+            
             if (CheckIsGrounded())
             {
                 if (lastGroundedTime<0f)
@@ -78,6 +80,7 @@ namespace MiniGame
                 _moveEffectSpawnRunning = false;
                 CancelInvoke(nameof(RunEffect));
             }
+            
             if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius*(int)moveDirection,0,0f),  wallLayer))
             {
                 _collisionWithWall = true;
@@ -186,8 +189,7 @@ namespace MiniGame
             RaycastHit2D hit2D = Physics2D.BoxCast(gameObject.GetComponent<CircleCollider2D>().bounds.center, boundSize,
                 0, Vector2.down, 0.1f, groundLayer);
 
-            
-            return hit2D.collider != null && hit2D.point.y< transform.position.y && !hit2D.collider.isTrigger;
+            return hit2D.collider != null && !hit2D.collider.isTrigger;
         }
         #region Controller
 
@@ -225,7 +227,7 @@ namespace MiniGame
             {
                 isJumpButtonRelease = false;
                 lastJumpTime = jumpBufferTime;
-                if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && rigidbody2D.velocity.y<4f)
+                if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && rigidbody2D.velocity.y<4f && CheckIsGrounded())
                 {
                     var velocity = rigidbody2D.velocity;
                     velocity.y = jumpForce;
@@ -256,7 +258,7 @@ namespace MiniGame
 
         private void RunEffect()
         {
-            if (moveDirection != MoveDirection.None)
+            if (moveDirection != MoveDirection.None && moveEffect)
             {
                 var obj = Instantiate(moveEffect);
                 obj.transform.position = transform.position + new Vector3(0, -0.6f, 0f);

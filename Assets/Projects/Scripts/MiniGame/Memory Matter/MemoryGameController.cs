@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,15 +17,17 @@ namespace MiniGame.MemoryMatter
         [SerializeField] private List<Transform> stairsList;
         [SerializeField] private List<SpriteRenderer> fruitList;
         [SerializeField] private List<Sprite> fruitSprites;
+        [SerializeField,FoldoutGroup("Bot")] private int maxBot = 8;
+        [SerializeField,FoldoutGroup("Bot")] private PlayerController botPrefab;
+        [SerializeField,FoldoutGroup("Bot")] private List<PlayerController> listBot;
+        [SerializeField,FoldoutGroup("Bot")] private BrainStateData[] botBrainData;
+        [SerializeField, FoldoutGroup("Bot")] private Transform[] spawnRange;
+        [SerializeField] private GameDifficulty _difficulty;
         [SerializeField] private Image resultObj;
         [SerializeField] private float showDuration, resultDuration, turnDuration;
-        [SerializeField] private int maxBot = 3, maxTurn, maxRound, maxNumberObjToShowPerTurn;
+        [SerializeField] private int maxTurn, maxRound, maxNumberObjToShowPerTurn;
         [SerializeField] private TextMeshProUGUI timeInGameText, timeCounterText;
         [SerializeField] private float timeToStart;
-        [SerializeField] private GameDifficulty _difficulty;
-        [SerializeField] private PlayerController botPrefab;
-        [SerializeField] private List<PlayerController> listBot;
-        [SerializeField] private BrainStateData botBrainData;
         private int currentRound = 0, currentTurn = 0, indexObj;
         private bool isShowing, isHiding;
         private float timeCounter;
@@ -49,9 +52,11 @@ namespace MiniGame.MemoryMatter
         {
             for (int i = 0; i < maxBot; i++)
             {
+                var rd = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 var bot = Instantiate(botPrefab);
+                bot.transform.position = new Vector3(rd,spawnRange[0].position.y, bot.transform.position.z);
                 listBot.Add(bot);
-                bot.Init(botBrainData);
+                bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4));
             }
         }
 
@@ -121,6 +126,13 @@ namespace MiniGame.MemoryMatter
             NextTurn();
         }
 
+        private void OnDestroy()
+        {
+            Hide();
+            StopAllCoroutines();
+            DOTween.KillAll(true);
+        }
+
         void NextTurn()
         {
             if (currentTurn == maxTurn)
@@ -166,7 +178,6 @@ namespace MiniGame.MemoryMatter
                 for (int i = 0; i < objsToShow.Count; i++)
                 {
                     objsToShow[i].transform.parent.gameObject.SetActive(true);
-                    Debug.Log("fruit index last shown " + fruitList.IndexOf(objsToShow[i]));
                     lastShownObjIndex.Add(fruitList.IndexOf(objsToShow[i]));
                 }
             }
@@ -180,7 +191,6 @@ namespace MiniGame.MemoryMatter
                 for (int i = 0; i < objsToShow.Count; i++)
                 {
                     objsToShow[i].transform.parent.gameObject.SetActive(true);
-                    Debug.Log("fruit index last shown " + fruitList.IndexOf(objsToShow[i]));
                     lastShownObjIndex = new List<int>();
                     lastShownObjIndex.Add(fruitList.IndexOf(objsToShow[i]));
                 }
