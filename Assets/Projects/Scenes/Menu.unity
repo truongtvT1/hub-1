@@ -7565,7 +7565,7 @@ MonoBehaviour:
   initialSkinName: base_01
   initialFlipX: 0
   initialFlipY: 0
-  startingAnimation: idle
+  startingAnimation: test_clothes
   startingLoop: 1
   timeScale: 1
   freeze: 0

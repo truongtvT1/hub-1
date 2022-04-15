@@ -179,16 +179,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -85
+      value: -181
       objectReference: {fileID: 0}
     - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: initialSkinName
-      value: wing/w_09
+      value: wing/w_05
       objectReference: {fileID: 0}
+    - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ddf400e92880e5644bf0351d0b19f0d4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
 --- !u!1 &5999860073053121197 stripped
@@ -298,16 +302,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -85
+      value: -181
       objectReference: {fileID: 0}
     - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: initialSkinName
-      value: wing/w_09
+      value: wing/w_05
       objectReference: {fileID: 0}
+    - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ddf400e92880e5644bf0351d0b19f0d4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
 --- !u!1 &2280421395385601743 stripped
@@ -417,16 +425,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6815667206992095199, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -85
+      value: -181
       objectReference: {fileID: 0}
     - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
       propertyPath: initialSkinName
-      value: wing/w_09
+      value: wing/w_05
       objectReference: {fileID: 0}
+    - target: {fileID: 8857574708392184281, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
+      propertyPath: skeletonDataAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: ddf400e92880e5644bf0351d0b19f0d4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1085eca3fd500f3488b437ef7edf20a2, type: 3}
 --- !u!1 &1276759832242872722 stripped
