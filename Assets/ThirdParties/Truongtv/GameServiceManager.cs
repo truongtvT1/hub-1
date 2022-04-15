@@ -101,6 +101,7 @@ namespace ThirdParties.Truongtv
                         _lastTimeShowAd = DateTime.Now;
                     
                 });
+                //show popup support us
                 LogEvent("ads_interstitial");
             }
         }
