@@ -21,6 +21,7 @@ namespace Projects.Scripts.Menu
         private List<Color> _skinColors;
         private SkinColorItem _selected;
         private PopupCustomizeCharacter _controller;
+        private bool _init;
         private void Awake()
         {
             _group = GetComponent<ToggleGroup>();
@@ -29,13 +30,18 @@ namespace Projects.Scripts.Menu
 
         public void Init(PopupCustomizeCharacter customizeCharacter)
         {
+            if(_init) return;
             _controller = customizeCharacter;
             scroll.content.RemoveAllChild();
             _skinColors = GameDataManager.Instance.GetAllSkinColors();
             var round = _skinColors.Count % 3 == 0 ? _skinColors.Count / 3 : _skinColors.Count / 3 + 1;
+            var rect = scroll.content.sizeDelta;
+            rect.y = round * 240;
+            scroll.content.sizeDelta = rect;
             for (var i = 0; i < round; i++)
             {
                 var group = Instantiate(prefab, scroll.content);
+                group.Init(new Vector2(20-i*20,-240*i),scroll);
                 for (var j = 0; j <  3;j++)
                 {
                     if (i * 3 + j < _skinColors.Count)
@@ -49,7 +55,8 @@ namespace Projects.Scripts.Menu
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);
             }
-            
+           
+            _init = true;
         }
 
         private void OnColorSelected(SkinColorItem item)

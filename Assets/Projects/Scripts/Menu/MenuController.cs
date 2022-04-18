@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Projects.Scripts.Hub;
 using ThirdParties.Truongtv;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,17 +11,28 @@ namespace Projects.Scripts.Menu
 {
     public class MenuController : MonoBehaviour
     {
-        
         public static MenuController Instance;
+
         private void Awake()
         {
-            if(Instance!=null)
+            if (Instance != null)
                 Destroy(gameObject);
             Instance = this;
         }
 
-        [SerializeField] private Button playButton, settingButton, switchButton, specialOfferButton, noAdButton, roomButton,userInfoButton,leaderBoardButton;
+        [SerializeField] private Button playButton,
+            settingButton,
+            switchButton,
+            specialOfferButton,
+            noAdButton,
+            roomButton,
+            userInfoButton,
+            leaderBoardButton;
+
         [SerializeField] private CharacterAnimationGraphic mainCharacter;
+        [SerializeField] private ParticleGold ticketEffect;
+        [SerializeField] private TextMeshProUGUI ticketText;
+
         private void Start()
         {
             playButton.onClick.AddListener(OnPlayButtonClick);
@@ -40,7 +53,6 @@ namespace Projects.Scripts.Menu
 
         private void OnPlayButtonClick()
         {
-            
         }
 
         private void OnSwitchButtonClick()
@@ -50,17 +62,14 @@ namespace Projects.Scripts.Menu
 
         private void OnSpecialOfferButtonClick()
         {
-            
         }
 
         private void OnUserInfoButtonClick()
         {
-            
         }
 
         private void OnNoAdButtonClick()
         {
-            
         }
 
         private void OnSettingButtonClick()
@@ -70,14 +79,12 @@ namespace Projects.Scripts.Menu
 
         private void OnRoomButtonClick()
         {
-            
         }
+
         private void OnLeaderBoardButtonClick()
         {
             PopupMenuController.Instance.ShowPopupLeaderBoard();
         }
-        
-        
 
         #endregion
 
@@ -85,6 +92,20 @@ namespace Projects.Scripts.Menu
         {
             mainCharacter.UpdateSkin(GameDataManager.Instance.GetCurrentSkin());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetSkinColor());
+        }
+
+        public void AddTicket(int value)
+        {
+        }
+
+        public void UseTicket(int value)
+        {
+            var current = GameDataManager.Instance.GetTotalTicket();
+            var last = current - value;
+            DOTween.To(() => current, x => current = x, last, 0.5f).SetEase(Ease.Linear)
+                .OnUpdate(() => { ticketText.text = $"{current}"; })
+                .OnComplete(() => { ticketText.text = $"{last}"; });
+            GameDataManager.Instance.UpdateTicket(-value);
         }
     }
 }

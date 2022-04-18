@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Projects.Scripts.Data;
 using Projects.Scripts.Scriptable;
@@ -17,6 +18,7 @@ namespace ThirdParties.Truongtv
         [SerializeField, FoldoutGroup("Game Data")] public RemoteConfigValue remoteConfigValue;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] private List<string> startSkin;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinColors))] public Color startColor;
+        
         private static GameDataManager _instance;
         public static GameDataManager Instance => _instance;
         private UserInfo _userInfo;
@@ -40,12 +42,10 @@ namespace ThirdParties.Truongtv
         {
             return ES3.KeyExists("user_info");
         }
-        [Button]
         public void LoadUserInfo()
         {
             _userInfo = ES3.Load<UserInfo>("user_info");
         }
-        [Button]
         public void CreateUserInfo()
         {
             _userInfo = new UserInfo();
@@ -99,9 +99,25 @@ namespace ThirdParties.Truongtv
             return _userInfo.currentSkin;
         }
 
-        public void UpdateCurrentSkin(List<string> skins)
+        public List<string> GetSkinInGame()
         {
-            _userInfo.currentSkin = skins;
+            var list = new List<string>();
+            if(_userInfo.trySkin.Count>0)
+                list.AddRange(_userInfo.trySkin);
+            return list;
+        }
+        public void ResetSkinInGame()
+        {
+            _userInfo.trySkin = new List<string>();
+            SaveUserInfo();
+        }
+
+        public void UpdateCurrentSkin(string skins)
+        {
+            var prefix = GetSkinPrefix(skins);
+            var remove = _userInfo.currentSkin.Find(a => a.Contains(prefix));
+            _userInfo.currentSkin.Remove(remove);
+            _userInfo.currentSkin.Add(skins);
             SaveUserInfo();
         }
         public Color GetSkinColor()
@@ -114,6 +130,52 @@ namespace ThirdParties.Truongtv
         {
             _userInfo.currentSkinColor = ColorUtility.ToHtmlStringRGB(c);
             SaveUserInfo();
+        }
+
+        public bool IsSkinUnlock(string skin)
+        {
+            return _userInfo.unlockedSkins.Contains(skin);
+        }
+
+        public void UnlockSkin(string skin)
+        {
+            if (!_userInfo.unlockedSkins.Contains(skin))
+            {
+                _userInfo.unlockedSkins.Add(skin);
+                SaveUserInfo();
+            }
+        }
+
+        public int GetSkinPriceByRank(SkinRank rank)
+        {
+            switch (rank)
+            {
+                case SkinRank.SS:
+                    return -1;
+                case SkinRank.S:
+                    return skinData.sTierTicket;
+                case SkinRank.A:
+                    return skinData.aTierTicket;
+                case SkinRank.B:
+                    return skinData.bTierTicket;
+                case SkinRank.C:
+                    return skinData.cTierTicket;
+            }
+            return 0;
+        }
+        public string GetSkinPrefix(string skin)
+        {
+            if (skinData.bodySkins.Exists(a => a.skinName.Equals(skin)))
+                return SkinData.SuitPrefix;
+            if (skinData.hairSkins.Exists(a => a.skinName.Equals(skin)))
+                return SkinData.HairPrefix;
+            if (skinData.glassSkins.Exists(a => a.skinName.Equals(skin)))
+                return SkinData.GlassPrefix;
+            if (skinData.gloveSkins.Exists(a => a.skinName.Equals(skin)))
+                return SkinData.GlovePrefix;
+            if (skinData.cloakSkins.Exists(a => a.skinName.Equals(skin)))
+                return SkinData.CloakPrefix;
+            return string.Empty;
         }
         #endregion
 

@@ -14,7 +14,7 @@ namespace Projects.Scripts.Menu.Customize
         [SerializeField] private GameObject container, selected, locked;
         [SerializeField] private Image bg;
         [SerializeField] private Color S, A, B, C;
-        private SkinInfo _item;
+        public SkinInfo item;
         private Toggle _toggle;
 
         private void Awake()
@@ -27,11 +27,11 @@ namespace Projects.Scripts.Menu.Customize
             container.SetActive(false);
             _toggle.interactable = false;
         }
-        public void Init(SkinInfo set,ToggleGroup group,Action<SkinItem> onColorSelected)
+        public void Init(SkinInfo set,ToggleGroup group,Action<SkinItem> onItemToggle)
         {
-            _item = set;
-            skin.initialSkinName = _item.skinName;
-            switch (_item.rank)
+            item = set;
+            skin.initialSkinName = item.skinName;
+            switch (item.rank)
             {
                 case SkinRank.S:
                     bg.color = S;
@@ -52,28 +52,36 @@ namespace Projects.Scripts.Menu.Customize
             skin.Initialize(true);
             _toggle.group = group;
             _toggle.interactable = true;
-            _toggle.onValueChanged.AddListener(value=>{
-                if (value)
-                {
-                    onColorSelected.Invoke(this);
-                }
+            
+            _toggle.onValueChanged.AddListener(value=>
+            {
+                OnToggle(value, onItemToggle);
             });
-            var on = GameDataManager.Instance.GetCurrentSkin().Contains(_item.skinName);
-            selected.SetActive(on);
+            
+            var on = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
             _toggle.isOn = on;
             _toggle.onValueChanged.Invoke(on);
-            locked.SetActive(false);
-            locked.SetActive(false);
+            
         }
 
         public void SetSelected()
         {
-            selected.SetActive(GameDataManager.Instance.GetCurrentSkin().Contains(_item.skinName));
+            selected.SetActive(GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName));
+            _toggle.onValueChanged.Invoke(true);
         }
 
-        public string GetSkinName()
+        private void OnToggle(bool value,Action<SkinItem>onItemToggle)
         {
-            return _item.skinName;
+            if (value)
+            {
+                onItemToggle.Invoke(this);
+                
+            }
+            
+            var on = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
+            selected.SetActive(on);
+            var unlock = GameDataManager.Instance.IsSkinUnlock(item.skinName);
+            locked.SetActive(!unlock);
         }
     }
 }

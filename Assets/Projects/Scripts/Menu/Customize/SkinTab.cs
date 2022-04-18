@@ -3,6 +3,7 @@ using Projects.Scripts.Hub;
 using Projects.Scripts.Popup;
 using Projects.Scripts.Scriptable;
 using ThirdParties.Truongtv;
+using TMPro;
 using Truongtv.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,15 +16,21 @@ namespace Projects.Scripts.Menu.Customize
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private SkinItemGroup prefab;
         [SerializeField] private CharacterAnimationGraphic customCharacter;
+        [SerializeField] private Button tryButton, buyByTicketButton, buyByAdButton, selectButton;
+        [SerializeField] private GameObject selected;
+        [SerializeField] private TextMeshProUGUI priceTicketText;
         private ToggleGroup _group;
         private List<SkinInfo> _skins;
-        private SkinItem _selected;
+        private SkinItem _selected, _current;
         private PopupCustomizeCharacter _controller;
         private bool _init;
         private void Awake()
         {
             _group = GetComponent<ToggleGroup>();
-            //changeColorButton.onClick.AddListener(OnChangeColorButtonClick);
+            tryButton.onClick.AddListener(OnTryButtonClick);
+            buyByTicketButton.onClick.AddListener(OnBuyButtonClick);
+            buyByAdButton.onClick.AddListener(OnBuyByAdButtonClick);
+            selectButton.onClick.AddListener(OnSelectButtonClick);
         }
 
         public void SetSkin(List<SkinInfo> skinList)
@@ -32,14 +39,17 @@ namespace Projects.Scripts.Menu.Customize
         }
         public void Init(PopupCustomizeCharacter customizeCharacter)
         {
-            
             if(_init) return;
             _controller = customizeCharacter;
             scroll.content.RemoveAllChild();
             var round = _skins.Count % 3 == 0 ? _skins.Count / 3 : _skins.Count / 3 + 1;
+            var rect = scroll.content.sizeDelta;
+            rect.y = round * 240;
+            scroll.content.sizeDelta = rect;
             for (var i = 0; i < round; i++)
             {
                 var group = Instantiate(prefab, scroll.content);
+                group.Init(new Vector2(20-i*20,-240*i),scroll);
                 for (var j = 0; j <  3;j++)
                 {
                     if (i * 3 + j < _skins.Count)
@@ -53,15 +63,13 @@ namespace Projects.Scripts.Menu.Customize
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);
             }
-
             _init = true;
+            
         }
         private void OnSkinSelected(SkinItem item)
         {
             _selected = item;
-            // customCharacter.Set();
-       
-            var skinName = _selected.GetSkinName();
+            var skinName = item.item.skinName;
             if (skinName.Contains("hair/"))
             {
                 _controller.skinList.RemoveAll(a => a.Contains("hair/"));
@@ -85,14 +93,77 @@ namespace Projects.Scripts.Menu.Customize
             _controller.skinList.Add(skinName);
             customCharacter.UpdateSkin(_controller.skinList);
             customCharacter.SetSkinColor(_controller.color);
+            if (GameDataManager.Instance.IsSkinUnlock(_selected.item.skinName))
+            {
+                if (GameDataManager.Instance.GetCurrentSkin().Contains(_selected.item.skinName))
+                {
+                    selected.SetActive(true);
+                    selectButton.gameObject.SetActive(false);
+                    
+                    
+                }
+                else
+                {
+                    selected.SetActive(false);
+                    selectButton.gameObject.SetActive(true);
+                }
+                tryButton.gameObject.SetActive(false);
+                buyByAdButton.gameObject.SetActive(false);
+                buyByTicketButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                var price = GameDataManager.Instance.GetSkinPriceByRank(_selected.item.rank);
+                priceTicketText.text = $"{price}";
+                selected.SetActive(false);
+                selectButton.gameObject.SetActive(false);
+                if (_selected.item.rank == SkinRank.C || _selected.item.rank == SkinRank.B)
+                {
+                    tryButton.gameObject.SetActive(false);
+                    buyByAdButton.gameObject.SetActive(true);
+                    buyByTicketButton.gameObject.SetActive(true);
+                }
+                else if (_selected.item.rank == SkinRank.A || _selected.item.rank == SkinRank.S)
+                {
+                    tryButton.gameObject.SetActive(true);
+                    buyByAdButton.gameObject.SetActive(false);
+                    buyByTicketButton.gameObject.SetActive(true);
+                }
+            }
         }
 
-        private void OnChangeColorButtonClick()
+        private void OnTryButtonClick()
         {
-            // check value here
-            _selected.SetSelected();
-            GameDataManager.Instance.UpdateCurrentSkin(_controller.skinList);
-            customCharacter.UpdateSkin(_controller.skinList);
+            
+        }
+
+        private void OnBuyButtonClick()
+        {
+            var price = GameDataManager.Instance.GetSkinPriceByRank(_selected.item.rank);
+            if (GameDataManager.Instance.GetTotalTicket() >=price)
+            {
+                MenuController.Instance.UseTicket(price);
+                GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
+                MenuController.Instance.UpdateCharacter();
+                _selected.SetSelected();
+            }
+        }
+
+        private void OnBuyByAdButtonClick()
+        {
+            GameServiceManager.Instance.ShowRewardedAd("customize", () =>
+            {
+                GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
+                MenuController.Instance.UpdateCharacter();
+                _selected.SetSelected();
+            });
+        }
+
+        private void OnSelectButtonClick()
+        {
+            selected.SetActive(true);
             
         }
     }
