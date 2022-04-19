@@ -32,6 +32,14 @@ namespace ThirdParties.Truongtv
         private void Start()
         {
             Application.targetFrameRate = 300;
+            if (IsUserCreate())
+            {
+                LoadUserInfo();
+            }
+            else
+            {
+                CreateUserInfo();
+            }
         }
         public bool IsPurchaseBlockAd()
         {
@@ -125,10 +133,23 @@ namespace ThirdParties.Truongtv
         }
         public List<string> GetSkinInGame()
         {
-            var list = new List<string>();
-            if(_userInfo.trySkin.Count>0)
-                list.AddRange(_userInfo.trySkin);
+            var list =GetCurrentSkin();
+            foreach (var item in _userInfo.trySkin)
+            {
+                list = UpdateSkinForList(list, item);
+            }
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                Debug.Log("skin " + list[i]);
+            }
             return list;
+        }
+
+        public void TrySkin(string skinName)
+        {
+            _userInfo.trySkin = UpdateSkinForList(_userInfo.trySkin, skinName);
+            SaveUserInfo();
         }
         public void ResetSkinInGame()
         {

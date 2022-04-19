@@ -11,6 +11,7 @@ namespace MiniGame
     public class GamePlayController : MonoBehaviour
     {
         [FoldoutGroup("Character")] public PlayerController player;
+        [FoldoutGroup("Character")] public PlayerController playerPrefabs;
         [SerializeField, FoldoutGroup("UI")] private Button pauseButton;
         private static GamePlayController _instance;
         public static GamePlayController Instance => _instance;
@@ -42,6 +43,14 @@ namespace MiniGame
             state = GameState.Playing;
             // GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{game, "lv_" + level}});
         }
+
+        public void Respawn(Vector3 position)
+        {
+            var player = Instantiate(playerPrefabs);
+            player.transform.position = position;
+            player.Init();
+            this.player = player;
+        }
         
         #region Controller
         
@@ -57,7 +66,7 @@ namespace MiniGame
                 player.JetpackLeft(release);
             }
         }
-
+        
         public void TouchMoveRight(bool release)
         {
             if (player != null && state != GameState.Playing && !player.IsDie()) return;

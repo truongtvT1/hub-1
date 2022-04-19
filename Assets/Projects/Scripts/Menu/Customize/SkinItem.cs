@@ -58,7 +58,7 @@ namespace Projects.Scripts.Menu.Customize
                 OnToggle(value, onItemToggle);
             });
             
-            var on = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
+            var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
             _toggle.isOn = on;
             _toggle.onValueChanged.Invoke(on);
             
@@ -66,7 +66,7 @@ namespace Projects.Scripts.Menu.Customize
 
         public void SetSelected()
         {
-            var result = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
+            var result = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
             selected.SetActive(result);
             _toggle.onValueChanged.Invoke(result);
         }
@@ -79,7 +79,7 @@ namespace Projects.Scripts.Menu.Customize
                 
             }
             
-            var on = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
+            var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
             selected.SetActive(on);
             var unlock = GameDataManager.Instance.IsSkinUnlock(item.skinName);
             locked.SetActive(!unlock);

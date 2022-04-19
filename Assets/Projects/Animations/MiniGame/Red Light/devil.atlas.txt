@@ -1,0 +1,97 @@
+
+devil.png
+size: 1024,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_eye1
+  rotate: false
+  xy: 520, 92
+  size: 25, 34
+  orig: 27, 36
+  offset: 1, 1
+  index: -1
+L_eye2
+  rotate: false
+  xy: 139, 5
+  size: 7, 11
+  orig: 9, 13
+  offset: 1, 1
+  index: -1
+L_horn
+  rotate: false
+  xy: 458, 59
+  size: 60, 67
+  orig: 62, 69
+  offset: 1, 1
+  index: -1
+Layer 1
+  rotate: true
+  xy: 315, 26
+  size: 100, 21
+  orig: 100, 21
+  offset: 0, 0
+  index: -1
+Levels 1
+  rotate: true
+  xy: 128, 18
+  size: 108, 185
+  orig: 123, 202
+  offset: 7, 1
+  index: -1
+R_eye2
+  rotate: false
+  xy: 128, 2
+  size: 9, 14
+  orig: 11, 16
+  offset: 1, 1
+  index: -1
+R_eye_1
+  rotate: true
+  xy: 499, 13
+  size: 44, 39
+  orig: 46, 41
+  offset: 1, 1
+  index: -1
+R_horn
+  rotate: false
+  xy: 403, 55
+  size: 53, 71
+  orig: 55, 73
+  offset: 1, 1
+  index: -1
+body
+  rotate: false
+  xy: 338, 45
+  size: 63, 81
+  orig: 65, 83
+  offset: 1, 1
+  index: -1
+hand_L
+  rotate: false
+  xy: 404, 3
+  size: 60, 50
+  orig: 63, 52
+  offset: 1, 1
+  index: -1
+hand_R
+  rotate: true
+  xy: 338, 4
+  size: 39, 64
+  orig: 41, 66
+  offset: 1, 1
+  index: -1
+head
+  rotate: false
+  xy: 2, 2
+  size: 124, 124
+  orig: 126, 126
+  offset: 1, 1
+  index: -1
+leg_L
+  rotate: false
+  xy: 466, 2
+  size: 31, 55
+  orig: 31, 55
+  offset: 0, 0
+  index: -1

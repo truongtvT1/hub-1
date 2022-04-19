@@ -3,6 +3,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Animation = Spine.Animation;
 
 namespace MiniGame
 {
@@ -72,7 +73,7 @@ namespace MiniGame
 
                     if (Mathf.Abs(transform.position.x - target.position.x) <= _controller.GetTargetDistance())
                     {
-                        _controller.SetReachTarget(true);
+                        _controller.SetReachTarget();
                     }
                     else
                     {
@@ -87,11 +88,13 @@ namespace MiniGame
             
             if (CheckIsGrounded() || CheckIsOnOtherPlayer())
             {
+                
                 if (lastGroundedTime<0f)
                 {
                     var obj = Instantiate(landingEffect);
                     obj.transform.SetParent(transform.parent);
                     obj.transform.localPosition = transform.localPosition + new Vector3(0, -0.67f, 0f);
+                    _controller.Animation.PlayIdle();
                 }
                 lastGroundedTime = JumpCoyoteTime;
                 if (!_moveEffectSpawnRunning)
@@ -99,7 +102,19 @@ namespace MiniGame
                     _moveEffectSpawnRunning = true;
                     InvokeRepeating(nameof(RunEffect),0f,0.2f);
                 }
+                
                 rigidbody2D.gravityScale = gravityScale;
+                if (!isJumping)
+                {
+                    if (Mathf.Abs(rigidbody2D.velocity.x) <= 0.5f)
+                    {
+                        _controller.Animation.PlayIdle();
+                    }
+                    else
+                    {
+                        _controller.Animation.PlayRun();
+                    }
+                }
             }
             else
             {
@@ -123,7 +138,13 @@ namespace MiniGame
             if (rigidbody2D.velocity.y < 0)
                 rigidbody2D.gravityScale = gravityScale * fallGravityMultiple;
             else
+            {
                 rigidbody2D.gravityScale = gravityScale;
+                if (isJumping && rigidbody2D.velocity.y >= 0)
+                {
+                    _controller.Animation.PlayJumpUp();
+                }
+            }
 
             #endregion
             
@@ -143,6 +164,7 @@ namespace MiniGame
                 }
                 else if (rigidbody2D.velocity.y < 0 && isJumping)
                 {
+                    _controller.Animation.PlayJumpDown();
                     isJumping = false;
                 }
             }
@@ -176,6 +198,7 @@ namespace MiniGame
                     }
                     else
                     {
+                        Debug.Log("move direction none");
                         countDeccelTime -= Time.deltaTime;
                         if (countDeccelTime > 0)
                         {
@@ -192,9 +215,13 @@ namespace MiniGame
                             }
                             rigidbody2D.velocity = velocity;
                         }
+
                     }
                 }
             }
+            
+            
+            
             #endregion
             #region Check Box
             

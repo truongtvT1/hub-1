@@ -1,0 +1,48 @@
+
+Boss.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+eyes 1
+  rotate: true
+  xy: 689, 22
+  size: 111, 36
+  orig: 113, 38
+  offset: 1, 1
+  index: -1
+eyes 2
+  rotate: true
+  xy: 660, 135
+  size: 116, 85
+  orig: 118, 87
+  offset: 1, 1
+  index: -1
+glow_L
+  rotate: true
+  xy: 540, 22
+  size: 79, 147
+  orig: 88, 166
+  offset: 5, 9
+  index: -1
+glow_R
+  rotate: false
+  xy: 540, 103
+  size: 118, 148
+  orig: 130, 166
+  offset: 7, 8
+  index: -1
+head
+  rotate: true
+  xy: 2, 11
+  size: 240, 274
+  orig: 242, 276
+  offset: 1, 1
+  index: -1
+platform boss
+  rotate: true
+  xy: 278, 2
+  size: 249, 260
+  orig: 253, 280
+  offset: 2, 2
+  index: -1

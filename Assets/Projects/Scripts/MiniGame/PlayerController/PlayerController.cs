@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using MoreMountains.Tools;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
@@ -61,19 +62,25 @@ namespace MiniGame
             }
         }
 
-        private void Start()
+        private async void Start()
         {
             Movement.Init(this);
+            await Task.Delay(1000);
+            Init();
+        }
+
+        public void Init()
+        {
             if (!IsBot)
             {
-                var currentSkin = GameDataManager.Instance.GetCurrentSkin();
-                var currentColor = GameDataManager.Instance.GetCurrentColor();
+                var currentSkin = GameDataManager.Instance.GetSkinInGame();
+                var currentColor = GameDataManager.Instance.GetCurrentColor(); 
                 Animation.SetSkin(currentSkin);
                 Animation.SetSkinColor(currentColor);
             }
         }
-
-        public void Init(BrainStateData brainData, BotDifficulty difficulty, List<string> skin, Color color)
+        
+        public void BotInit(BrainStateData brainData, BotDifficulty difficulty, List<string> skin, Color color)
         {
             Animation.SetSkin(skin);
             Animation.SetSkinColor(color);
@@ -261,7 +268,6 @@ namespace MiniGame
         void Die()
         {
             //anim die
-            Debug.Log("die");
             CurrentHp = 0;
             StopAllCoroutines();
             Destroy(gameObject);

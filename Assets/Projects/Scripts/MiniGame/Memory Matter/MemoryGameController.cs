@@ -36,7 +36,15 @@ namespace MiniGame.MemoryMatter
         private List<int> lastShownObjIndex = new List<int>();
         private float cacheShowDuration, cacheTurnDuration, deltaDifficulty;
         private int cacheMaxTurn, cacheMaxNumberObjs;
+        private List<BotSkin> cacheBotSkin;
 
+        [Serializable]
+        public class BotSkin
+        {
+            public Color color;
+            public List<string> skin;
+        }
+            
         private void Awake()
         {
             deltaDifficulty = (float) _difficulty / 10;
@@ -46,6 +54,7 @@ namespace MiniGame.MemoryMatter
             cacheMaxNumberObjs = maxNumberObjToShowPerTurn;
             _gamePlayController = GetComponent<GamePlayController>();
             listBot = new List<PlayerController>(maxBot);
+            cacheBotSkin = new List<BotSkin>();
             Hide();
         }
 
@@ -56,11 +65,15 @@ namespace MiniGame.MemoryMatter
             {
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var color = GameDataManager.Instance.RandomColor();
+                var skin = new BotSkin();
+                skin.color = color;
+                skin.skin = listSkin;
+                cacheBotSkin.Add(skin);
                 var rd = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 var bot = Instantiate(botPrefab);
                 bot.transform.position = new Vector3(rd,spawnRange[0].position.y, bot.transform.position.z);
                 listBot.Add(bot);
-                bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
+                bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
             }
         }
 
@@ -89,20 +102,6 @@ namespace MiniGame.MemoryMatter
 
         void Refresh()
         {
-            for (int i = 0; i < listBot.Count; i++)
-            {
-                if (listBot[i] == null)
-                {
-                    var listSkin = GameDataManager.Instance.RandomSkinList();
-                    var color = GameDataManager.Instance.RandomColor();
-                    var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
-                    var bot = Instantiate(botPrefab);
-                    bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
-                    bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
-                    listBot[i] = bot;
-                }
-            }
-            
             var rd = new System.Random();
             var rdList = fruitSprites.OrderBy(_ => rd.Next()).Take(fruitSprites.Count).ToList();
             for (int i = 0; i < fruitList.Count; i++)
@@ -145,6 +144,25 @@ namespace MiniGame.MemoryMatter
             }
             currentRound++;
             await Task.Delay(2500);
+            if (_gamePlayController.player == null)
+            {
+                Debug.Log("player dead");
+                var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
+                _gamePlayController.Respawn(new Vector3(rd1, spawnRange[0].position.y,0));
+            }
+            
+            for (int i = 0; i < listBot.Count; i++)
+            {
+                if (listBot[i] == null)
+                {
+                    var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
+                    var bot = Instantiate(botPrefab);
+                    bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
+                    bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),cacheBotSkin[i].skin,cacheBotSkin[i].color);
+                    listBot[i] = bot;
+                }
+            }
+
             NextTurn();
         }
 
@@ -153,6 +171,11 @@ namespace MiniGame.MemoryMatter
             Hide();
             StopAllCoroutines();
             DOTween.KillAll(true);
+            foreach (var bot in listBot)
+            {
+                Destroy(bot.gameObject);
+            }
+            listBot = new List<PlayerController>(maxBot);
         }
 
         void NextTurn()
@@ -233,6 +256,7 @@ namespace MiniGame.MemoryMatter
         {
             indexObj = Random.Range(0, fruitList.Count);
             resultObj.sprite = fruitList[indexObj].sprite;
+            resultObj.SetNativeSize();
             resultObj.transform.parent.gameObject.SetActive(true);
             isShowing = true;
             var rd = Random.Range(0, fruitList.Count);
