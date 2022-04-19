@@ -101,10 +101,18 @@ namespace ThirdParties.Truongtv
 
         public List<string> GetSkinInGame()
         {
-            var list = new List<string>();
-            if(_userInfo.trySkin.Count>0)
-                list.AddRange(_userInfo.trySkin);
+            var list =GetCurrentSkin();
+            foreach (var item in _userInfo.trySkin)
+            {
+                list = UpdateSkinForList(list, item);
+            }
             return list;
+        }
+
+        public void TrySkin(string skinName)
+        {
+            _userInfo.trySkin = UpdateSkinForList(_userInfo.trySkin, skinName);
+            SaveUserInfo();
         }
         public void ResetSkinInGame()
         {

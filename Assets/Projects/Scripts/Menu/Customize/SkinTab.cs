@@ -75,9 +75,9 @@ namespace Projects.Scripts.Menu.Customize
             var skinName = item.item.skinName;
             _controller.skinList = GameDataManager.Instance.UpdateSkinForList(_controller.skinList, skinName);
             _controller.UpdateCharacter();
-            if (GameDataManager.Instance.IsSkinUnlock(_selected.item.skinName))
+            if (GameDataManager.Instance.IsSkinUnlock(_selected.item.skinName)||GameDataManager.Instance.GetSkinInGame().Contains(_selected.item.skinName))
             {
-                if (GameDataManager.Instance.GetCurrentSkin().Contains(_selected.item.skinName))
+                if (GameDataManager.Instance.GetSkinInGame().Contains(_selected.item.skinName))
                 {
                     selected.SetActive(true);
                     selectButton.gameObject.SetActive(false);
@@ -116,7 +116,7 @@ namespace Projects.Scripts.Menu.Customize
         {
             GameServiceManager.Instance.ShowRewardedAd("customize_try_skin", () =>
             {
-                //GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                GameDataManager.Instance.TrySkin(_selected.item.skinName);
                 OnSelectButtonClick();
             });
         }
@@ -128,6 +128,7 @@ namespace Projects.Scripts.Menu.Customize
             {
                 MenuController.Instance.UseTicket(price);
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
                 OnSelectButtonClick();
             }
             else
@@ -141,13 +142,13 @@ namespace Projects.Scripts.Menu.Customize
             GameServiceManager.Instance.ShowRewardedAd("customize_unlock_skin", () =>
             {
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
                 OnSelectButtonClick();
             });
         }
 
         private void OnSelectButtonClick()
         {
-            GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
             MenuController.Instance.UpdateCharacter();
             foreach (var item in _itemList)
             {
