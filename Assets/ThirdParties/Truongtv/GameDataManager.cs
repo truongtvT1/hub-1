@@ -96,7 +96,7 @@ namespace ThirdParties.Truongtv
 
         public List<string> GetCurrentSkin()
         {
-            return _userInfo.currentSkin;
+            return new List<string>(_userInfo.currentSkin);
         }
 
         public List<string> GetSkinInGame()
@@ -114,11 +114,17 @@ namespace ThirdParties.Truongtv
 
         public void UpdateCurrentSkin(string skins)
         {
-            var prefix = GetSkinPrefix(skins);
-            var remove = _userInfo.currentSkin.Find(a => a.Contains(prefix));
-            _userInfo.currentSkin.Remove(remove);
-            _userInfo.currentSkin.Add(skins);
+            _userInfo.currentSkin = UpdateSkinForList(_userInfo.currentSkin,skins);
             SaveUserInfo();
+        }
+
+        public List<string> UpdateSkinForList(List<string> skinList, string changeSkin)
+        {
+            var prefix = GetSkinPrefix(changeSkin);
+            var remove = skinList.Find(a => a.Contains(prefix));
+            skinList.Remove(remove);
+            skinList.Add(changeSkin);
+            return skinList;
         }
         public Color GetSkinColor()
         {
@@ -162,6 +168,11 @@ namespace ThirdParties.Truongtv
                     return skinData.cTierTicket;
             }
             return 0;
+        }
+
+        public int GetColorPrice()
+        {
+            return skinData.colorTicket;
         }
         public string GetSkinPrefix(string skin)
         {

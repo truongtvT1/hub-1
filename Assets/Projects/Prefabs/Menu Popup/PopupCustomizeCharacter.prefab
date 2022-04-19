@@ -2731,7 +2731,10 @@ MonoBehaviour:
   scroll: {fileID: 3236331118822601741}
   prefab: {fileID: 6353484252669449831, guid: 3137e47b086b0c34ba8ebf7df5c8b9c8, type: 3}
   customCharacter: {fileID: 3236331118612527661}
-  changeColorButton: {fileID: 3236331117851407761}
+  changeByTicketButton: {fileID: 3236331117851407761}
+  changeByAdButton: {fileID: 6767502501806555883}
+  selected: {fileID: 5477619776723248672}
+  priceTicketText: {fileID: 1453090379254669641}
 --- !u!1 &3236331117025856960
 GameObject:
   m_ObjectHideFlags: 0
@@ -6095,6 +6098,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSkin: base_00
+  idleAnim: idle
+  changeClothesAnim: test_clothes
 --- !u!1 &3236331118636628383
 GameObject:
   m_ObjectHideFlags: 0
@@ -8833,7 +8838,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: UNLOCK
+  m_text: SELECT
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b25c695b3f171bf45a9fe326cfe1d9f8, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 6c0ce75420a41f44284daf3b2711efb0, type: 2}

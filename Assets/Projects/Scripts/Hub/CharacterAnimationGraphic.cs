@@ -12,6 +12,7 @@ namespace Projects.Scripts.Hub
     {
         private SkeletonGraphic _skeletonGraphic;
         [SerializeField,SpineSkin] private string baseSkin;
+        [SerializeField, SpineAnimation] private string idleAnim, changeClothesAnim;
         private Skin _characterSkin;
         private SkeletonData _skeletonData;
         private List<string> _skinList;
@@ -21,6 +22,8 @@ namespace Projects.Scripts.Hub
         {
             _skeletonGraphic = GetComponent<SkeletonGraphic>();
             _skeletonData = _skeletonGraphic.Skeleton.Data;
+            if (!string.IsNullOrEmpty(idleAnim))
+                _skeletonGraphic.AnimationState.SetAnimation(0, idleAnim, true);
         }
         public void SetSkinColor(Color color)
         {
@@ -35,14 +38,8 @@ namespace Projects.Scripts.Hub
                 ChangeSlotColor("body");
             }
         }
-        private void ChangeSlotColor(string slotName)
-        {
-            var slot = _skeletonGraphic.Skeleton.FindSlot(slotName);
-            slot.R = _color.r;
-            slot.G = _color.g;
-            slot.B = _color.b;
-        }
-        public void UpdateSkin(List<string> skinList)
+      
+        public void SetSkin(List<string> skinList)
         {
             _skinList = skinList;
             _characterSkin = new Skin("character-base");
@@ -52,7 +49,23 @@ namespace Projects.Scripts.Hub
                 _characterSkin.AddSkin(_skeletonData.FindSkin(_skinList[i]));
             }
             UpdateCombineSkin();
+            
         }
+
+        public void ChangeClothes()
+        {
+            if (!string.IsNullOrEmpty(changeClothesAnim))
+            {
+                var trackEntry = _skeletonGraphic.AnimationState.SetAnimation(0, changeClothesAnim, false);
+                trackEntry.Complete += entry =>
+                {
+                    if (!string.IsNullOrEmpty(idleAnim))
+                        _skeletonGraphic.AnimationState.SetAnimation(0, idleAnim, true);
+                };
+            }
+        }
+        
+        #region private
         private void UpdateCombineSkin()
         {
             var skeleton = _skeletonGraphic.Skeleton;
@@ -62,5 +75,16 @@ namespace Projects.Scripts.Hub
             skeleton.SetSkin(resultCombinedSkin);
             skeleton.SetSlotsToSetupPose();
         }
+
+        private void ChangeSlotColor(string slotName)
+        {
+            var slot = _skeletonGraphic.Skeleton.FindSlot(slotName);
+            slot.R = _color.r;
+            slot.G = _color.g;
+            slot.B = _color.b;
+        }
+        
+
+        #endregion
     }
 }

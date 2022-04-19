@@ -66,8 +66,9 @@ namespace Projects.Scripts.Menu.Customize
 
         public void SetSelected()
         {
-            selected.SetActive(GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName));
-            _toggle.onValueChanged.Invoke(true);
+            var result = GameDataManager.Instance.GetCurrentSkin().Contains(item.skinName);
+            selected.SetActive(result);
+            _toggle.onValueChanged.Invoke(result);
         }
 
         private void OnToggle(bool value,Action<SkinItem>onItemToggle)

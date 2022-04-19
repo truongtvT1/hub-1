@@ -22,7 +22,7 @@ namespace Projects.Scripts.Scriptable
         public const string GlassPrefix = "glass/";
         public const string CloakPrefix = "wing/";
         public List<Color> skinColors;
-        public int sTierTicket = 150, aTierTicket = 100, bTierTicket = 50, cTierTicket = 30;
+        public int sTierTicket = 150, aTierTicket = 100, bTierTicket = 50, cTierTicket = 30,colorTicket = 5;
 
         public List<string> GetAllSkinName()
         {

@@ -33,12 +33,22 @@ namespace Projects.Scripts.Popup
         {
             skinList = GameDataManager.Instance.GetCurrentSkin();
             color = GameDataManager.Instance.GetSkinColor();
-            character.UpdateSkin(skinList);
-            character.SetSkinColor(color);
+            UpdateCharacter();
             skinToggle.isOn = true;
             skinToggle.onValueChanged.Invoke(true);
         }
 
+        public void UpdateCharacter()
+        {
+            character.SetSkin(skinList);
+            character.SetSkinColor(color);
+        }
+
+        public void SetChangeClothes()
+        {
+
+            character.ChangeClothes();
+        }
         #region ButtonEvent
 
         private void OnSkinToggleChange(bool value)

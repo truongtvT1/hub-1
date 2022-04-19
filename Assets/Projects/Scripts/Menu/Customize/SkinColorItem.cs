@@ -44,7 +44,9 @@ namespace Projects.Scripts.Menu
 
         public void SetSelected()
         {
-            selected.SetActive(GameDataManager.Instance.GetSkinColor() == _color);
+            var result = GameDataManager.Instance.GetSkinColor() == _color;
+            selected.SetActive(result);
+            _toggle.onValueChanged.Invoke(result);
         }
 
         public Color GetColor()

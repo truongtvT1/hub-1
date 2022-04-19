@@ -21,7 +21,8 @@ namespace Projects.Scripts.Menu.Customize
         [SerializeField] private TextMeshProUGUI priceTicketText;
         private ToggleGroup _group;
         private List<SkinInfo> _skins;
-        private SkinItem _selected, _current;
+        private List<SkinItem> _itemList;
+        private SkinItem _selected;
         private PopupCustomizeCharacter _controller;
         private bool _init;
         private void Awake()
@@ -42,6 +43,7 @@ namespace Projects.Scripts.Menu.Customize
             if(_init) return;
             _controller = customizeCharacter;
             scroll.content.RemoveAllChild();
+            _itemList = new List<SkinItem>();
             var round = _skins.Count % 3 == 0 ? _skins.Count / 3 : _skins.Count / 3 + 1;
             var rect = scroll.content.sizeDelta;
             rect.y = round * 240;
@@ -55,6 +57,7 @@ namespace Projects.Scripts.Menu.Customize
                     if (i * 3 + j < _skins.Count)
                     {
                         group.items[j].GetComponent<SkinItem>().Init(_skins[i * 3 + j],_group,OnSkinSelected);
+                        _itemList.Add(group.items[j].GetComponent<SkinItem>());
                     }
                     else
                     {
@@ -70,37 +73,14 @@ namespace Projects.Scripts.Menu.Customize
         {
             _selected = item;
             var skinName = item.item.skinName;
-            if (skinName.Contains("hair/"))
-            {
-                _controller.skinList.RemoveAll(a => a.Contains("hair/"));
-            }
-            else if (skinName.Contains("gloves/"))
-            {
-                _controller.skinList.RemoveAll(a => a.Contains("gloves/"));
-            }
-            else if (skinName.Contains("body/"))
-            {
-                _controller.skinList.RemoveAll(a => a.Contains("body/"));
-            }
-            else if (skinName.Contains("glass/"))
-            {
-                _controller.skinList.RemoveAll(a => a.Contains("glass/"));
-            }
-            else if (skinName.Contains("wing/"))
-            {
-                _controller.skinList.RemoveAll(a => a.Contains("wing/"));
-            }
-            _controller.skinList.Add(skinName);
-            customCharacter.UpdateSkin(_controller.skinList);
-            customCharacter.SetSkinColor(_controller.color);
+            _controller.skinList = GameDataManager.Instance.UpdateSkinForList(_controller.skinList, skinName);
+            _controller.UpdateCharacter();
             if (GameDataManager.Instance.IsSkinUnlock(_selected.item.skinName))
             {
                 if (GameDataManager.Instance.GetCurrentSkin().Contains(_selected.item.skinName))
                 {
                     selected.SetActive(true);
                     selectButton.gameObject.SetActive(false);
-                    
-                    
                 }
                 else
                 {
@@ -134,7 +114,11 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnTryButtonClick()
         {
-            
+            GameServiceManager.Instance.ShowRewardedAd("customize_try_skin", () =>
+            {
+                //GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
+                OnSelectButtonClick();
+            });
         }
 
         private void OnBuyButtonClick()
@@ -144,27 +128,32 @@ namespace Projects.Scripts.Menu.Customize
             {
                 MenuController.Instance.UseTicket(price);
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
-                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
-                MenuController.Instance.UpdateCharacter();
-                _selected.SetSelected();
+                OnSelectButtonClick();
+            }
+            else
+            {
+                // show not enough ticket
             }
         }
 
         private void OnBuyByAdButtonClick()
         {
-            GameServiceManager.Instance.ShowRewardedAd("customize", () =>
+            GameServiceManager.Instance.ShowRewardedAd("customize_unlock_skin", () =>
             {
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
-                GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
-                MenuController.Instance.UpdateCharacter();
-                _selected.SetSelected();
+                OnSelectButtonClick();
             });
         }
 
         private void OnSelectButtonClick()
         {
-            selected.SetActive(true);
-            
+            GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
+            MenuController.Instance.UpdateCharacter();
+            foreach (var item in _itemList)
+            {
+                item.SetSelected();
+            }
+            _controller.SetChangeClothes();
         }
     }
 }

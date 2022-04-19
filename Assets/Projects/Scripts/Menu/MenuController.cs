@@ -43,7 +43,7 @@ namespace Projects.Scripts.Menu
             roomButton.onClick.AddListener(OnRoomButtonClick);
             userInfoButton.onClick.AddListener(OnUserInfoButtonClick);
             leaderBoardButton.onClick.AddListener(OnLeaderBoardButtonClick);
-            mainCharacter.UpdateSkin(GameDataManager.Instance.GetCurrentSkin());
+            mainCharacter.SetSkin(GameDataManager.Instance.GetCurrentSkin());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetSkinColor());
             Debug.Log(GameDataManager.Instance.GetSkinColor());
             GameServiceManager.Instance.ShowBanner();
@@ -90,7 +90,7 @@ namespace Projects.Scripts.Menu
 
         public void UpdateCharacter()
         {
-            mainCharacter.UpdateSkin(GameDataManager.Instance.GetCurrentSkin());
+            mainCharacter.SetSkin(GameDataManager.Instance.GetCurrentSkin());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetSkinColor());
         }
 
