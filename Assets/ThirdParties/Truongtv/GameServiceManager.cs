@@ -8,10 +8,12 @@ using ThirdParties.Truongtv.Notification;
 using ThirdParties.Truongtv.Rating;
 using ThirdParties.Truongtv.RemoteConfig;
 using ThirdParties.Truongtv.Utilities;
+using Truongtv.PopUpController;
 using UnityEngine;
 #if UNITY_EDITOR
 using System.IO;
 using System.Xml;
+
 #endif
 namespace ThirdParties.Truongtv
 {
@@ -23,18 +25,25 @@ namespace ThirdParties.Truongtv
     [RequireComponent(typeof(IapManager))]
     public class GameServiceManager : MonoBehaviour
     {
+        #if UNITY_EDITOR
         [SerializeField, OnValueChanged(nameof(OnAdServiceChange))]
         private AdService adService;
+
         [SerializeField, OnValueChanged(nameof(OnLogServiceChange))]
         private LogService logService;
+
         [SerializeField, OnValueChanged(nameof(OnRemoteServiceChange))]
         private RemoteConfigService remoteConfigService;
+
         [SerializeField, OnValueChanged(nameof(OnRateServiceChange))]
         private RatingService ratingService;
+
         [SerializeField, OnValueChanged(nameof(OnCloudMessagingServiceChange))]
         private CloudMessagingService cloudMessagingService;
+
         [SerializeField, OnValueChanged(nameof(OnIapServiceChange))]
         private IapService iapService;
+        #endif
         private AdManager _adManager;
         private LogEventManager _logEventManager;
         private RatingHelper _ratingHelper;
@@ -42,43 +51,123 @@ namespace ThirdParties.Truongtv
         private MobileNotification _mobileNotification;
         private IapManager _iapManager;
         public static GameServiceManager Instance;
-
+        
+        private DateTime _lastTimeShowAd;
         #region public
 
         #region Ads Service
-        public void ShowBanner(Action<bool> result = null)
+
+        public void ShowBanner()
         {
-            _adManager.ShowBanner(result);
+#if UNITY_IOS|| UNITY_IPHONE
+            if (GameDataManager.Instance.remoteConfigValue.versionReview.Equals(Application.version))
+            {
+                result?.Invoke(false);
+                return;
+            }
+#endif
+            if (GameDataManager.Instance.IsPurchaseBlockAd() || GameDataManager.Instance.cheated)
+            {
+                return;
+            }
+
+            _adManager.ShowBanner();
         }
 
         public void HideBanner()
         {
             _adManager.HideBanner();
         }
+
         public void ShowInterstitialAd(
             Action adResult = null)
         {
-            _adManager.ShowInterstitialAd(adResult);
+            adResult?.Invoke();
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                return;
+            }
+
+            if (GameDataManager.Instance.IsPurchaseBlockAd() ||GameDataManager.Instance.cheated)
+            {
+                return;
+            }
+            if (_adManager.IsInterstitialLoaded() && DateTime.Now.Subtract(_lastTimeShowAd).TotalSeconds <
+                GameDataManager.Instance.remoteConfigValue.blockAdTime)
+            {
+                _adManager.ShowInterstitialAd(result =>
+                {
+                    if (result)
+                        _lastTimeShowAd = DateTime.Now;
+                    
+                });
+                //show popup support us
+                LogEvent("ads_interstitial");
+            }
         }
-        
         public void ShowRewardedAd(string location, Action adResult = null)
         {
-            _adManager.ShowRewardedAd(location,adResult);
+            if (GameDataManager.Instance.cheated)
+            {
+                adResult?.Invoke();
+                return;
+            }
+            LogEvent("ads_reward_click", new Dictionary<string, object>
+            {
+                {"reward_for", location}
+            });
+            if (Application.internetReachability == NetworkReachability.NotReachable)
+            {
+                PopupController.Instance.ShowNoInternet();
+                LogEvent("ads_reward_fail", new Dictionary<string, object>
+                {
+                    {"cause", "no_internet"}
+                });
+                return;
+            }
+            if (!_adManager.IsRewardVideoLoaded())
+            {
+                PopupController.Instance.ShowToast("Ads is still coming. Please try again later.");
+                LogEvent("ads_reward_fail", new Dictionary<string, object>
+                {
+                    {"cause", "no_fill"}
+                });
+                return;
+            }
+            _adManager.ShowRewardedAd(result =>
+            {
+                if (!result)
+                {
+                    LogEvent("ads_reward_fail", new Dictionary<string, object>
+                    {
+                        {"cause", "not_complete"}
+                    });
+                    return;
+                }
+                _lastTimeShowAd = DateTime.Now;
+                LogEvent("ads_reward_complete", new Dictionary<string, object>
+                {
+                    {"reward_for", location}
+                });
+                adResult?.Invoke();
+            });
         }
-        
 
         #endregion
 
         #region Log Event
-        public void LogEvent(string eventName, Dictionary<string,object> parameters)
+
+        public void LogEvent(string eventName, Dictionary<string, object> parameters)
         {
-            _logEventManager.LogEvent(eventName,parameters);
+            _logEventManager.LogEvent(eventName, parameters);
         }
+
         public void LogEvent(string eventName)
         {
             _logEventManager.LogEvent(eventName);
         }
-        public void SetUserProperties(string userProperty,string value)
+
+        public void SetUserProperties(string userProperty, string value)
         {
             _logEventManager.SetUserProperties(userProperty, value);
         }
@@ -98,12 +187,14 @@ namespace ThirdParties.Truongtv
 
         public void PurchaseProduct(string sku, Action<bool, string> pAction)
         {
-            _iapManager.PurchaseProduct(sku,pAction);
+            _iapManager.PurchaseProduct(sku, pAction);
         }
+
         public string GetItemLocalPriceString(string sku)
         {
             return _iapManager.GetItemLocalPriceString(sku);
         }
+
         public void RestorePurchase()
         {
             _iapManager.RestorePurchase();
@@ -113,10 +204,11 @@ namespace ThirdParties.Truongtv
 
         #region Mobile Notification
 
-         public void SetLuckySpinReminder()
+        public void SetLuckySpinReminder()
         {
             _mobileNotification.SetLuckySpinReminder();
         }
+
         public void DailyRewardResetReminder(bool receive)
         {
             _mobileNotification.DailyRewardResetReminder(receive);
@@ -130,10 +222,11 @@ namespace ThirdParties.Truongtv
         {
             _remoteConfigManager.fetchComplete += fetch;
         }
-        
 
         #endregion
+
         #endregion
+
         #region Private function
 
         private void Awake()
@@ -155,21 +248,20 @@ namespace ThirdParties.Truongtv
         {
             _adManager.Init();
             OnFetchComplete(GameDataManager.Instance.remoteConfigValue.OnFetchComplete);
-            #if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
+#if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
              FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
                 remoteConfigManager.Init();
                 logEventManager.Init();
                 mobileNotification.Init();
             });
-            #else
+#else
             _remoteConfigManager.Init();
             _logEventManager.Init();
             _mobileNotification.Init();
-            #endif
-            
+#endif
         }
-        
+
 #if UNITY_EDITOR
         private void OnAdServiceChange()
         {
@@ -265,6 +357,7 @@ namespace ThirdParties.Truongtv
             SaveProperties("cloud_message", cloudMessagingService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
+
         private void OnIapServiceChange()
         {
             var symbolList = DefineSymbol.GetAllDefineSymbols();
@@ -281,9 +374,11 @@ namespace ThirdParties.Truongtv
                     symbolList.Add(DefineSymbol.UDP);
                     break;
             }
+
             SaveProperties("iap", iapService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
+
         private static void SaveProperties(string property, string value)
         {
             var XmlPath = "ThirdParties/Truongtv/CustomService.xml";
@@ -309,7 +404,6 @@ namespace ThirdParties.Truongtv
 #endif
 
         #endregion
-        
     }
 
     enum LogService
@@ -342,10 +436,14 @@ namespace ThirdParties.Truongtv
 
     enum CloudMessagingService
     {
-        None,Firebase
+        None,
+        Firebase
     }
+
     enum IapService
     {
-        None,IAP,UDP
+        None,
+        IAP,
+        UDP
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using ThirdParties.Truongtv;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,15 +49,18 @@ namespace MiniGame.MemoryMatter
             Hide();
         }
 
-        private void Start()
+        private async void Start()
         {
+            await Task.Delay(1000);
             for (int i = 0; i < maxBot; i++)
             {
+                var listSkin = GameDataManager.Instance.RandomSkinList();
+                var color = GameDataManager.Instance.RandomColor();
                 var rd = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 var bot = Instantiate(botPrefab);
                 bot.transform.position = new Vector3(rd,spawnRange[0].position.y, bot.transform.position.z);
                 listBot.Add(bot);
-                bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4));
+                bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
             }
         }
 
@@ -89,10 +93,12 @@ namespace MiniGame.MemoryMatter
             {
                 if (listBot[i] == null)
                 {
+                    var listSkin = GameDataManager.Instance.RandomSkinList();
+                    var color = GameDataManager.Instance.RandomColor();
                     var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                     var bot = Instantiate(botPrefab);
                     bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
-                    bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4));
+                    bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
                     listBot[i] = bot;
                 }
             }

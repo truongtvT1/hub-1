@@ -12,33 +12,37 @@ namespace Projects.Scripts.Hub
         private Skin _characterSkin;
         private SkeletonData _skeletonData;
         private List<string> _skinList;
+        private Color _color;
         private void Start()
         {
             _skeletonData = skeletonAnimation.skeleton.Data;
         }
-
-        public void Init(List<string> skinList)
+        public void SetSkinColor(Color color)
         {
-            _skinList = new List<string>(skinList);
-            UpdateSkin(_skinList);
+            _color = color;
+            ChangeSlotColor("head");
+            ChangeSlotColor("hand_L");
+            ChangeSlotColor("hand_R");
+            if (_skinList.Contains("body/body_00"))
+            {
+                ChangeSlotColor("leg_L");
+                ChangeSlotColor("leg_R");
+                ChangeSlotColor("body");
+            }
         }
-
-        public void ChangeSkin(string current, string next)
+        public void SetSkin(List<string> skinList)
         {
-            _skinList.Remove(current);
-            _skinList.Add(next);
-            UpdateSkin(_skinList);
-        }
-
-        private void UpdateSkin(List<string> skinList)
-        {
+            if(_skeletonData==null)
+                _skeletonData = skeletonAnimation.skeleton.Data;
+            _skinList = skinList;
             _characterSkin = new Skin("character-base");
             _characterSkin.AddSkin(_skeletonData.FindSkin(baseSkin));
-            for (var i = 0; i < skinList.Count; i++)
+            for (var i = 0; i < _skinList.Count; i++)
             {
-                _characterSkin.AddSkin(_skeletonData.FindSkin(skinList[i]));
+                _characterSkin.AddSkin(_skeletonData.FindSkin(_skinList[i]));
             }
             UpdateCombineSkin();
+            
         }
         private void UpdateCombineSkin()
         {
@@ -48,6 +52,13 @@ namespace Projects.Scripts.Hub
 
             skeleton.SetSkin(resultCombinedSkin);
             skeleton.SetSlotsToSetupPose();
+        }
+        private void ChangeSlotColor(string slotName)
+        {
+            var slot = skeletonAnimation.Skeleton.FindSlot(slotName);
+            slot.R = _color.r;
+            slot.G = _color.g;
+            slot.B = _color.b;
         }
     }
 }

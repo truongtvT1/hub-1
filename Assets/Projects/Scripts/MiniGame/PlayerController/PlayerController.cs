@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using MoreMountains.Tools;
+using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
+using ThirdParties.Truongtv;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,7 +21,7 @@ namespace MiniGame
     public class PlayerController : MonoBehaviour
     {
         public PlayerMovement Movement;
-        public PlayerAnimation Animation;
+        public CharacterAnimation Animation;
         [SerializeField] private int MaxHp, CurrentHp;
         [SerializeField, ShowIf(nameof(IsBot))] private Transform target;
         [SerializeField, ShowIf(nameof(IsBot))] private bool isFollowTarget, isReachTarget;
@@ -61,10 +64,20 @@ namespace MiniGame
         private void Start()
         {
             Movement.Init(this);
+            if (!IsBot)
+            {
+                var currentSkin = GameDataManager.Instance.GetCurrentSkin();
+                var currentColor = GameDataManager.Instance.GetCurrentColor();
+                Animation.SetSkin(currentSkin);
+                Animation.SetSkinColor(currentColor);
+            }
         }
 
-        public void Init(BrainStateData brainData, BotDifficulty difficulty)
+        public void Init(BrainStateData brainData, BotDifficulty difficulty, List<string> skin, Color color)
         {
+            Animation.SetSkin(skin);
+            Animation.SetSkinColor(color);
+            
             switch (difficulty)
             {
                 case BotDifficulty.Easy:

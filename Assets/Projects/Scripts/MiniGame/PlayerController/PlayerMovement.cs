@@ -212,9 +212,9 @@ namespace MiniGame
         
         public bool CheckIsGrounded()
         {
-            Vector2 boundSize = gameObject.GetComponent<CircleCollider2D>().bounds.size;
+            Vector2 boundSize = gameObject.GetComponent<Collider2D>().bounds.size;
             boundSize = new Vector2(boundSize.x - 0.1f, boundSize.y);
-            RaycastHit2D hit2D = Physics2D.BoxCast(gameObject.GetComponent<CircleCollider2D>().bounds.center, boundSize,
+            RaycastHit2D hit2D = Physics2D.BoxCast(gameObject.GetComponent<Collider2D>().bounds.center, boundSize,
                 0, Vector2.down, 0.1f, groundLayer);
 
             return hit2D.collider != null && !hit2D.collider.isTrigger;
@@ -320,7 +320,7 @@ namespace MiniGame
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(groundCheckPoint.transform.position, ballRadius);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position, ballRadius);
         }
     }
 }
