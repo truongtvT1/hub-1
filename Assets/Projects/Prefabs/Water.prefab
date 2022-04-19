@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 4765934190313684278}
   - component: {fileID: 2290484966157770720}
   - component: {fileID: 2861493182818741637}
+  - component: {fileID: 384379638099400084}
+  - component: {fileID: 8321105737556419472}
   m_Layer: 4
   m_Name: Water
   m_TagString: Untagged
@@ -205,6 +207,54 @@ MonoBehaviour:
   deltaSurface: 1.7
   deltaCollider: 0.29
   effect: {fileID: 3581603948829547909}
+--- !u!114 &384379638099400084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373223342485641448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0a7538185babc742b3eae4a642410e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  lostLifeWhenDie: 1
+  damage: 3
+--- !u!114 &8321105737556419472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2373223342485641448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fae651febb407fbaa8fe6787771261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEnter2DEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 384379638099400084}
+        m_TargetAssemblyTypeName: MiniGame.DamageToPlayer, Assembly-CSharp
+        m_MethodName: TriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerStay2DEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerExit2DEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4792214253336907456
 GameObject:
   m_ObjectHideFlags: 0

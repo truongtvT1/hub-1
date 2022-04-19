@@ -28,12 +28,6 @@ namespace MoreMountains.Tools
         protected float _lastActionsUpdate = 0f;
         protected float _lastDecisionsUpdate = 0f;
 	    protected AIState _initialState;
-
-        public bool isReachedTarget;
-        public bool isOrderAccepted;
-        public bool isHaveOrderInRoom;
-        public bool isOrderCanceled;
-        public bool isEndStayInRoomTime;
         
 	    private PlayerController _playerController;
 

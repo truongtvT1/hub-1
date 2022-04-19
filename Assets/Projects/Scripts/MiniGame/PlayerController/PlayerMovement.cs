@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -25,7 +26,7 @@ namespace MiniGame
         [SerializeField, FoldoutGroup("Check")]
         private LayerMask wallLayer;
         [SerializeField, FoldoutGroup("Check")]
-        private LayerMask boxLayer;
+        private LayerMask playerLayer;
         [SerializeField, FoldoutGroup("Check")]
         private Transform groundCheckPoint;
 
@@ -52,19 +53,45 @@ namespace MiniGame
 
         private void Update()
         {
-            
-            
+
+            #region Check follow target
+
+            if (_controller.IsFollowTarget())
+            {
+                if (_controller.GetTarget() != null)
+                {
+                    var target = _controller.GetTarget();
+                    if (transform.position.x < target.position.x)
+                    {
+                        moveDirection = MoveDirection.Right;
+                    }
+                    else
+                    {
+                        moveDirection = MoveDirection.Left;
+                    }
+
+                    if (Mathf.Abs(transform.position.x - target.position.x) <= _controller.GetTargetDistance())
+                    {
+                        _controller.SetReachTarget(true);
+                    }
+                    else
+                    {
+                        _controller.SetReachTarget(false);
+                    }
+                }
+            }
+
+            #endregion
             
             #region Check Ground
             
-            if (CheckIsGrounded())
+            if (CheckIsGrounded() || CheckIsOnOtherPlayer())
             {
                 if (lastGroundedTime<0f)
                 {
                     var obj = Instantiate(landingEffect);
                     obj.transform.SetParent(transform.parent);
                     obj.transform.localPosition = transform.localPosition + new Vector3(0, -0.67f, 0f);
-                    // SoundInGameManager.Instance.PlayBallLandingSound();
                 }
                 lastGroundedTime = JumpCoyoteTime;
                 if (!_moveEffectSpawnRunning)
@@ -170,7 +197,7 @@ namespace MiniGame
             }
             #endregion
             #region Check Box
-            //
+            
             // if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius*(int)moveDirection,0,0f),  groundLayer) &&
             //     Physics2D.OverlapPoint(groundCheckPoint.position - new Vector3(0, ballRadius, 0f), boxLayer))
             // {
@@ -182,7 +209,8 @@ namespace MiniGame
             #endregion
 
         }
-        private bool CheckIsGrounded()
+        
+        public bool CheckIsGrounded()
         {
             Vector2 boundSize = gameObject.GetComponent<CircleCollider2D>().bounds.size;
             boundSize = new Vector2(boundSize.x - 0.1f, boundSize.y);
@@ -191,6 +219,27 @@ namespace MiniGame
 
             return hit2D.collider != null && !hit2D.collider.isTrigger;
         }
+
+        public bool CheckIsOnOtherPlayer()
+        {
+            var hit2D = Physics2D.Raycast(groundCheckPoint.position + new Vector3(0,-(ballRadius + .1f)), Vector2.down,.1f, playerLayer);
+            if (hit2D)
+            {
+                return hit2D.collider.gameObject != gameObject && hit2D.transform.position.y <= groundCheckPoint.position.y;
+            }
+            return false;
+        }
+        
+        public bool CheckCollidingObject()
+        {
+            if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius * (int)moveDirection, 0, 0), wallLayer))
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        
         #region Controller
 
         public void TouchMoveLeft(bool release = false)
@@ -227,7 +276,7 @@ namespace MiniGame
             {
                 isJumpButtonRelease = false;
                 lastJumpTime = jumpBufferTime;
-                if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && rigidbody2D.velocity.y<4f && CheckIsGrounded())
+                if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && rigidbody2D.velocity.y<4f)
                 {
                     var velocity = rigidbody2D.velocity;
                     velocity.y = jumpForce;
@@ -267,6 +316,11 @@ namespace MiniGame
 
         #endregion
 
-        
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(groundCheckPoint.transform.position, ballRadius);
+        }
     }
 }

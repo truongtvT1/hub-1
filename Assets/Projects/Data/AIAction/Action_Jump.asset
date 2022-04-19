@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e690c4c092a74572a4d8b95476c26cc8, type: 3}
   m_Name: Action_Jump
   m_EditorClassIdentifier: 
-  maxJumpCount: 1
-  maxJumpTime: 1
+  maxJumpTime: 2

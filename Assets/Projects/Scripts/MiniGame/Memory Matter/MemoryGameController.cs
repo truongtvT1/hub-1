@@ -43,7 +43,7 @@ namespace MiniGame.MemoryMatter
             cacheTurnDuration = turnDuration;
             cacheMaxTurn = maxTurn;
             cacheMaxNumberObjs = maxNumberObjToShowPerTurn;
-            _gamePlayController = GamePlayController.Instance;
+            _gamePlayController = GetComponent<GamePlayController>();
             listBot = new List<PlayerController>(maxBot);
             Hide();
         }
@@ -85,6 +85,18 @@ namespace MiniGame.MemoryMatter
 
         void Refresh()
         {
+            for (int i = 0; i < listBot.Count; i++)
+            {
+                if (listBot[i] == null)
+                {
+                    var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
+                    var bot = Instantiate(botPrefab);
+                    bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
+                    bot.Init(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4));
+                    listBot[i] = bot;
+                }
+            }
+            
             var rd = new System.Random();
             var rdList = fruitSprites.OrderBy(_ => rd.Next()).Take(fruitSprites.Count).ToList();
             for (int i = 0; i < fruitList.Count; i++)
@@ -113,6 +125,10 @@ namespace MiniGame.MemoryMatter
         {
             Refresh();
             ReassignParam();
+            for (int i = 0; i < listBot.Count; i++)
+            {
+                listBot[i].SetTarget(null);
+            }
             if (currentRound == maxRound)
             {
                 //Show popup Game over
@@ -213,6 +229,12 @@ namespace MiniGame.MemoryMatter
             resultObj.sprite = fruitList[indexObj].sprite;
             resultObj.transform.parent.gameObject.SetActive(true);
             isShowing = true;
+            var rd = Random.Range(0, fruitList.Count);
+            for (int i = 0; i < listBot.Count; i++)
+            {
+                if (i == rd) continue;
+                listBot[i].SetTarget(fruitList[indexObj].transform);
+            }
             var showDuration = Mathf.RoundToInt(cacheShowDuration * (1 - deltaDifficulty) + 1f);
             StopAllCoroutines();
             StartCoroutine(CountTime(showDuration, 0.5f, f =>
@@ -239,7 +261,7 @@ namespace MiniGame.MemoryMatter
             StartCoroutine(CountTime(resultDuration, 0,callback: async () =>
             {
                 //Score player
-
+                
                 await Task.Delay(1000);
                 currentTurn = 0;
                 NextRound();

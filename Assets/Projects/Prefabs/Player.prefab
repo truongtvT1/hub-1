@@ -47,11 +47,6 @@ MonoBehaviour:
   TimeInThisState: 0
   ActionsFrequency: 0.03
   DecisionFrequency: 0.03
-  isReachedTarget: 0
-  isOrderAccepted: 0
-  isHaveOrderInRoom: 0
-  isOrderCanceled: 0
-  isEndStayInRoomTime: 0
 --- !u!1 &3584323495458657398
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,7 +62,7 @@ GameObject:
   - component: {fileID: 2414380726862205924}
   m_Layer: 3
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,6 +99,9 @@ MonoBehaviour:
   MaxHp: 1
   CurrentHp: 1
   target: {fileID: 0}
+  isFollowTarget: 0
+  isReachTarget: 0
+  targetDistance: 4
   minTimeToThink: 3.5
   maxTimeToThink: 8.5
   IsBot: 1
@@ -127,20 +125,20 @@ MonoBehaviour:
   icon: {fileID: 3584323497125221100}
   totalDisplay: {fileID: 3584323496463144635}
   moveDirection: 0
-  jumpForce: 10
+  jumpForce: 9
   jumpCutMultiple: 0
-  gravityScale: 1
+  gravityScale: 1.2
   fallGravityMultiple: 1.5
   rigidbody2D: {fileID: 3584323495458657357}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 88
+    m_Bits: 336
   wallLayer:
     serializedVersion: 2
     m_Bits: 72
-  boxLayer:
+  playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   groundCheckPoint: {fileID: 3584323495458657354}
   ballRadius: 0.55
   JumpCoyoteTime: 0.2

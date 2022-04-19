@@ -6,10 +6,14 @@ using UnityEngine;
 public class ActionMove : AIAction
 {
     public MoveDirection Direction;
-
+    public bool random = false;
     protected override void OneTimeAction(AIBrain _brain)
     {
         base.OneTimeAction(_brain);
+        if (random)
+        {
+            Direction = (MoveDirection) Random.Range(-1, 2);
+        }
         switch (Direction)
         {
             case MoveDirection.Left:

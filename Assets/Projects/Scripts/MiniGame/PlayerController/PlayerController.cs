@@ -2,6 +2,7 @@ using System;
 using MoreMountains.Tools;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MiniGame
 {
@@ -20,7 +21,8 @@ namespace MiniGame
         public PlayerAnimation Animation;
         [SerializeField] private int MaxHp, CurrentHp;
         [SerializeField, ShowIf(nameof(IsBot))] private Transform target;
-        [SerializeField, ShowIf(nameof(IsBot))] private float targetDistance;
+        [SerializeField, ShowIf(nameof(IsBot))] private bool isFollowTarget, isReachTarget;
+        [SerializeField, ShowIf(nameof(IsBot))] private float targetDistance = 2.5f;
         [ShowIf(nameof(IsBot))] public float minTimeToThink;
         [ShowIf(nameof(IsBot))] public float maxTimeToThink;
         public bool IsBot, jetpackMode;
@@ -233,8 +235,37 @@ namespace MiniGame
             _holdJump = !release;
         }
 
+        public void Damage(DamageType type, int damage, bool lostLifeWhenDie)
+        {
+            switch (type)
+            {
+                case DamageType.Water: 
+                    Die();
+                    break;
+            }
+        }
+
+        void Die()
+        {
+            //anim die
+            Debug.Log("die");
+            CurrentHp = 0;
+            StopAllCoroutines();
+            Destroy(gameObject);
+        }
+        
         #region AI Action
 
+        public bool IsCollidingObject()
+        {
+            return Movement.CheckCollidingObject();
+        }
+
+        public bool IsGrounded()
+        {
+            return Movement.CheckIsGrounded() || Movement.CheckIsOnOtherPlayer();
+        }
+        
         public void Idle()
         {
             CancelAllMove();
@@ -242,8 +273,24 @@ namespace MiniGame
 
         public void FollowTarget(bool enable = true)
         {
-            
+            isFollowTarget = enable;
+            if (enable && target == null)
+            {
+                var listBot = FindObjectsOfType<PlayerController>();
+                target = listBot[Random.Range(0, listBot.Length)].transform;
+            }
         }
+
+        public void SwitchRandomTarget()
+        {
+            var listBot = FindObjectsOfType<PlayerController>();
+            target = listBot[Random.Range(0, listBot.Length)].transform;
+        }
+        
+        public bool IsFollowTarget()
+        {
+            return isFollowTarget;
+        }        
         
         public Transform GetTarget()
         {
@@ -253,6 +300,26 @@ namespace MiniGame
         public void SetTarget(Transform target)
         {
             this.target = target;
+        }
+
+        public bool IsReachTarget()
+        {
+            return isReachTarget;
+        }
+
+        public void SetReachTarget(bool reached = true)
+        {
+            isReachTarget = reached;
+        }
+        
+        public void SetTargetDistance(float distance)
+        {
+            targetDistance = distance;
+        }
+        
+        public float GetTargetDistance()
+        {
+            return targetDistance;
         }
         
         public void JumpStart()
