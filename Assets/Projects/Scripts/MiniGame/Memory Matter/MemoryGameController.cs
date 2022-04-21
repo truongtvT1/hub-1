@@ -146,7 +146,6 @@ namespace MiniGame.MemoryMatter
             await Task.Delay(2500);
             if (_gamePlayController.player == null)
             {
-                Debug.Log("player dead");
                 var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 _gamePlayController.Respawn(new Vector3(rd1, spawnRange[0].position.y,0));
             }
@@ -259,12 +258,25 @@ namespace MiniGame.MemoryMatter
             resultObj.SetNativeSize();
             resultObj.transform.parent.gameObject.SetActive(true);
             isShowing = true;
-            var rd = Random.Range(0, fruitList.Count);
+            
+            //random list bot ignore target
+            int count = (int) _difficulty;
+            var rd = new System.Random();
+            var ignoreList = listBot.OrderBy(_ => rd.Next()).Take(count).ToList();
+            int k = 0;
             for (int i = 0; i < listBot.Count; i++)
             {
-                if (i == rd) continue;
+                if (k < count)
+                {
+                    if (listBot[i] == ignoreList[k])
+                    {
+                        k++;
+                        continue;
+                    }
+                }
                 listBot[i].SetTarget(fruitList[indexObj].transform);
             }
+            
             var showDuration = Mathf.RoundToInt(cacheShowDuration * (1 - deltaDifficulty) + 1f);
             StopAllCoroutines();
             StartCoroutine(CountTime(showDuration, 0.5f, f =>

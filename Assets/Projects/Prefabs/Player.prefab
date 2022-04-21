@@ -120,6 +120,8 @@ MonoBehaviour:
   jumpCutMultiple: 0.15
   gravityScale: 1.2
   fallGravityMultiple: 2
+  nofriction: {fileID: 6200000, guid: 7cc140d3529c2ff4a8c9bf57a7051562, type: 2}
+  smooth: {fileID: 6200000, guid: 212aa1f957f2c6a47b9807a9e950978c, type: 2}
   rigidbody2D: {fileID: 3584323495458657357}
   groundLayer:
     serializedVersion: 2
@@ -131,7 +133,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckPoint: {fileID: 3584323495458657354}
-  ballRadius: 0.55
+  ballRadius: 0.45
   JumpCoyoteTime: 0.2
   jumpBufferTime: 0.1
   forcePushBox: 7.5
@@ -235,7 +237,6 @@ Transform:
   m_Children:
   - {fileID: 6945684853642189960}
   - {fileID: 2368286729091274459}
-  - {fileID: 3014305340014895633}
   m_Father: {fileID: 3584323496463144635}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -268,7 +269,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6023886054379998400}
   m_Father: {fileID: 3584323497125221100}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -466,11 +468,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6956372100577579835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.95, z: 0}
-  m_LocalScale: {x: 0.2, y: -0.08, z: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 3584323497125221100}
-  m_RootOrder: 2
+  m_Father: {fileID: 6023886054379998400}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6015876111085267628
 SpriteRenderer:
@@ -512,8 +514,8 @@ SpriteRenderer:
   m_SortingLayerID: -287656607
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 1f0081b11fbc24f21be87b8cfb313a31, type: 3}
-  m_Color: {r: 1, g: 0.86329013, b: 0.25943398, a: 0.78039217}
+  m_Sprite: {fileID: 21300000, guid: fc725ce8a1a348141b3c09144d464145, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -611,7 +613,7 @@ MonoBehaviour:
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
-  endValueV3: {x: 0, y: 1.77, z: 0}
+  endValueV3: {x: 0, y: 2.3, z: 0}
   endValueV2: {x: 0, y: 0}
   endValueColor: {r: 1, g: 1, b: 1, a: 1}
   endValueString: 
@@ -628,3 +630,56 @@ MonoBehaviour:
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
+--- !u!1 &7567363030319886485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6023886054379998400}
+  - component: {fileID: 1915052963403390489}
+  m_Layer: 0
+  m_Name: Head
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6023886054379998400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567363030319886485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0001144803, y: 1.1719273, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3014305340014895633}
+  m_Father: {fileID: 2368286729091274459}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915052963403390489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7567363030319886485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fd8daaed7b64148a34acb96ba14ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 8223909577167606731}
+  boneName: head
+  followXYPosition: 1
+  followZPosition: 0
+  followBoneRotation: 0
+  followSkeletonFlip: 0
+  followLocalScale: 0
+  maintainedAxisOrientation: 1
+  initializeOnAwake: 1

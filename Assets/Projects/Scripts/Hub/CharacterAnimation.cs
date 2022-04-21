@@ -7,6 +7,7 @@ using Spine.Unity;
 using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using Animation = Spine.Animation;
+using Random = UnityEngine.Random;
 
 namespace Projects.Scripts.Hub
 {
@@ -29,12 +30,16 @@ namespace Projects.Scripts.Hub
 
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string runScareAnim;
+
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string runNaruto;
+
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string stun;
+
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string getHit;
+
         private Skin _characterSkin;
         private SkeletonData _skeletonData;
         private List<string> _skinList;
@@ -44,6 +49,7 @@ namespace Projects.Scripts.Hub
         private void Start()
         {
             _skeletonData = skeletonAnimation.skeleton.Data;
+            Random.InitState(DateTime.UtcNow.Millisecond);
         }
 
         List<string> GetAllAnimationName()
@@ -110,6 +116,26 @@ namespace Projects.Scripts.Hub
             slot.B = _color.b;
         }
 
+        public void PauseAnim(bool pause = true)
+        {
+            if (pause)
+            {
+                skeletonAnimation.timeScale = 0;
+            }
+            else
+            {
+                skeletonAnimation.timeScale = 1;
+            }
+        }
+
+        public int GetSortingOrder()
+        {
+            return skeletonAnimation.GetComponent<Renderer>().sortingOrder;
+        }
+        
+        #region Anim
+
+        
         public TrackEntry PlayIdle(bool loop = true, Action callback = null)
         {
             return PlayAnim("idle", loop: loop, callback: callback);
@@ -134,8 +160,24 @@ namespace Projects.Scripts.Hub
         {
             return PlayAnim("jump_down", 0, loop, callback: callback);
         }
+
+        public TrackEntry PlayStopPose(bool loop = false, Action callback = null)
+        {
+            var rdAnim = stopAnimations[Random.Range(0, stopAnimations.Count)];
+            return PlayAnim(rdAnim, 0,loop, callback: callback);
+        }
         
+        public TrackEntry PlayDie(bool loop = false, Action callback = null)
+        {
+            var rdAnim = dieAnimations[Random.Range(0, dieAnimations.Count)];
+            return PlayAnim(rdAnim, 0,loop, callback: callback);
+        }
         
+        public TrackEntry PlayWin(bool loop = true, Action callback = null)
+        {
+            var rdAnim = winAnimations[Random.Range(0, winAnimations.Count)];
+            return PlayAnim(rdAnim, 0,loop, callback: callback);
+        }
         
         TrackEntry PlayAnim(string animName, int trackIndex = 0,
             bool loop = false,
@@ -173,5 +215,8 @@ namespace Projects.Scripts.Hub
                 return trackEntry;
             }
         }
+
+        #endregion
+
     }
 }

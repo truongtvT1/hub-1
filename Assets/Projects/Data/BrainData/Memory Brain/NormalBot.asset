@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c11efb22fa5a8488e5eb13e05b4599, type: 3}
+  m_Name: NormalBot
+  m_EditorClassIdentifier: 
+  States:
+  - StateName: Idle
+    Actions:
+    - {fileID: 11400000, guid: f94219c8b88d2ea47abb1f903a641f52, type: 2}
+    - {fileID: 11400000, guid: 483cf4ea02beb884ab3765377e0d685b, type: 2}
+    Transitions:
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 7acc9fa61cc3eb043a02281c82a46efb, type: 2}
+      - {fileID: 11400000, guid: 7418f915b92ef294ba85b2dcc1c4e1d8, type: 2}
+      TrueState: FollowTarget
+      FalseState: 
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 659d8049f17b1734c9afa61f597fa139, type: 2}
+      TrueState: MoveRandom
+      FalseState: 
+  - StateName: Jump
+    Actions:
+    - {fileID: 11400000, guid: cbd7621dfa633b44099afe7717bdfc4d, type: 2}
+    Transitions:
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 8e23e3cc883d13d42b9f2c21cd84b9de, type: 2}
+      TrueState: MoveRandom
+      FalseState: 
+  - StateName: MoveRandom
+    Actions:
+    - {fileID: 11400000, guid: 94b0e2825ac378144aa0a5b8a891eeaf, type: 2}
+    Transitions:
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 7a2193c0fa0907f479a7f1c5a33c00d6, type: 2}
+      - {fileID: 11400000, guid: 659d8049f17b1734c9afa61f597fa139, type: 2}
+      TrueState: Jump
+      FalseState: 
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 7acc9fa61cc3eb043a02281c82a46efb, type: 2}
+      TrueState: FollowTarget
+      FalseState: 
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 659d8049f17b1734c9afa61f597fa139, type: 2}
+      TrueState: Idle
+      FalseState: 
+  - StateName: FollowTarget
+    Actions:
+    - {fileID: 11400000, guid: e7280fd45bc05a142a3b88bb10aa20c0, type: 2}
+    Transitions:
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: f92e6bb7604a2b24996b31b83f06375e, type: 2}
+      TrueState: Idle
+      FalseState: 
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 7acc9fa61cc3eb043a02281c82a46efb, type: 2}
+      TrueState: 
+      FalseState: Idle

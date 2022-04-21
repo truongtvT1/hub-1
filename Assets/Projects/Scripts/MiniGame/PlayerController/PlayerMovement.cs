@@ -20,8 +20,11 @@ namespace MiniGame
         [SerializeField, FoldoutGroup("Jump")]
         private float gravityScale, fallGravityMultiple;
         [SerializeField, FoldoutGroup("Check")]
+        private PhysicsMaterial2D nofriction;
+        [SerializeField, FoldoutGroup("Check")]
+        private PhysicsMaterial2D smooth;
+        [SerializeField, FoldoutGroup("Check")]
         private new Rigidbody2D rigidbody2D;
-
         [SerializeField, FoldoutGroup("Check")]
         private LayerMask groundLayer;
         [SerializeField, FoldoutGroup("Check")]
@@ -126,9 +129,25 @@ namespace MiniGame
             if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius*(int)moveDirection,0,0f),  wallLayer))
             {
                 _collisionWithWall = true;
+                if (CheckIsGrounded())
+                {
+                    rigidbody2D.sharedMaterial = smooth;
+                }
+                else
+                {
+                    rigidbody2D.sharedMaterial = nofriction;
+                }
             }
             else
             {
+                if (CheckIsOnOtherPlayer())
+                {
+                    rigidbody2D.sharedMaterial = nofriction;
+                }
+                else
+                {                    
+                    rigidbody2D.sharedMaterial = smooth;
+                }
                 _collisionWithWall = false;
             }
             #endregion
@@ -249,12 +268,12 @@ namespace MiniGame
 
         public bool CheckIsOnOtherPlayer()
         {
-            var hit2D = Physics2D.Raycast(groundCheckPoint.position + new Vector3(0,-(ballRadius + .1f)), Vector2.down,.1f, playerLayer);
-            if (hit2D)
-            {
-                return hit2D.collider.gameObject != gameObject && hit2D.transform.position.y <= groundCheckPoint.position.y;
-            }
-            return false;
+            var hit2D1 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(0,-.05f), Vector2.down,.1f, playerLayer);
+            var hit2D2 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(.25f,-0.02f), Vector2.down,.1f, playerLayer);
+            var hit2D3 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(-.25f,-0.02f), Vector2.down,.1f, playerLayer);
+            var hit2D4 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(.35f,0.1f), Vector2.down,.1f, playerLayer);
+            var hit2D5 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(-.35f,0.1f), Vector2.down,.1f, playerLayer);
+            return hit2D1 || hit2D2 || hit2D3 || hit2D4 || hit2D5;
         }
         
         public bool CheckCollidingObject()
@@ -265,7 +284,6 @@ namespace MiniGame
             }
             return false;
         }
-        
         
         #region Controller
 
@@ -347,7 +365,12 @@ namespace MiniGame
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
-            // Gizmos.DrawSphere(groundCheckPoint.transform.position, ballRadius);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(0,-.05f), .01f);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.25f,-0.02f), .01f);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.25f,-0.02f), .01f);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.35f,0.1f), .01f);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.35f,0.1f), .01f);
+            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(ballRadius * (int)moveDirection, ballRadius, 0), .01f);
         }
     }
 }

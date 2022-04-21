@@ -168,6 +168,8 @@ MonoBehaviour:
   jumpCutMultiple: 0.15
   gravityScale: 1.2
   fallGravityMultiple: 2
+  nofriction: {fileID: 6200000, guid: 7cc140d3529c2ff4a8c9bf57a7051562, type: 2}
+  smooth: {fileID: 6200000, guid: 212aa1f957f2c6a47b9807a9e950978c, type: 2}
   rigidbody2D: {fileID: 3584323495458657357}
   groundLayer:
     serializedVersion: 2
@@ -179,7 +181,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundCheckPoint: {fileID: 3584323495458657354}
-  ballRadius: 0.55
+  ballRadius: 0.45
   JumpCoyoteTime: 0.2
   jumpBufferTime: 0.1
   forcePushBox: 7.5
