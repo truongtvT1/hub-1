@@ -1,0 +1,417 @@
+fileFormatVersion: 2
+guid: 0d3f2c4bfb3f4b4468513c8fb0b8009a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4817715348122862158
+    second: banana
+  - first:
+      213: 7268810191519713488
+    second: banner blue
+  - first:
+      213: 6521649950188164254
+    second: banner green
+  - first:
+      213: -8086260473422800619
+    second: banner pink
+  - first:
+      213: 9133472321129899815
+    second: banner purple
+  - first:
+      213: 3219539113527825443
+    second: banner yellow
+  - first:
+      213: -4916276714045598410
+    second: grape
+  - first:
+      213: -6810279448610506461
+    second: Layer 9
+  - first:
+      213: 8720775565077857502
+    second: orange
+  - first:
+      213: 1668292025216466150
+    second: pallete 1
+  - first:
+      213: 6590625016785345540
+    second: pallete 2
+  - first:
+      213: 666660158781105950
+    second: pallete 3
+  - first:
+      213: 8982247196788291611
+    second: pallete 4
+  - first:
+      213: -6869843537542965101
+    second: pallete 5
+  - first:
+      213: 8130477326818896572
+    second: peach
+  - first:
+      213: -8661332600587486721
+    second: watermelon
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: banana
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 6
+        width: 252
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bd703e8a69042db0800000000000000
+      internalID: -4817715348122862158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: banner blue
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 967
+        width: 390
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d8854d7b5000e460800000000000000
+      internalID: 7268810191519713488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: banner green
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 967
+        width: 384
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e94d866931e818a50800000000000000
+      internalID: 6521649950188164254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: banner pink
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 967
+        width: 384
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5191a5831f4d7cf80800000000000000
+      internalID: -8086260473422800619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: banner purple
+      rect:
+        serializedVersion: 2
+        x: 1165
+        y: 967
+        width: 384
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7276fc25fac90ce70800000000000000
+      internalID: 9133472321129899815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: banner yellow
+      rect:
+        serializedVersion: 2
+        x: 1551
+        y: 967
+        width: 381
+        height: 1080
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3245d4214c91eac20800000000000000
+      internalID: 3219539113527825443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: grape
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 203
+        width: 177
+        height: 251
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63599c94060e5cbb0800000000000000
+      internalID: -4916276714045598410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: orange
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 710
+        width: 197
+        height: 255
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed44f5afb2b660970800000000000000
+      internalID: 8720775565077857502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pallete 1
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 204
+        width: 420
+        height: 250
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ecf4a802c6f62710800000000000000
+      internalID: 1668292025216466150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pallete 2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 456
+        width: 423
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40c1b4db88a967b50800000000000000
+      internalID: 6590625016785345540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pallete 4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 713
+        width: 423
+        height: 252
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1870594c3a57ac70800000000000000
+      internalID: 8982247196788291611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: peach
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 503
+        width: 221
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cba68673d0245d070800000000000000
+      internalID: 8130477326818896572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: watermelon
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 37
+        width: 270
+        height: 165
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff9f874b3e3ccc780800000000000000
+      internalID: -8661332600587486721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

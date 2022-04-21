@@ -11,8 +11,8 @@ namespace Truongtv.PopUpController
     {
         #region Properties
 
-        //[SerializeField] private Image shadowBackground;
-        [SerializeField] private Canvas lockSceneCanvas;
+        //[SerializeField] private GameObject shadowBackground;
+        //[SerializeField] private Canvas lockSceneCanvas;
         private Stack<BasePopup> _stackPopup = new Stack<BasePopup>();
         private Canvas _canvasPopup;
 
@@ -32,29 +32,9 @@ namespace Truongtv.PopUpController
             }
 
             _instance = this;
-        }
-        #region Unity function
-
-        private void Start()
-        {
             _stackPopup = new Stack<BasePopup>();
             _canvasPopup = GetComponent<Canvas>();
-            //_blackButton = shadowBackground.GetComponent<Button>();
-            // _blackButton.onClick.AddListener(OutSideClick);
         }
-        #if UNITY_ANDROID|| UNITY_EDITOR
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.Escape))
-                OutSideClick();
-        }
-        #endif
-        #endregion
-
-        #region Public function
-
-        
-        #endregion
 
         #region Private Function
 
@@ -97,7 +77,7 @@ namespace Truongtv.PopUpController
             if (_stackPopup.Count <= 0)
             {
                 LockScene(false);
-               // ShowShadowBackground(false);
+                //ShowShadowBackground(false);
                 return;
             }
             var popup = _stackPopup.Peek();
@@ -106,21 +86,20 @@ namespace Truongtv.PopUpController
         }
         public void LockScene(bool active)
         {
-            if (lockSceneCanvas == null) return;
-            lockSceneCanvas.enabled = active;
+            // if (lockSceneCanvas == null) return;
+            // lockSceneCanvas.enabled = active;
         }
 
         // private void ShowShadowBackground(bool active)
         // {
         //     if (shadowBackground == null) return;
-        //     shadowBackground.enabled = active;
+        //     shadowBackground.SetActive(active);
         // }
 
       
 
         #endregion
 
-        [Button]
         public void ShowToast(string description)
         {
             toast.gameObject.SetActive(true);

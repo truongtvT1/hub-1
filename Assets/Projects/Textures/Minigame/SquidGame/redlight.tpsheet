@@ -1,0 +1,28 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:7f49de5df046055bae6b1ae6283cd9a1:b6f54e026b3b46c34715788c51089dad:eef7308c1ed6a3864ab0d8bbd3222c62$
+#
+:format=40300
+:texture=redlight.png
+:size=512x1024
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+danger warning;348;840;154;183; 0.5;0.5; 0;0;0;0
+effect character dead in ground;88;788;243;71; 0.5;0.5; 0;0;0;0
+effect ground;88;511;324;138; 0.5;0.5; 0;0;0;0
+Layer 1;333;651;146;187; 0.5;0.5; 0;0;0;0
+light decor;414;425;90;224; 0.5;0.5; 0;0;0;0
+line;1;21;85;838; 0.5;0.5; 0;0;0;0
+object2;88;657;211;129; 0.5;0.5; 0;0;0;0
+object3 copy;88;441;144;68; 0.5;0.5; 0;0;0;0
+random skull1;234;382;121;127; 0.5;0.5; 0;0;0;0
+random skull2;88;312;121;127; 0.5;0.5; 0;0;0;0
+random skull3;357;309;116;114; 0.5;0.5; 0;0;0;0
+random skull4;211;257;112;123; 0.5;0.5; 0;0;0;0
+warning border;1;861;345;162; 0.5;0.5; 0;0;0;0

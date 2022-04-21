@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using Truongtv.PopUpController;
 using Truongtv.Services.Ad;
 using UnityEngine;
 
@@ -9,9 +7,7 @@ namespace ThirdParties.Truongtv.AdsManager
     public class AdManager:MonoBehaviour
     {
         private IAdClient _adClient;
-        private DateTime _lastTimeInterstitialShow;
-        private int _countLevel;
-        #region Unity Function
+        #region Public Function
         public void Init()
         {
             #if USING_MAX
@@ -25,144 +21,31 @@ namespace ThirdParties.Truongtv.AdsManager
             #endif
             _adClient.Initialized();
         }
-        #endregion
         
-        #region Private Function
-
-        private void ShowRewardVideo(string placement = null, Action<bool> actionCloseAd=null)
-        {
-            
-            _adClient.ShowRewardVideo((result) =>
-            {
-                if(result)
-                    _lastTimeInterstitialShow = DateTime.Now;
-                actionCloseAd?.Invoke(result);
-                
-            });
-        }
-
-        private bool IsRewardVideoLoaded()
+        public bool IsRewardVideoLoaded()
         {
             return _adClient.IsRewardVideoLoaded();
         }
-
-        private void ShowInterstitial(Action<bool> actionCloseAd=null)
-        {
-            
-            _lastTimeInterstitialShow = DateTime.Now;
-            _countLevel++;
-            _adClient.ShowInterstitial(actionCloseAd);
-        }
-
-        private bool IsInterstitialLoaded()
+        public bool IsInterstitialLoaded()
         {
             return _adClient.IsInterstitialLoaded();
         }
-
-        private bool IsInterstitialAvailableToShow()
+        public void ShowBanner()
         {
-            if (DateTime.Now.Subtract(_lastTimeInterstitialShow).TotalSeconds < GameDataManager.Instance.remoteConfigValue.blockAdTime)
-                return false;
-            return true;
+            _adClient.ShowBannerAd();
         }
-        
-        #endregion
-        #region Public Function
-        public void ShowBanner(Action<bool> result = null)
-        {
-#if UNITY_IOS|| UNITY_IPHONE
-            if (GameDataManager.Instance.remoteConfigValue.versionReview.Equals(Application.version))
-            {
-                result?.Invoke(false);
-                return;
-            }
-#endif
-            if (GameDataManager.Instance.IsPurchaseBlockAd()||GameDataManager.Instance.cheated)
-            {
-                result?.Invoke(false);
-                return;
-            }
-            _adClient.ShowBannerAd(result);
-        }
-
         public void HideBanner()
         {
             _adClient.HideBannerAd();
         }
         public void ShowInterstitialAd(
-            Action adResult = null)
+            Action<bool> adResult = null)
         {
-            if (Application.internetReachability == NetworkReachability.NotReachable)
-            {
-                adResult?.Invoke();
-                return;
-            }
-            if (GameDataManager.Instance.cheated)
-            {
-                adResult?.Invoke();
-                return;
-            }
-            if (IsInterstitialLoaded() && IsInterstitialAvailableToShow())
-            {
-                ShowInterstitial(result =>
-                {
-                    GameServiceManager.Instance.LogEvent("ads_interstitial");
-                    adResult?.Invoke();
-                });
-            }
-            else
-            {
-                adResult?.Invoke();
-            }
+            _adClient.ShowInterstitial(adResult);
         }
-        
-        public void ShowRewardedAd(string location, Action adResult = null)
+        public void ShowRewardedAd( Action<bool> adResult = null)
         {
-            
-            if (GameDataManager.Instance.cheated)
-            {
-                adResult?.Invoke();
-                return;
-            }
-            GameServiceManager.Instance.LogEvent("ads_reward_click",new Dictionary<string, object>
-            {
-                {"reward_for",location}
-            });
-            if (Application.internetReachability == NetworkReachability.NotReachable)
-            {
-                PopupController.Instance.ShowNoInternet();
-                GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
-                {
-                    {"cause","no_internet"}
-                });
-                _countLevel++;
-                return;
-            }
-            if (!IsRewardVideoLoaded())
-            {
-                PopupController.Instance.ShowToast("Ads is still coming. Please try again later.");
-                GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
-                {
-                    {"cause","no_fill"}
-                });
-                return;
-            }
-            ShowRewardVideo(location,result =>
-            {
-                if (!result)
-                {
-                    GameServiceManager.Instance.LogEvent("ads_reward_fail",new Dictionary<string, object>
-                    {
-                        {"cause","not_complete"}
-                    });
-                    return;
-                }
-                adResult?.Invoke();
-                GameServiceManager.Instance.LogEvent("ads_reward_complete",new Dictionary<string, object>
-                {
-                    {"reward_for",location}
-                });
-            });
+            _adClient.ShowRewardVideo(adResult);
         }
         #endregion
 

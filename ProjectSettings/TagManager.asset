@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ground
+  - Block
+  - Platform
   - 
   - 
   - 
@@ -40,4 +40,25 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Item
+    uniqueID: 797789477
+    locked: 0
+  - name: Player
+    uniqueID: 4007310689
+    locked: 0
+  - name: Ground
+    uniqueID: 2977666205
+    locked: 0
+  - name: UI
+    uniqueID: 1726413149
+    locked: 0
+  - name: Popup
+    uniqueID: 3543778595
+    locked: 0
+  - name: Currency
+    uniqueID: 224707623
+    locked: 0
+  - name: Notification
+    uniqueID: 1229125091
     locked: 0

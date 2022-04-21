@@ -1,0 +1,648 @@
+fileFormatVersion: 2
+guid: 1f0ed974e5f40ce4c9390935ff40f34a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5219265429197219629
+    second: finish
+  - first:
+      213: -8282314525886423737
+    second: haptic icon
+  - first:
+      213: 1804942536004782824
+    second: medium blue
+  - first:
+      213: 3026095328598015926
+    second: medium green2
+  - first:
+      213: 3368944713548168695
+    second: music icon
+  - first:
+      213: -7373880428372708526
+    second: Music Sound Haptic
+  - first:
+      213: -4850756510986859161
+    second: name backk
+  - first:
+      213: -7263846995776976200
+    second: popup back2
+  - first:
+      213: -8865800195471304682
+    second: score
+  - first:
+      213: 513894570918104421
+    second: setting
+  - first:
+      213: 3422518386314149147
+    second: skull icon
+  - first:
+      213: -5589959164506025086
+    second: sound icon
+  - first:
+      213: -8790399837741147707
+    second: TeamOne0101
+  - first:
+      213: 7690371254390683111
+    second: tick back
+  - first:
+      213: 6293745909222051640
+    second: tickback
+  - first:
+      213: -3199265162004847705
+    second: time back
+  - first:
+      213: -4134230284560483258
+    second: time1
+  - first:
+      213: -5672179630057564745
+    second: time2
+  - first:
+      213: 4313336462231740670
+    second: top1
+  - first:
+      213: 2157994897330838609
+    second: top2
+  - first:
+      213: 2085561587339319920
+    second: top3
+  - first:
+      213: -6970339593375987663
+    second: v
+  - first:
+      213: -8343581773329175713
+    second: x
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: finish
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 880
+        width: 59
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d27e6c7414e8e6840800000000000000
+      internalID: 5219265429197219629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: haptic icon
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 526
+        width: 102
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d5b7ef1de4f0d80800000000000000
+      internalID: -8282314525886423737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: medium blue
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 188
+        width: 297
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eace8a6ca17c0910800000000000000
+      internalID: 1804942536004782824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: medium green2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 62
+        width: 297
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bfbd8d1ba9def920800000000000000
+      internalID: 3026095328598015926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: music icon
+      rect:
+        serializedVersion: 2
+        x: 530
+        y: 344
+        width: 75
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7fdf7f61e55e0ce20800000000000000
+      internalID: 3368944713548168695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Music Sound Haptic
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 729
+        width: 151
+        height: 268
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 253b3a2a1d6baa990800000000000000
+      internalID: -7373880428372708526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: name backk
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 329
+        width: 283
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76d07b657a6aeacb0800000000000000
+      internalID: -4850756510986859161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: popup back2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 497
+        width: 801
+        height: 526
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bacce194a1a13b90800000000000000
+      internalID: -7263846995776976200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: score
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 833
+        width: 54
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 618185bf1b956f480800000000000000
+      internalID: -8865800195471304682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: setting
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 603
+        width: 149
+        height: 124
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56d4397b368b12700800000000000000
+      internalID: 513894570918104421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull icon
+      rect:
+        serializedVersion: 2
+        x: 912
+        y: 420
+        width: 100
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1d7f7dc65a3f7f20800000000000000
+      internalID: 3422518386314149147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sound icon
+      rect:
+        serializedVersion: 2
+        x: 683
+        y: 414
+        width: 85
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 283ddaab1c97c62b0800000000000000
+      internalID: -5589959164506025086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TeamOne0101
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 999
+        width: 196
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c999cdcbe9320680800000000000000
+      internalID: -8790399837741147707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tick back
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 931
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e5f4d819efa9ba60800000000000000
+      internalID: 7690371254390683111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tickback
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 931
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83f8fb90f80e75750800000000000000
+      internalID: 6293745909222051640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: time back
+      rect:
+        serializedVersion: 2
+        x: 770
+        y: 314
+        width: 246
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a32b6c194de993d0800000000000000
+      internalID: -3199265162004847705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: time1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 423
+        width: 680
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64c3c15d57340a6c0800000000000000
+      internalID: -4134230284560483258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: time2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 376
+        width: 527
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 262, y: 0, z: 262, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b55630ddae5841b0800000000000000
+      internalID: -5672179630057564745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: top1
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 772
+        width: 47
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0201cc8ac0cdb30800000000000000
+      internalID: 4313336462231740670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: top2
+      rect:
+        serializedVersion: 2
+        x: 957
+        y: 715
+        width: 47
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15c9282fcecb2fd10800000000000000
+      internalID: 2157994897330838609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: top3
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 660
+        width: 47
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07a5f82c63761fc10800000000000000
+      internalID: 2085561587339319920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: v
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 445
+        width: 88
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 138cbfcf111644f90800000000000000
+      internalID: -6970339593375987663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: x
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 520
+        width: 106
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5b6a465594a53c80800000000000000
+      internalID: -8343581773329175713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

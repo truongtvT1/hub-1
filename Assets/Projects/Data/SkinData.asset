@@ -12,13 +12,431 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e337ffb8d0694026bdfd44f178e849bd, type: 3}
   m_Name: SkinData
   m_EditorClassIdentifier: 
-  skeleton: {fileID: 11400000, guid: 91a60be3ea058c245b89efb440a49a58, type: 2}
-  baseSkin: hair/blue
+  skeleton: {fileID: 11400000, guid: f4ecef79612d5e0449325c349354159b, type: 2}
   hairSkins:
-  - hair/blue
-  - hair/brown
-  - hair/long-blue-with-scarf
-  - hair/pink
-  - hair/short-red
-  faceSkins: []
-  bodySkins: []
+  - skinName: hair/hair_00
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_01
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_02
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_03
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_04
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_05
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_06
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_07
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_08
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_09
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_10
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_11
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_12
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_13
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_14
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_15
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_16
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_17
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_18
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_19
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_20
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_21
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_22
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_23
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_24
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_25
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_26
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_27
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_28
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_29
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_30
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_31
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_32
+    skinType: 0
+    rank: 2
+  - skinName: hair/hair_33
+    skinType: 0
+    rank: 1
+  - skinName: hair/hair_34
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_35
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_36
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_37
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_38
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_39
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_40
+    skinType: 0
+    rank: 3
+  - skinName: hair/hair_41
+    skinType: 0
+    rank: 4
+  - skinName: hair/hair_42
+    skinType: 0
+    rank: 3
+  gloveSkins:
+  - skinName: gloves/glove_00
+    skinType: 1
+    rank: 4
+  - skinName: gloves/glove_01
+    skinType: 1
+    rank: 1
+  - skinName: gloves/glove_02
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_03
+    skinType: 1
+    rank: 3
+  - skinName: gloves/glove_04
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_05
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_06
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_07
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_08
+    skinType: 1
+    rank: 3
+  - skinName: gloves/glove_09
+    skinType: 1
+    rank: 4
+  - skinName: gloves/glove_10
+    skinType: 1
+    rank: 3
+  - skinName: gloves/glove_11
+    skinType: 1
+    rank: 2
+  - skinName: gloves/glove_12
+    skinType: 1
+    rank: 2
+  bodySkins:
+  - skinName: body/body_00
+    skinType: 2
+    rank: 4
+  - skinName: body/body_01
+    skinType: 2
+    rank: 2
+  - skinName: body/body_02
+    skinType: 2
+    rank: 2
+  - skinName: body/body_03
+    skinType: 2
+    rank: 2
+  - skinName: body/body_04
+    skinType: 2
+    rank: 2
+  - skinName: body/body_05
+    skinType: 2
+    rank: 3
+  - skinName: body/body_06
+    skinType: 2
+    rank: 4
+  - skinName: body/body_07
+    skinType: 2
+    rank: 3
+  - skinName: body/body_08
+    skinType: 2
+    rank: 1
+  - skinName: body/body_09
+    skinType: 2
+    rank: 2
+  - skinName: body/body_10
+    skinType: 2
+    rank: 1
+  - skinName: body/body_11
+    skinType: 2
+    rank: 2
+  - skinName: body/body_12
+    skinType: 2
+    rank: 2
+  - skinName: body/body_13
+    skinType: 2
+    rank: 1
+  - skinName: body/body_14
+    skinType: 2
+    rank: 4
+  - skinName: body/body_15
+    skinType: 2
+    rank: 1
+  - skinName: body/body_16
+    skinType: 2
+    rank: 4
+  - skinName: body/body_17
+    skinType: 2
+    rank: 2
+  - skinName: body/body_18
+    skinType: 2
+    rank: 2
+  - skinName: body/body_19
+    skinType: 2
+    rank: 1
+  - skinName: body/body_20
+    skinType: 2
+    rank: 3
+  - skinName: body/body_21
+    skinType: 2
+    rank: 1
+  - skinName: body/body_22
+    skinType: 2
+    rank: 4
+  - skinName: body/body_23
+    skinType: 2
+    rank: 2
+  - skinName: body/body_24
+    skinType: 2
+    rank: 3
+  - skinName: body/body_25
+    skinType: 2
+    rank: 4
+  - skinName: body/body_26
+    skinType: 2
+    rank: 1
+  - skinName: body/body_27
+    skinType: 2
+    rank: 3
+  - skinName: body/body_28
+    skinType: 2
+    rank: 2
+  - skinName: body/body_29
+    skinType: 2
+    rank: 1
+  - skinName: body/body_30
+    skinType: 2
+    rank: 3
+  - skinName: body/body_31
+    skinType: 2
+    rank: 3
+  - skinName: body/body_32
+    skinType: 2
+    rank: 2
+  - skinName: body/body_33
+    skinType: 2
+    rank: 3
+  - skinName: body/body_34
+    skinType: 2
+    rank: 3
+  - skinName: body/body_35
+    skinType: 2
+    rank: 4
+  - skinName: body/body_36
+    skinType: 2
+    rank: 4
+  - skinName: body/body_37
+    skinType: 2
+    rank: 2
+  - skinName: body/body_38
+    skinType: 2
+    rank: 3
+  - skinName: body/body_39
+    skinType: 2
+    rank: 1
+  - skinName: body/body_40
+    skinType: 2
+    rank: 1
+  glassSkins:
+  - skinName: glass/glass_00
+    skinType: 3
+    rank: 4
+  - skinName: glass/glass_01
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_02
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_03
+    skinType: 3
+    rank: 2
+  - skinName: glass/glass_04
+    skinType: 3
+    rank: 1
+  - skinName: glass/glass_05
+    skinType: 3
+    rank: 2
+  - skinName: glass/glass_06
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_07
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_08
+    skinType: 3
+    rank: 2
+  - skinName: glass/glass_09
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_10
+    skinType: 3
+    rank: 4
+  - skinName: glass/glass_11
+    skinType: 3
+    rank: 4
+  - skinName: glass/glass_12
+    skinType: 3
+    rank: 1
+  - skinName: glass/glass_13
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_14
+    skinType: 3
+    rank: 1
+  - skinName: glass/glass_15
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_16
+    skinType: 3
+    rank: 3
+  - skinName: glass/glass_17
+    skinType: 3
+    rank: 2
+  - skinName: glass/glass_18
+    skinType: 3
+    rank: 4
+  - skinName: glass/glass_19
+    skinType: 3
+    rank: 1
+  cloakSkins:
+  - skinName: wing/w_00
+    skinType: 4
+    rank: 4
+  - skinName: wing/w_01
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_02
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_03
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_04
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_05
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_06
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_07
+    skinType: 4
+    rank: 1
+  - skinName: wing/w_08
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_09
+    skinType: 4
+    rank: 1
+  - skinName: wing/w_10
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_11
+    skinType: 4
+    rank: 3
+  - skinName: wing/w_12
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_13
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_14
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_15
+    skinType: 4
+    rank: 2
+  - skinName: wing/w_16
+    skinType: 4
+    rank: 1
+  skinColors:
+  - {r: 0.91764706, g: 0.105882354, b: 0.105882354, a: 1}
+  - {r: 0.44313726, g: 0.28627452, b: 0.11764706, a: 1}
+  - {r: 0.972549, g: 0.50980395, b: 0.05882353, a: 1}
+  - {r: 1, g: 0.85882354, b: 0.2, a: 1}
+  - {r: 1, g: 0.25490198, b: 0.7529412, a: 1}
+  - {r: 0.43529412, g: 0.16078432, b: 0.79607844, a: 1}
+  - {r: 0.09019608, g: 0.20784314, b: 0.9019608, a: 1}
+  - {r: 0.21960784, g: 0.99607843, b: 0.85882354, a: 1}
+  - {r: 0, g: 0.69803923, b: 0.24705882, a: 0}
+  - {r: 0.25882354, g: 1, b: 0.15294118, a: 1}
+  - {r: 0.8392157, g: 0.8784314, b: 0.9411765, a: 1}
+  - {r: 0.24705882, g: 0.2784314, b: 0.30588236, a: 1}
+  - {r: 1, g: 0.7607843, b: 0.54509807, a: 1}
+  - {r: 0.05882353, g: 0.63529414, b: 0.93333334, a: 1}
+  - {r: 0.5686275, g: 0.5372549, b: 0.46666667, a: 1}
+  sTierTicket: 150
+  aTierTicket: 100
+  bTierTicket: 50
+  cTierTicket: 30

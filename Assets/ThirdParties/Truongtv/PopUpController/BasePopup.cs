@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using Spine.Unity;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -13,9 +14,8 @@ namespace Truongtv.PopUpController
     [RequireComponent(typeof(GraphicRaycaster))]
     public class BasePopup:MonoBehaviour
     {
-        [SerializeField] private PopupDisplayType displayType = PopupDisplayType.Zoom;
-        [SerializeField] private Image shadowBackground;
-        
+        [SerializeField] private Transform container;
+        private PopupDisplayType displayType = PopupDisplayType.FadeIn;
         protected const float DURATION = 0.5f;
         private Canvas _canvasPopup;
         private CanvasGroup _canvasGroup;
@@ -35,6 +35,9 @@ namespace Truongtv.PopUpController
             {
                 displayType = (PopupDisplayType) Random.Range(1, 7);
             }
+            container.localScale = Vector3.zero;
+            SoundManager.Instance.PlayPopupOpenSound();
+            container.DOScale(1, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.OutBack);
             openAction?.Invoke();
             switch (displayType)
             {
@@ -53,18 +56,6 @@ namespace Truongtv.PopUpController
                     FadeIn(openCompleteAction);
                     break;
             }
-
-            // if (shadowBackground != null)
-            // {
-            //     if (MenuPopupController.Instance != null)
-            //     {
-            //         shadowBackground.sprite = MenuPopupController.Instance.GetBackgroundImg();
-            //     }
-            //     else
-            //     {
-            //         shadowBackground.sprite = GamePlayPopupController.Instance.GetBackgroundImg();
-            //     }
-            // }
         }
 
         
@@ -78,6 +69,9 @@ namespace Truongtv.PopUpController
                 closeCompleteAction?.Invoke();
             }
             closeAction?.Invoke();
+            SoundManager.Instance.PlayPopupCloseSound();
+            container.DOScale(0, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.InBack);
+
             switch (displayType)
             {
                 case PopupDisplayType.None:
@@ -102,22 +96,10 @@ namespace Truongtv.PopUpController
 
         private void FadeIn(Action complete = null)
         {
-            // var skels = GetComponentsInChildren<SkeletonGraphic>();
-            // foreach (var skel in skels)
-            // {
-            //     skel.color = new Color(skel.color.r,skel.color.g,skel.color.b,1);
-            // }
             CanvasGroup().alpha = 0;
             CanvasGroup().DOFade(1,DURATION)
                 .SetEase(Ease.OutBack)
                 .SetUpdate(UpdateType.Normal,true)
-                // .OnUpdate(() =>
-                // {
-                //     foreach (var skel in skels)
-                //     {
-                //         skel.color = new Color(skel.color.r,skel.color.g,skel.color.b,CanvasGroup().alpha);
-                //     }
-                // })
                 .onComplete = ()=>
             {
                 _popupController.LockScene(false);
@@ -127,17 +109,9 @@ namespace Truongtv.PopUpController
 
         private void FadeOut(Action action)
         {
-            // var skels = GetComponentsInChildren<SkeletonGraphic>();
             CanvasGroup().DOFade(0, DURATION)
                 .SetEase(Ease.InBack)
                 .SetUpdate(UpdateType.Normal,true)
-                .OnUpdate(() =>
-                {
-                    // foreach (var skel in skels)
-                    // {
-                    //     skel.color = new Color(skel.color.r,skel.color.g,skel.color.b,CanvasGroup().alpha);
-                    // }
-                })
                 .onComplete = action.Invoke;
         }
         private void ZoomIn(Action complete = null)
