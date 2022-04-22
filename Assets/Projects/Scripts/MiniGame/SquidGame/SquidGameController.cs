@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
@@ -27,13 +28,17 @@ namespace MiniGame.SquidGame
         [FoldoutGroup("UI")] public Button pauseButton;
         public float gameDuration, greenDuration, redDuration, moveSpeed;
         [Range(0, .3f)] public float difficultyDelta;
+        public float meteorPeriod;
+        public int maxMeteor;
+        public Vector2 fallRange;
         [SpineAnimation(dataField = nameof(animBoss))]
         public string idle, redLight, greenLight, warning;
         public SkeletonAnimation animBoss, animStaff1, animStaff2;
-
+        public GameObject meteorPrefab;
         public CharacterAnimation playerAnimation;
         public GameObject shotFx;
         public ParticleSystem blowEffect;
+        public GameObject skull;
         public Transform start, end, playerTransform;
         public Action onRedLight, onGreenLight;
         public List<SquidPlayer> listNPC;
@@ -44,11 +49,14 @@ namespace MiniGame.SquidGame
         public GameState state = GameState.None;
         public static SquidGameController Instance => _instance;
         private static SquidGameController _instance;
-        private bool isHoldingMove;
+        private bool isHoldingMove, canKillBall;
         private float gameTimeCount, backUpPitchShift, progressImageWitdh;
         private int level;
         private Color cacheColor;
-
+        private List<SquidPlayer> npcToKill = new List<SquidPlayer>();
+        private List<SquidPlayer> listToKill1 = new List<SquidPlayer>();
+        private List<SquidPlayer> listToKill2 = new List<SquidPlayer>();
+        
         private void Awake()
         {
             if (_instance == null)
@@ -59,22 +67,17 @@ namespace MiniGame.SquidGame
             {
                 Destroy(_instance.gameObject);
             }
+
             pauseButton.onClick.AddListener(() =>
-            { 
+            {
                 Pause();
-                InGamePopupController.Instance.ShowPopupSetting(() =>
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                },
-                () =>
-                {
-                    // update result
-                    
-                },
-                () =>
-                {
-                    Resume();
-                });
+                InGamePopupController.Instance.ShowPopupSetting(
+                    () => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); },
+                    () =>
+                    {
+                        // update result
+                    },
+                    () => { Resume(); });
             });
             audio.outputAudioMixerGroup = pitchBend;
             audio.clip = greenLightSound;
@@ -96,7 +99,7 @@ namespace MiniGame.SquidGame
             // difficultyDelta = difficultyDelta + GameDataManager.Instance.GetSquidLevelDifficulty();
             Debug.Log("difficult delta: " + difficultyDelta);
             StartCoroutine(Init());
-            GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object>{{"red_line",level}});
+            GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{"red_line", level}});
         }
 
         public void Pause()
@@ -123,47 +126,42 @@ namespace MiniGame.SquidGame
 
         IEnumerator Init()
         {
-            greenProgress.rectTransform.localPosition = new Vector3(-progressImageWitdh,greenProgress.rectTransform.localPosition.y);
+            greenProgress.rectTransform.localPosition =
+                new Vector3(-progressImageWitdh, greenProgress.rectTransform.localPosition.y);
             gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration).ToString(@"mm\:ss");
             animBoss.state.SetAnimation(0, idle, true);
             holdToMove.transform.parent.GetComponent<CustomButton>().enabled = false;
             animStaff1.state.Event += StateOnEvent1;
             animStaff2.state.Event += StateOnEvent2;
-            
+
             //init ball
             var skin = GameDataManager.Instance.GetSkinInGame();
             var color = GameDataManager.Instance.GetCurrentColor();
             playerAnimation.SetSkin(skin);
             playerAnimation.SetSkinColor(color);
-            
+
             var distance = Random.Range(1f, 2f);
             playerTransform.position = start.position + new Vector3(distance, 0);
             playerTransform.DOMoveX(start.position.x, moveSpeed)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
-                .OnStart(() =>
-                {
-                    playerAnimation.PlayRun();
-                })
-                .OnComplete(() =>
-                {
-                    playerAnimation.PlayIdle();
-                });
+                .OnStart(() => { playerAnimation.PlayRun(); })
+                .OnComplete(() => { playerAnimation.PlayIdle(); });
 
             //init npc
             for (int i = 0; i < listNPC.Count; i++)
             {
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var skinColor = GameDataManager.Instance.RandomColor();
-                listNPC[i].Init(this,listSkin,skinColor,difficultyDelta);
+                listNPC[i].Init(this, listSkin, skinColor, difficultyDelta);
             }
+
             yield return new WaitUntil(() => !listNPC.Exists(p => !p.isReady));
             holdToMove.gameObject.SetActive(true);
             holdToMove.transform.parent.GetComponent<CustomButton>().enabled = true;
-            
+
             //wait for player start
             yield return new WaitUntil(() => isHoldingMove);
-            Debug.Log("start game");
             state = GameState.Playing;
             holdToMove.gameObject.SetActive(false);
             container.DOLocalMoveY(-65f, 1f).SetEase(Ease.Linear);
@@ -180,22 +178,49 @@ namespace MiniGame.SquidGame
 
         private void StateOnEvent2(TrackEntry trackentry, Event e)
         {
-            if (e.Data.Name.Equals("fire"))
+            if (e.Data.Name.Equals("attack"))
             {
-                // shotFx[1].gameObject.SetActive(true);
-                // shotFx[1].Play(true);
+                for (int i = 0; i < listToKill2.Count; i++)
+                {
+                    var item = listToKill2[i];
+                    var shot = Instantiate(shotFx);
+                    shot.transform.position = animStaff2.transform.GetChild(0).transform.position;
+                    shot.transform.DOMove(item.anim.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
+                    {
+                        item.Kill();
+                        Destroy(shot.gameObject);
+                    });
+                }
             }
         }
 
         private void StateOnEvent1(TrackEntry trackentry, Event e)
         {
-            if (e.Data.Name.Equals("fire"))
+            if (e.Data.Name.Equals("attack"))
             {
-                var shot = Instantiate(shotFx);
-                shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
-                // shot.transform.
-                // shotFx[0].gameObject.SetActive(true);
-                // shotFx[0].Play(true);
+                
+                for (int i = 0; i < listToKill1.Count; i++)
+                {
+                    var item = listToKill1[i];
+                    var shot = Instantiate(shotFx);
+                    shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
+                    shot.transform.DOMove(item.anim.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
+                    {
+                        item.Kill();
+                        Destroy(shot.gameObject);
+                    });
+                }
+
+                if (canKillBall)
+                {
+                    var shot = Instantiate(shotFx);
+                    shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
+                    shot.transform.DOMove(playerAnimation.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
+                    {
+                        KillBall();
+                        Destroy(shot.gameObject);
+                    });
+                }
             }
         }
 
@@ -206,6 +231,8 @@ namespace MiniGame.SquidGame
                 onGreenLight?.Invoke();
                 animBoss.state.SetAnimation(0, greenLight, true);
             };
+            listToKill1 = new List<SquidPlayer>();
+            listToKill2 = new List<SquidPlayer>();
             greenProgress.color = cacheColor;
             warningSprite.DOFade(0, 0);
             StopAllCoroutines();
@@ -220,8 +247,11 @@ namespace MiniGame.SquidGame
                     warningSprite.DOFade(50 / 255f, .3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     animBoss.state.SetAnimation(0, warning, true);
                 }
-
-                greenProgress.rectTransform.localPosition = new Vector3(progressImageWitdh * count / greenDuration - progressImageWitdh, greenProgress.rectTransform.localPosition.y);
+                
+                
+                greenProgress.rectTransform.localPosition = new Vector3(
+                    progressImageWitdh * count / greenDuration - progressImageWitdh,
+                    greenProgress.rectTransform.localPosition.y);
             }, () =>
             {
                 if (state != GameState.End)
@@ -237,10 +267,9 @@ namespace MiniGame.SquidGame
         }
 
 
-        private List<SquidPlayer> npcToKill;
         void RedLight()
         {
-            // SoundManager.Instance.PlaySfx(redLightSound);
+            SoundManager.Instance.PlaySfx(redLightSound);
             animBoss.state.SetAnimation(0, redLight, false).Complete += entry =>
             {
                 onRedLight?.Invoke();
@@ -248,7 +277,7 @@ namespace MiniGame.SquidGame
             };
             warningSprite.DOFade(0 / 255f, 0);
             StopAllCoroutines();
-            StartCoroutine(CountTime(redDuration, .5f, f =>
+            StartCoroutine(CountTime(redDuration, .3f, f =>
             {
                 if (state != GameState.End)
                 {
@@ -257,47 +286,86 @@ namespace MiniGame.SquidGame
                     {
                         if (!listNPC[i].isWin && listNPC[i].isMoving)
                         {
-                            var rd = Random.value > 0.5f;
-                            if (rd)
+                            if (!npcToKill.Contains(listNPC[i]))
                             {
-                                animStaff1.state.SetAnimation(0, "attack", false)
-                                    .Complete += entry =>
-                                {
-                                    // shotFx[rd].gameObject.SetActive(false);
-                                    animStaff1.state.SetAnimation(0, "idle", true);
-                                };
-                                listNPC[i].Kill();
-                            }
-                            else
-                            {
-                                animStaff2.state.SetAnimation(0, "attack", false)
-                                    .Complete += entry =>
-                                {
-                                    // shotFx[rd].gameObject.SetActive(false);
-                                    animStaff2.state.SetAnimation(0, "idle", true);
-                                };
-                                listNPC[i].Kill();
+                                npcToKill.Add(listNPC[i]);
                             }
                         }
                     }
 
-                    if (isHoldingMove && !HitFinishLine())
+                    if (f >= .3f)
                     {
-                        KillBall();
+                        var npcToKillCount = npcToKill.Count;
+                        if (npcToKillCount > 0)
+                        {
+                            if (npcToKillCount > 2)
+                            {
+                                var temp = new List<SquidPlayer>();
+                                foreach (var item in npcToKill)
+                                {
+                                    var tempItem = item;
+                                    temp.Add(tempItem);
+                                }
+
+                                for (int i = 0; i < temp.Count; i++)
+                                {
+                                    if (i <= temp.Count / 2)
+                                    {
+                                        listToKill1.Add(temp[i]);
+                                    }
+                                    else
+                                    {
+                                        listToKill2.Add(temp[i]);
+                                    }
+                                }
+
+                                npcToKill = new List<SquidPlayer>();
+                                animStaff1.state.SetAnimation(0, "attack", false)
+                                    .Complete += entry => { animStaff1.state.SetAnimation(0, "idle", true); };
+                                animStaff2.state.SetAnimation(0, "attack", false)
+                                    .Complete += entry => { animStaff2.state.SetAnimation(0, "idle", true); };
+                            }
+                            else
+                            {
+                                var item = npcToKill[0];
+                                var rd = Random.value > 0.5f;
+                                if (rd)
+                                {
+                                    listToKill1.Add(item);
+                                    animStaff1.state.SetAnimation(0, "attack", false)
+                                        .Complete += entry => { animStaff1.state.SetAnimation(0, "idle", true); };
+                                }
+                                else
+                                {
+                                    listToKill2.Add(item);
+                                    animStaff2.state.SetAnimation(0, "attack", false)
+                                        .Complete += entry => { animStaff2.state.SetAnimation(0, "idle", true); };
+                                }
+                                npcToKill = new List<SquidPlayer>();
+                            }
+                        }
+                    }
+
+                    if (isHoldingMove && !HitFinishLine() && !canKillBall)
+                    {
+                        canKillBall = true;
+                        animStaff1.state.SetAnimation(0, "attack", false).Complete += trackEntry =>
+                        {
+                            animStaff1.state.SetAnimation(0, "idle", true);
+                        };
                     }
                 }
             }, () =>
             {
                 if (state != GameState.End)
                 {
-                    // SoundManager.Instance.PlaySfx(redLightSound);
+                    SoundManager.Instance.PlaySfx(redLightSound);
                     GreenLight();
                 }
             }));
         }
 
-        
-        
+
         IEnumerator CountTime(float duration, float delay, Action<float> onCounting = null, Action callback = null)
         {
             yield return new WaitForSeconds(delay);
@@ -319,47 +387,29 @@ namespace MiniGame.SquidGame
         private void KillBall()
         {
             StopAllCoroutines();
-            var rd = Random.Range(0, 2);
-            if (rd == 0)
-            {
-                animStaff1.state.SetAnimation(0, "attack", false).Complete += trackEntry =>
-                {
-                    // shotFx[rd].gameObject.SetActive(false);
-                    animStaff1.state.SetAnimation(0, "idle", true);
-                };
-            }
-            else
-            {
-                animStaff2.state.SetAnimation(0, "attack", false).Complete += trackEntry =>
-                {
-                    // shotFx[rd].gameObject.SetActive(false);
-                    animStaff2.state.SetAnimation(0, "idle", true);
-                };
-            }
-
             OnAttack();
         }
 
-        private void OnAttack()
+        private async void OnAttack()
         {
             state = GameState.End;
+            
             //lose
-            // blowEffect.gameObject.SetActive(true);
-            // blowEffect.Play(true);
-            playerAnimation.PlayDie(callback: () =>
-            {
-                //revive
-                // Debug.Log("ball die");
-                // PopupInGameController.Instance.OpenPopupRevive(
-                //     () =>
-                //     {
-                //         SceneLoader.ReloadScene();
-                //     }, () =>
-                //     {
-                //         SoundInGameManager.Instance.PlayLoseSound(Lose);
-                //     },GameDataManager.Instance.GetCurrentSkin());
-                
-            });
+            blowEffect.gameObject.SetActive(true);
+            blowEffect.Play(true);
+            skull.SetActive(true);
+            playerAnimation.gameObject.SetActive(false);
+            await Task.Delay(500);
+            
+            //revive
+            // PopupInGameController.Instance.OpenPopupRevive(
+            //     () =>
+            //     {
+            //         SceneLoader.ReloadScene();
+            //     }, () =>
+            //     {
+            //         SoundInGameManager.Instance.PlayLoseSound(Lose);
+            //     },GameDataManager.Instance.GetCurrentSkin());
         }
 
         void Lose()
@@ -379,10 +429,7 @@ namespace MiniGame.SquidGame
             playerTransform.DOMoveX(end.position.x, moveSpeed)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
-                .OnStart(() =>
-                {
-                    playerAnimation.PlayRun();
-                });
+                .OnStart(() => { playerAnimation.PlayRun(); });
             StartCoroutine(Cheers());
         }
 
@@ -436,8 +483,9 @@ namespace MiniGame.SquidGame
             // SceneLoader.LoadMenu();
         }
 
-        private int finalRank = 0;
-
+        private int finalRank, meteorFallCount;
+        private float timeToMeteorFall;
+        private float closestXPos = 100;
         private void Update()
         {
             if (state == GameState.Playing)
@@ -454,37 +502,86 @@ namespace MiniGame.SquidGame
                     Win();
                 }
 
+                if (!HitFinishLine() && HitByMeteor())
+                {
+                    KillBall();
+                }
+
+                for (int i = 0; i < listNPC.Count; i++)
+                {
+                    if (!listNPC[i].isDead && listNPC[i].anim.transform.position.x < closestXPos)
+                    {
+                        closestXPos = listNPC[i].anim.transform.position.x;
+                    }
+                }
+
+                if (playerAnimation.transform.position.x < closestXPos)
+                {
+                    closestXPos = playerAnimation.transform.position.x;
+                }
+                
+                if (timeToMeteorFall <= meteorPeriod)
+                {
+                    timeToMeteorFall += Time.deltaTime;
+                }
+                else
+                {
+                    if (meteorFallCount < maxMeteor)
+                    {
+                        var meteor = Instantiate(meteorPrefab);
+                        meteor.transform.position = new Vector3(Random.Range(animBoss.transform.position.x + 2f, closestXPos), Random.Range(fallRange.x,fallRange.y));
+                        meteorFallCount++;
+                        timeToMeteorFall = 0;
+                    }
+                }
+                
                 if (gameTimeCount < gameDuration)
                 {
                     gameTimeCount += Time.deltaTime;
                     gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration - gameTimeCount).ToString(@"mm\:ss");
                 }
-                else
+                else if (!canKillBall)
                 {
-                    KillBall();
+                    canKillBall = true;
+                    animStaff1.state.SetAnimation(0, "attack", false).Complete += entry =>
+                    {
+                        animStaff1.state.SetAnimation(0, "idle", true);
+                    };
                 }
 
                 if (isHoldingMove && (playerTransform.position.x >= end.position.x || !HitFinishLine()))
                 {
-                    playerTransform.position = Vector3.MoveTowards(playerTransform.position, end.position, moveSpeed * Time.deltaTime);
+                    playerTransform.position = Vector3.MoveTowards(playerTransform.position, end.position,
+                        moveSpeed * Time.deltaTime);
                     playerAnimation.PlayRun();
                 }
             }
         }
 
 
-        bool HitFinishLine()
+        bool HitByMeteor()
         {
-            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position, Vector2.left, .2f);
+            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position, Vector2.left, .2f,1 << 9);
             if (hit)
             {
-                Debug.Log("hit collider " + hit.collider.name);
                 return hit;    
             }
 
             return false;
         }
         
+        bool HitFinishLine()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position, Vector2.left, .2f, 1 << 0);
+            if (hit)
+            {
+                Debug.Log("hit collider " + hit.collider.name);
+                return hit;
+            }
+
+            return false;
+        }
+
         public void TouchMove(bool release = false)
         {
             if (state != GameState.End)
