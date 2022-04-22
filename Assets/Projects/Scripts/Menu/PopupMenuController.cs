@@ -12,6 +12,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private PopupSetting popupSetting;
         [SerializeField] private PopupLeaderBoard popupLeaderBoard;
         [SerializeField] private PopupCustomizeCharacter popupCustomizeCharacter;
+        [SerializeField] private PopupRule popupRule;
         private PopupController _controller;
 
         private void Awake()
@@ -40,6 +41,11 @@ namespace Projects.Scripts.Menu
             popupCustomizeCharacter.gameObject.SetActive(true);
             popupCustomizeCharacter.Init();
             popupCustomizeCharacter.Show(_controller);
+        }
+        public void ShowPopupRule()
+        {
+            popupRule.gameObject.SetActive(true);
+            popupRule.Show(_controller);
         }
     }
 }

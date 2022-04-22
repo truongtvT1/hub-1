@@ -12,5 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3203c63ab660be9439b0fa6f6b0dc311, type: 3}
   m_Name: IAPData
   m_EditorClassIdentifier: 
-  androidSkuId: []
+  androidSkuId:
+  - skuId: t1.ticket.300
+    productType: 0
+    defaultValue: 2.99$
+  - skuId: t1.ticket.500
+    productType: 0
+    defaultValue: 4.99$
+  - skuId: t1.ticket.1100
+    productType: 0
+    defaultValue: 9.99
+  - skuId: t1.ticket.2400
+    productType: 0
+    defaultValue: 19.99$
+  - skuId: t1.ticket.6250
+    productType: 0
+    defaultValue: 49.99$
+  - skuId: t1.ticket.14000
+    productType: 0
+    defaultValue: 99.99$
+  - skuId: t1.pack.1
+    productType: 0
+    defaultValue: 14.99$
+  - skuId: t1.pack.2
+    productType: 0
+    defaultValue: 19.99$
+  - skuId: t1.offer.1
+    productType: 0
+    defaultValue: 2.99$
+  - skuId: t1.offer.2
+    productType: 0
+    defaultValue: 2.99$
+  - skuId: t1.offer.3
+    productType: 0
+    defaultValue: 2.99$
+  - skuId: t1.offer.4
+    productType: 0
+    defaultValue: 2.99$
+  - skuId: t1.offer.5
+    productType: 0
+    defaultValue: 4.99$
+  - skuId: t1.offer.6
+    productType: 0
+    defaultValue: 4.99$
+  - skuId: t1.offer.7
+    productType: 0
+    defaultValue: 4.99$
+  - skuId: t1.offer.8
+    productType: 0
+    defaultValue: 7.99$
+  - skuId: t1.offer.9
+    productType: 0
+    defaultValue: 7.99$
   iosSkuId: []

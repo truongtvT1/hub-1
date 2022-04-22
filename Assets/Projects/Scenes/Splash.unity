@@ -311,7 +311,7 @@ MonoBehaviour:
   remoteConfigService: 0
   ratingService: 1
   cloudMessagingService: 0
-  iapService: 0
+  iapService: 1
 --- !u!114 &772000253
 MonoBehaviour:
   m_ObjectHideFlags: 0

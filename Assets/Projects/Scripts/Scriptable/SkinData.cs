@@ -22,7 +22,7 @@ namespace Projects.Scripts.Scriptable
         public const string GlassPrefix = "glass/";
         public const string CloakPrefix = "wing/";
         public List<Color> skinColors;
-        public int sTierTicket = 150, aTierTicket = 100, bTierTicket = 50, cTierTicket = 30,colorTicket = 5;
+        public int sTierTicket = 150, aTierTicket = 100, bTierTicket = 50, cTierTicket = 30, colorTicket = 5;
 
         public List<string> GetAllSkinName()
         {
@@ -47,7 +47,8 @@ namespace Projects.Scripts.Scriptable
         [Button]
         private void UpdateHairSkinList()
         {
-            hairSkins = new List<SkinInfo>();
+            if (hairSkins == null)
+                hairSkins = new List<SkinInfo>();
             var list = GetAllSkinsByName(HairPrefix);
             foreach (var item in list)
             {
@@ -55,11 +56,12 @@ namespace Projects.Scripts.Scriptable
                     hairSkins.Add(new SkinInfo(SkinType.Hair, item));
             }
         }
-        
+
         [Button]
         private void UpdateGloveSkinList()
         {
-            gloveSkins = new List<SkinInfo>();
+            if (gloveSkins == null)
+                gloveSkins = new List<SkinInfo>();
             var list = GetAllSkinsByName(GlovePrefix);
             foreach (var item in list)
             {
@@ -67,11 +69,12 @@ namespace Projects.Scripts.Scriptable
                     gloveSkins.Add(new SkinInfo(SkinType.Glove, item));
             }
         }
-        
+
         [Button]
         private void UpdateBodySkinList()
         {
-            bodySkins = new List<SkinInfo>();
+            if (bodySkins == null)
+                bodySkins = new List<SkinInfo>();
             var list = GetAllSkinsByName(SuitPrefix);
             foreach (var item in list)
             {
@@ -79,36 +82,39 @@ namespace Projects.Scripts.Scriptable
                     bodySkins.Add(new SkinInfo(SkinType.Suit, item));
             }
         }
-        
+
         [Button]
         private void UpdateGlassSkinList()
         {
             var list = GetAllSkinsByName(GlassPrefix);
-            glassSkins = new List<SkinInfo>();
+            if (glassSkins == null)
+                glassSkins = new List<SkinInfo>();
             foreach (var item in list)
             {
                 if (!glassSkins.Exists(a => a.skinName.Equals(item)))
                     glassSkins.Add(new SkinInfo(SkinType.Glass, item));
             }
         }
-        
+
         [Button]
         private void UpdateWingSkinList()
         {
             var list = GetAllSkinsByName(CloakPrefix);
-            cloakSkins = new List<SkinInfo>();
+            if (cloakSkins == null)
+                cloakSkins = new List<SkinInfo>();
             foreach (var item in list)
             {
                 if (!cloakSkins.Exists(a => a.skinName.Equals(item)))
                     cloakSkins.Add(new SkinInfo(SkinType.Cloak, item));
             }
         }
+
         [Button]
-        private void UpdateData(TextAsset asset,SkinType type)
+        private void UpdateData(TextAsset asset, SkinType type)
         {
             var data = asset.text;
             var list = JsonConvert.DeserializeObject<List<SkinInfo>>(data);
-            List<SkinInfo> temp=null;
+            List<SkinInfo> temp = null;
             switch (type)
             {
                 case SkinType.Hair:

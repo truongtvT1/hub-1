@@ -40,6 +40,7 @@ MonoBehaviour:
     - Google.Play.Common
     - Sirenix.OdinInspector.CompatibilityLayer
     - MoreMountains.NiceVibrations
+    - Purchasing.Common
     - Google.Android.AppBundle.Editor
     - PsdPlugin
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
