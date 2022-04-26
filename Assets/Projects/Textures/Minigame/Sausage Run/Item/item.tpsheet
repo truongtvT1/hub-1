@@ -1,0 +1,25 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:542aa3f63c6db95e39ba06e7096bf68d:692cd7d803ebb68345a4701187c6ecdc:86e987d7ee6b3bac6af4b8625439e384$
+#
+:format=40300
+:texture=item.png
+:size=512x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+bamboo;455;885;23;1123; 0.5;0.5; 0;0;0;0
+body;1;631;247;437; 0.5;0.5; 0;0;0;0
+decor;333;1860;120;187; 0.5;0.5; 0;0;0;0
+hammer down;1;1641;330;406; 0.5;0.5; 0;0;0;0
+hand_L;333;1740;78;64; 0.5;0.5; 0;0;0;0
+hand_R;333;1806;84;52; 0.5;0.5; 0;0;0;0
+line;480;1107;17;305; 0.5;0.5; 0;0;0;0
+lock;455;2010;48;37; 0.5;0.5; 0;0;0;0
+rope;480;1414;17;594; 0.5;0.5; 0;0;0;0
+wood board;1;1070;247;569; 0.5;0.5; 0;0;0;0

@@ -122,7 +122,7 @@ namespace MiniGame.SquidGame
 
         bool HitByMeteor()
         {
-            RaycastHit2D hit = Physics2D.Raycast(anim.transform.position, Vector2.left, .2f,1 << 9);
+            RaycastHit2D hit = Physics2D.Raycast(anim.transform.position + new Vector3(0,.1f), Vector2.left, .2f,1 << 9);
             if (hit)
             {
                 return hit;    

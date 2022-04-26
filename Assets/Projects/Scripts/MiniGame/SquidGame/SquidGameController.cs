@@ -27,15 +27,16 @@ namespace MiniGame.SquidGame
         [FoldoutGroup("UI")] public Image greenProgress;
         [FoldoutGroup("UI")] public Button pauseButton;
         public float gameDuration, greenDuration, redDuration, moveSpeed;
-        [Range(0, .3f)] public float difficultyDelta;
-        public float meteorPeriod;
-        public int maxMeteor;
+        public GameDifficulty difficulty;
+        [SerializeField,Range(0, .3f)] private float difficultyDelta;
+        public int maxMeteorPerTurn;
         public Vector2 fallRange;
+        public GameObject meteorPrefab;
         [SpineAnimation(dataField = nameof(animBoss))]
         public string idle, redLight, greenLight, warning;
-        public SkeletonAnimation animBoss, animStaff1, animStaff2;
-        public GameObject meteorPrefab;
         public CharacterAnimation playerAnimation;
+        public SkeletonAnimation animBoss, animStaff1, animStaff2;
+        public float shootSpeed = 18f;
         public GameObject shotFx;
         public ParticleSystem blowEffect;
         public GameObject skull;
@@ -96,7 +97,7 @@ namespace MiniGame.SquidGame
         private void Start()
         {
             // level = GameDataManager.Instance.GetSquidGameLevel();
-            // difficultyDelta = difficultyDelta + GameDataManager.Instance.GetSquidLevelDifficulty();
+            difficultyDelta = (float) difficulty/10;
             Debug.Log("difficult delta: " + difficultyDelta);
             StartCoroutine(Init());
             GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{"red_line", level}});
@@ -185,7 +186,7 @@ namespace MiniGame.SquidGame
                     var item = listToKill2[i];
                     var shot = Instantiate(shotFx);
                     shot.transform.position = animStaff2.transform.GetChild(0).transform.position;
-                    shot.transform.DOMove(item.anim.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
+                    shot.transform.DOMove(item.anim.transform.position, shootSpeed).SetSpeedBased(true).OnComplete(() =>
                     {
                         item.Kill();
                         Destroy(shot.gameObject);
@@ -204,7 +205,7 @@ namespace MiniGame.SquidGame
                     var item = listToKill1[i];
                     var shot = Instantiate(shotFx);
                     shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
-                    shot.transform.DOMove(item.anim.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
+                    shot.transform.DOMove(item.anim.transform.position, shootSpeed).SetSpeedBased(true).OnComplete(() =>
                     {
                         item.Kill();
                         Destroy(shot.gameObject);
@@ -238,8 +239,34 @@ namespace MiniGame.SquidGame
             StopAllCoroutines();
             var isWarning = false;
             audio.Play();
+            maxMeteorPerTurn = (int) difficulty;
             StartCoroutine(CountTime(greenDuration, 0, count =>
             {
+                for (int i = 0; i < listNPC.Count; i++)
+                {
+                    if (!listNPC[i].isDead && listNPC[i].anim.transform.position.x < closestXPos)
+                    {
+                        closestXPos = listNPC[i].anim.transform.position.x;
+                    }
+                }
+
+                if (playerAnimation.transform.position.x < closestXPos)
+                {
+                    closestXPos = playerAnimation.transform.position.x;
+                }
+                
+                if (count >= meteorFallCount * greenDuration/maxMeteorPerTurn)
+                {
+                    if (meteorFallCount < maxMeteorPerTurn)
+                    {
+                        var meteor = Instantiate(meteorPrefab);
+                        var posY = Random.Range(fallRange.x, fallRange.y);
+                        meteor.transform.position = new Vector3(Random.Range(animBoss.transform.position.x + 2f, closestXPos),posY);
+                        meteor.GetComponent<Meteor>().Init(posY);
+                        meteorFallCount++;
+                    }
+                }
+                
                 if (count / greenDuration >= 2 / 3f && !isWarning)
                 {
                     greenProgress.color = Color.red;
@@ -256,6 +283,7 @@ namespace MiniGame.SquidGame
             {
                 if (state != GameState.End)
                 {
+                    meteorFallCount = 0;
                     warningSprite.DOKill();
                     var pitchShift = audio.pitch * (1 + difficultyDelta);
                     audio.pitch = pitchShift;
@@ -507,34 +535,6 @@ namespace MiniGame.SquidGame
                     KillBall();
                 }
 
-                for (int i = 0; i < listNPC.Count; i++)
-                {
-                    if (!listNPC[i].isDead && listNPC[i].anim.transform.position.x < closestXPos)
-                    {
-                        closestXPos = listNPC[i].anim.transform.position.x;
-                    }
-                }
-
-                if (playerAnimation.transform.position.x < closestXPos)
-                {
-                    closestXPos = playerAnimation.transform.position.x;
-                }
-                
-                if (timeToMeteorFall <= meteorPeriod)
-                {
-                    timeToMeteorFall += Time.deltaTime;
-                }
-                else
-                {
-                    if (meteorFallCount < maxMeteor)
-                    {
-                        var meteor = Instantiate(meteorPrefab);
-                        meteor.transform.position = new Vector3(Random.Range(animBoss.transform.position.x + 2f, closestXPos), Random.Range(fallRange.x,fallRange.y));
-                        meteorFallCount++;
-                        timeToMeteorFall = 0;
-                    }
-                }
-                
                 if (gameTimeCount < gameDuration)
                 {
                     gameTimeCount += Time.deltaTime;
@@ -561,7 +561,7 @@ namespace MiniGame.SquidGame
 
         bool HitByMeteor()
         {
-            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position, Vector2.left, .2f,1 << 9);
+            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position + new Vector3(0,.1f), Vector2.left, .2f,1 << 9);
             if (hit)
             {
                 return hit;    

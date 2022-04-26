@@ -1,0 +1,90 @@
+
+ninja_underground.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_eye
+  rotate: false
+  xy: 447, 54
+  size: 24, 34
+  orig: 26, 36
+  offset: 1, 1
+  index: -1
+R_eye
+  rotate: true
+  xy: 2, 12
+  size: 32, 38
+  orig: 34, 40
+  offset: 1, 1
+  index: -1
+bambooo
+  rotate: false
+  xy: 2, 46
+  size: 330, 184
+  orig: 330, 184
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 334, 2
+  size: 86, 111
+  orig: 86, 111
+  offset: 0, 0
+  index: -1
+down
+  rotate: false
+  xy: 476, 52
+  size: 467, 39
+  orig: 467, 39
+  offset: 0, 0
+  index: -1
+ground
+  rotate: false
+  xy: 476, 93
+  size: 477, 137
+  orig: 478, 137
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: true
+  xy: 955, 152
+  size: 78, 64
+  orig: 80, 66
+  offset: 1, 1
+  index: -1
+hand_R
+  rotate: true
+  xy: 955, 72
+  size: 78, 64
+  orig: 80, 66
+  offset: 1, 1
+  index: -1
+head
+  rotate: false
+  xy: 334, 90
+  size: 140, 140
+  orig: 142, 142
+  offset: 1, 1
+  index: -1
+leg_L
+  rotate: true
+  xy: 945, 8
+  size: 62, 35
+  orig: 64, 37
+  offset: 1, 1
+  index: -1
+leg_R
+  rotate: true
+  xy: 982, 8
+  size: 62, 35
+  orig: 64, 37
+  offset: 1, 1
+  index: -1
+up
+  rotate: false
+  xy: 447, 26
+  size: 456, 24
+  orig: 456, 24
+  offset: 0, 0
+  index: -1

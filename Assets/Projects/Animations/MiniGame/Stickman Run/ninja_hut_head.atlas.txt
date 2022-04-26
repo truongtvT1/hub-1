@@ -1,0 +1,83 @@
+
+ninja_hut_head.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+L_eye
+  rotate: true
+  xy: 236, 6
+  size: 24, 34
+  orig: 26, 36
+  offset: 1, 1
+  index: -1
+R_eye
+  rotate: false
+  xy: 236, 32
+  size: 32, 38
+  orig: 34, 40
+  offset: 1, 1
+  index: -1
+body
+  rotate: true
+  xy: 390, 2
+  size: 86, 111
+  orig: 86, 111
+  offset: 0, 0
+  index: -1
+bush
+  rotate: false
+  xy: 2, 72
+  size: 244, 141
+  orig: 245, 141
+  offset: 0, 0
+  index: -1
+hand_L
+  rotate: false
+  xy: 2, 6
+  size: 78, 64
+  orig: 80, 66
+  offset: 1, 1
+  index: -1
+hand_R
+  rotate: false
+  xy: 82, 6
+  size: 78, 64
+  orig: 80, 66
+  offset: 1, 1
+  index: -1
+head
+  rotate: false
+  xy: 248, 73
+  size: 140, 140
+  orig: 142, 142
+  offset: 1, 1
+  index: -1
+leg_L
+  rotate: true
+  xy: 162, 8
+  size: 62, 35
+  orig: 64, 37
+  offset: 1, 1
+  index: -1
+leg_R
+  rotate: true
+  xy: 199, 8
+  size: 62, 35
+  orig: 64, 37
+  offset: 1, 1
+  index: -1
+rope_tuab
+  rotate: true
+  xy: 2, 215
+  size: 290, 529
+  orig: 290, 529
+  offset: 0, 0
+  index: -1
+tuab
+  rotate: false
+  xy: 390, 90
+  size: 97, 123
+  orig: 97, 123
+  offset: 0, 0
+  index: -1

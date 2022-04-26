@@ -1,0 +1,13 @@
+
+ninja_underwater_hand.png
+size: 128,64
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Catch_hand
+  rotate: true
+  xy: 2, 2
+  size: 53, 100
+  orig: 53, 100
+  offset: 0, 0
+  index: -1

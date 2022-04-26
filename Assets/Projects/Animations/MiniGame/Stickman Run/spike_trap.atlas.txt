@@ -1,0 +1,27 @@
+
+spike_trap.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+spike_1
+  rotate: false
+  xy: 1067, 37
+  size: 531, 297
+  orig: 531, 299
+  offset: 0, 1
+  index: -1
+spike_2
+  rotate: false
+  xy: 534, 5
+  size: 531, 329
+  orig: 531, 330
+  offset: 0, 1
+  index: -1
+spike_3
+  rotate: false
+  xy: 2, 2
+  size: 530, 332
+  orig: 530, 334
+  offset: 0, 1
+  index: -1
