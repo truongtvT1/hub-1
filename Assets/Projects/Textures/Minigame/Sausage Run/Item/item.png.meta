@@ -32,6 +32,12 @@ TextureImporter:
   - first:
       213: 6144470470189479466
     second: wood board
+  - first:
+      213: -7203022041760441896
+    second: mask underground
+  - first:
+      213: -8443361483352683924
+    second: shuriken
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,32 +115,11 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bamboo
-      rect:
-        serializedVersion: 2
-        x: 455
-        y: 885
-        width: 23
-        height: 1123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a981a2d855b949830800000000000000
-      internalID: 4077054354420013210
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: body
       rect:
         serializedVersion: 2
         x: 1
-        y: 631
+        y: 15
         width: 247
         height: 437
       alignment: 0
@@ -154,8 +139,8 @@ TextureImporter:
       name: decor
       rect:
         serializedVersion: 2
-        x: 333
-        y: 1860
+        x: 793
+        y: 836
         width: 120
         height: 187
       alignment: 0
@@ -175,8 +160,8 @@ TextureImporter:
       name: hammer down
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1641
+        x: 250
+        y: 617
         width: 330
         height: 406
       alignment: 0
@@ -196,8 +181,8 @@ TextureImporter:
       name: hand_L
       rect:
         serializedVersion: 2
-        x: 333
-        y: 1740
+        x: 915
+        y: 905
         width: 78
         height: 64
       alignment: 0
@@ -217,8 +202,8 @@ TextureImporter:
       name: hand_R
       rect:
         serializedVersion: 2
-        x: 333
-        y: 1806
+        x: 915
+        y: 971
         width: 84
         height: 52
       alignment: 0
@@ -235,32 +220,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: line
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 1107
-        width: 17
-        height: 305
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 739e17e506ee82a90800000000000000
-      internalID: -7338353495131428553
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: lock
       rect:
         serializedVersion: 2
-        x: 455
-        y: 2010
+        x: 915
+        y: 866
         width: 48
         height: 37
       alignment: 0
@@ -277,13 +241,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rope
+      name: shuriken
       rect:
         serializedVersion: 2
-        x: 480
-        y: 1414
-        width: 17
-        height: 594
+        x: 582
+        y: 814
+        width: 209
+        height: 209
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,8 +255,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5462103e413103240800000000000000
-      internalID: 4769332985814132293
+      spriteID: c6a4c8a377723da80800000000000000
+      internalID: -8443361483352683924
       vertices: []
       indices: 
       edges: []
@@ -302,7 +266,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 1070
+        y: 454
         width: 247
         height: 569
       alignment: 0

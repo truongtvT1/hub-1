@@ -181,21 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">RawImage/stick run/bamboo.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>6,281,11,561</rect>
-                <key>scale9Paddings</key>
-                <rect>6,281,11,561</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">RawImage/stick run/body.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -271,21 +256,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">RawImage/stick run/line.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,76,9,153</rect>
-                <key>scale9Paddings</key>
-                <rect>4,76,9,153</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">RawImage/stick run/lock.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -301,7 +271,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">RawImage/stick run/rope.png</key>
+            <key type="filename">RawImage/stick run/shuriken.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -310,9 +280,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>4,149,9,297</rect>
+                <rect>52,52,105,105</rect>
                 <key>scale9Paddings</key>
-                <rect>4,149,9,297</rect>
+                <rect>52,52,105,105</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -334,16 +304,14 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>RawImage/stick run/rope.png</filename>
             <filename>RawImage/stick run/wood board.png</filename>
-            <filename>RawImage/stick run/bamboo.png</filename>
             <filename>RawImage/stick run/body.png</filename>
             <filename>RawImage/stick run/decor.png</filename>
             <filename>RawImage/stick run/hammer down.png</filename>
             <filename>RawImage/stick run/hand_L.png</filename>
             <filename>RawImage/stick run/hand_R.png</filename>
-            <filename>RawImage/stick run/line.png</filename>
             <filename>RawImage/stick run/lock.png</filename>
+            <filename>RawImage/stick run/shuriken.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

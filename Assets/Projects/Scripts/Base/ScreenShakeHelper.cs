@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Com.LuisPedroFonseca.ProCamera2D;
 using MiniGame;
 using UnityEngine;
@@ -10,6 +11,11 @@ namespace Base
         [SerializeField] private ShakePreset shakePreset;
         [SerializeField] private ConstantShakePreset constantShakePreset;
         private bool _canShake = true;
+        private Renderer _renderer;
+        private void Awake()
+        {
+            _renderer = GetComponent<Renderer>();
+        }
 
         private void Start()
         {
@@ -18,7 +24,8 @@ namespace Base
 
         private void CheckCanShake()
         {
-            _canShake = Mathf.Abs(transform.position.x - GamePlayController.Instance.player.transform.position.x) < Screen.width/200f;
+            _canShake = _renderer.isVisible;
+            Debug.Log("check can shake " + _canShake);
         }
 
         public void Shake()

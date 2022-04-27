@@ -73,7 +73,8 @@ namespace MiniGame
                     {
                         moveDirection = MoveDirection.Left;
                     }
-
+                    var scale = transform.localScale;
+                    totalDisplay.localScale= new Vector3(Mathf.Abs(scale.x)*(int)moveDirection,scale.y,scale.z);
                     if (Mathf.Abs(transform.position.x - target.position.x) <= _controller.GetTargetDistance())
                     {
                         _controller.SetReachTarget();
@@ -217,7 +218,6 @@ namespace MiniGame
                     }
                     else
                     {
-                        Debug.Log("move direction none");
                         countDeccelTime -= Time.deltaTime;
                         if (countDeccelTime > 0)
                         {

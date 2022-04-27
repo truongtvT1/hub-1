@@ -16,7 +16,7 @@ namespace MiniGame
         private static GamePlayController _instance;
         public static GamePlayController Instance => _instance;
         public GameState state = GameState.None;
-        private void Awake()
+        protected void Awake()
         {
             if (_instance != null)
             {
@@ -26,7 +26,7 @@ namespace MiniGame
             _instance = this;
         }
 
-        private void Start()
+        protected void Start()
         {
             if (pauseButton) 
             {
