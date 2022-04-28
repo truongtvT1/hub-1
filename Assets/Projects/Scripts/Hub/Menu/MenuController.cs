@@ -27,7 +27,8 @@ namespace Projects.Scripts.Menu
             noAdButton,
             roomButton,
             userInfoButton,
-            leaderBoardButton;
+            leaderBoardButton,
+            shopButton;
 
         [SerializeField] private CharacterAnimationGraphic mainCharacter;
         [SerializeField] private ParticleGold ticketEffect;
@@ -43,9 +44,9 @@ namespace Projects.Scripts.Menu
             roomButton.onClick.AddListener(OnRoomButtonClick);
             userInfoButton.onClick.AddListener(OnUserInfoButtonClick);
             leaderBoardButton.onClick.AddListener(OnLeaderBoardButtonClick);
+            shopButton.onClick.AddListener(OnShopButtonClick);
             mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
-            Debug.Log(GameDataManager.Instance.GetCurrentColor());
             GameServiceManager.Instance.ShowBanner();
         }
 
@@ -86,6 +87,11 @@ namespace Projects.Scripts.Menu
             PopupMenuController.Instance.ShowPopupLeaderBoard();
         }
 
+        private void OnShopButtonClick()
+        {
+            PopupMenuController.Instance.ShowPopupShop();
+        }
+
         #endregion
 
         public void UpdateCharacter()
@@ -96,6 +102,13 @@ namespace Projects.Scripts.Menu
 
         public void AddTicket(int value)
         {
+            ticketEffect.Play();
+            var current = GameDataManager.Instance.GetTotalTicket();
+            var last = current + value;
+            DOTween.To(() => current, x => current = x, last, 0.5f).SetEase(Ease.Linear)
+                .OnUpdate(() => { ticketText.text = $"{current}"; })
+                .OnComplete(() => { ticketText.text = $"{last}"; });
+            GameDataManager.Instance.UpdateTicket(value);
         }
 
         public void UseTicket(int value)

@@ -1,48 +1,33 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using ThirdParties.Truongtv.SoundManager;
 using TMPro;
 using UnityEngine;
 
 namespace Truongtv.PopUpController
 {
-    public class Toast : BasePopup
+    public class Toast : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI descriptionTxt;
         [SerializeField] private float stayDuration;
-        private void Awake()
-        {
-            RegisterEvent();
-        }
+        private RectTransform _rect;
+        private Sequence _sequence;
 
         public void Initialized(string description)
         {
             descriptionTxt.text = description;
-        }
-
-        private void RegisterEvent()
-        {
-            openAction = OnStart;
-            closeAction = OnClose;
-            openCompleteAction = async () =>
-            {
-                StopAllCoroutines();
-                StartCoroutine(OnOpenComplete());
-            };
-        }
-        private void OnStart()
-        {
+            _rect = GetComponent<RectTransform>();
             SoundManager.Instance.PlayPopupOpenSound();
-        }
-
-        private IEnumerator OnOpenComplete()
-        {
-            yield return new WaitForSeconds(stayDuration);
-            Close();
-        }
-        private void OnClose()
-        {
-            SoundManager.Instance.PlayPopupCloseSound();
+            if(_sequence.IsActive())
+                _sequence.Kill(true);
+            _sequence = DOTween.Sequence();
+            _sequence.Append(_rect.DOLocalMoveY(0, 0.35f).SetEase(Ease.OutQuad));
+            _sequence.Append(_rect.DOLocalMoveY(400, 0.35f).SetEase(Ease.InQuad).SetDelay(stayDuration).OnStart(() =>
+            {
+                SoundManager.Instance.PlayPopupCloseSound();
+            }));
+            _sequence.Play();
         }
     }
 }

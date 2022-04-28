@@ -29,27 +29,25 @@ MonoBehaviour:
     freePerDay: 3
     coolDown: 500
     price: 0
-    reward:
-      ticket: 0
-      skinList: []
+    numberItemReward: 0
   - shopId: chest_2
     purchaseType: 2
     skuId: 
     freePerDay: 0
     coolDown: 0
     price: 50
-    reward:
-      ticket: 0
-      skinList: []
+    numberItemReward: 0
   - shopId: chest_3
     purchaseType: 2
     skuId: 
     freePerDay: 0
     coolDown: 0
     price: 300
-    reward:
-      ticket: 0
-      skinList: []
+    numberItemReward: 0
+  sPercent: 0.5
+  aPercent: 4.5
+  bPercent: 40
+  cPercent: 55
   shopPackList:
   - shopId: pack_1
     purchaseType: 0
@@ -77,7 +75,7 @@ MonoBehaviour:
     coolDown: 500
     price: 0
     reward:
-      ticket: 0
+      ticket: 50
       skinList: []
   - shopId: ticket_2
     purchaseType: 0

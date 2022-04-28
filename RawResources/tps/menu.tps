@@ -226,21 +226,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/MainMenu/ID 552093 (fake).png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>83,11,165,22</rect>
-                <key>scale9Paddings</key>
-                <rect>83,11,165,22</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Sprites/MainMenu/Special Offer.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -542,6 +527,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../Sprites/MainMenu/shop icon.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>23,21,47,41</rect>
+                <key>scale9Paddings</key>
+                <rect>23,21,47,41</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../Sprites/MainMenu/sound icon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -632,21 +632,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/leaderBoard/LEADERBOARD.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>120,15,239,31</rect>
-                <key>scale9Paddings</key>
-                <rect>120,15,239,31</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Sprites/leaderBoard/back.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -689,21 +674,6 @@
                 <rect>399,21,797,42</rect>
                 <key>scale9Paddings</key>
                 <rect>399,21,797,42</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/leaderBoard/text demo.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>358,7,715,14</rect>
-                <key>scale9Paddings</key>
-                <rect>358,7,715,14</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

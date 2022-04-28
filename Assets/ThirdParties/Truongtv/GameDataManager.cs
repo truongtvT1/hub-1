@@ -16,6 +16,9 @@ namespace ThirdParties.Truongtv
         [SerializeField,FoldoutGroup("Game Setting")] public bool cheated = false;
         [SerializeField, FoldoutGroup("Game Setting")] public bool debugger = false;
         [SerializeField, FoldoutGroup("Game Data")] public SkinData skinData;
+
+        [SerializeField, FoldoutGroup("Game Data")]
+        public ShopData shopData;
         [SerializeField, FoldoutGroup("Game Data")] public RemoteConfigValue remoteConfigValue;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] private List<string> startSkin;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinColors))] public Color startColor;
@@ -89,7 +92,26 @@ namespace ThirdParties.Truongtv
             }
             return _userInfo.currencies[name];
         }
+        private void SetTime(string key)
+        {
+            if (!_userInfo.times.ContainsKey(key))
+            {
+                _userInfo.times.Add(key,DateTime.Now);
+                
+            }
+            _userInfo.times[key] = DateTime.Now;
+            SaveUserInfo();
+        }
 
+        private DateTime GetTime(string key)
+        {
+            if (!_userInfo.times.ContainsKey(key))
+            {
+                _userInfo.times.Add(key,DateTime.Now);
+                SaveUserInfo();
+            }
+            return _userInfo.times[key];
+        }
         public int GetTotalTicket()
         {
             return GetCurrencyValue("ticket");
@@ -99,6 +121,7 @@ namespace ThirdParties.Truongtv
         {
             UpdateCurrency("ticket", value);
         }
+
         #endregion
 
         #region Skin
@@ -245,6 +268,51 @@ namespace ThirdParties.Truongtv
         public List<Color> GetAllSkinColors()
         {
             return skinData.skinColors;
+        }
+
+        
+        #endregion
+
+        #region Shop
+
+        
+        public int GetFreeChestCountInDay()
+        {
+            return GetCurrencyValue("free_chest");
+        }
+
+        public DateTime GetLastTimeClaimFreeChest()
+        {
+            return GetTime("free_chest");
+        }
+
+        public DateTime GetLastTimeClaimFreeTicket()
+        {
+            return GetTime("free_ticket");
+        }
+        public void UpdateFreeChestCountInDay(int value)
+        {
+            UpdateCurrency("free_chest", value);
+            SetTime("free_chest");
+        }
+        public int GetFreeTicketCountInDay()
+        {
+            return GetCurrencyValue("free_ticket");
+        }
+        public void UpdateFreeTicketCountInDay(int value)
+        {
+            UpdateCurrency("free_ticket", value);
+            SetTime("free_ticket");
+        }
+
+        public int GetTotalChestOpen()
+        {
+            return GetCurrencyValue("chest");
+        }
+
+        public void UpdateChestOpenNumber(int value)
+        {
+            UpdateCurrency("chest", value);
         }
         #endregion
     }

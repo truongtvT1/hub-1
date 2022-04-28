@@ -1,6 +1,5 @@
 using System;
 using DG.Tweening;
-using Spine.Unity;
 using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.UI;
@@ -35,9 +34,14 @@ namespace Truongtv.PopUpController
             {
                 displayType = (PopupDisplayType) Random.Range(1, 7);
             }
-            container.localScale = Vector3.zero;
+
             SoundManager.Instance.PlayPopupOpenSound();
-            container.DOScale(1, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.OutBack);
+            if (container != null)
+            {
+                container.localScale = Vector3.zero;
+                container.DOScale(1, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.OutBack);
+            }
+
             openAction?.Invoke();
             switch (displayType)
             {
@@ -70,7 +74,8 @@ namespace Truongtv.PopUpController
             }
             closeAction?.Invoke();
             SoundManager.Instance.PlayPopupCloseSound();
-            container.DOScale(0, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.InBack);
+            if(container!=null)
+                container.DOScale(0, DURATION).SetUpdate(UpdateType.Normal, true).SetEase(Ease.InBack);
 
             switch (displayType)
             {

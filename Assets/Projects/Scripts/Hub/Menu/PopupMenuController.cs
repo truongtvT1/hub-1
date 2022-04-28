@@ -13,6 +13,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private PopupLeaderBoard popupLeaderBoard;
         [SerializeField] private PopupCustomizeCharacter popupCustomizeCharacter;
         [SerializeField] private PopupRule popupRule;
+        [SerializeField] private PopupShop popupShop;
         private PopupController _controller;
 
         private void Awake()
@@ -46,6 +47,12 @@ namespace Projects.Scripts.Menu
         {
             popupRule.gameObject.SetActive(true);
             popupRule.Show(_controller);
+        }
+        public void ShowPopupShop(ShopType type = ShopType.Chest)
+        {
+            popupShop.gameObject.SetActive(true);
+            popupShop.Init(type);
+            popupShop.Show(_controller);
         }
     }
 }
