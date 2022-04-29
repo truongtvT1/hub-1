@@ -25,7 +25,6 @@ namespace Base
         private void CheckCanShake()
         {
             _canShake = _renderer.isVisible;
-            Debug.Log("check can shake " + _canShake);
         }
 
         public void Shake()

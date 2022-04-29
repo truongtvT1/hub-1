@@ -146,6 +146,8 @@ namespace Projects.Scripts.Hub
 
         public TrackEntry PlayIdle(bool loop = true, Action callback = null)
         {
+            skeletonAnimation.AnimationState.SetEmptyAnimation(0, .02f);
+            skeletonAnimation.AnimationState.SetEmptyAnimation(1, .02f);
             return PlayAnim("idle", loop: loop, callback: callback);
         }
 

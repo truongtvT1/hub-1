@@ -181,6 +181,36 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">C:/Users/PC/Desktop/Work/ninja/gate .png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>82,189,165,379</rect>
+                <key>scale9Paddings</key>
+                <rect>82,189,165,379</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">C:/Users/PC/Desktop/Work/ninja/gate 1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>32,83,63,166</rect>
+                <key>scale9Paddings</key>
+                <rect>32,83,63,166</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/stick run/body.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -208,6 +238,21 @@
                 <rect>30,47,60,93</rect>
                 <key>scale9Paddings</key>
                 <rect>30,47,60,93</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/stick run/gate_shadow.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>186,117,371,233</rect>
+                <key>scale9Paddings</key>
+                <rect>186,117,371,233</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -312,6 +357,9 @@
             <filename>RawImage/stick run/hand_R.png</filename>
             <filename>RawImage/stick run/lock.png</filename>
             <filename>RawImage/stick run/shuriken.png</filename>
+            <filename>C:/Users/PC/Desktop/Work/ninja/gate .png</filename>
+            <filename>C:/Users/PC/Desktop/Work/ninja/gate 1.png</filename>
+            <filename>RawImage/stick run/gate_shadow.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

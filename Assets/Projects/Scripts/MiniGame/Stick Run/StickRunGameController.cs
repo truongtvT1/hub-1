@@ -13,11 +13,13 @@ namespace MiniGame.StickRun
         public GameState state = GameState.None;
         public StickmanPlayerController player;
         public StickmanPlayerController playerPrefab;
+        [SerializeField] private int maxTimeRevive = 3;
         public static StickRunGameController Instance
         {
             get => instance;
         }
 
+        private int deadTime;
         private Pool trapPool;
         private Transform checkPoint;
         private static StickRunGameController instance = null;
@@ -43,6 +45,7 @@ namespace MiniGame.StickRun
 
         IEnumerator Init()
         {
+            deadTime = 0;
             //gen map
             
             //init bot
@@ -51,6 +54,22 @@ namespace MiniGame.StickRun
             state = GameState.Playing;
         }
 
+        public void Dead()
+        {
+            deadTime++;
+        }
+        
+        public bool CheckCanRevive()
+        {
+            return deadTime <= maxTimeRevive;
+        }
+
+        public void EndGame()
+        {
+            state = GameState.End;
+            
+        }
+        
         private void Update()
         {
             if (state == GameState.Playing)

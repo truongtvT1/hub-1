@@ -38,6 +38,18 @@ TextureImporter:
   - first:
       213: -8443361483352683924
     second: shuriken
+  - first:
+      213: 5479672369354503340
+    second: 'gate '
+  - first:
+      213: -6141991535633769599
+    second: gate 1
+  - first:
+      213: -4063125048235193689
+    second: gate shadow
+  - first:
+      213: 8216789504447909302
+    second: gate_shadow
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,8 +130,8 @@ TextureImporter:
       name: body
       rect:
         serializedVersion: 2
-        x: 1
-        y: 15
+        x: 714
+        y: 1039
         width: 247
         height: 437
       alignment: 0
@@ -139,8 +151,8 @@ TextureImporter:
       name: decor
       rect:
         serializedVersion: 2
-        x: 793
-        y: 836
+        x: 129
+        y: 772
         width: 120
         height: 187
       alignment: 0
@@ -157,11 +169,74 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: 'gate '
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 821
+        width: 329
+        height: 757
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca4f5e4ccf4bb0c40800000000000000
+      internalID: 5479672369354503340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gate 1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 627
+        width: 126
+        height: 332
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18bd7117d3343caa0800000000000000
+      internalID: -6141991535633769599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gate_shadow
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1580
+        width: 743
+        height: 467
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd86c61586e70270800000000000000
+      internalID: 8216789504447909302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: hammer down
       rect:
         serializedVersion: 2
-        x: 250
-        y: 617
+        x: 1
+        y: 1172
         width: 330
         height: 406
       alignment: 0
@@ -181,8 +256,8 @@ TextureImporter:
       name: hand_L
       rect:
         serializedVersion: 2
-        x: 915
-        y: 905
+        x: 664
+        y: 1514
         width: 78
         height: 64
       alignment: 0
@@ -202,8 +277,8 @@ TextureImporter:
       name: hand_R
       rect:
         serializedVersion: 2
-        x: 915
-        y: 971
+        x: 212
+        y: 1118
         width: 84
         height: 52
       alignment: 0
@@ -223,8 +298,8 @@ TextureImporter:
       name: lock
       rect:
         serializedVersion: 2
-        x: 915
-        y: 866
+        x: 664
+        y: 1475
         width: 48
         height: 37
       alignment: 0
@@ -244,8 +319,8 @@ TextureImporter:
       name: shuriken
       rect:
         serializedVersion: 2
-        x: 582
-        y: 814
+        x: 1
+        y: 961
         width: 209
         height: 209
       alignment: 0
@@ -265,8 +340,8 @@ TextureImporter:
       name: wood board
       rect:
         serializedVersion: 2
-        x: 1
-        y: 454
+        x: 746
+        y: 1478
         width: 247
         height: 569
       alignment: 0
