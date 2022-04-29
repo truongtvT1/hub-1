@@ -143,6 +143,33 @@ TextureImporter:
   - first:
       213: 3176949926323960873
     second: shop icon
+  - first:
+      213: -5258126938299910564
+    second: choose mode
+  - first:
+      213: -7896944420112813205
+    second: i
+  - first:
+      213: -5099102833126988963
+    second: mode cllipping mask
+  - first:
+      213: 7894600243580971546
+    second: mode game back
+  - first:
+      213: 3919726784454295582
+    second: Most played
+  - first:
+      213: 924010620390775294
+    second: Rectangle 1
+  - first:
+      213: 2395987761145742367
+    second: red, green light
+  - first:
+      213: 3802091392676919337
+    second: star
+  - first:
+      213: -4463891961754665666
+    second: Win Lose
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -244,8 +271,8 @@ TextureImporter:
       name: ava
       rect:
         serializedVersion: 2
-        x: 920
-        y: 1525
+        x: 1723
+        y: 876
         width: 203
         height: 197
       alignment: 0
@@ -266,7 +293,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1897
-        y: 1493
+        y: 1418
         width: 149
         height: 124
       alignment: 0
@@ -286,8 +313,8 @@ TextureImporter:
       name: back1
       rect:
         serializedVersion: 2
-        x: 1585
-        y: 1495
+        x: 1723
+        y: 1178
         width: 298
         height: 78
       alignment: 0
@@ -308,7 +335,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1585
-        y: 1575
+        y: 1527
         width: 310
         height: 78
       alignment: 0
@@ -328,8 +355,8 @@ TextureImporter:
       name: back3
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1588
+        x: 1723
+        y: 1075
         width: 266
         height: 68
       alignment: 0
@@ -349,8 +376,8 @@ TextureImporter:
       name: Battle Matches
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1658
+        x: 1723
+        y: 1145
         width: 267
         height: 31
       alignment: 0
@@ -370,8 +397,8 @@ TextureImporter:
       name: Battle Victories
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1691
+        x: 1215
+        y: 1528
         width: 281
         height: 31
       alignment: 0
@@ -409,11 +436,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: choose mode
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 1661
+        width: 479
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c56b8ba88616707b0800000000000000
+      internalID: -5258126938299910564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: fix
       rect:
         serializedVersion: 2
-        x: 1233
-        y: 1505
+        x: 1028
+        y: 1578
         width: 87
         height: 81
       alignment: 0
@@ -434,7 +482,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1946
-        y: 1704
+        y: 1619
         width: 102
         height: 75
       alignment: 0
@@ -454,8 +502,8 @@ TextureImporter:
       name: Highest Trophies
       rect:
         serializedVersion: 2
-        x: 1723
-        y: 1302
+        x: 920
+        y: 1528
         width: 293
         height: 31
       alignment: 0
@@ -472,11 +520,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: i
+      rect:
+        serializedVersion: 2
+        x: 1928
+        y: 873
+        width: 68
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b633c24c3ea686290800000000000000
+      internalID: -7896944420112813205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: icon no ads
       rect:
         serializedVersion: 2
-        x: 753
-        y: 1160
+        x: 1928
+        y: 945
         width: 117
         height: 128
       alignment: 0
@@ -538,8 +607,8 @@ TextureImporter:
       name: leaderboard
       rect:
         serializedVersion: 2
-        x: 753
-        y: 1002
+        x: 1117
+        y: 1578
         width: 87
         height: 81
       alignment: 0
@@ -560,7 +629,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 277
+        y: 231
         width: 695
         height: 640
       alignment: 0
@@ -602,7 +671,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1723
-        y: 1384
+        y: 1416
         width: 161
         height: 109
       alignment: 0
@@ -623,7 +692,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1593
-        y: 1655
+        y: 1607
         width: 351
         height: 124
       alignment: 0
@@ -640,11 +709,74 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: mode cllipping mask
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 28
+        width: 684
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d53274e4df85c39b0800000000000000
+      internalID: -5099102833126988963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mode game back
+      rect:
+        serializedVersion: 2
+        x: 697
+        y: 520
+        width: 703
+        height: 351
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1a2b5a18114f8d60800000000000000
+      internalID: 7894600243580971546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Most played
+      rect:
+        serializedVersion: 2
+        x: 1886
+        y: 1378
+        width: 158
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e108bfb2ebaa56630800000000000000
+      internalID: 3919726784454295582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: music icon
       rect:
         serializedVersion: 2
-        x: 843
-        y: 1081
+        x: 1293
+        y: 1582
         width: 75
         height: 77
       alignment: 0
@@ -707,7 +839,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 920
-        y: 967
+        y: 999
         width: 801
         height: 526
       alignment: 0
@@ -719,6 +851,48 @@ TextureImporter:
       bones: []
       spriteID: 8bacce194a1a13b90800000000000000
       internalID: -7263846995776976200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rectangle 1
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 99
+        width: 683
+        height: 130
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef9941d73ceb2dc00800000000000000
+      internalID: 924010620390775294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: red, green light
+      rect:
+        serializedVersion: 2
+        x: 1593
+        y: 1733
+        width: 353
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f14864d9c22404120800000000000000
+      internalID: 2395987761145742367
       vertices: []
       indices: 
       edges: []
@@ -748,8 +922,8 @@ TextureImporter:
       name: setting
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1335
+        x: 1723
+        y: 1258
         width: 149
         height: 124
       alignment: 0
@@ -769,8 +943,8 @@ TextureImporter:
       name: shop icon
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 1619
+        x: 1948
+        y: 1696
         width: 93
         height: 83
       alignment: 0
@@ -790,8 +964,8 @@ TextureImporter:
       name: sound icon
       rect:
         serializedVersion: 2
-        x: 1322
-        y: 1505
+        x: 1206
+        y: 1578
         width: 85
         height: 81
       alignment: 0
@@ -829,11 +1003,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: star
+      rect:
+        serializedVersion: 2
+        x: 1897
+        y: 1563
+        width: 41
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 928f3103afdb3c430800000000000000
+      internalID: 3802091392676919337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: tick back
       rect:
         serializedVersion: 2
-        x: 842
-        y: 1013
+        x: 753
+        y: 1222
         width: 66
         height: 66
       alignment: 0
@@ -853,8 +1048,8 @@ TextureImporter:
       name: ticket
       rect:
         serializedVersion: 2
-        x: 753
-        y: 890
+        x: 1874
+        y: 1266
         width: 85
         height: 110
       alignment: 0
@@ -874,8 +1069,8 @@ TextureImporter:
       name: v
       rect:
         serializedVersion: 2
-        x: 753
-        y: 1085
+        x: 1946
+        y: 1544
         width: 88
         height: 73
       alignment: 0
@@ -892,11 +1087,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: Win Lose
+      rect:
+        serializedVersion: 2
+        x: 1961
+        y: 1304
+        width: 69
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3d34e759e11d02c0800000000000000
+      internalID: -4463891961754665666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: win rate
       rect:
         serializedVersion: 2
-        x: 1886
-        y: 1461
+        x: 1723
+        y: 1384
         width: 152
         height: 30
       alignment: 0
@@ -916,8 +1132,8 @@ TextureImporter:
       name: x
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1505
+        x: 920
+        y: 1578
         width: 106
         height: 81
       alignment: 0

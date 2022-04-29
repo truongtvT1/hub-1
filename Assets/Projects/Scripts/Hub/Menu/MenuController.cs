@@ -47,7 +47,7 @@ namespace Projects.Scripts.Menu
             shopButton.onClick.AddListener(OnShopButtonClick);
             mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
-            GameServiceManager.Instance.ShowBanner();
+            GameServiceManager.ShowBanner();
         }
 
         #region Button Event

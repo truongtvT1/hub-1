@@ -31,6 +31,10 @@ namespace Projects.Scripts.Scriptable
         {
             return shopChestList.Select(a => a.shopId).ToList();
         }
+        public List<string> GetAllShopPackId()
+        {
+            return shopPackList.Select(a => a.shopId).ToList();
+        }
     }
 
     [Serializable]

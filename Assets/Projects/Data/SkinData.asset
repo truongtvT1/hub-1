@@ -145,13 +145,13 @@ MonoBehaviour:
     rank: 3
   - skinName: hair/hair_43
     skinType: 0
-    rank: 0
+    rank: 2
   - skinName: hair/hair_44
     skinType: 0
-    rank: 0
+    rank: 2
   - skinName: hair/hair_45
     skinType: 0
-    rank: 0
+    rank: 2
   gloveSkins:
   - skinName: gloves/glove_00
     skinType: 1
@@ -194,7 +194,7 @@ MonoBehaviour:
     rank: 2
   - skinName: gloves/glove_13
     skinType: 1
-    rank: 0
+    rank: 2
   bodySkins:
   - skinName: body/body_00
     skinType: 2
@@ -321,7 +321,7 @@ MonoBehaviour:
     rank: 1
   - skinName: body/body_41
     skinType: 2
-    rank: 0
+    rank: 2
   glassSkins:
   - skinName: glass/glass_00
     skinType: 3
@@ -385,7 +385,7 @@ MonoBehaviour:
     rank: 1
   - skinName: glass/glass_20
     skinType: 3
-    rank: 0
+    rank: 1
   cloakSkins:
   - skinName: wing/w_00
     skinType: 4

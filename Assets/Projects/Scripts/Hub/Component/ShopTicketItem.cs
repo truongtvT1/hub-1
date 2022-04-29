@@ -52,7 +52,7 @@ namespace Projects.Scripts.Hub.Component
             }
             else
             {
-                priceText.text = GameServiceManager.Instance.GetItemLocalPriceString(_item.skuId);
+                priceText.text = GameServiceManager.GetItemLocalPriceString(_item.skuId);
                 button.onClick.AddListener(BuyIap);
             }
             
@@ -60,7 +60,7 @@ namespace Projects.Scripts.Hub.Component
 
         private void BuyByAd()
         {
-            GameServiceManager.Instance.ShowRewardedAd("shop_free_ticket", () =>
+            GameServiceManager.ShowRewardedAd("shop_free_ticket", () =>
             {
                 var count = GameDataManager.Instance.GetFreeTicketCountInDay()+1;
                 GameDataManager.Instance.UpdateFreeTicketCountInDay(count);
@@ -70,7 +70,7 @@ namespace Projects.Scripts.Hub.Component
 
         private void BuyIap()
         {
-            GameServiceManager.Instance.PurchaseProduct(_item.skuId, (result, sku) =>
+            GameServiceManager.PurchaseProduct(_item.skuId, (result, sku) =>
             {
                 if (result)
                 {

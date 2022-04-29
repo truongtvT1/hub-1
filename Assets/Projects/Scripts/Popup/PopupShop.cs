@@ -14,18 +14,16 @@ namespace Projects.Scripts.Popup
     public class PopupShop : BasePopup
     {
         [SerializeField, BoxGroup("UI")] private Button closeButton;
-        [SerializeField,BoxGroup("Chest")] private Button ruleButton;
+        [SerializeField, BoxGroup("Chest")] private Button ruleButton;
         [SerializeField, BoxGroup("Chest")] private List<ShopChestItem> chestItemList;
         [SerializeField, BoxGroup("Chest")] private Image chestProgress;
+        [SerializeField, BoxGroup("Chest")] private float[] fillProgress;
         [SerializeField, BoxGroup("Ticket")] private List<ShopTicketItem> ticketItemList;
-        
+
         private void Awake()
         {
             closeButton.onClick.AddListener(Close);
-            ruleButton.onClick.AddListener(() =>
-            {
-                PopupMenuController.Instance.ShowPopupRule();
-            });
+            ruleButton.onClick.AddListener(() => { PopupMenuController.Instance.ShowPopupRule(); });
         }
 
         public void Init(ShopType shopType)
@@ -34,11 +32,18 @@ namespace Projects.Scripts.Popup
             {
                 ticketItem.Init(GameDataManager.Instance.shopData);
             }
+
             foreach (var chestItem in chestItemList)
             {
-                chestItem.Init(GameDataManager.Instance.shopData);
+                chestItem.Init(GameDataManager.Instance.shopData,this);
             }
-            
+
+        }
+
+        public void UpdateChestProgress()
+        {
+            var count = GameDataManager.Instance.GetTotalChestOpen() % 10;
+            chestProgress.fillAmount = fillProgress[count];
         }
     }
 

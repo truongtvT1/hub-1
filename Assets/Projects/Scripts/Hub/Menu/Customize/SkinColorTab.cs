@@ -103,7 +103,7 @@ namespace Projects.Scripts.Menu
         }
         private void OnChangeColorByAdButtonClick()
         {
-            GameServiceManager.Instance.ShowRewardedAd("customize_change_color",ChangeColor);
+            GameServiceManager.ShowRewardedAd("customize_change_color",ChangeColor);
         }
 
         private void ChangeColor()

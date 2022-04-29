@@ -114,7 +114,7 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnTryButtonClick()
         {
-            GameServiceManager.Instance.ShowRewardedAd("customize_try_skin", () =>
+            GameServiceManager.ShowRewardedAd("customize_try_skin", () =>
             {
                 GameDataManager.Instance.TrySkin(_selected.item.skinName);
                 OnSelectButtonClick();
@@ -139,7 +139,7 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnBuyByAdButtonClick()
         {
-            GameServiceManager.Instance.ShowRewardedAd("customize_unlock_skin", () =>
+            GameServiceManager.ShowRewardedAd("customize_unlock_skin", () =>
             {
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
                 GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);

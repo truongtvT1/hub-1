@@ -65,7 +65,7 @@ namespace Projects.Scripts.Popup
 
         private void OnHomeButtonClick()
         {
-            GameServiceManager.Instance.ShowInterstitialAd(() =>
+            GameServiceManager.ShowInterstitialAd(() =>
             {
                 homeCallback?.Invoke();
                 SceneManager.LoadScene("Menu");

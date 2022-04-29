@@ -94,9 +94,8 @@ namespace MiniGame.SquidGame
         {
             // level = GameDataManager.Instance.GetSquidGameLevel();
             // difficultyDelta = difficultyDelta + GameDataManager.Instance.GetSquidLevelDifficulty();
-            Debug.Log("difficult delta: " + difficultyDelta);
             StartCoroutine(Init());
-            GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object>{{"red_line",level}});
+            GameServiceManager.LogEvent("level_start", new Dictionary<string, object>{{"red_line",level}});
         }
 
         public void Pause()
@@ -364,7 +363,7 @@ namespace MiniGame.SquidGame
 
         void Lose()
         {
-            GameServiceManager.Instance.ShowInterstitialAd(() =>
+            GameServiceManager.ShowInterstitialAd(() =>
             {
                 // SceneLoader.LoadMenu();
             });

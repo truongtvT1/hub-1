@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Projects.Scripts.Menu;
+using Projects.Scripts.Popup;
 using Projects.Scripts.Scriptable;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
@@ -19,14 +20,16 @@ namespace Projects.Scripts.Hub.Component
         [SerializeField] private Button button;
         private ShopData _shopData;
         private ChestData _item;
+        private PopupShop _shop;
         private List<string> GetALlShopTicketId()
         {
             return ShopData.Instance.GetAllShopChestId();
         }
 
-        public void Init(ShopData shopData)
+        public void Init(ShopData shopData,PopupShop popupShop)
         {
             _shopData = shopData;
+            _shop = popupShop;
             _item = _shopData.shopChestList.Find(a => a.shopId == shopId);
             
             button.onClick.RemoveAllListeners();
@@ -59,7 +62,7 @@ namespace Projects.Scripts.Hub.Component
         }
         private void BuyByAd()
         {
-            GameServiceManager.Instance.ShowRewardedAd("shop_free_chest", () =>
+            GameServiceManager.ShowRewardedAd("shop_free_chest", () =>
             {
                 var count = GameDataManager.Instance.GetFreeChestCountInDay()+1;
                 GameDataManager.Instance.UpdateFreeChestCountInDay(count);
@@ -80,7 +83,10 @@ namespace Projects.Scripts.Hub.Component
 
         private void PurchaseSuccess()
         {
-            Init(_shopData);
+            var value = GameDataManager.Instance.GetTotalChestOpen() + 1;
+            GameDataManager.Instance.UpdateChestOpenNumber(value);
+            Init(_shopData,_shop);
+            _shop.UpdateChestProgress();
             // show open chest
         }
         private IEnumerator CountDown(TimeSpan timSpan)
@@ -93,8 +99,7 @@ namespace Projects.Scripts.Hub.Component
                 time = time.Subtract(TimeSpan.FromSeconds(1));
                 priceText.text = time.ToString(@"hh\:mm\:ss");
             }
-            
-            Init(_shopData);
+            Init(_shopData,_shop);
         }
     }
 }
