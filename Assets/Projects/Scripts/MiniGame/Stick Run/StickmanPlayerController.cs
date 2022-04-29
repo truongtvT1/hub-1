@@ -18,10 +18,10 @@ namespace MiniGame.StickRun
         public MoveDirection moveDirection;
         public Vector2 sprintingCollider;
         public SpriteRenderer mountIcon;
-        public GameObject dodgeCollider, narutoCollider;
+        public Collider2D headCollider;
         public bool isSprinting, isHoldingSprint, isNormalRun, isCollideWall, isInSpecialTrap, isDead, isBot;
         private Tween tween;
-        private Vector2 cacheColliderSize, cacheOffsetCollider, runLine;
+        private Vector2 cacheColliderSize, cacheOffsetCollider, cacheHeadColliderOffset, runLine;
         private Transform checkPoint;
         private Color currentColor;
         private List<string> currentSkin = new List<string>();
@@ -29,6 +29,7 @@ namespace MiniGame.StickRun
         {
             cacheColliderSize = collider.size;
             cacheOffsetCollider = collider.offset;
+            cacheHeadColliderOffset = headCollider.offset;
             runLine = transform.position;
         }
 
@@ -78,8 +79,7 @@ namespace MiniGame.StickRun
             anim.PlayRunScare();
             collider.size = cacheColliderSize;
             collider.offset = cacheOffsetCollider;
-            dodgeCollider.SetActive(false);
-            narutoCollider.SetActive(false);
+            headCollider.offset = cacheHeadColliderOffset;
         }
 
         void Sprint()
@@ -94,14 +94,12 @@ namespace MiniGame.StickRun
             if (Random.value > 0.5f)
             {
                 anim.PlayRunNaruto();
-                // narutoCollider.SetActive(true);
-                // dodgeCollider.SetActive(false);
+                headCollider.offset = new Vector2(0.48f, -.57f);
             }
             else
             {
                 anim.PlayDodge();
-                // narutoCollider.SetActive(false);
-                // dodgeCollider.SetActive(true);
+                headCollider.offset = cacheHeadColliderOffset;
             }
             var size = collider.size;
             var offset = collider.offset;
@@ -119,8 +117,7 @@ namespace MiniGame.StickRun
                     isCollideWall = true;
                     anim.PlayRun();
                     anim.PlayRunScare();
-                    // dodgeCollider.SetActive(false);
-                    // narutoCollider.SetActive(false);
+                    headCollider.offset = cacheHeadColliderOffset;
                     transform.DOKill();
                 }
                 else if (isCollideWall)
@@ -156,71 +153,64 @@ namespace MiniGame.StickRun
             }
         }
 
-        public void Die(DamageType type, Transform checkPoint, Transform die = null)
+        public void Die(DamageType type, Transform checkPoint, Vector3 diePos, Ease ease = Ease.Linear)
         {
             if (isDead)
             {
                 return;
             }
             isDead = true;
+            isInSpecialTrap = false;
             collider.enabled = false;
+            headCollider.enabled = false;
             mountIcon.gameObject.SetActive(false);
-            // dodgeCollider.SetActive(false);
-            // narutoCollider.SetActive(false);
             if (!isBot)
             {
                 StickRunGameController.Instance.Dead();
             }
             this.checkPoint = checkPoint;
             transform.DOKill();
-            if (die)
-            {
-                transform.DOMove(die.position, .5f).SetEase(Ease.InSine).OnComplete(() =>
-                {
-                    Dead();
-                });
-            }
-            else
-            {
-                Dead();
-            }
-            void Dead()
+            transform.DOMove(diePos, .5f).SetEase(ease).OnComplete(() =>
             {
                 switch (type)
                 {
                     case DamageType.Water:
                         anim.PlayDie(callback:() =>
                         {
+                            anim.PlayIdle();
                             Respawn();
                         });
                         break;
                     case DamageType.Object:
                         anim.PlayDie(callback:() =>
                         {
+                            anim.PlayIdle();
                             Respawn();
                         });
                         break;
                 }
-            }
-            
+            });
         }
 
         async void Respawn()
         {
             if (isBot)
             {
-                await Task.Delay(3000);
+                await Task.Delay(2000);
                 collider.enabled = true;
                 transform.position = new Vector3(checkPoint.position.x, runLine.y);
+                Init();
+                await Task.Delay(200);
                 isDead = false;
             }
             else
             {
                 if (StickRunGameController.Instance.CheckCanRevive())
                 {
-                    await Task.Delay(3000);
+                    await Task.Delay(2000);
                     mountIcon.gameObject.SetActive(true);
                     collider.enabled = true;
+                    headCollider.enabled = true;
                     Init();
                     transform.position = new Vector3(checkPoint.position.x, runLine.y);
                     await Task.Delay(200);

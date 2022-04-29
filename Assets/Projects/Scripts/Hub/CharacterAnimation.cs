@@ -52,6 +52,7 @@ namespace Projects.Scripts.Hub
         private void Start()
         {
             _skeletonData = skeletonAnimation.skeleton.Data;
+            skeletonAnimation.Initialize(true);
             Random.InitState(DateTime.UtcNow.Millisecond);
         }
 
@@ -146,8 +147,6 @@ namespace Projects.Scripts.Hub
 
         public TrackEntry PlayIdle(bool loop = true, Action callback = null)
         {
-            skeletonAnimation.AnimationState.SetEmptyAnimation(0, .02f);
-            skeletonAnimation.AnimationState.SetEmptyAnimation(1, .02f);
             return PlayAnim("idle", loop: loop, callback: callback);
         }
 

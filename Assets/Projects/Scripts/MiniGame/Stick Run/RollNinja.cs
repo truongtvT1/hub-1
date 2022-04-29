@@ -56,6 +56,7 @@ namespace MiniGame.StickRun
         protected override void Idle()
         {
             target.localPosition = start.localPosition;
+            targetAnim.state.ClearTrack(0);
         }
     }
 }

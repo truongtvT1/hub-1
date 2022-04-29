@@ -1,47 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using DG.Tweening;
+using System.Threading.Tasks;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
 
 namespace MiniGame.StickRun
 {
-    public class SpecialTrap : MonoBehaviour
+    public class WaterTrap : MonoBehaviour
     {
-        public float maxStayDuration = .8f;
-        public SkeletonAnimation anim;
-        [SpineAnimation(dataField = nameof(anim))]
-        public string attackAnim;
-        [SpineAnimation(dataField = nameof(anim))]
-        public string idleAnim;
-        public DamageType damageType;
+        public float maxStayTime = 1.5f;
         public Vector2 boxCastSize;
+        public Pool handPool;
         public LayerMask layerToCast;
-        public Transform diePos;
+        public DamageType damageType;
         public Transform checkPoint;
-        protected TrackEntry track;
-        protected float timeStay, duration;
-        protected bool isStayInTrigger, isSprinting;
+        private TrackEntry track;
+        private float timeStay, duration;
+        private bool isStayInTrigger, isSprinting;
         private List<StickmanPlayerController> listPlayer = new List<StickmanPlayerController>();
-        protected virtual void Start()
-        {
-            ResetTrap();
-        }
-
-        protected virtual void ResetTrap()
+        
+        private void Start()
         {
             isStayInTrigger = false;
             isSprinting = false;
-            anim.state.SetAnimation(0, idleAnim, false)
-                .Complete += entry =>
-            {
-                track = anim.state.SetAnimation(0, attackAnim, false);
-                track.TrackTime = 0;
-                track.TimeScale = 0;
-                duration = track.Animation.Duration;
-                timeStay = 0;
-            };
         }
 
         protected bool BoxCast()
@@ -63,8 +45,9 @@ namespace MiniGame.StickRun
             return false;
         }
         
-        protected virtual void Update()
+        private void Update()
         {
+
             if (BoxCast())
             {
                 isStayInTrigger = true;
@@ -72,14 +55,12 @@ namespace MiniGame.StickRun
                 {
                     if (!listPlayer[0].isSprinting)
                     {
-                        listPlayer[0].isInSpecialTrap = true;
-                        Debug.Log("not sprinting");
+                        // listPlayer[0].isInSpecialTrap = true;
                         isSprinting = false;
                     }
                     else if (listPlayer[0].isSprinting)
                     {
-                        listPlayer[0].isInSpecialTrap = false;
-                        Debug.Log("sprinting");
+                        // listPlayer[0].isInSpecialTrap = false;
                         isSprinting = true;
                     }
                 }
@@ -92,12 +73,12 @@ namespace MiniGame.StickRun
                         var player = listPlayer[i];
                         if (!player.isSprinting)
                         {
-                            player.isInSpecialTrap = true;
+                            // player.isInSpecialTrap = true;
                             countSprinting++;
                         }
                         else if (player.isSprinting)
                         {
-                            player.isInSpecialTrap = false;
+                            // player.isInSpecialTrap = false;
                             countNotSprinting++;
                         }
                     }
@@ -118,50 +99,57 @@ namespace MiniGame.StickRun
             {
                 isStayInTrigger = false;
                 isSprinting = false;
-                for (int i = 0; i < listPlayer.Count; i++)
-                {
-                    var player = listPlayer[i];
-                    player.isInSpecialTrap = false;
-                }
             }
             
             if (isStayInTrigger)
             {
                 if (!isSprinting)
                 {
-                    track.TimeScale = anim.timeScale;
                     timeStay += Time.deltaTime;
-                    if (timeStay >= maxStayDuration)
+                    if (timeStay >= maxStayTime)
                     {
-                        anim.state.Update(track.TrackEnd);
                         for (int i = 0; i < listPlayer.Count; i++)
                         {
                             var player = listPlayer[i];
-                            if (!player.isDead)
+                            if (!player.isDead && !player.isSprinting)
                             {
                                 Kill(player);
                             }
                         }
-                        ResetTrap();
+                        timeStay = 0;
+                        isStayInTrigger = false;
+                        isSprinting = false;
                         listPlayer = new List<StickmanPlayerController>();
-                        return;
                     }
-                    track.TrackTime = (timeStay * duration/maxStayDuration) * anim.timeScale;
-                    anim.state.Update(track.TrackTime);
                 }
                 else
                 {
                     timeStay -= Time.deltaTime;
-                    track.TrackTime = timeStay * duration/maxStayDuration * anim.timeScale;
-                    anim.state.Update(track.TrackTime);
                 }
             }
         }
 
-        protected virtual void Kill(StickmanPlayerController player)
+        void Kill(StickmanPlayerController player)
         {
-            player.Die(damageType,checkPoint,diePos.position,Ease.InSine);
-        }
+            var hand = handPool.nextThing;
+            hand.transform.position = player.transform.position + new Vector3(.3f, 0);
+            var anim = hand.GetComponent<SkeletonAnimation>();
+            anim.Initialize(true);
+            var track = anim.state.SetAnimation(0, "catch", false);
+            track.Complete += entry =>
+            {
+                hand.SetActive(false);
+            };
+            track.Event += (entry1, event1) =>
+            {
+                if (event1.ToString().Equals("catch"))
+                {
+                    player.Die(damageType, checkPoint, player.transform.position + new Vector3(0, -4f));
+                }
+            };
+        }        
+
+        
         
         private void OnDrawGizmos()
         {

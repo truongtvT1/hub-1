@@ -14,7 +14,7 @@ namespace MiniGame.StickRun
                 var player = other.GetComponent<StickmanPlayerController>();
                 if (player)
                 {
-                    player.Die(damageType, checkPoint);
+                    player.Die(damageType, checkPoint,player.transform.position);
                 }
             }
         }
@@ -26,7 +26,7 @@ namespace MiniGame.StickRun
                 var player = other.gameObject.GetComponent<StickmanPlayerController>();
                 if (player)
                 {
-                    player.Die(damageType, checkPoint);
+                    player.Die(damageType, checkPoint,player.transform.position);
                 }
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -12,9 +13,9 @@ namespace MiniGame.StickRun
     public class Ninja : MonoBehaviour
     {
         public SkeletonAnimation anim;
-        [SerializeField, SpineAnimation(dataField = nameof(anim))]
+        [ShowIf(nameof(anim)),SerializeField, SpineAnimation(dataField = nameof(anim))]
         public string attackAnim;
-        [SerializeField, SpineAnimation(dataField = nameof(anim))]
+        [ShowIf(nameof(anim)),SerializeField, SpineAnimation(dataField = nameof(anim))]
         public string idleAnim;
 
         public float attackDelay, idleDelay, moveSpeed, moveBackSpeed, idleDuration;
