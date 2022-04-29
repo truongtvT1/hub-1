@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MiniGame;
 using UnityEngine;
 
 namespace Projects.Scripts.Data
@@ -11,13 +12,14 @@ namespace Projects.Scripts.Data
         public Dictionary<string, int> currencies;
         public List<string> currentSkin,trySkin;
         public string currentSkinColor;
-        public Dictionary<string, float> difficult;
+        public Dictionary<string, GameDifficulty> difficult;
         public List<string> unlockedSkins;
+        public string lastPlayed;
         public UserInfo( )
         {
             times = new Dictionary<string, DateTime> {{"date_create", DateTime.Now}};
             currencies = new Dictionary<string, int>();
-            difficult = new Dictionary<string, float>();
+            difficult = new Dictionary<string, GameDifficulty>();
                         
         }
 

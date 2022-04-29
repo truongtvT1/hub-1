@@ -1,0 +1,20 @@
+
+trap_hole.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+trap_hole
+  rotate: false
+  xy: 2, 2
+  size: 588, 151
+  orig: 588, 151
+  offset: 0, 0
+  index: -1
+trap_hole2
+  rotate: false
+  xy: 2, 155
+  size: 658, 222
+  orig: 658, 223
+  offset: 0, 1
+  index: -1

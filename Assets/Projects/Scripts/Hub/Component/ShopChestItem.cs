@@ -64,8 +64,7 @@ namespace Projects.Scripts.Hub.Component
         {
             GameServiceManager.ShowRewardedAd("shop_free_chest", () =>
             {
-                var count = GameDataManager.Instance.GetFreeChestCountInDay()+1;
-                GameDataManager.Instance.UpdateFreeChestCountInDay(count);
+                GameDataManager.Instance.UpdateFreeChestCountInDay(1);
                 PurchaseSuccess();
             });
         }
@@ -83,8 +82,7 @@ namespace Projects.Scripts.Hub.Component
 
         private void PurchaseSuccess()
         {
-            var value = GameDataManager.Instance.GetTotalChestOpen() + 1;
-            GameDataManager.Instance.UpdateChestOpenNumber(value);
+            GameDataManager.Instance.UpdateChestOpenNumber(_item.numberItemReward);
             Init(_shopData,_shop);
             _shop.UpdateChestProgress();
             // show open chest

@@ -118,16 +118,25 @@ namespace ThirdParties.Truongtv.SoundManager
 
         public void PlayPopupOpenSound()
         {
-            PlaySfx(popupOpenSound);
+            if (popupOpenSound)
+            {
+                PlaySfx(popupOpenSound);
+            }
         }
         public void PlayPopupCloseSound()
         {
-            PlaySfx(popupCloseSound);
+            if (popupCloseSound)
+            {
+                PlaySfx(popupCloseSound);
+            }
         }
         
         public void PlayButtonSound(Action complete = null)
         {
-            PlaySfx(buttonSound,onComplete:complete);
+            if (buttonSound)
+            {
+                PlaySfx(buttonSound,onComplete:complete);
+            }
         }
     }
 }

@@ -18,8 +18,11 @@ namespace Projects.Scripts.Popup
         private Action replayCallback, homeCallback;
         private void Awake()
         {
-            homeButton.onClick.AddListener(OnHomeButtonClick);
-            replayButton.onClick.AddListener(OnReplayButtonClick);
+            if (isInGame)
+            {
+                homeButton.onClick.AddListener(OnHomeButtonClick);
+                replayButton.onClick.AddListener(OnReplayButtonClick);
+            }
             closeButton.onClick.AddListener(Close);
             bgmToggle.onValueChanged.AddListener(OnBgmToggleChange);
             sfxToggle.onValueChanged.AddListener(OnSfxToggleChange);

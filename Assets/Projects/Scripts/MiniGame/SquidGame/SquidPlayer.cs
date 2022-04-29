@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Projects.Scripts.Hub;
 using UnityEngine;
@@ -18,7 +20,7 @@ namespace MiniGame.SquidGame
         public SpriteRenderer skull;
         public float moveSpeed;
         private Coroutine _coroutineRed,_coroutineGreen;
-        private float difficulty, delayGreen = .2f, delayRed = .2f;
+        private float difficulty, delayGreen = .3f, delayRed = .3f;
         public void Init(SquidGameController controller, List<string> skin, Color color, float difficulty)
         {
             isReady = false;
@@ -67,18 +69,6 @@ namespace MiniGame.SquidGame
                 {
                     isMoving = false;
                 })
-                .OnUpdate(() =>
-                {
-                    if (HitFinishLine() && !isWin)
-                    {
-                        isWin = true;
-                        _controller.playerRank++;
-                    }
-                    if (isMoving && _controller.state != GameState.Pause)
-                    {
-                        anim.PlayRun();
-                    }
-                })
                 .OnComplete(() =>
                 {
                     anim.PlayWin();
@@ -88,7 +78,29 @@ namespace MiniGame.SquidGame
         }
 
         private bool tempMoving = false;
-        
+
+        private void Update()
+        {
+            if (isReady)
+            {
+                if (HitFinishLine() && !isWin)
+                {
+                    isWin = true;
+                    _controller.playerRank++;
+                }
+
+                if (!isWin && HitByMeteor())
+                {
+                    Kill();
+                }
+                        
+                if (isMoving && _controller.state != GameState.Pause)
+                {
+                    anim.PlayRun();
+                }
+            }
+        }
+
         public void Pause()
         {
             tempMoving = isMoving;
@@ -100,17 +112,28 @@ namespace MiniGame.SquidGame
         public void Resume()
         {
             isMoving = tempMoving;
+            anim.PauseAnim(false);
             if (isMoving)
             {
-                anim.PauseAnim(false);
                 anim.PlayRun();
                 anim.transform.parent.DOTogglePause();
             }
         }
 
+        bool HitByMeteor()
+        {
+            RaycastHit2D hit = Physics2D.Raycast(anim.transform.position + new Vector3(0,.1f), Vector2.left, .2f,1 << 9);
+            if (hit)
+            {
+                return hit;    
+            }
+
+            return false;
+        }
+        
         bool HitFinishLine()
         {
-            RaycastHit2D hit = Physics2D.Raycast(anim.transform.position, Vector2.left, .2f);
+            RaycastHit2D hit = Physics2D.Raycast(anim.transform.position, Vector2.left, .2f,1 << 0);
             if (hit)
             {
                 return hit;    
@@ -126,7 +149,7 @@ namespace MiniGame.SquidGame
         
         IEnumerator RedLight()
         {
-            if (isWin)
+            if (isWin || isDead)
             {
                 yield break;
             }
@@ -143,7 +166,7 @@ namespace MiniGame.SquidGame
 
         IEnumerator GreenLight()
         {
-            if (isWin)
+            if (isWin || isDead)
             {
                 yield break;
             }
@@ -159,18 +182,19 @@ namespace MiniGame.SquidGame
             
         }
 
-        public void Kill()
+
+        public async void Kill()
         {
-            Debug.Log("kill " + gameObject.name);
+            if (isDead) return;
             StopAllCoroutines();
-            // blood.gameObject.SetActive(true);
-            // blood.Play(true);
+            isDead = true;
             anim.transform.parent.DOKill();
-            anim.PlayDie(callback:() =>
-            {
-                isDead = true;
-                
-            });
+            blood.gameObject.SetActive(true);
+            blood.Play(true);
+            skull.gameObject.SetActive(true);
+            anim.gameObject.SetActive(false);
+            await Task.Delay(500);
+            blood.gameObject.SetActive(false);
         }
         
 #if UNITY_EDITOR

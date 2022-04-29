@@ -54,6 +54,7 @@ namespace Projects.Scripts.Menu
 
         private void OnPlayButtonClick()
         {
+            PopupMenuController.Instance.ShowPopupChooseMode();
         }
 
         private void OnSwitchButtonClick()

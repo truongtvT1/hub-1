@@ -164,6 +164,7 @@ MonoBehaviour:
   cheated: 0
   debugger: 0
   skinData: {fileID: 11400000, guid: 927749abf6aa67046ab6f3e12d6957fd, type: 2}
+  miniGameData: {fileID: 11400000, guid: 9717b0a22e568e242b550882caf7db19, type: 2}
   shopData: {fileID: 11400000, guid: 860a16ad58fc90646a1be89b48222c56, type: 2}
   remoteConfigValue:
     versionReview: 

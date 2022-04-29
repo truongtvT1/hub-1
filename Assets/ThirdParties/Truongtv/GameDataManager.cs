@@ -18,6 +18,8 @@ namespace ThirdParties.Truongtv
         [SerializeField, FoldoutGroup("Game Data")] public SkinData skinData;
 
         [SerializeField, FoldoutGroup("Game Data")]
+        public MiniGameData miniGameData;
+        [SerializeField, FoldoutGroup("Game Data")]
         public ShopData shopData;
         [SerializeField, FoldoutGroup("Game Data")] public RemoteConfigValue remoteConfigValue;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] private List<string> startSkin;
@@ -25,7 +27,7 @@ namespace ThirdParties.Truongtv
         
         private static GameDataManager _instance;
         public static GameDataManager Instance => _instance;
-        private UserInfo _userInfo;
+        [SerializeField]private UserInfo _userInfo;
         private void Awake()
         {
             if (_instance != null)
@@ -313,6 +315,48 @@ namespace ThirdParties.Truongtv
         public void UpdateChestOpenNumber(int value)
         {
             UpdateCurrency("chest", value);
+        }
+        #endregion
+
+        #region Mode Game
+
+        public int GetMiniGameCountPlayed(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_played");
+        }
+        public int GetMiniGameWinCount(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_win");
+        }
+        public int GetMiniGameLoseCount(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_lose");
+        }
+        public void UpdateMiniGameCountPlayed(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_played") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+        public void UpdateMiniGameWinCount(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_win") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+        public void UpdateMiniGameLoseCount(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_lose") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+
+        public void UpdateLastPlayed(string miniGame)
+        {
+            _userInfo.lastPlayed = miniGame;
+            SaveUserInfo();
+        }
+
+        public string GetLastPlayed()
+        {
+            return _userInfo.lastPlayed;
         }
         #endregion
     }

@@ -27,7 +27,10 @@ namespace Projects.Scripts.Hub
 
         [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
         private List<string> stopAnimations;
-
+        
+        [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
+        private List<string> dodgeAnimations;
+        
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string runScareAnim;
 
@@ -69,6 +72,9 @@ namespace Projects.Scripts.Hub
             return listName;
         }
 
+        #region Control
+
+        
         public void SetSkinColor(Color color)
         {
             _color = color;
@@ -132,12 +138,16 @@ namespace Projects.Scripts.Hub
         {
             return skeletonAnimation.GetComponent<Renderer>().sortingOrder;
         }
+
+        #endregion
+        
         
         #region Anim
 
-        
         public TrackEntry PlayIdle(bool loop = true, Action callback = null)
         {
+            skeletonAnimation.AnimationState.SetEmptyAnimation(0, .02f);
+            skeletonAnimation.AnimationState.SetEmptyAnimation(1, .02f);
             return PlayAnim("idle", loop: loop, callback: callback);
         }
 
@@ -177,6 +187,22 @@ namespace Projects.Scripts.Hub
         {
             var rdAnim = winAnimations[Random.Range(0, winAnimations.Count)];
             return PlayAnim(rdAnim, 0,loop, callback: callback);
+        }
+        
+        public TrackEntry PlayDodge(bool loop = true, Action callback = null)
+        {
+            var rdAnim = dodgeAnimations[Random.Range(0, dodgeAnimations.Count)];
+            return PlayAnim(rdAnim, 1,loop, callback: callback);
+        }
+        
+        public TrackEntry PlayRunScare(bool loop = true, Action callback = null)
+        {
+            return PlayAnim(runScareAnim, 1,loop, callback: callback);
+        }
+
+        public TrackEntry PlayRunNaruto(bool loop = true, Action callback = null)
+        {
+            return PlayAnim(runNaruto, 1,loop, callback: callback);
         }
         
         TrackEntry PlayAnim(string animName, int trackIndex = 0,

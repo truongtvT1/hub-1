@@ -1,0 +1,26 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:de145e7d4ea112eff15d1ac647fe4c80:4a5f0f44873921d81021d1db8b6796f8:86e987d7ee6b3bac6af4b8625439e384$
+#
+:format=40300
+:texture=item.png
+:size=1024x2048
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+body;714;1039;247;437; 0.5;0.5; 0;0;0;0
+decor;129;772;120;187; 0.5;0.5; 0;0;0;0
+gate ;333;821;329;757; 0.5;0.5; 0;0;0;0
+gate 1;1;627;126;332; 0.5;0.5; 0;0;0;0
+gate_shadow;1;1580;743;467; 0.5;0.5; 0;0;0;0
+hammer down;1;1172;330;406; 0.5;0.5; 0;0;0;0
+hand_L;664;1514;78;64; 0.5;0.5; 0;0;0;0
+hand_R;212;1118;84;52; 0.5;0.5; 0;0;0;0
+lock;664;1475;48;37; 0.5;0.5; 0;0;0;0
+shuriken;1;961;209;209; 0.5;0.5; 0;0;0;0
+wood board;746;1478;247;569; 0.5;0.5; 0;0;0;0

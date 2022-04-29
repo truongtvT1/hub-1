@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Projects/Scenes/Menu.unity
     guid: b212ff5ed44199f48876317052e22a9b
+  - enabled: 1
+    path: Assets/Projects/Scenes/Memory Matter.unity
+    guid: 9d7210bbfe4909f4fb7edc03754f09b3
+  - enabled: 1
+    path: Assets/Projects/Scenes/Red Light.unity
+    guid: 75232a711945ec94b9531e1f3bb373cd
+  - enabled: 1
+    path: Assets/Projects/Scenes/Stickman Run.unity
+    guid: eb354a8ef08145f46ba1b1633f8153a4
   m_configObjects: {}
