@@ -16,13 +16,18 @@ namespace ThirdParties.Truongtv
         [SerializeField,FoldoutGroup("Game Setting")] public bool cheated = false;
         [SerializeField, FoldoutGroup("Game Setting")] public bool debugger = false;
         [SerializeField, FoldoutGroup("Game Data")] public SkinData skinData;
+
+        [SerializeField, FoldoutGroup("Game Data")]
+        public MiniGameData miniGameData;
+        [SerializeField, FoldoutGroup("Game Data")]
+        public ShopData shopData;
         [SerializeField, FoldoutGroup("Game Data")] public RemoteConfigValue remoteConfigValue;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] private List<string> startSkin;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinColors))] public Color startColor;
         
         private static GameDataManager _instance;
         public static GameDataManager Instance => _instance;
-        private UserInfo _userInfo;
+        [SerializeField]private UserInfo _userInfo;
         private void Awake()
         {
             if (_instance != null)
@@ -79,7 +84,15 @@ namespace ThirdParties.Truongtv
             _userInfo.currencies[name] += value;
             SaveUserInfo();
         }
-
+        private void SetCurrency(string name,int value)
+        {
+            if (!_userInfo.currencies.ContainsKey(name))
+            {
+                _userInfo.currencies.Add(name,0);
+            }
+            _userInfo.currencies[name] = value;
+            SaveUserInfo();
+        }
         private int GetCurrencyValue(string name)
         {
             if (!_userInfo.currencies.ContainsKey(name))
@@ -89,7 +102,26 @@ namespace ThirdParties.Truongtv
             }
             return _userInfo.currencies[name];
         }
+        private void SetTime(string key)
+        {
+            if (!_userInfo.times.ContainsKey(key))
+            {
+                _userInfo.times.Add(key,DateTime.Now);
+                
+            }
+            _userInfo.times[key] = DateTime.Now;
+            SaveUserInfo();
+        }
 
+        private DateTime GetTime(string key)
+        {
+            if (!_userInfo.times.ContainsKey(key))
+            {
+                _userInfo.times.Add(key,DateTime.MinValue);
+                SaveUserInfo();
+            }
+            return _userInfo.times[key];
+        }
         public int GetTotalTicket()
         {
             return GetCurrencyValue("ticket");
@@ -99,6 +131,7 @@ namespace ThirdParties.Truongtv
         {
             UpdateCurrency("ticket", value);
         }
+
         #endregion
 
         #region Skin
@@ -245,6 +278,102 @@ namespace ThirdParties.Truongtv
         public List<Color> GetAllSkinColors()
         {
             return skinData.skinColors;
+        }
+
+        
+        #endregion
+
+        #region Shop
+
+        
+        public int GetFreeChestCountInDay()
+        {
+            return GetCurrencyValue("free_chest");
+        }
+
+        public DateTime GetLastTimeClaimFreeChest()
+        {
+            return GetTime("free_chest");
+        }
+
+        public DateTime GetLastTimeClaimFreeTicket()
+        {
+            return GetTime("free_ticket");
+        }
+        public void UpdateFreeChestCountInDay(int value)
+        {
+            UpdateCurrency("free_chest", value);
+            SetTime("free_chest");
+        }
+
+        public void ResetFreeChestCountInDay()
+        {
+            SetCurrency("free_chest", 0);
+        }
+        public void ResetFreeTicketCountInDay()
+        {
+            SetCurrency("free_ticket", 0);
+        }
+        public int GetFreeTicketCountInDay()
+        {
+            return GetCurrencyValue("free_ticket");
+        }
+        public void UpdateFreeTicketCountInDay(int value)
+        {
+            UpdateCurrency("free_ticket", value);
+            SetTime("free_ticket");
+        }
+
+        public int GetTotalChestOpen()
+        {
+            return GetCurrencyValue("chest");
+        }
+
+        public void UpdateChestOpenNumber(int value)
+        {
+            UpdateCurrency("chest", value);
+        }
+        #endregion
+
+        #region Mode Game
+
+        public int GetMiniGameCountPlayed(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_played");
+        }
+        public int GetMiniGameWinCount(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_win");
+        }
+        public int GetMiniGameLoseCount(string miniGame)
+        {
+            return GetCurrencyValue(miniGame+"_lose");
+        }
+        public void UpdateMiniGameCountPlayed(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_played") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+        public void UpdateMiniGameWinCount(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_win") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+        public void UpdateMiniGameLoseCount(string miniGame)
+        {
+            var count = GetCurrencyValue(miniGame + "_lose") + 1;
+            UpdateCurrency(miniGame,count);
+        }
+
+        public void UpdateLastPlayed(string miniGame)
+        {
+            _userInfo.lastPlayed = miniGame;
+            SaveUserInfo();
+        }
+
+        public string GetLastPlayed()
+        {
+            return _userInfo.lastPlayed;
         }
         #endregion
     }

@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49409a0142b3b9a4d83d9bd74a4db225, type: 3}
+  m_Name: ShopData
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  iapData: {fileID: 11400000, guid: 329ad386fee883547ac67e724d3c4fe9, type: 2}
+  shopChestList:
+  - shopId: chest_1
+    purchaseType: 1
+    skuId: 
+    freePerDay: 3
+    coolDown: 300
+    price: 0
+    numberItemReward: 1
+  - shopId: chest_2
+    purchaseType: 2
+    skuId: 
+    freePerDay: 0
+    coolDown: 0
+    price: 50
+    numberItemReward: 1
+  - shopId: chest_3
+    purchaseType: 2
+    skuId: 
+    freePerDay: 0
+    coolDown: 0
+    price: 300
+    numberItemReward: 10
+  sPercent: 0.5
+  aPercent: 4.5
+  bPercent: 40
+  cPercent: 55
+  shopPackList:
+  - shopId: pack_1
+    purchaseType: 0
+    skuId: t1.pack.1
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 1000
+      skinList: []
+  - shopId: pack_2
+    purchaseType: 0
+    skuId: t1.pack.2
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 500
+      skinList: []
+  shopTicketList:
+  - shopId: ticket_1
+    purchaseType: 1
+    skuId: 
+    freePerDay: 3
+    coolDown: 300
+    price: 0
+    reward:
+      ticket: 50
+      skinList: []
+  - shopId: ticket_2
+    purchaseType: 0
+    skuId: t1.ticket.300
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 300
+      skinList: []
+  - shopId: ticket_3
+    purchaseType: 0
+    skuId: t1.ticket.500
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 500
+      skinList: []
+  - shopId: ticket_4
+    purchaseType: 0
+    skuId: t1.ticket.1100
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 1100
+      skinList: []
+  - shopId: ticket_5
+    purchaseType: 0
+    skuId: t1.ticket.2400
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 2400
+      skinList: []
+  - shopId: ticket_6
+    purchaseType: 0
+    skuId: t1.ticket.6250
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 6250
+      skinList: []
+  - shopId: ticket_7
+    purchaseType: 0
+    skuId: t1.ticket.14000
+    freePerDay: 0
+    coolDown: 0
+    price: 0
+    reward:
+      ticket: 14000
+      skinList: []

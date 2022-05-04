@@ -9,11 +9,15 @@ tpsheetFileNames:
 - Assets/Projects/Textures/Items/item-jungle.tpsheet
 - Assets/Projects/Textures/Items/item-jungle-2.tpsheet
 - Assets/Projects/Textures/Items/item-snow.tpsheet
+- Assets/Projects/Textures/Minigame/ingame setting.tpsheet
+- Assets/Projects/Textures/Minigame/Memory Brain/memory.tpsheet
 - Assets/Projects/Textures/Minigame/Popu win/win.tpsheet
+- Assets/Projects/Textures/Minigame/Sausage Run/Item/item.tpsheet
+- Assets/Projects/Textures/Minigame/SquidGame/redlight.tpsheet
 - Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.tpsheet
 - Assets/Projects/Textures/UI/Double Reward/double_reward.tpsheet
-- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/GamePlay/UI-Ingame.tpsheet
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.tpsheet
 - Assets/Projects/Textures/UI/Gift/gift-popup.tpsheet
 - Assets/Projects/Textures/UI/lottery/lottery.tpsheet
 - Assets/Projects/Textures/UI/Main menu/main_menu.tpsheet
@@ -65,11 +69,15 @@ textureFileNames:
 - Assets/Projects/Textures/Items/item-jungle.png
 - Assets/Projects/Textures/Items/item-jungle-2.png
 - Assets/Projects/Textures/Items/item-snow.png
+- Assets/Projects/Textures/Minigame/ingame setting.png
+- Assets/Projects/Textures/Minigame/Memory Brain/memory.png
 - Assets/Projects/Textures/Minigame/Popu win/win.png
+- Assets/Projects/Textures/Minigame/Sausage Run/Item/item.png
+- Assets/Projects/Textures/Minigame/SquidGame/redlight.png
 - Assets/Projects/Textures/UI/CustomizeCharacter/customizeCharacter.png
 - Assets/Projects/Textures/UI/Double Reward/double_reward.png
-- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
 - Assets/Projects/Textures/UI/GamePlay/UI-Ingame.png
+- Assets/Projects/Textures/UI/Gameplay/UI-Ingame.png
 - Assets/Projects/Textures/UI/Gift/gift-popup.png
 - Assets/Projects/Textures/UI/lottery/lottery.png
 - Assets/Projects/Textures/UI/Main menu/main_menu.png
@@ -118,6 +126,10 @@ normalmapFileNames:
 - 
 - 
 - Assets/codeandweb.com/Example/SpriteSheet/sprites_n.png
+- 
+- 
+- 
+- 
 - 
 - 
 - 

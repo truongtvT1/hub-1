@@ -50,14 +50,156 @@ namespace ThirdParties.Truongtv
         private RemoteConfigManager _remoteConfigManager;
         private MobileNotification _mobileNotification;
         private IapManager _iapManager;
-        public static GameServiceManager Instance;
+        private static GameServiceManager _instance;
         
         private DateTime _lastTimeShowAd;
         #region public
 
         #region Ads Service
 
-        public void ShowBanner()
+        public static void ShowBanner()
+        {
+            _instance.ShowBannerPrivate();
+        }
+
+        public static void HideBanner()
+        {
+            _instance.HideBannerPrivate();
+        }
+
+        public static void ShowInterstitialAd(Action adResult = null)
+        {
+            _instance.ShowInterstitialAdPrivate(adResult);
+        }
+        public static void ShowRewardedAd(string location, Action adResult = null)
+        {
+            _instance.ShowRewardedAdPrivate(location,adResult);
+        }
+        #endregion
+
+        #region Log Event
+        public static void LogEvent(string eventName, Dictionary<string, object> parameters)
+        {
+            _instance.LogEventPrivate(eventName,parameters);
+        }
+        
+        public static void LogEvent(string eventName)
+        {
+            _instance.LogEventPrivate(eventName);
+        }
+        public static void SetUserProperties(string userProperty, string value)
+        {
+            _instance.SetUserPropertiesPrivate(userProperty, value);
+        }
+
+        #endregion
+
+        #region Rate
+
+        public static void Rate()
+        {
+            _instance.RatePrivate();
+        }
+
+        #endregion
+
+        #region IAP
+
+        public static void PurchaseProduct(string sku, Action<bool, string> pAction)
+        {
+            _instance.PurchaseProductPrivate(sku,pAction);
+        }
+
+        public static string GetItemLocalPriceString(string sku)
+        {
+            return _instance.GetItemLocalPriceStringPrivate(sku);
+        }
+        public static void RestorePurchase()
+        {
+            _instance.RestorePurchasePrivate();
+        }
+        #endregion
+
+        #region Mobile Notification
+
+        public void SetLuckySpinReminder()
+        {
+            _mobileNotification.SetLuckySpinReminder();
+        }
+
+        public void DailyRewardResetReminder(bool receive)
+        {
+            _mobileNotification.DailyRewardResetReminder(receive);
+        }
+
+        #endregion
+
+       
+        #endregion
+
+        #region Private Function
+
+        #region unity
+
+        
+        private void Awake()
+        {
+            if (_instance != null)
+                Destroy(_instance.gameObject);
+            _instance = this;
+            if (Application.isPlaying)
+                DontDestroyOnLoad(gameObject);
+            _adManager = GetComponent<AdManager>();
+            _logEventManager = GetComponent<LogEventManager>();
+            _ratingHelper = GetComponent<RatingHelper>();
+            _remoteConfigManager = GetComponent<RemoteConfigManager>();
+            _mobileNotification = GetComponent<MobileNotification>();
+            _iapManager = GetComponent<IapManager>();
+        }
+
+        private void Start()
+        {
+            _adManager.Init();
+            OnFetchComplete(GameDataManager.Instance.remoteConfigValue.OnFetchComplete);
+#if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
+             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
+                remoteConfigManager.Init();
+                logEventManager.Init();
+                mobileNotification.Init();
+            });
+#else
+            _remoteConfigManager.Init();
+            _logEventManager.Init();
+            _mobileNotification.Init();
+#endif
+        }
+        
+
+        #endregion
+
+        #region Log Event
+
+        private void LogEventPrivate(string eventName, Dictionary<string, object> parameters)
+        {
+            _logEventManager.LogEvent(eventName, parameters);
+        }
+        private void LogEventPrivate(string eventName)
+        {
+            _logEventManager.LogEvent(eventName);
+        }
+        private void SetUserPropertiesPrivate(string userProperty, string value)
+        {
+            _logEventManager.SetUserProperties(userProperty, value);
+        }
+        
+        
+
+        #endregion
+
+        #region Ad
+
+         private void ShowBannerPrivate()
         {
 #if UNITY_IOS|| UNITY_IPHONE
             if (GameDataManager.Instance.remoteConfigValue.versionReview.Equals(Application.version))
@@ -70,16 +212,15 @@ namespace ThirdParties.Truongtv
             {
                 return;
             }
-
             _adManager.ShowBanner();
         }
 
-        public void HideBanner()
+        public void HideBannerPrivate()
         {
             _adManager.HideBanner();
         }
 
-        public void ShowInterstitialAd(
+        public void ShowInterstitialAdPrivate(
             Action adResult = null)
         {
             adResult?.Invoke();
@@ -105,7 +246,7 @@ namespace ThirdParties.Truongtv
                 LogEvent("ads_interstitial");
             }
         }
-        public void ShowRewardedAd(string location, Action adResult = null)
+        public void ShowRewardedAdPrivate(string location, Action adResult = null)
         {
             if (GameDataManager.Instance.cheated)
             {
@@ -152,73 +293,41 @@ namespace ThirdParties.Truongtv
                 adResult?.Invoke();
             });
         }
-
-        #endregion
-
-        #region Log Event
-
-        public void LogEvent(string eventName, Dictionary<string, object> parameters)
-        {
-            _logEventManager.LogEvent(eventName, parameters);
-        }
-
-        public void LogEvent(string eventName)
-        {
-            _logEventManager.LogEvent(eventName);
-        }
-
-        public void SetUserProperties(string userProperty, string value)
-        {
-            _logEventManager.SetUserProperties(userProperty, value);
-        }
-
-        #endregion
-
-        #region Rate
-
-        public void Rate()
-        {
-            _ratingHelper.Rate();
-        }
+        
+        
 
         #endregion
 
         #region IAP
 
-        public void PurchaseProduct(string sku, Action<bool, string> pAction)
+        private void PurchaseProductPrivate(string sku, Action<bool, string> pAction)
         {
             _iapManager.PurchaseProduct(sku, pAction);
         }
 
-        public string GetItemLocalPriceString(string sku)
+        private string GetItemLocalPriceStringPrivate(string sku)
         {
             return _iapManager.GetItemLocalPriceString(sku);
         }
 
-        public void RestorePurchase()
+        private void RestorePurchasePrivate()
         {
             _iapManager.RestorePurchase();
         }
 
         #endregion
 
-        #region Mobile Notification
-
-        public void SetLuckySpinReminder()
+        #region Rate
+        private void RatePrivate()
         {
-            _mobileNotification.SetLuckySpinReminder();
+            _ratingHelper.Rate();
         }
-
-        public void DailyRewardResetReminder(bool receive)
-        {
-            _mobileNotification.DailyRewardResetReminder(receive);
-        }
+        
 
         #endregion
-
         #region Remote Config
 
-        public void OnFetchComplete(Action<RemoteConfigManager> fetch)
+        private void OnFetchComplete(Action<RemoteConfigManager> fetch)
         {
             _remoteConfigManager.fetchComplete += fetch;
         }
@@ -226,41 +335,9 @@ namespace ThirdParties.Truongtv
         #endregion
 
         #endregion
+        #region Private Editor
 
-        #region Private function
-
-        private void Awake()
-        {
-            if (Instance != null)
-                Destroy(Instance.gameObject);
-            Instance = this;
-            if (Application.isPlaying)
-                DontDestroyOnLoad(gameObject);
-            _adManager = GetComponent<AdManager>();
-            _logEventManager = GetComponent<LogEventManager>();
-            _ratingHelper = GetComponent<RatingHelper>();
-            _remoteConfigManager = GetComponent<RemoteConfigManager>();
-            _mobileNotification = GetComponent<MobileNotification>();
-            _iapManager = GetComponent<IapManager>();
-        }
-
-        private void Start()
-        {
-            _adManager.Init();
-            OnFetchComplete(GameDataManager.Instance.remoteConfigValue.OnFetchComplete);
-#if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
-             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
-            {
-                remoteConfigManager.Init();
-                logEventManager.Init();
-                mobileNotification.Init();
-            });
-#else
-            _remoteConfigManager.Init();
-            _logEventManager.Init();
-            _mobileNotification.Init();
-#endif
-        }
+        
 
 #if UNITY_EDITOR
         private void OnAdServiceChange()

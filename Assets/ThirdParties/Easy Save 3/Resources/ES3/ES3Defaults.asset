@@ -38,6 +38,7 @@ MonoBehaviour:
     - MoreMountains.NiceVibrations.Demos
     - Google.Play.Core
     - Google.Play.Common
+    - Purchasing.Common
     - Sirenix.OdinInspector.CompatibilityLayer
     - MoreMountains.NiceVibrations
     - Google.Android.AppBundle.Editor

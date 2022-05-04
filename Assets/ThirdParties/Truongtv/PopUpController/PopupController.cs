@@ -100,11 +100,11 @@ namespace Truongtv.PopUpController
 
         #endregion
 
+        [Button]
         public void ShowToast(string description)
         {
             toast.gameObject.SetActive(true);
             toast.Initialized(description);
-            toast.Show(this);
         }
 
         public void ShowNoInternet()
