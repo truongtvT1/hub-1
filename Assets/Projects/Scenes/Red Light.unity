@@ -960,6 +960,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -1624,6 +1625,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -1944,6 +1946,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -2367,6 +2370,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -4031,6 +4035,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -4676,6 +4681,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -5480,71 +5486,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 449218, guid: 22e35da3d2c81274bb1c8fd73cca399e, type: 3}
   m_PrefabInstance: {fileID: 979295254}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &979690114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 979690116}
-  - component: {fileID: 979690115}
-  m_Layer: 0
-  m_Name: GameDataManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &979690115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979690114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e61f109eb8d42bd868d182eb9562c1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  cheated: 0
-  debugger: 0
-  skinData: {fileID: 11400000, guid: 927749abf6aa67046ab6f3e12d6957fd, type: 2}
-  remoteConfigValue:
-    versionReview: 
-    blockAdTime: 30
-  startSkin:
-  - body/body_00
-  - glass/glass_00
-  - gloves/glove_00
-  - hair/hair_00
-  - wing/w_00
-  startColor: {r: 0.91764706, g: 0.105882354, b: 0.105882354, a: 1}
---- !u!4 &979690116
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 979690114}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &987018579
 GameObject:
   m_ObjectHideFlags: 0
@@ -6000,6 +5941,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -7035,136 +6977,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1e24ee3dc5ee2a4c91ec92b2bf66370, type: 3}
---- !u!1 &1340960883
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1340960891}
-  - component: {fileID: 1340960890}
-  - component: {fileID: 1340960889}
-  - component: {fileID: 1340960888}
-  - component: {fileID: 1340960887}
-  - component: {fileID: 1340960886}
-  - component: {fileID: 1340960885}
-  - component: {fileID: 1340960884}
-  m_Layer: 0
-  m_Name: GameServiceManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1340960884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9150f2bc1bf84a4a8ef6596cacc6dac0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  adService: 0
-  logService: 0
-  remoteConfigService: 0
-  ratingService: 1
-  cloudMessagingService: 0
-  iapService: 0
---- !u!114 &1340960885
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f4e85fcc1ef80a42825c244a74ff7b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iapData: {fileID: 11400000, guid: 329ad386fee883547ac67e724d3c4fe9, type: 2}
---- !u!114 &1340960886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70bea1bb992e4696b70ba870ab75dd61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 7
-  autoBadging: 1
---- !u!114 &1340960887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95abcec731974b0b851bd2f6ef8b8866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1340960888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0345e6463acb68c4e812c316ae63b0d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1340960889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a1cf3629cf87c048856299720550cb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1340960890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f0aad6ecbc58894dbc3b9f1579bb67c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1340960891
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340960883}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1345085865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8333,6 +8145,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -8542,6 +8355,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -9818,6 +9632,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -10006,6 +9821,7 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -10913,7 +10729,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1463259320673573172, guid: 2571227fa1280dd43bfbbceb573c46fd, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1463259320673573172, guid: 2571227fa1280dd43bfbbceb573c46fd, type: 3}
       propertyPath: m_LocalPosition.x

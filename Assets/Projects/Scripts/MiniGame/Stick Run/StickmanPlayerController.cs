@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DG.Tweening;
 using DG.Tweening.Core;
 using Projects.Scripts.Hub;
+using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -20,6 +21,10 @@ namespace MiniGame.StickRun
         public SpriteRenderer mountIcon;
         public Collider2D headCollider;
         public bool isSprinting, isHoldingSprint, isNormalRun, isCollideWall, isInSpecialTrap, isDead, isBot;
+        [ShowIf(nameof(isBot))] public LayerMask itemLayer;
+        private BotDifficulty botDifficulty;
+        private float sprintRate;
+        private float botVision;
         private Tween tween;
         private Vector2 cacheColliderSize, cacheOffsetCollider, cacheHeadColliderOffset, runLine;
         private Transform checkPoint;
@@ -108,6 +113,25 @@ namespace MiniGame.StickRun
         }
 
         private float bufferTimeCollideWall = .5f;
+
+        #region AI
+
+        float DetectDistanceToObject()
+        {
+            float distance = 0;
+            RaycastHit2D hit =
+                Physics2D.Raycast(
+                    transform.position + new Vector3(cacheColliderSize.x / 2 + .1f,
+                        cacheColliderSize.y / 2 + cacheOffsetCollider.y), Vector2.right, botVision, itemLayer);
+            if (hit)
+            {
+                distance = hit.distance;
+            }
+            return distance;
+        }
+
+        #endregion
+        
         private void Update()
         {
             if (StickRunGameController.Instance.state == GameState.Playing && !isDead)

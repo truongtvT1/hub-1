@@ -71,6 +71,7 @@ namespace MiniGame.MemoryMatter
                 cacheBotSkin.Add(skin);
                 var rd = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 var bot = Instantiate(botPrefab);
+                await Task.Delay(10);
                 bot.transform.position = new Vector3(rd,spawnRange[0].position.y, bot.transform.position.z);
                 listBot.Add(bot);
                 bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
@@ -156,6 +157,7 @@ namespace MiniGame.MemoryMatter
                 {
                     var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                     var bot = Instantiate(botPrefab);
+                    await Task.Delay(10);
                     bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
                     bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),cacheBotSkin[i].skin,cacheBotSkin[i].color);
                     listBot[i] = bot;
