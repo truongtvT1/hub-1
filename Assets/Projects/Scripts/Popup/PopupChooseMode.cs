@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Projects.Scripts.Data;
 using Projects.Scripts.Hub.Component;
+using Sirenix.Utilities;
 using ThirdParties.Truongtv;
 using Truongtv.PopUpController;
 using Truongtv.Utilities;
@@ -49,7 +50,7 @@ namespace Projects.Scripts.Popup
                 info.total = GameDataManager.Instance.GetMiniGameCountPlayed(info.gameId);
                 info.win = GameDataManager.Instance.GetMiniGameWinCount(info.gameId);
                 info.lose = GameDataManager.Instance.GetMiniGameLoseCount(info.gameId);
-                info.recentPlay = lastPlayed.Equals(info.gameId);
+                info.recentPlay = !lastPlayed.IsNullOrWhitespace()&&lastPlayed.Equals(info.gameId);
                 if (max < info.total)
                     max = info.total;
             }

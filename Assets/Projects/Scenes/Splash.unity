@@ -176,6 +176,12 @@ MonoBehaviour:
   - hair/hair_00
   - wing/w_00
   startColor: {r: 0.91764706, g: 0.105882354, b: 0.105882354, a: 1}
+  _userInfo:
+    currentSkin: []
+    trySkin: []
+    currentSkinColor: 
+    unlockedSkins: []
+    lastPlayed: 
 --- !u!4 &353174989
 Transform:
   m_ObjectHideFlags: 0
@@ -449,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapData: {fileID: 11400000, guid: 329ad386fee883547ac67e724d3c4fe9, type: 2}
+  fakeIap: 1
 --- !u!4 &1089933317 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9083824279688316171, guid: 6d26cf3551c8f6c48bdd97e47126a16b, type: 3}

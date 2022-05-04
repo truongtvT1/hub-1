@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Projects.Scripts.Hub;
 using Projects.Scripts.Popup;
 using Projects.Scripts.Scriptable;
@@ -38,7 +39,7 @@ namespace Projects.Scripts.Menu.Customize
         {
             _skins = skinList;
         }
-        public void Init(PopupCustomizeCharacter customizeCharacter)
+        public async void Init(PopupCustomizeCharacter customizeCharacter)
         {
             if(_init) return;
             _controller = customizeCharacter;
@@ -50,6 +51,7 @@ namespace Projects.Scripts.Menu.Customize
             scroll.content.sizeDelta = rect;
             for (var i = 0; i < round; i++)
             {
+                await Task.Delay(10);
                 var group = Instantiate(prefab, scroll.content);
                 group.Init(new Vector2(20-i*20,-240*i),scroll);
                 for (var j = 0; j <  3;j++)

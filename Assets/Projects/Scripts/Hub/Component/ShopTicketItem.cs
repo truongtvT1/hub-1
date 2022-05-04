@@ -34,14 +34,23 @@ namespace Projects.Scripts.Hub.Component
                 var time = GameDataManager.Instance.GetLastTimeClaimFreeTicket();
                 if (DateTime.Now.Date.Subtract(time.Date).TotalDays >= 1)
                 {
-                    GameDataManager.Instance.UpdateFreeTicketCountInDay(0);
+                    GameDataManager.Instance.ResetFreeTicketCountInDay();
                 }
                 var count = GameDataManager.Instance.GetFreeTicketCountInDay();
                 var remain = _item.freePerDay - count;
                 if (_item.freePerDay - count > 0)
                 {
-                    priceText.text = $"Free({remain})";
-                    button.onClick.AddListener(BuyByAd);
+                    var timeRemain = GameDataManager.Instance.GetLastTimeClaimFreeChest().AddSeconds(_item.coolDown)
+                        .Subtract(DateTime.Now);
+                    if (timeRemain.TotalSeconds > 0)
+                    {
+                        StartCoroutine(CountDown(timeRemain));
+                    }
+                    else
+                    {
+                        priceText.text = $"Free({remain})";
+                        button.onClick.AddListener(BuyByAd);
+                    }
                 }
                 else
                 {

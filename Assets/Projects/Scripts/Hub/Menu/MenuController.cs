@@ -103,6 +103,7 @@ namespace Projects.Scripts.Menu
 
         public void AddTicket(int value)
         {
+            ticketEffect.gameObject.SetActive(true);
             ticketEffect.Play();
             var current = GameDataManager.Instance.GetTotalTicket();
             var last = current + value;

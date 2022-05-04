@@ -84,7 +84,15 @@ namespace ThirdParties.Truongtv
             _userInfo.currencies[name] += value;
             SaveUserInfo();
         }
-
+        private void SetCurrency(string name,int value)
+        {
+            if (!_userInfo.currencies.ContainsKey(name))
+            {
+                _userInfo.currencies.Add(name,0);
+            }
+            _userInfo.currencies[name] = value;
+            SaveUserInfo();
+        }
         private int GetCurrencyValue(string name)
         {
             if (!_userInfo.currencies.ContainsKey(name))
@@ -109,7 +117,7 @@ namespace ThirdParties.Truongtv
         {
             if (!_userInfo.times.ContainsKey(key))
             {
-                _userInfo.times.Add(key,DateTime.Now);
+                _userInfo.times.Add(key,DateTime.MinValue);
                 SaveUserInfo();
             }
             return _userInfo.times[key];
@@ -296,6 +304,15 @@ namespace ThirdParties.Truongtv
         {
             UpdateCurrency("free_chest", value);
             SetTime("free_chest");
+        }
+
+        public void ResetFreeChestCountInDay()
+        {
+            SetCurrency("free_chest", 0);
+        }
+        public void ResetFreeTicketCountInDay()
+        {
+            SetCurrency("free_ticket", 0);
         }
         public int GetFreeTicketCountInDay()
         {

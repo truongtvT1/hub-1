@@ -20,8 +20,10 @@ namespace Projects.Scripts.Popup
         {
             if (isInGame)
             {
-                homeButton.onClick.AddListener(OnHomeButtonClick);
-                replayButton.onClick.AddListener(OnReplayButtonClick);
+                if(homeButton!=null)
+                    homeButton.onClick.AddListener(OnHomeButtonClick);
+                if(replayButton!=null)
+                    replayButton.onClick.AddListener(OnReplayButtonClick);
             }
             closeButton.onClick.AddListener(Close);
             bgmToggle.onValueChanged.AddListener(OnBgmToggleChange);
@@ -44,8 +46,10 @@ namespace Projects.Scripts.Popup
             }
             else
             {
-                homeButton.gameObject.SetActive(false);
-                replayButton.gameObject.SetActive(false);
+                if(homeButton!=null)
+                    homeButton.gameObject.SetActive(false);
+                if(homeButton!=null)
+                    replayButton.gameObject.SetActive(false);
             }
         }
         private void OnSfxToggleChange(bool value)

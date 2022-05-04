@@ -27,23 +27,23 @@ MonoBehaviour:
     purchaseType: 1
     skuId: 
     freePerDay: 3
-    coolDown: 500
+    coolDown: 300
     price: 0
-    numberItemReward: 0
+    numberItemReward: 1
   - shopId: chest_2
     purchaseType: 2
     skuId: 
     freePerDay: 0
     coolDown: 0
     price: 50
-    numberItemReward: 0
+    numberItemReward: 1
   - shopId: chest_3
     purchaseType: 2
     skuId: 
     freePerDay: 0
     coolDown: 0
     price: 300
-    numberItemReward: 0
+    numberItemReward: 10
   sPercent: 0.5
   aPercent: 4.5
   bPercent: 40
@@ -72,7 +72,7 @@ MonoBehaviour:
     purchaseType: 1
     skuId: 
     freePerDay: 3
-    coolDown: 500
+    coolDown: 300
     price: 0
     reward:
       ticket: 50

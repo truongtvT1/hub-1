@@ -38,14 +38,23 @@ namespace Projects.Scripts.Hub.Component
                 var time = GameDataManager.Instance.GetLastTimeClaimFreeChest();
                 if (DateTime.Now.Date.Subtract(time.Date).TotalDays >= 1)
                 {
-                    GameDataManager.Instance.UpdateFreeChestCountInDay(0);
+                    GameDataManager.Instance.ResetFreeChestCountInDay();
                 }
                 var count = GameDataManager.Instance.GetFreeChestCountInDay();
                 var remain = _item.freePerDay - count;
                 if (_item.freePerDay - count > 0)
                 {
-                    priceText.text = $"Free({remain})";
-                    button.onClick.AddListener(BuyByAd);
+                    var timeRemain = GameDataManager.Instance.GetLastTimeClaimFreeChest().AddSeconds(_item.coolDown)
+                        .Subtract(DateTime.Now);
+                    if (timeRemain.TotalSeconds > 0)
+                    {
+                        StartCoroutine(CountDown(timeRemain));
+                    }
+                    else
+                    {
+                        priceText.text = $"Free({remain})";
+                        button.onClick.AddListener(BuyByAd);
+                    }
                 }
                 else
                 {
