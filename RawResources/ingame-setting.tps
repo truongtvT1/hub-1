@@ -211,6 +211,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">RawImage/ingame setting/back.png</key>
+            <key type="filename">RawImage/ingame setting/forward.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>59,60,119,119</rect>
+                <key>scale9Paddings</key>
+                <rect>59,60,119,119</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/ingame setting/finish.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -238,6 +254,21 @@
                 <rect>26,19,51,37</rect>
                 <key>scale9Paddings</key>
                 <rect>26,19,51,37</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/ingame setting/jump.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,75,149,149</rect>
+                <key>scale9Paddings</key>
+                <rect>75,75,149,149</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -524,6 +555,9 @@
             <filename>RawImage/ingame setting/top3.png</filename>
             <filename>RawImage/ingame setting/v.png</filename>
             <filename>RawImage/ingame setting/x.png</filename>
+            <filename>RawImage/ingame setting/jump.png</filename>
+            <filename>RawImage/ingame setting/back.png</filename>
+            <filename>RawImage/ingame setting/forward.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

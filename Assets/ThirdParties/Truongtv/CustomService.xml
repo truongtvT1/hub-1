@@ -1,4 +1,8 @@
 <root>
-  <rate>InApp</rate>
+  <rate>OpenLink</rate>
   <iap>IAP</iap>
+  <ad_service>None</ad_service>
+  <log>None</log>
+  <remote_config>None</remote_config>
+  <cloud_message>None</cloud_message>
 </root>

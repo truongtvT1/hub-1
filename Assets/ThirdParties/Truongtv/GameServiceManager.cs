@@ -7,7 +7,9 @@ using ThirdParties.Truongtv.LogManager;
 using ThirdParties.Truongtv.Notification;
 using ThirdParties.Truongtv.Rating;
 using ThirdParties.Truongtv.RemoteConfig;
+#if UNITY_EDITOR
 using ThirdParties.Truongtv.Utilities;
+#endif
 using Truongtv.PopUpController;
 using UnityEngine;
 #if UNITY_EDITOR

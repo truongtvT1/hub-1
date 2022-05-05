@@ -71,6 +71,15 @@ TextureImporter:
   - first:
       213: -8343581773329175713
     second: x
+  - first:
+      213: 1187961194834725857
+    second: back
+  - first:
+      213: -2239915109679899052
+    second: forward
+  - first:
+      213: 8892762350033652797
+    second: jump
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -148,11 +157,32 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: back
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 183
+        width: 237
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1eb8211a96c7c7010800000000000000
+      internalID: 1187961194834725857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: finish
       rect:
         serializedVersion: 2
         x: 957
-        y: 880
+        y: 906
         width: 59
         height: 49
       alignment: 0
@@ -169,11 +199,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: forward
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 183
+        width: 237
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45edf7843193ae0e0800000000000000
+      internalID: -2239915109679899052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: haptic icon
       rect:
         serializedVersion: 2
-        x: 912
-        y: 526
+        x: 780
+        y: 290
         width: 102
         height: 75
       alignment: 0
@@ -190,11 +241,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: medium blue
+      name: jump
       rect:
         serializedVersion: 2
         x: 1
-        y: 188
+        y: 122
+        width: 299
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3c49b1dd30796b70800000000000000
+      internalID: 8892762350033652797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: medium blue
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 10
         width: 297
         height: 124
       alignment: 0
@@ -214,8 +286,8 @@ TextureImporter:
       name: medium green2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 62
+        x: 601
+        y: 10
         width: 297
         height: 124
       alignment: 0
@@ -235,8 +307,8 @@ TextureImporter:
       name: music icon
       rect:
         serializedVersion: 2
-        x: 530
-        y: 344
+        x: 888
+        y: 371
         width: 75
         height: 77
       alignment: 0
@@ -257,7 +329,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 804
-        y: 729
+        y: 755
         width: 151
         height: 268
       alignment: 0
@@ -277,8 +349,8 @@ TextureImporter:
       name: name backk
       rect:
         serializedVersion: 2
-        x: 1
-        y: 329
+        x: 683
+        y: 450
         width: 283
         height: 45
       alignment: 0
@@ -320,7 +392,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 957
-        y: 833
+        y: 747
         width: 54
         height: 45
       alignment: 0
@@ -341,7 +413,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 804
-        y: 603
+        y: 629
         width: 149
         height: 124
       alignment: 0
@@ -361,8 +433,8 @@ TextureImporter:
       name: skull icon
       rect:
         serializedVersion: 2
-        x: 912
-        y: 420
+        x: 804
+        y: 523
         width: 100
         height: 104
       alignment: 0
@@ -382,8 +454,8 @@ TextureImporter:
       name: sound icon
       rect:
         serializedVersion: 2
-        x: 683
-        y: 414
+        x: 780
+        y: 207
         width: 85
         height: 81
       alignment: 0
@@ -404,7 +476,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 804
-        y: 999
+        y: 497
         width: 196
         height: 24
       alignment: 0
@@ -425,7 +497,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 957
-        y: 931
+        y: 957
         width: 66
         height: 66
       alignment: 0
@@ -446,7 +518,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 957
-        y: 931
+        y: 957
         width: 66
         height: 66
       alignment: 0
@@ -466,8 +538,8 @@ TextureImporter:
       name: time back
       rect:
         serializedVersion: 2
-        x: 770
-        y: 314
+        x: 1
+        y: 16
         width: 246
         height: 104
       alignment: 0
@@ -508,8 +580,8 @@ TextureImporter:
       name: time2
       rect:
         serializedVersion: 2
-        x: 1
-        y: 376
+        x: 302
+        y: 136
         width: 527
         height: 45
       alignment: 0
@@ -529,8 +601,8 @@ TextureImporter:
       name: top1
       rect:
         serializedVersion: 2
-        x: 957
-        y: 772
+        x: 249
+        y: 61
         width: 47
         height: 59
       alignment: 0
@@ -551,7 +623,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 957
-        y: 715
+        y: 849
         width: 47
         height: 55
       alignment: 0
@@ -571,8 +643,8 @@ TextureImporter:
       name: top3
       rect:
         serializedVersion: 2
-        x: 955
-        y: 660
+        x: 957
+        y: 794
         width: 47
         height: 53
       alignment: 0
@@ -592,8 +664,8 @@ TextureImporter:
       name: v
       rect:
         serializedVersion: 2
-        x: 804
-        y: 445
+        x: 906
+        y: 554
         width: 88
         height: 73
       alignment: 0
@@ -613,8 +685,8 @@ TextureImporter:
       name: x
       rect:
         serializedVersion: 2
-        x: 804
-        y: 520
+        x: 780
+        y: 367
         width: 106
         height: 81
       alignment: 0

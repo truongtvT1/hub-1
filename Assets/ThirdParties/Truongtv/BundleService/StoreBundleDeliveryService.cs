@@ -8,7 +8,9 @@ using MEC;
 using Google.Play.AssetDelivery;
 #endif
 using UnityEngine;
+#if UNITY_IOS || UNITY_IPHONE
 using UnityEngine.iOS;
+#endif
 
 namespace ThirdParties.Truongtv.BundleService
 {

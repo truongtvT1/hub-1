@@ -41,7 +41,7 @@ namespace Projects.Scripts.Hub.Component
         private void OnPlayButtonClick()
         {
             GameDataManager.Instance.UpdateLastPlayed(_info.gameId);
-            SceneManager.LoadScene(_info.gameScene.name);
+            SceneManager.LoadScene(_info.GetScene);
         }
     }
 }

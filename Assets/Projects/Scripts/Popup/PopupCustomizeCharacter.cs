@@ -31,7 +31,7 @@ namespace Projects.Scripts.Popup
 
         public void Init()
         {
-            skinList = GameDataManager.Instance.GetCurrentSkin();
+            skinList = GameDataManager.Instance.GetSkinInGame();
             color = GameDataManager.Instance.GetCurrentColor();
             UpdateCharacter();
             skinToggle.isOn = true;

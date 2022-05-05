@@ -39,6 +39,7 @@ namespace Projects.Scripts.Menu.Customize
         {
             _skins = skinList;
         }
+        
         public async void Init(PopupCustomizeCharacter customizeCharacter)
         {
             if(_init) return;
@@ -58,12 +59,12 @@ namespace Projects.Scripts.Menu.Customize
                 {
                     if (i * 3 + j < _skins.Count)
                     {
-                        group.items[j].GetComponent<SkinItem>().Init(_skins[i * 3 + j],_group,OnSkinSelected);
-                        _itemList.Add(group.items[j].GetComponent<SkinItem>());
+                        group.items[j].Init(_skins[i * 3 + j],_group,OnSkinSelected);
+                        _itemList.Add(group.items[j]);
                     }
                     else
                     {
-                        group.items[j].GetComponent<SkinItem>().Hide();
+                        group.items[j].Hide();
                     }
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);

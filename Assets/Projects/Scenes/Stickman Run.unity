@@ -885,7 +885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 120804608}
   - component: {fileID: 120804609}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: BoneFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2391,7 +2391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 332712367}
   - component: {fileID: 332712368}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5234,11 +5234,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdToRunFastText: {fileID: 487961224}
   listBot: []
-  difficulty: 0
+  botPrefabs: {fileID: 4643669624193923003, guid: 623662f91eafcdb448f9e5e51e7067e1, type: 3}
+  difficulty: 1
   state: 0
   player: {fileID: 3584323497454831843}
   playerPrefab: {fileID: 136148416963457267, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
-  maxTimeRevive: 10
+  startPos: {x: -5, y: -2.25}
+  maxTimeRevive: 6
+  maxBotNumbers: 3
 --- !u!4 &924025541
 Transform:
   m_ObjectHideFlags: 0
@@ -5443,13 +5446,13 @@ GameObject:
   m_Component:
   - component: {fileID: 981255284}
   - component: {fileID: 981255285}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Hole Trap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &981255284
 Transform:
   m_ObjectHideFlags: 0
@@ -5817,7 +5820,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1034156582}
-  m_Layer: 0
+  - component: {fileID: 1034156585}
+  - component: {fileID: 1034156584}
+  - component: {fileID: 1034156583}
+  m_Layer: 9
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5841,6 +5847,77 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1034156583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034156581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fae651febb407fbaa8fe6787771261, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerEnter2DEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1034156584}
+        m_TargetAssemblyTypeName: MiniGame.StickRun.Gate, Assembly-CSharp
+        m_MethodName: TriggerEnter
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  triggerStay2DEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  triggerExit2DEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &1034156584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034156581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 964032a01a07447d9744be5012ed1f79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1034156585
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1034156581}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.45, y: 1.21}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 5.99}
+  m_EdgeRadius: 0
 --- !u!1 &1042041070
 GameObject:
   m_ObjectHideFlags: 0
@@ -8529,7 +8606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1630255921}
   - component: {fileID: 1630255922}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8880,7 +8957,7 @@ MonoBehaviour:
   attackDelay: 0
   idleDelay: 0
   idleDuration: 2
-  attackDuration: 1.5
+  attackDuration: 2.5
   isAttacking: 0
   damageObj: {fileID: 1290194076}
   onStartAttack:
@@ -11557,6 +11634,10 @@ PrefabInstance:
     - target: {fileID: 136148416963457267, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
       propertyPath: narutoCollider
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 136148416963457267, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
+      propertyPath: itemLayer.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 136148416963457267, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
       propertyPath: sprintingCollider.x

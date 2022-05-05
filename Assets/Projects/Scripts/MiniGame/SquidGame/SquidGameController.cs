@@ -427,8 +427,8 @@ namespace MiniGame.SquidGame
             blowEffect.Play(true);
             skull.SetActive(true);
             playerAnimation.gameObject.SetActive(false);
-            await Task.Delay(500);
-            
+            await Task.Delay(2500);
+            Lose();
             //revive
             // PopupInGameController.Instance.OpenPopupRevive(
             //     () =>
@@ -444,7 +444,7 @@ namespace MiniGame.SquidGame
         {
             GameServiceManager.ShowInterstitialAd(() =>
             {
-                // SceneLoader.LoadMenu();
+                LoadMainMenu();
             });
         }
 
@@ -466,6 +466,8 @@ namespace MiniGame.SquidGame
             yield return new WaitForSeconds(2f);
             playerAnimation.PlayWin();
             audio.outputAudioMixerGroup = pitchBend;
+            yield return new WaitForSeconds(1.5f);
+            LoadMainMenu();
             // SoundInGameManager.Instance.PlayBallWinSound();
             // SoundInGameManager.Instance.PlayWinSound(() =>
             // {
@@ -508,7 +510,8 @@ namespace MiniGame.SquidGame
         {
             // GameDataManager.Instance.SetSquidGameLevel(level + 1);
             // Debug.Log("current squid level: " + (level + 1));
-            // SceneLoader.LoadMenu();
+            SceneManager.LoadScene("Menu");
+            GameDataManager.Instance.ResetSkinInGame();
         }
 
         private int finalRank, meteorFallCount;

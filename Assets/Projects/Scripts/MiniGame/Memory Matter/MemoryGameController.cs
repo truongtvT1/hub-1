@@ -8,6 +8,7 @@ using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -38,13 +39,6 @@ namespace MiniGame.MemoryMatter
         private int cacheMaxTurn, cacheMaxNumberObjs;
         private List<BotSkin> cacheBotSkin;
 
-        [Serializable]
-        public class BotSkin
-        {
-            public Color color;
-            public List<string> skin;
-        }
-            
         private void Awake()
         {
             deltaDifficulty = (float) _difficulty / 10;
@@ -86,7 +80,7 @@ namespace MiniGame.MemoryMatter
                 timeCounterText.text = "" + (int) timeToStart;
                 timeToStart -= Time.deltaTime;
             }
-            else if (_gamePlayController.state != GameState.Playing)
+            else if (_gamePlayController.state != GameState.Playing && _gamePlayController.state != GameState.End) 
             {
                 _gamePlayController.StartGame("memory_game");
                 timeCounterText.transform.root.gameObject.SetActive(false);
@@ -135,12 +129,16 @@ namespace MiniGame.MemoryMatter
             {
                 listBot[i].SetTarget(null);
             }
+            
             if (currentRound == maxRound)
             {
                 //Show popup Game over
                 _gamePlayController.state = GameState.End;
                 DOTween.KillAll(true);
                 StopAllCoroutines();
+                await Task.Delay(2500);
+                SceneManager.LoadScene("Menu");
+                GameDataManager.Instance.ResetSkinInGame();
                 return;
             }
             currentRound++;

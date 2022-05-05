@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Projects.Scripts.Menu.Customize;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ namespace Projects.Scripts.Menu
     [RequireComponent(typeof(HorizontalLayoutGroup))]
     public class SkinItemGroup : MonoBehaviour
     {
-        public List<GameObject> items;
+        public List<SkinItem> items;
         private Vector2 _startPos;
         private ScrollRect _scroll;
         private float _moveLength;

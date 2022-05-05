@@ -18,7 +18,7 @@ namespace MiniGame.StickRun
                 }
             }
         }
-
+        
         public virtual void OnCollide(Collision2D other)
         {
             if (other.gameObject.tag.Equals("Player"))

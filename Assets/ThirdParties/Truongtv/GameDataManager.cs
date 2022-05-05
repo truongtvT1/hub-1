@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using Projects.Scripts.Data;
 using Projects.Scripts.Scriptable;
 using Sirenix.OdinInspector;

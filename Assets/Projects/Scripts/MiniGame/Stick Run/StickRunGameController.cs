@@ -1,19 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using ThirdParties.Truongtv;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MiniGame.StickRun
 {
     public class StickRunGameController : MonoBehaviour
     {
         public GameObject holdToRunFastText;
-        public List<StickmanPlayerController> listBot;
+        public List<StickmanPlayerController> listBot = new List<StickmanPlayerController>();
+        public StickmanPlayerController botPrefabs;
         public GameDifficulty difficulty;
         public GameState state = GameState.None;
         public StickmanPlayerController player;
         public StickmanPlayerController playerPrefab;
+        public Vector2 startPos;
         [SerializeField] private int maxTimeRevive = 3;
+        [SerializeField] private int maxBotNumbers = 3;
+        private List<BotSkin> cacheBotSkin = new List<BotSkin>();
         public static StickRunGameController Instance
         {
             get => instance;
@@ -49,6 +56,19 @@ namespace MiniGame.StickRun
             //gen map
             
             //init bot
+            for (int i = 0; i < maxBotNumbers; i++)
+            {
+                var listSkin = GameDataManager.Instance.RandomSkinList();
+                var color = GameDataManager.Instance.RandomColor();
+                cacheBotSkin.Add(new BotSkin(color,listSkin));
+                var bot = Instantiate(botPrefabs);
+                yield return new WaitUntil(() => bot);
+                bot.transform.position = startPos;
+                var botController = bot.GetComponent<StickmanPlayerController>();
+                var difficulty = (int) this.difficulty;
+                botController.Init(listSkin,color,(BotDifficulty) difficulty);
+                listBot.Add(botController);
+            }
             yield return new WaitUntil(() => isFirstTap);
             holdToRunFastText.gameObject.SetActive(false);
             state = GameState.Playing;
@@ -64,10 +84,25 @@ namespace MiniGame.StickRun
             return deadTime <= maxTimeRevive;
         }
 
+        public async void Win()
+        {
+            state = GameState.End;
+            await Task.Delay(2000);
+            GameServiceManager.ShowInterstitialAd(() =>
+            {
+                GameDataManager.Instance.ResetSkinInGame();
+                SceneManager.LoadScene("Menu");
+            });
+        }
+        
         public void EndGame()
         {
             state = GameState.End;
-            
+            GameServiceManager.ShowInterstitialAd(() =>
+            {
+                GameDataManager.Instance.ResetSkinInGame();
+                SceneManager.LoadScene("Menu");
+            });
         }
         
         private void Update()

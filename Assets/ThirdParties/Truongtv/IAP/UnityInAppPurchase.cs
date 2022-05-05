@@ -1,10 +1,10 @@
 ﻿#if USING_IAP
 using System;
 using System.Collections.Generic;
-using ThirdParties.Truongtv.IAP;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Security;
+
 namespace ThirdParties.Truongtv.IAP
 {
     public class UnityInAppPurchase:IStoreListener,IPaymentService

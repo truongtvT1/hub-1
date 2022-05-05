@@ -50,7 +50,10 @@ namespace Projects.Scripts.Menu.Customize
 
             ;
             skin.Initialize(true);
-            _toggle.group = group;
+            if (group != null)
+            {
+                _toggle.group = group;
+            }
             _toggle.interactable = true;
             
             _toggle.onValueChanged.AddListener(value=>

@@ -24,12 +24,13 @@ namespace MiniGame.StickRun
         
         async void Attack()
         {
-            ninja.state.SetAnimation(1, ninjaCastSpell, false).Complete += entry =>
+            ninja.state.SetAnimation(1, ninjaCastSpell, false).Complete += async entry =>
             {
-                damageObj.SetActive(true);
                 plant.state.SetAnimation(0, plantAttack, false);
+                await Task.Delay(100);
+                damageObj.SetActive(true);
             };
-            await Task.Delay((int)attackDuration * 1000);
+            await Task.Delay((int)attackDuration/2 * 1000);            
             ninja.state.SetEmptyAnimation(1,.02f);
             ninja.state.SetAnimation(1, ninjaIdle, true);
             damageObj.SetActive(false);

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+#if UNITY_EDITOR
 using Newtonsoft.Json;
+#endif
+
 using Sirenix.OdinInspector;
 using Spine.Unity;
 using UnityEngine;
@@ -108,7 +111,8 @@ namespace Projects.Scripts.Scriptable
                     cloakSkins.Add(new SkinInfo(SkinType.Cloak, item));
             }
         }
-
+        
+        #if UNITY_EDITOR
         [Button]
         private void UpdateData(TextAsset asset, SkinType type)
         {
@@ -142,5 +146,6 @@ namespace Projects.Scripts.Scriptable
                 }
             }
         }
+        #endif
     }
 }
