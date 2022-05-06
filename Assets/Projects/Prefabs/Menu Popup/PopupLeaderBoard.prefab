@@ -75,7 +75,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -69}
+  m_AnchoredPosition: {x: 2, y: -66.03485}
   m_SizeDelta: {x: 1654, y: 701}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3877527178185140606
@@ -314,7 +314,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 36, y: 323}
+  m_AnchoredPosition: {x: 36, y: 321}
   m_SizeDelta: {x: 1595, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3877527178327432230
@@ -389,10 +389,10 @@ RectTransform:
   m_Father: {fileID: 3877527178185140605}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -823.6975, y: 350.5}
-  m_SizeDelta: {x: 1647.5222, y: 693.225}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 3.3024902, y: 0.5}
+  m_SizeDelta: {x: -6.477783, y: -6.7750244}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &3877527178841645513
 CanvasRenderer:
@@ -503,14 +503,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 20c37e1f434f1f44d865b85bdd18def7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 02e958ef65fcb40429ba9c635fafea28, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -660,7 +660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -827, y: 346.6125}
+  m_AnchoredPosition: {x: -827, y: 347.1125}
   m_SizeDelta: {x: 1654, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &3877527179411305115

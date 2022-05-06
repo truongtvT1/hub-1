@@ -16,7 +16,9 @@ namespace Projects.Scripts.Popup
         [SerializeField] private ModeGameLauncher prefab;
         [SerializeField] private Transform prefabContainer;
         [SerializeField] private Button closeButton;
+        [SerializeField] private List<Color> colors;
         private List<MiniGameInfo> _miniGameList;
+        
         private void Awake()
         {
             closeButton.onClick.AddListener(Close);
@@ -30,12 +32,12 @@ namespace Projects.Scripts.Popup
                 if (i < _miniGameList.Count)
                 {
                     var item = Instantiate(prefab, prefabContainer);
-                    item.Init(_miniGameList[i]);
+                    item.Init(colors[i],_miniGameList[i]);
                 }
                 else
                 {
                     var item = Instantiate(prefab, prefabContainer);
-                    item.Init();
+                    item.Init(Color.clear);
                 }
             }
         }

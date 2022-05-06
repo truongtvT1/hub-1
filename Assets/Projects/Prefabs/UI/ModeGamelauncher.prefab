@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameBg: {fileID: 3566956920617283389}
+  titleBg: {fileID: 3566956921111771759}
   winText: {fileID: 3566956920175322696}
   loseText: {fileID: 3566956920881199114}
   nameText: {fileID: 3566956919944613516}

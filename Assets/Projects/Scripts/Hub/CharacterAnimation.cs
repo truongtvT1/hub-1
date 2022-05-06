@@ -21,6 +21,8 @@ namespace Projects.Scripts.Hub
 
         [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
         private List<string> loseAnimations;
+        [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
+        private List<string> jumpUpAnimations;
 
         [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
         private List<string> dieAnimations;
@@ -123,6 +125,11 @@ namespace Projects.Scripts.Hub
             slot.B = _color.b;
         }
 
+        public void SetVisible(bool visible = false)
+        {
+            skeletonAnimation.GetComponent<Renderer>().enabled = visible;
+        }
+        
         public void PauseAnim(bool pause = true)
         {
             if (pause)
@@ -145,47 +152,71 @@ namespace Projects.Scripts.Hub
         
         #region Anim
 
-        public TrackEntry PlayIdle(bool loop = true, Action callback = null)
+        public void ClearTrack(int trackIndex,Action callback = null)
         {
-            return PlayAnim("idle", loop: loop, callback: callback);
+            var currentTrack = skeletonAnimation.AnimationState.GetCurrent(trackIndex);
+            if (currentTrack != null)
+            {
+                var mixDuration = currentTrack.MixDuration;
+                skeletonAnimation.AnimationState.SetEmptyAnimation(trackIndex, mixDuration)
+                    .Complete += entry =>
+                {
+                    callback?.Invoke();
+                };
+            }
+            else
+            {
+                callback?.Invoke();
+            }
+        }
+        
+        public TrackEntry PlayIdle(bool loop = true, int trackIndex = 0, Action callback = null)
+        {
+            return PlayAnim("idle", trackIndex, loop, callback: callback);
         }
 
-        public TrackEntry PlayRun(bool loop = true, Action callback = null)
+        public TrackEntry PlayRun(bool loop = true, int trackIndex = 0, Action callback = null)
         {
-            return PlayAnim("run", 0, loop, callback: callback);
+            return PlayAnim("run", trackIndex, loop, callback: callback);
         }
 
         public TrackEntry PlayRunFast(bool loop = true, Action callback = null)
         {
             return PlayAnim("run2", 0, loop, callback: callback);
         }
-        
+
         public TrackEntry PlayJumpUp(bool loop = true, Action callback = null)
         {
-            return PlayAnim("jump_up", 0, loop, callback: callback);
+            return PlayAnim(jumpUpAnimations[0], 0, loop, callback: callback);
         }
+        
+        public TrackEntry PlayJumpUp2(bool loop = true, Action callback = null)
+        {
+            return PlayAnim(jumpUpAnimations[1], 0, loop, callback: callback);
+        }
+
         
         public TrackEntry PlayJumpDown(bool loop = true, Action callback = null)
         {
             return PlayAnim("jump_down", 0, loop, callback: callback);
         }
 
-        public TrackEntry PlayStopPose(bool loop = false, Action callback = null)
+        public TrackEntry PlayStopPose(bool loop = false, int trackIndex = 0, Action callback = null)
         {
             var rdAnim = stopAnimations[Random.Range(0, stopAnimations.Count)];
-            return PlayAnim(rdAnim, 0,loop, callback: callback);
+            return PlayAnim(rdAnim, trackIndex,loop, callback: callback);
         }
         
-        public TrackEntry PlayDie(bool loop = false, Action callback = null)
+        public TrackEntry PlayDie(bool loop = false, int trackIndex = 0, Action callback = null)
         {
             var rdAnim = dieAnimations[Random.Range(0, dieAnimations.Count)];
-            return PlayAnim(rdAnim, 0,loop, callback: callback);
+            return PlayAnim(rdAnim, trackIndex,loop, callback: callback);
         }
         
-        public TrackEntry PlayWin(bool loop = true, Action callback = null)
+        public TrackEntry PlayWin(bool loop = true, int trackIndex = 0, Action callback = null)
         {
             var rdAnim = winAnimations[Random.Range(0, winAnimations.Count)];
-            return PlayAnim(rdAnim, 0,loop, callback: callback);
+            return PlayAnim(rdAnim, trackIndex,loop, callback: callback);
         }
         
         public TrackEntry PlayDodge(bool loop = true, Action callback = null)

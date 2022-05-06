@@ -9,12 +9,12 @@ namespace Projects.Scripts.Hub.Component
 {
     public class ModeGameLauncher : MonoBehaviour
     {
-        [SerializeField] private Image gameBg;
+        [SerializeField] private Image gameBg,titleBg;
         [SerializeField] private TextMeshProUGUI  winText, loseText,nameText;
         [SerializeField] private GameObject mostPlayObj,lastPlayObj,onObj,offObj;
         [SerializeField] private Button button;
         private MiniGameInfo _info;
-        public void Init(MiniGameInfo info=null)
+        public void Init(Color color, MiniGameInfo info=null)
         {
             _info = info;
             if (_info == null)
@@ -24,6 +24,7 @@ namespace Projects.Scripts.Hub.Component
                 button.interactable = false;
                 return;
             }
+            titleBg.color = color;
             onObj.SetActive(true);
             offObj.SetActive(false);
             gameBg.sprite = _info.bg;

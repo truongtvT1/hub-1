@@ -95,16 +95,19 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations:
+  - jump_up
+  - jump_up2
   dieAnimations:
   - die
   - die2
-  - die3
   stopAnimations:
   - stop_pose
   - stop_pose2
   - stop_pose3
   - stop_pose4
   - stop_pose5
+  dodgeAnimations: []
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -127,11 +130,25 @@ MonoBehaviour:
   collider: {fileID: 2313282585178127176}
   moveDirection: 0
   sprintingCollider: {x: 0, y: 0}
+  mountIcon: {fileID: 0}
+  headCollider: {fileID: 0}
   isSprinting: 0
   isHoldingSprint: 0
   isNormalRun: 0
   isCollideWall: 0
+  isInSpecialTrap: 0
+  isDead: 0
   isBot: 0
+  itemLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  sprintRate: 0
+  sprintDuration: 0
+  botVision: 0
+  minimumDistanceToSprint: 0
+  timeStable: 0
+  timeSprinting: 0
+  distanceToObj: 0
 --- !u!1 &136148417569452604
 GameObject:
   m_ObjectHideFlags: 0

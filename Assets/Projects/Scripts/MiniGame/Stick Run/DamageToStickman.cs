@@ -15,6 +15,7 @@ namespace MiniGame.StickRun
                 if (player)
                 {
                     player.Die(damageType, checkPoint,player.transform.position);
+                    Debug.Log($"kill {other.name}");
                 }
             }
         }

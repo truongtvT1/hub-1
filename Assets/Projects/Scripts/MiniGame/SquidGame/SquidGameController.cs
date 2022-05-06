@@ -29,7 +29,7 @@ namespace MiniGame.SquidGame
         public float gameDuration, greenDuration, redDuration, moveSpeed;
         public GameDifficulty difficulty;
         [SerializeField,Range(0, .3f)] private float difficultyDelta;
-        public int maxMeteorPerTurn;
+        private int maxMeteorPerTurn;
         public Vector2 fallRange;
         public GameObject meteorPrefab;
         [SpineAnimation(dataField = nameof(animBoss))]
@@ -71,14 +71,13 @@ namespace MiniGame.SquidGame
 
             pauseButton.onClick.AddListener(() =>
             {
-                Pause();
                 InGamePopupController.Instance.ShowPopupSetting(
                     () => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); },
                     () =>
                     {
                         // update result
                     },
-                    () => { Resume(); });
+                    () => {});
             });
             audio.outputAudioMixerGroup = pitchBend;
             audio.clip = greenLightSound;
@@ -86,6 +85,7 @@ namespace MiniGame.SquidGame
             backUpPitchShift = pitchBendValue;
             cacheColor = greenProgress.color;
             progressImageWitdh = greenProgress.GetComponent<RectTransform>().rect.width;
+            maxMeteorPerTurn = (int) difficulty;
         }
 
         private void OnDestroy()
@@ -102,29 +102,7 @@ namespace MiniGame.SquidGame
             StartCoroutine(Init());
             GameServiceManager.LogEvent("level_start", new Dictionary<string, object> {{"red_line", level}});
         }
-
-        public void Pause()
-        {
-            if (state == GameState.None) return;
-            audio.Pause();
-            state = GameState.Pause;
-            foreach (var npc in listNPC)
-            {
-                npc.Pause();
-            }
-        }
-
-        public void Resume()
-        {
-            if (state == GameState.None) return;
-            audio.UnPause();
-            state = GameState.Playing;
-            foreach (var npc in listNPC)
-            {
-                npc.Resume();
-            }
-        }
-
+        
         IEnumerator Init()
         {
             greenProgress.rectTransform.localPosition =
@@ -146,7 +124,10 @@ namespace MiniGame.SquidGame
             playerTransform.DOMoveX(start.position.x, moveSpeed)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
-                .OnStart(() => { playerAnimation.PlayRun(); })
+                .OnStart(() =>
+                {
+                    playerAnimation.PlayRun();
+                })
                 .OnComplete(() => { playerAnimation.PlayIdle(); });
 
             //init npc
@@ -239,7 +220,6 @@ namespace MiniGame.SquidGame
             StopAllCoroutines();
             var isWarning = false;
             audio.Play();
-            maxMeteorPerTurn = (int) difficulty;
             StartCoroutine(CountTime(greenDuration, 0, count =>
             {
                 for (int i = 0; i < listNPC.Count; i++)
@@ -255,7 +235,7 @@ namespace MiniGame.SquidGame
                     closestXPos = playerAnimation.transform.position.x;
                 }
                 
-                if (count >= meteorFallCount * greenDuration/maxMeteorPerTurn)
+                if (count >= meteorFallCount * greenDuration/maxMeteorPerTurn + 1.5f/(int)difficulty)
                 {
                     if (meteorFallCount < maxMeteorPerTurn)
                     {
@@ -457,7 +437,11 @@ namespace MiniGame.SquidGame
             playerTransform.DOMoveX(end.position.x, moveSpeed)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
-                .OnStart(() => { playerAnimation.PlayRun(); });
+                .OnStart(() =>
+                {
+                    playerAnimation.PlayRun();
+                    playerAnimation.PlayRun(trackIndex:1);
+                });
             StartCoroutine(Cheers());
         }
 
@@ -465,6 +449,7 @@ namespace MiniGame.SquidGame
         {
             yield return new WaitForSeconds(2f);
             playerAnimation.PlayWin();
+            playerAnimation.PlayWin(trackIndex:1);
             audio.outputAudioMixerGroup = pitchBend;
             yield return new WaitForSeconds(1.5f);
             LoadMainMenu();
@@ -556,7 +541,6 @@ namespace MiniGame.SquidGame
                 {
                     playerTransform.position = Vector3.MoveTowards(playerTransform.position, end.position,
                         moveSpeed * Time.deltaTime);
-                    playerAnimation.PlayRun();
                 }
             }
         }
@@ -593,6 +577,27 @@ namespace MiniGame.SquidGame
                 if (release)
                 {
                     playerAnimation.PlayStopPose();
+                    playerAnimation.PlayStopPose(trackIndex:1);
+                }
+                else
+                {
+                    if (Random.value > 0.75f)
+                    {
+                        playerAnimation.PlayRun();
+                        if (Random.value > 0.875f)
+                        {
+                            playerAnimation.PlayDodge();
+                        }
+                        else
+                        {
+                            playerAnimation.PlayRunNaruto();
+                        }
+                    }
+                    else
+                    {
+                        playerAnimation.PlayRun();
+                        playerAnimation.PlayRun(trackIndex:1);
+                    }
                 }
             }
         }

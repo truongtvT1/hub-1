@@ -50,7 +50,7 @@ namespace Projects.Scripts.Menu.Customize
 
             ;
             skin.Initialize(true);
-            if (group != null)
+            if (_toggle != null)
             {
                 _toggle.group = group;
             }

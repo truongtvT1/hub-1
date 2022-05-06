@@ -1230,7 +1230,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 12.76001, y: -68.100006}
+  m_AnchoredPosition: {x: 114, y: -68.100006}
   m_SizeDelta: {x: 209.28, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &522815774
@@ -1287,7 +1287,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -12
@@ -2026,6 +2026,9 @@ MonoBehaviour:
   mainCharacter: {fileID: 1264771983}
   ticketEffect: {fileID: 1902895127}
   ticketText: {fileID: 423604308}
+  userNameText: {fileID: 526897754}
+  userTrophyText: {fileID: 522815774}
+  userAvatar: {fileID: 0}
 --- !u!1 &701132795
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 171, y: -66.99997}
+  m_AnchoredPosition: {x: -42, y: -66.99997}
   m_SizeDelta: {x: 87, y: 81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &705823574
@@ -2608,6 +2611,7 @@ MonoBehaviour:
   popupSetting: {fileID: 1911224300}
   popupLeaderBoard: {fileID: 285649882}
   popupCustomizeCharacter: {fileID: 232903966}
+  popupUserInfo: {fileID: 747381354840395868}
   popupRule: {fileID: 2590906919807440684}
   popupShop: {fileID: 605802757}
   popupChooseMode: {fileID: 1345564922}
@@ -5121,6 +5125,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2884f84fdada60a49affc0fb8c63d97a, type: 3}
+--- !u!114 &747381354840395868 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7695149367378745763, guid: 2884f84fdada60a49affc0fb8c63d97a, type: 3}
+  m_PrefabInstance: {fileID: 747381354840395867}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1240dc6129a4436e8594931600506c23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2590906919807440683
 PrefabInstance:
   m_ObjectHideFlags: 0

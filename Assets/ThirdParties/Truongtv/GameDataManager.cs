@@ -36,14 +36,6 @@ namespace ThirdParties.Truongtv
         private void Start()
         {
             Application.targetFrameRate = 300;
-            if (IsUserCreate())
-            {
-                LoadUserInfo();
-            }
-            else
-            {
-                CreateUserInfo();
-            }
         }
         public bool IsPurchaseBlockAd()
         {
@@ -66,6 +58,22 @@ namespace ThirdParties.Truongtv
             SaveUserInfo();
         }
 
+        public UserRanking GetUserRanking()
+        {
+            return _userInfo.ranking;
+        }
+
+        public string GetUserName()
+        {
+            return _userInfo.ranking.userName;
+        }
+
+        public void SetUserName(string name)
+        {
+            _userInfo.ranking.userName = name;
+            SaveUserInfo();
+        }
+        
         private void SaveUserInfo()
         {
             ES3.Save("user_info",_userInfo);

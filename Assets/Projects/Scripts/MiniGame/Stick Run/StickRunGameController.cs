@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace MiniGame.StickRun
 {
     public class StickRunGameController : MonoBehaviour
     {
+        public Button settingButton;
         public GameObject holdToRunFastText;
         public List<StickmanPlayerController> listBot = new List<StickmanPlayerController>();
         public StickmanPlayerController botPrefabs;
@@ -43,6 +46,16 @@ namespace MiniGame.StickRun
             {
                 Destroy(instance.gameObject);
             }
+            settingButton.onClick.AddListener(() =>
+            {
+                InGamePopupController.Instance.ShowPopupSetting(() =>
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }, () =>
+                {
+                    SceneManager.LoadScene("Menu");
+                }, null);
+            });
         }
 
         private void Start()
@@ -62,8 +75,9 @@ namespace MiniGame.StickRun
                 var color = GameDataManager.Instance.RandomColor();
                 cacheBotSkin.Add(new BotSkin(color,listSkin));
                 var bot = Instantiate(botPrefabs);
+                bot.name = "bot" + i;
                 yield return new WaitUntil(() => bot);
-                bot.transform.position = startPos;
+                bot.transform.position = startPos + new Vector2(Random.Range(-1,2) * i, 0);
                 var botController = bot.GetComponent<StickmanPlayerController>();
                 var difficulty = (int) this.difficulty;
                 botController.Init(listSkin,color,(BotDifficulty) difficulty);

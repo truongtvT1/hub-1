@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Animation = Spine.Animation;
+using Random = UnityEngine.Random;
 
 namespace MiniGame
 {
@@ -162,7 +163,7 @@ namespace MiniGame
                 rigidbody2D.gravityScale = gravityScale;
                 if (isJumping && rigidbody2D.velocity.y >= 0)
                 {
-                    _controller.Animation.PlayJumpUp();
+                    
                 }
             }
 
@@ -323,6 +324,14 @@ namespace MiniGame
                 lastJumpTime = jumpBufferTime;
                 if (lastGroundedTime > 0 && lastJumpTime > 0 && !isJumping && rigidbody2D.velocity.y<4f)
                 {
+                    if (Random.value > 0.5f)
+                    {
+                        _controller.Animation.PlayJumpUp();
+                    }
+                    else
+                    {
+                        _controller.Animation.PlayJumpUp2();
+                    }
                     var velocity = rigidbody2D.velocity;
                     velocity.y = jumpForce;
                     rigidbody2D.velocity = velocity;
