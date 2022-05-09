@@ -1,0 +1,48 @@
+
+chest.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+blur
+  rotate: false
+  xy: 724, 134
+  size: 62, 89
+  orig: 67, 99
+  offset: 2, 5
+  index: -1
+chest1
+  rotate: true
+  xy: 530, 20
+  size: 203, 122
+  orig: 205, 124
+  offset: 1, 1
+  index: -1
+chest2
+  rotate: true
+  xy: 389, 7
+  size: 216, 139
+  orig: 217, 139
+  offset: 0, 0
+  index: -1
+chest3
+  rotate: true
+  xy: 214, 15
+  size: 208, 173
+  orig: 208, 173
+  offset: 0, 0
+  index: -1
+effect
+  rotate: true
+  xy: 2, 2
+  size: 221, 210
+  orig: 228, 217
+  offset: 3, 2
+  index: -1
+shadow
+  rotate: true
+  xy: 654, 10
+  size: 213, 68
+  orig: 216, 71
+  offset: 1, 1
+  index: -1

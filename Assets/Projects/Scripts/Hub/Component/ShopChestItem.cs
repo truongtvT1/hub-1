@@ -95,6 +95,11 @@ namespace Projects.Scripts.Hub.Component
             Init(_shopData,_shop);
             _shop.UpdateChestProgress();
             // show open chest
+            var listItem = GameDataManager.Instance.skinData.GetRandomSkin(_item.numberItemReward);
+            PopupMenuController.Instance.ShowPopupOpenChest(listItem);
+
+
+
         }
         private IEnumerator CountDown(TimeSpan timSpan)
         {

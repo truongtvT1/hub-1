@@ -189,7 +189,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -199}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 143.85954, y: 220.36499}
   m_Pivot: {x: 0.49035764, y: -0.15509714}
 --- !u!222 &8230276723929627968
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: f4ecef79612d5e0449325c349354159b, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: ddf400e92880e5644bf0351d0b19f0d4, type: 2}
   initialSkinName: hair/hair_05
   initialFlipX: 0
   initialFlipY: 0
@@ -468,6 +468,10 @@ MonoBehaviour:
   A: {r: 1, g: 0.84705883, b: 0, a: 1}
   B: {r: 0.7137255, g: 0.14117648, b: 0.39607844, a: 1}
   C: {r: 0.13725491, g: 0.06666667, b: 0.2784314, a: 1}
+  item:
+    skinName: 
+    skinType: 0
+    rank: 0
 --- !u!1 &6363029034837164816
 GameObject:
   m_ObjectHideFlags: 0

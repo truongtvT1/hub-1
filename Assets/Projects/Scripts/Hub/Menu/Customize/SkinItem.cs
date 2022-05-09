@@ -27,7 +27,7 @@ namespace Projects.Scripts.Menu.Customize
             container.SetActive(false);
             _toggle.interactable = false;
         }
-        public void Init(SkinInfo set,ToggleGroup group,Action<SkinItem> onItemToggle)
+        public void Init(SkinInfo set,ToggleGroup group,Action<SkinItem> onItemToggle,bool canClick = true)
         {
             item = set;
             skin.initialSkinName = item.skinName;
@@ -50,21 +50,27 @@ namespace Projects.Scripts.Menu.Customize
 
             ;
             skin.Initialize(true);
-            if (group != null)
+            
+            if (canClick)
             {
-                _toggle.group = group;
+                if (group != null)
+                {
+                    _toggle.group = group;
+                }
+                _toggle.interactable = true;
+            
+                _toggle.onValueChanged.AddListener(value=>
+                {
+                    OnToggle(value, onItemToggle);
+                });
+                var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
+                _toggle.isOn = on;
+                _toggle.onValueChanged.Invoke(on);
             }
-            _toggle.interactable = true;
-            
-            _toggle.onValueChanged.AddListener(value=>
+            else
             {
-                OnToggle(value, onItemToggle);
-            });
-            
-            var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
-            _toggle.isOn = on;
-            _toggle.onValueChanged.Invoke(on);
-            
+                _toggle.interactable = false;
+            }
         }
 
         public void SetSelected()

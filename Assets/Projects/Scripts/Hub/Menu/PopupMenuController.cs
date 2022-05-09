@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using Projects.Scripts.Popup;
+using Projects.Scripts.Scriptable;
 using Truongtv.PopUpController;
 using UnityEngine;
 
@@ -15,6 +18,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private PopupRule popupRule;
         [SerializeField] private PopupShop popupShop;
         [SerializeField] private PopupChooseMode popupChooseMode;
+        [SerializeField] private PopupOpenChest popupOpenChest;
         private PopupController _controller;
 
         private void Awake()
@@ -60,6 +64,13 @@ namespace Projects.Scripts.Menu
             popupChooseMode.gameObject.SetActive(true);
             popupChooseMode.Init();
             popupChooseMode.Show(_controller);
+        }
+
+        public void ShowPopupOpenChest(List<SkinInfo> skinList,Action onClose = null)
+        {
+            popupOpenChest.gameObject.SetActive(true);
+            popupOpenChest.Init(skinList,onClose);
+            popupOpenChest.Show(_controller);
         }
     }
 }
