@@ -49,8 +49,7 @@ namespace Projects.Scripts.Menu.Customize
             }
 
             ;
-            skin.Initialize(true);
-            
+            skin.Initialize(true);    
             if (canClick)
             {
                 if (group != null)

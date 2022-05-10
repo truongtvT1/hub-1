@@ -241,6 +241,21 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">RawImage/stick run/gate_finish.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>67,75,133,149</rect>
+                <key>scale9Paddings</key>
+                <rect>67,75,133,149</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/stick run/gate_shadow.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -331,6 +346,66 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">RawImage/stick run/smash trap bua.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>71,24,141,48</rect>
+                <key>scale9Paddings</key>
+                <rect>71,24,141,48</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/stick run/smash trap go dap.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>165,30,331,59</rect>
+                <key>scale9Paddings</key>
+                <rect>165,30,331,59</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/stick run/smash trap go lan.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>139,139,279,277</rect>
+                <key>scale9Paddings</key>
+                <rect>139,139,279,277</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/stick run/smash trap may chem.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>57,20,114,41</rect>
+                <key>scale9Paddings</key>
+                <rect>57,20,114,41</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/stick run/wood board.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -360,6 +435,11 @@
             <filename>C:/Users/PC/Desktop/Work/ninja/gate .png</filename>
             <filename>C:/Users/PC/Desktop/Work/ninja/gate 1.png</filename>
             <filename>RawImage/stick run/gate_shadow.png</filename>
+            <filename>RawImage/stick run/smash trap may chem.png</filename>
+            <filename>RawImage/stick run/smash trap bua.png</filename>
+            <filename>RawImage/stick run/smash trap go dap.png</filename>
+            <filename>RawImage/stick run/smash trap go lan.png</filename>
+            <filename>RawImage/stick run/gate_finish.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -96,8 +96,10 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations:
+  - jump_up
+  - jump_up2
   dieAnimations:
-  - die3
   - die
   - die2
   stopAnimations:
@@ -341,7 +343,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 048b6a328f97ffd4c97d434b4f617ab6, type: 2}
+  - {fileID: 2100000, guid: c3c6af040084fa749ab0fe4e459a0ce8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -393,11 +395,9 @@ MonoBehaviour:
   calculateTangents: 0
   maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled:
-    - {fileID: 2100000, guid: c3c6af040084fa749ab0fe4e459a0ce8, type: 2}
+    materialsMaskDisabled: []
     materialsInsideMask: []
-    materialsOutsideMask:
-    - {fileID: 2100000, guid: 048b6a328f97ffd4c97d434b4f617ab6, type: 2}
+    materialsOutsideMask: []
   disableRenderingOnOverride: 1
   _animationName: idle
   loop: 1

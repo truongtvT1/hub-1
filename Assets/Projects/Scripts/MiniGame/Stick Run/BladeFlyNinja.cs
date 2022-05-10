@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Spine.Unity;
+using Spine.Unity.Examples;
 using UnityEngine;
 
 namespace MiniGame.StickRun
@@ -8,7 +9,7 @@ namespace MiniGame.StickRun
     {
         [SpineAnimation(dataField = nameof(anim))]
         public string flyBackAnim;
-
+        public SkeletonGhost bladeGhost;
         protected override void Idle()
         {   
             onStartIdle?.Invoke();
@@ -17,7 +18,7 @@ namespace MiniGame.StickRun
                 currentEntry = anim.state.SetAnimation(0, flyBackAnim, false);
                 tweener = target.DOLocalMove(start.localPosition, moveSpeed)
                     .SetSpeedBased(true)
-                    .SetEase(Ease.Linear)
+                    .SetEase(moveBackEase)
                     .OnUpdate(() => { })
                     .SetUpdate(UpdateType.Normal, false)
                     .OnComplete(() =>
@@ -27,7 +28,30 @@ namespace MiniGame.StickRun
                     .Play();
             }
         }
-        
-        
+
+        protected override void Attack()
+        {
+            onStartAttack?.Invoke();
+            bladeGhost.ghostingEnabled = true;
+            if (target)
+            {
+                PlayAttack(false);
+                tweener = target.DOLocalMove(end.localPosition, moveSpeed)
+                    .SetSpeedBased(true)
+                    .SetEase(moveNextEase)
+                    .OnUpdate(() =>
+                    {
+                        
+                    })
+                    .OnComplete(() =>
+                    {
+                        PlayIdle();
+                        bladeGhost.ghostingEnabled = false;
+                        isAttacking = false;
+                    })
+                    .SetUpdate(UpdateType.Normal,false)
+                    .Play();
+            }
+        }
     }
 }

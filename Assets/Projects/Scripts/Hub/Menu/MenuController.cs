@@ -12,7 +12,7 @@ namespace Projects.Scripts.Menu
     public class MenuController : MonoBehaviour
     {
         public static MenuController Instance;
-
+        
         private void Awake()
         {
             if (Instance != null)
@@ -32,7 +32,8 @@ namespace Projects.Scripts.Menu
 
         [SerializeField] private CharacterAnimationGraphic mainCharacter;
         [SerializeField] private ParticleGold ticketEffect;
-        [SerializeField] private TextMeshProUGUI ticketText;
+        [SerializeField] private TextMeshProUGUI ticketText, userNameText, userTrophyText;
+        [SerializeField] private Image userAvatar;
 
         private void Start()
         {
@@ -47,7 +48,9 @@ namespace Projects.Scripts.Menu
             shopButton.onClick.AddListener(OnShopButtonClick);
             mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
-            ticketText.text = $"{GameDataManager.Instance.GetTotalTicket()}";
+            ticketText.text = GameDataManager.Instance.GetTotalTicket() + "";
+            userNameText.text = GameDataManager.Instance.GetUserName();
+            userTrophyText.text = GameDataManager.Instance.GetUserRanking().trophy + "";
             GameServiceManager.ShowBanner();
         }
 
@@ -69,6 +72,7 @@ namespace Projects.Scripts.Menu
 
         private void OnUserInfoButtonClick()
         {
+            PopupMenuController.Instance.ShowPopupUserInfo();
         }
 
         private void OnNoAdButtonClick()

@@ -58,6 +58,7 @@ namespace Projects.Scripts.Menu.Customize
                     var item = group.items[j].GetComponent<SkinItem>();
                     if (i * 3 + j < _skins.Count)
                     {
+
                         
                         item.Init(_skins[i * 3 + j],_group,OnSkinSelected);
                         _itemList.Add(item);
@@ -65,6 +66,8 @@ namespace Projects.Scripts.Menu.Customize
                     else
                     {
                         item.Hide();
+
+                    
                     }
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);
@@ -152,8 +155,8 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnSelectButtonClick()
         {
+            GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
             MenuController.Instance.UpdateCharacter();
-            //GameDataManager.Instance
             foreach (var item in _itemList)
             {
                 item.SetSelected();

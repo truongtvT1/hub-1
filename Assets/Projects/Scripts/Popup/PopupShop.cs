@@ -29,6 +29,7 @@ namespace Projects.Scripts.Popup
 
         public void Init(ShopType shopType)
         {
+            chestProgress.fillAmount = fillProgress[GameDataManager.Instance.GetTotalChestOpen() % 10];
             foreach (var ticketItem in ticketItemList)
             {
                 ticketItem.Init(GameDataManager.Instance.shopData);

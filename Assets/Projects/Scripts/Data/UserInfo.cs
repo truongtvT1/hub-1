@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MiniGame;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Projects.Scripts.Data
 {
@@ -14,13 +15,14 @@ namespace Projects.Scripts.Data
         public string currentSkinColor;
         public Dictionary<string, GameDifficulty> difficult;
         public List<string> unlockedSkins;
+        public UserRanking ranking;
         public string lastPlayed;
-        public UserInfo( )
+        public UserInfo()
         {
             times = new Dictionary<string, DateTime> {{"date_create", DateTime.Now}};
             currencies = new Dictionary<string, int>();
             difficult = new Dictionary<string, GameDifficulty>();
-                        
+            ranking = new UserRanking();
         }
 
         public void InitSkin(List<string> currentSkinList,Color color)

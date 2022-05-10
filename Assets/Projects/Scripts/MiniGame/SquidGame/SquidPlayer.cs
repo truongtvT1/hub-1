@@ -21,11 +21,13 @@ namespace MiniGame.SquidGame
         public float moveSpeed;
         private Coroutine _coroutineRed,_coroutineGreen;
         private float difficulty, delayGreen = .3f, delayRed = .3f;
+        private float rdValue;
         public void Init(SquidGameController controller, List<string> skin, Color color, float difficulty)
         {
             isReady = false;
             isWin = false;
             this.difficulty = difficulty;
+            rdValue = Random.value;
             anim.SetSkin(skin);
             anim.SetSkinColor(color);
             skull.sortingOrder = anim.GetSortingOrder();
@@ -38,14 +40,14 @@ namespace MiniGame.SquidGame
             _controller = controller;
             _controller.onRedLight += () =>
             {
-                if (!isDead && _controller.state != GameState.End && _controller.state != GameState.Pause)
+                if (!isDead && _controller.state != GameState.End)
                 {
                     _coroutineRed = StartCoroutine(RedLight());
                 }
             };
             _controller.onGreenLight += () =>
             {
-                if (!isDead && _controller.state != GameState.End && _controller.state != GameState.Pause)
+                if (!isDead && _controller.state != GameState.End)
                 {
                     _coroutineGreen = StartCoroutine(GreenLight());
                 }
@@ -72,6 +74,7 @@ namespace MiniGame.SquidGame
                 .OnComplete(() =>
                 {
                     anim.PlayWin();
+                    anim.PlayWin(trackIndex:1);
                     // SoundInGameManager.Instance.PlayBallWinSound();
                 })
                 .Pause();
@@ -93,30 +96,6 @@ namespace MiniGame.SquidGame
                 {
                     Kill();
                 }
-                        
-                if (isMoving && _controller.state != GameState.Pause)
-                {
-                    anim.PlayRun();
-                }
-            }
-        }
-
-        public void Pause()
-        {
-            tempMoving = isMoving;
-            isMoving = false;
-            anim.transform.parent.DOPause();
-            anim.PauseAnim();
-        }
-
-        public void Resume()
-        {
-            isMoving = tempMoving;
-            anim.PauseAnim(false);
-            if (isMoving)
-            {
-                anim.PlayRun();
-                anim.transform.parent.DOTogglePause();
             }
         }
 
@@ -162,6 +141,7 @@ namespace MiniGame.SquidGame
             isMoving = false;
             anim.transform.parent.DOPause();
             anim.PlayStopPose();
+            anim.PlayStopPose(trackIndex:1);
         }
 
         IEnumerator GreenLight()
@@ -177,7 +157,24 @@ namespace MiniGame.SquidGame
                 StopCoroutine(_coroutineRed);
             }
             isMoving = true;
-            anim.PlayRun();
+            if (rdValue > 0.5f)
+            {
+                anim.PlayRun();
+                if (rdValue > 0.75f)
+                {
+                    anim.PlayRunNaruto();
+                }
+                else
+                {
+                    anim.PlayDodge();
+                }
+
+            }
+            else
+            {
+                anim.PlayRun();
+                anim.PlayRun(trackIndex:1);
+            }
             anim.transform.parent.DOTogglePause();
             
         }

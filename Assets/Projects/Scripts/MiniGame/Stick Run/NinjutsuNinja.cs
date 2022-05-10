@@ -27,7 +27,7 @@ namespace MiniGame.StickRun
             ninja.state.SetAnimation(1, ninjaCastSpell, false).Complete += async entry =>
             {
                 plant.state.SetAnimation(0, plantAttack, false);
-                await Task.Delay(100);
+                await Task.Delay(50);
                 damageObj.SetActive(true);
             };
             await Task.Delay((int)attackDuration/2 * 1000);            

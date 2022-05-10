@@ -16,9 +16,11 @@ namespace MiniGame.MemoryMatter
 {
     public class MemoryGameController : MonoBehaviour
     {
+        [SerializeField] private Button settingButton;
         [SerializeField] private List<Transform> stairsList;
         [SerializeField] private List<SpriteRenderer> fruitList;
         [SerializeField] private List<Sprite> fruitSprites;
+        [FoldoutGroup("Character")] public PlayerController playerPrefabs;
         [SerializeField,FoldoutGroup("Bot")] private int maxBot = 8;
         [SerializeField,FoldoutGroup("Bot")] private PlayerController botPrefab;
         [SerializeField,FoldoutGroup("Bot")] private List<PlayerController> listBot;
@@ -30,6 +32,7 @@ namespace MiniGame.MemoryMatter
         [SerializeField] private int maxTurn, maxRound, maxNumberObjToShowPerTurn;
         [SerializeField] private TextMeshProUGUI timeInGameText, timeCounterText;
         [SerializeField] private float timeToStart;
+        
         private int currentRound = 0, currentTurn = 0, indexObj;
         private bool isShowing, isHiding;
         private float timeCounter;
@@ -38,9 +41,21 @@ namespace MiniGame.MemoryMatter
         private float cacheShowDuration, cacheTurnDuration, deltaDifficulty;
         private int cacheMaxTurn, cacheMaxNumberObjs;
         private List<BotSkin> cacheBotSkin;
-
+        private List<string> playerSkin;
+        private Color playerColor;
+        
         private void Awake()
         {
+            settingButton.onClick.AddListener(() =>
+            {
+                InGamePopupController.Instance.ShowPopupSetting(() =>
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }, () =>
+                {
+                    SceneManager.LoadScene("Menu");
+                }, null);
+            });
             deltaDifficulty = (float) _difficulty / 10;
             cacheShowDuration = showDuration;
             cacheTurnDuration = turnDuration;
@@ -54,7 +69,8 @@ namespace MiniGame.MemoryMatter
 
         private async void Start()
         {
-            await Task.Delay(1000);
+            playerSkin = GameDataManager.Instance.GetSkinInGame();
+            playerColor = GameDataManager.Instance.GetCurrentColor(); 
             for (int i = 0; i < maxBot; i++)
             {
                 var listSkin = GameDataManager.Instance.RandomSkinList();
@@ -142,11 +158,17 @@ namespace MiniGame.MemoryMatter
                 return;
             }
             currentRound++;
-            await Task.Delay(2500);
+            
             if (_gamePlayController.player == null)
             {
                 var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
-                _gamePlayController.Respawn(new Vector3(rd1, spawnRange[0].position.y,0));
+                var player = Instantiate(playerPrefabs);
+                player.Animation.SetVisible();
+                await Task.Delay(10);
+                player.Animation.SetVisible(true);
+                player.transform.position = new Vector3(rd1, spawnRange[0].position.y,player.transform.position.z);
+                player.Init(playerSkin,playerColor);
+                _gamePlayController.player = player;
             }
             
             for (int i = 0; i < listBot.Count; i++)
@@ -155,13 +177,15 @@ namespace MiniGame.MemoryMatter
                 {
                     var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                     var bot = Instantiate(botPrefab);
+                    bot.Animation.SetVisible();
                     await Task.Delay(10);
+                    bot.Animation.SetVisible(true);
                     bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
                     bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),cacheBotSkin[i].skin,cacheBotSkin[i].color);
                     listBot[i] = bot;
                 }
             }
-
+            
             NextTurn();
         }
 
@@ -304,7 +328,7 @@ namespace MiniGame.MemoryMatter
             {
                 //Score player
                 
-                await Task.Delay(1000);
+                await Task.Delay(500);
                 currentTurn = 0;
                 NextRound();
             }

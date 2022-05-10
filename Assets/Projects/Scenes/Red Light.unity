@@ -950,6 +950,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -960,7 +961,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -1615,6 +1618,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -1625,7 +1629,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -1936,6 +1942,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -1946,7 +1953,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -2360,6 +2369,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -2370,7 +2380,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -4025,6 +4037,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -4035,7 +4048,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -4671,6 +4686,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -4681,7 +4697,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -5931,6 +5949,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -5941,7 +5960,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -8135,6 +8156,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -8145,7 +8167,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -8345,6 +8369,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -8355,7 +8380,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -9622,6 +9649,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -9632,7 +9660,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -9811,6 +9841,7 @@ MonoBehaviour:
   loseAnimations:
   - lose
   - lose2
+  jumpUpAnimations: []
   dieAnimations:
   - die
   - die2
@@ -9821,7 +9852,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -10489,7 +10522,6 @@ MonoBehaviour:
   moveSpeed: 0.8
   difficulty: 1
   difficultyDelta: 0.15
-  maxMeteorPerTurn: 0
   fallRange: {x: 2.05, y: -5.2}
   meteorPrefab: {fileID: 3674623096472515585, guid: ea841cf64d829b54bb13223d0eab5509, type: 3}
   idle: idle

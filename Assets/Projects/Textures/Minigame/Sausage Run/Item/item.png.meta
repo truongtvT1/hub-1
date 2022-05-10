@@ -50,6 +50,21 @@ TextureImporter:
   - first:
       213: 8216789504447909302
     second: gate_shadow
+  - first:
+      213: 8905256688532634027
+    second: smash trap bua
+  - first:
+      213: 4993096761668525653
+    second: smash trap go dap
+  - first:
+      213: -3738720175518817026
+    second: smash trap go lan
+  - first:
+      213: -1990586430705466018
+    second: smash trap may chem
+  - first:
+      213: 1965998975569268630
+    second: gate_finish
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,8 +145,8 @@ TextureImporter:
       name: body
       rect:
         serializedVersion: 2
-        x: 714
-        y: 1039
+        x: 543
+        y: 330
         width: 247
         height: 437
       alignment: 0
@@ -151,8 +166,8 @@ TextureImporter:
       name: decor
       rect:
         serializedVersion: 2
-        x: 129
-        y: 772
+        x: 560
+        y: 936
         width: 120
         height: 187
       alignment: 0
@@ -172,8 +187,8 @@ TextureImporter:
       name: 'gate '
       rect:
         serializedVersion: 2
-        x: 333
-        y: 821
+        x: 1
+        y: 10
         width: 329
         height: 757
       alignment: 0
@@ -193,8 +208,8 @@ TextureImporter:
       name: gate 1
       rect:
         serializedVersion: 2
-        x: 1
-        y: 627
+        x: 560
+        y: 1125
         width: 126
         height: 332
       alignment: 0
@@ -206,6 +221,27 @@ TextureImporter:
       bones: []
       spriteID: 18bd7117d3343caa0800000000000000
       internalID: -6141991535633769599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gate_finish
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 1748
+        width: 267
+        height: 299
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69f8697e6a1a84b10800000000000000
+      internalID: 1965998975569268630
       vertices: []
       indices: 
       edges: []
@@ -235,8 +271,8 @@ TextureImporter:
       name: hammer down
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1172
+        x: 688
+        y: 769
         width: 330
         height: 406
       alignment: 0
@@ -277,8 +313,8 @@ TextureImporter:
       name: hand_R
       rect:
         serializedVersion: 2
-        x: 212
-        y: 1118
+        x: 560
+        y: 882
         width: 84
         height: 52
       alignment: 0
@@ -319,8 +355,8 @@ TextureImporter:
       name: shuriken
       rect:
         serializedVersion: 2
-        x: 1
-        y: 961
+        x: 332
+        y: 691
         width: 209
         height: 209
       alignment: 0
@@ -337,11 +373,95 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: smash trap bua
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 804
+        width: 282
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba9b8a1b6c3d59b70800000000000000
+      internalID: 8905256688532634027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smash trap go dap
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1459
+        width: 661
+        height: 119
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55ed768dc0b0b4540800000000000000
+      internalID: 4993096761668525653
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smash trap go lan
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 902
+        width: 557
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef46d971fc56d1cc0800000000000000
+      internalID: -3738720175518817026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: smash trap may chem
+      rect:
+        serializedVersion: 2
+        x: 792
+        y: 686
+        width: 228
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e55861710340064e0800000000000000
+      internalID: -1990586430705466018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: wood board
       rect:
         serializedVersion: 2
         x: 746
-        y: 1478
+        y: 1177
         width: 247
         height: 569
       alignment: 0
