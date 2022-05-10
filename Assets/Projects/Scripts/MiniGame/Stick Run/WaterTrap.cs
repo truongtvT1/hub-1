@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using RavingBots.Water2D;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MiniGame.StickRun
 {
@@ -15,10 +18,30 @@ namespace MiniGame.StickRun
         public LayerMask layerToCast;
         public DamageType damageType;
         public Transform checkPoint;
+        public Water2DSplashFX splashFXPrefab;
+        public float SplashFXOffset = 0.2f;
+        public AudioClip[] SplashFXSounds;
+        public float SplashFXPowerToVolume = 1;
+        public float SplashFXPowerToPitch = 1;
+        private Water2DSplashFX[] _splashCache;
+        private int _splash;
         private TrackEntry track;
         private float timeStay, duration;
         private bool isStayInTrigger, isSprinting;
         private List<StickmanPlayerController> listPlayer = new List<StickmanPlayerController>();
+        
+        private void Awake()
+        {
+            _splashCache = new Water2DSplashFX[10];
+            var container = new GameObject("Splash Container").transform;
+            container.transform.position = Vector3.zero;
+            for (var i = 0; i < _splashCache.Length; i++)
+            {
+                var splash = Instantiate(splashFXPrefab);
+                splash.transform.parent = container;
+                _splashCache[i] = splash;
+            }
+        }
         
         private void Start()
         {
@@ -85,12 +108,10 @@ namespace MiniGame.StickRun
 
                     if (countSprinting > countNotSprinting)
                     {
-                        Debug.Log("sprinting");
                         isSprinting = true;
                     }
                     else
                     {
-                        Debug.Log("not sprinting");
                         isSprinting = false;
                     }
                 }
@@ -106,25 +127,26 @@ namespace MiniGame.StickRun
                 if (!isSprinting)
                 {
                     timeStay += Time.deltaTime;
-                    if (timeStay >= maxStayTime)
-                    {
-                        for (int i = 0; i < listPlayer.Count; i++)
-                        {
-                            var player = listPlayer[i];
-                            if (!player.isDead && !player.isSprinting)
-                            {
-                                Kill(player);
-                            }
-                        }
-                        timeStay = 0;
-                        isStayInTrigger = false;
-                        isSprinting = false;
-                        listPlayer = new List<StickmanPlayerController>();
-                    }
                 }
                 else
                 {
+                    if (timeStay >= 0)
                     timeStay -= Time.deltaTime;
+                }
+                if (timeStay >= maxStayTime)
+                {
+                    for (int i = 0; i < listPlayer.Count; i++)
+                    {
+                        var player = listPlayer[i];
+                        if (!player.isDead && !player.isSprinting)
+                        {
+                            Kill(player);
+                        }
+                    }
+                    timeStay = 0;
+                    isStayInTrigger = false;
+                    isSprinting = false;
+                    listPlayer = new List<StickmanPlayerController>();
                 }
             }
         }
@@ -144,6 +166,11 @@ namespace MiniGame.StickRun
             {
                 if (event1.ToString().Equals("catch"))
                 {
+                    var splash = _splashCache[_splash];
+                    splash.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - SplashFXOffset,100);
+                    splash.Play(2.5f, SplashFXSounds[Random.Range(0, SplashFXSounds.Length)], 5 * SplashFXPowerToVolume, SplashFXPowerToPitch / 5);
+                    _splash = (_splash + 1) % _splashCache.Length;
+
                     player.Die(damageType, checkPoint, player.transform.position + new Vector3(0, -4f));
                 }
             };

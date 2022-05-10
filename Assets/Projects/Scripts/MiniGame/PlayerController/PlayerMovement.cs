@@ -353,7 +353,7 @@ namespace MiniGame
         }
         public void SetForceInstant(Vector2 force)
         {
-            rigidbody2D.velocity = force;
+            rigidbody2D.AddForce(force,ForceMode2D.Impulse);
         }
         #endregion
 

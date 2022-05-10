@@ -13,9 +13,8 @@ namespace MiniGame
             get
             {  
                 if (things.Count < 1)
-                {  
-                    GameObject newClone = (GameObject)Instantiate(thing);  
-                    newClone.transform.parent = transform;  
+                {
+                    GameObject newClone = (GameObject) Instantiate(thing, transform, true);  
                     newClone.SetActive(false);  
                     things.Add(newClone);  
                     PoolMember poolMember = newClone.AddComponent<PoolMember>();  

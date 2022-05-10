@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using RavingBots.Water2D;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace MiniGame.StickRun
 {
@@ -20,10 +22,14 @@ namespace MiniGame.StickRun
         public LayerMask layerToCast;
         public Transform diePos;
         public Transform checkPoint;
+        
         protected TrackEntry track;
         protected float timeStay, duration;
         protected bool isStayInTrigger, isSprinting;
         private List<StickmanPlayerController> listPlayer = new List<StickmanPlayerController>();
+
+        
+
         protected virtual void Start()
         {
             ResetTrap();
@@ -49,13 +55,19 @@ namespace MiniGame.StickRun
             var hit = Physics2D.BoxCastAll(transform.position, boxCastSize, 0, Vector2.up, layerToCast);
             if (hit.Length != 0)
             {
-                listPlayer = new List<StickmanPlayerController>(hit.Length);
+                if (listPlayer.Count == 0)
+                {
+                    listPlayer = new List<StickmanPlayerController>(hit.Length);
+                }
                 for (int i = 0; i < hit.Length; i++)
                 {
                     var player = hit[i].collider.GetComponent<StickmanPlayerController>();
                     if (player != null)
                     {
-                        listPlayer.Add(player);
+                        if (!listPlayer.Contains(player))
+                        {
+                            listPlayer.Add(player);
+                        }
                     }
                 }
                 return true;
@@ -73,13 +85,11 @@ namespace MiniGame.StickRun
                     if (!listPlayer[0].isSprinting)
                     {
                         listPlayer[0].isInSpecialTrap = true;
-                        Debug.Log("not sprinting");
                         isSprinting = false;
                     }
                     else if (listPlayer[0].isSprinting)
                     {
                         listPlayer[0].isInSpecialTrap = false;
-                        Debug.Log("sprinting");
                         isSprinting = true;
                     }
                 }
@@ -104,12 +114,10 @@ namespace MiniGame.StickRun
 
                     if (countSprinting > countNotSprinting)
                     {
-                        Debug.Log("sprinting");
                         isSprinting = true;
                     }
                     else
                     {
-                        Debug.Log("not sprinting");
                         isSprinting = false;
                     }
                 }
@@ -129,31 +137,40 @@ namespace MiniGame.StickRun
             {
                 if (!isSprinting)
                 {
-                    track.TimeScale = anim.timeScale;
-                    timeStay += Time.deltaTime;
-                    if (timeStay >= maxStayDuration)
+                    if (track != null)
                     {
-                        anim.state.Update(track.TrackEnd);
-                        for (int i = 0; i < listPlayer.Count; i++)
+                        track.TimeScale = anim.timeScale;
+                        timeStay += Time.deltaTime;
+                        if (timeStay >= maxStayDuration)
                         {
-                            var player = listPlayer[i];
-                            if (!player.isDead)
+                            anim.state.Update(track.TrackEnd);
+                            for (int i = 0; i < listPlayer.Count; i++)
                             {
-                                Kill(player);
+                                var player = listPlayer[i];
+                                if (!player.isDead)
+                                {
+                                    Kill(player);
+                                }
                             }
+                            ResetTrap();
+                            listPlayer = new List<StickmanPlayerController>();
+                            return;
                         }
-                        ResetTrap();
-                        listPlayer = new List<StickmanPlayerController>();
-                        return;
+                        track.TrackTime = (timeStay * duration/maxStayDuration) * anim.timeScale;
+                        anim.state.Update(track.TrackTime);
                     }
-                    track.TrackTime = (timeStay * duration/maxStayDuration) * anim.timeScale;
-                    anim.state.Update(track.TrackTime);
                 }
                 else
                 {
-                    timeStay -= Time.deltaTime;
-                    track.TrackTime = timeStay * duration/maxStayDuration * anim.timeScale;
-                    anim.state.Update(track.TrackTime);
+                    if (timeStay >= 0)
+                    {
+                        timeStay -= Time.deltaTime;
+                        if (track != null)
+                        {
+                            track.TrackTime = timeStay * duration / maxStayDuration * anim.timeScale;
+                            anim.state.Update(track.TrackTime);
+                        }
+                    }
                 }
             }
         }
@@ -163,7 +180,7 @@ namespace MiniGame.StickRun
             player.Die(damageType,checkPoint,diePos.position,Ease.InSine);
         }
         
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawCube(transform.position,boxCastSize);

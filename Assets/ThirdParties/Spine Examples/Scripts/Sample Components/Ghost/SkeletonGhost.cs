@@ -34,7 +34,6 @@ using System.Collections.Generic;
 
 namespace Spine.Unity.Examples {
 
-	[RequireComponent(typeof(SkeletonRenderer))]
 	public class SkeletonGhost : MonoBehaviour {
 		// Internal Settings
 		const HideFlags GhostHideFlags = HideFlags.HideInHierarchy;
@@ -65,7 +64,7 @@ namespace Spine.Unity.Examples {
 		float nextSpawnTime;
 		SkeletonGhostRenderer[] pool;
 		int poolIndex = 0;
-		SkeletonRenderer skeletonRenderer;
+		SkeletonPartsRenderer skeletonRenderer;
 		MeshRenderer meshRenderer;
 		MeshFilter meshFilter;
 
@@ -80,7 +79,7 @@ namespace Spine.Unity.Examples {
 				if (ghostShader == null)
 					ghostShader = Shader.Find(GhostingShaderName);
 
-				skeletonRenderer = GetComponent<SkeletonRenderer>();
+				skeletonRenderer = transform.GetComponent<SkeletonPartsRenderer>();
 				meshFilter = GetComponent<MeshFilter>();
 				meshRenderer = GetComponent<MeshRenderer>();
 				nextSpawnTime = Time.time + spawnInterval;

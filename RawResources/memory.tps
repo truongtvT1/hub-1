@@ -258,6 +258,111 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">RawImage/memory brain/obstacle anchor.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>49,50,99,99</rect>
+                <key>scale9Paddings</key>
+                <rect>49,50,99,99</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle bomb 1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>26,28,51,55</rect>
+                <key>scale9Paddings</key>
+                <rect>26,28,51,55</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle bomb 2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,10,17,19</rect>
+                <key>scale9Paddings</key>
+                <rect>8,10,17,19</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle box.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,34,73,67</rect>
+                <key>scale9Paddings</key>
+                <rect>36,34,73,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle helm.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>57,58,115,115</rect>
+                <key>scale9Paddings</key>
+                <rect>57,58,115,115</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle tnt 1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>36,24,71,47</rect>
+                <key>scale9Paddings</key>
+                <rect>36,24,71,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/obstacle tnt 2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>34,24,67,47</rect>
+                <key>scale9Paddings</key>
+                <rect>34,24,67,47</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/memory brain/orange.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -319,6 +424,36 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">RawImage/memory brain/warning sign 1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>60,54,120,107</rect>
+                <key>scale9Paddings</key>
+                <rect>60,54,120,107</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">RawImage/memory brain/warning sign 2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>73,77,145,153</rect>
+                <key>scale9Paddings</key>
+                <rect>73,77,145,153</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">RawImage/memory brain/watermelon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -350,6 +485,15 @@
             <filename>RawImage/memory brain/grape.png</filename>
             <filename>RawImage/memory brain/orange.png</filename>
             <filename>RawImage/memory brain/pallete 1.png</filename>
+            <filename>RawImage/memory brain/warning sign 1.png</filename>
+            <filename>RawImage/memory brain/warning sign 2.png</filename>
+            <filename>RawImage/memory brain/obstacle anchor.png</filename>
+            <filename>RawImage/memory brain/obstacle bomb 1.png</filename>
+            <filename>RawImage/memory brain/obstacle bomb 2.png</filename>
+            <filename>RawImage/memory brain/obstacle box.png</filename>
+            <filename>RawImage/memory brain/obstacle helm.png</filename>
+            <filename>RawImage/memory brain/obstacle tnt 1.png</filename>
+            <filename>RawImage/memory brain/obstacle tnt 2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -40,6 +40,16 @@ namespace Base
             }
         }
 
+        public void UpdateListPoint()
+        {
+            pointList = new List<Vector3>();
+            if(pointParent==null) return;
+            foreach (Transform point in pointParent)
+            {
+                pointList.Add(point.position);
+            }
+        }
+
         protected void MoveNext(int endIndex, Action complete = null,
             Action onMove = null, Action onStart = null,bool ignoreTimeScale = false)
         {

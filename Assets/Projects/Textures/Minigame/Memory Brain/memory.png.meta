@@ -50,6 +50,33 @@ TextureImporter:
   - first:
       213: -8661332600587486721
     second: watermelon
+  - first:
+      213: -7204606687769405284
+    second: obstacle anchor
+  - first:
+      213: -6172931518210233697
+    second: obstacle bomb 1
+  - first:
+      213: -1805750904122793977
+    second: obstacle bomb 2
+  - first:
+      213: -3503664283655483228
+    second: obstacle box
+  - first:
+      213: 4892940377046664294
+    second: obstacle helm
+  - first:
+      213: 2971713116537208826
+    second: obstacle tnt 1
+  - first:
+      213: -601098947520592194
+    second: obstacle tnt 2
+  - first:
+      213: 8695051016735046517
+    second: warning sign 1
+  - first:
+      213: 1784487408008036735
+    second: warning sign 2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -130,8 +157,8 @@ TextureImporter:
       name: banana
       rect:
         serializedVersion: 2
-        x: 1
-        y: 6
+        x: 867
+        y: 560
         width: 252
         height: 195
       alignment: 0
@@ -256,8 +283,8 @@ TextureImporter:
       name: grape
       rect:
         serializedVersion: 2
-        x: 1
-        y: 203
+        x: 426
+        y: 151
         width: 177
         height: 251
       alignment: 0
@@ -274,11 +301,158 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: obstacle anchor
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 298
+        width: 197
+        height: 198
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c98d91d9368140c90800000000000000
+      internalID: -7204606687769405284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle bomb 1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 35
+        width: 103
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9a24426d77555aa0800000000000000
+      internalID: -6172931518210233697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle bomb 2
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 10
+        width: 33
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 700abe6be1fa0f6e0800000000000000
+      internalID: -1805750904122793977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle box
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 10
+        width: 145
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a0dd70b5eb706fc0800000000000000
+      internalID: -3503664283655483228
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle helm
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 171
+        width: 229
+        height: 231
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6644809595737e340800000000000000
+      internalID: 4892940377046664294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle tnt 1
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 51
+        width: 143
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: affb19da555ad3920800000000000000
+      internalID: 2971713116537208826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: obstacle tnt 2
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 51
+        width: 134
+        height: 94
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb68c2621b778a7f0800000000000000
+      internalID: -601098947520592194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: orange
       rect:
         serializedVersion: 2
         x: 1
-        y: 710
+        y: 401
         width: 197
         height: 255
       alignment: 0
@@ -298,8 +472,8 @@ TextureImporter:
       name: pallete 1
       rect:
         serializedVersion: 2
-        x: 180
-        y: 204
+        x: 294
+        y: 715
         width: 420
         height: 250
       alignment: 0
@@ -320,7 +494,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 456
+        y: 147
         width: 423
         height: 252
       alignment: 0
@@ -341,7 +515,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 713
+        y: 404
         width: 423
         height: 252
       alignment: 0
@@ -361,8 +535,8 @@ TextureImporter:
       name: peach
       rect:
         serializedVersion: 2
-        x: 426
-        y: 503
+        x: 716
+        y: 757
         width: 221
         height: 208
       alignment: 0
@@ -379,11 +553,53 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: warning sign 1
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 498
+        width: 240
+        height: 215
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57b3464d4d60ba870800000000000000
+      internalID: 8695051016735046517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: warning sign 2
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 658
+        width: 291
+        height: 307
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f710a7cc7d5c3c810800000000000000
+      internalID: 1784487408008036735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: watermelon
       rect:
         serializedVersion: 2
-        x: 255
-        y: 37
+        x: 605
+        y: 4
         width: 270
         height: 165
       alignment: 0

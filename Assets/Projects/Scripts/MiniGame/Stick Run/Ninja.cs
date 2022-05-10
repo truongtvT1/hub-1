@@ -18,7 +18,7 @@ namespace MiniGame.StickRun
         [ShowIf(nameof(anim)),SerializeField, SpineAnimation(dataField = nameof(anim))]
         public string idleAnim;
 
-        public float attackDelay, idleDelay, moveSpeed, moveBackSpeed, idleDuration;
+        public float activeDelay, attackDelay, idleDelay, moveSpeed, moveBackSpeed, idleDuration;
         public Ease moveNextEase = Ease.InQuint, moveBackEase = Ease.Linear;
         public Transform target, start, end;
         public LineRenderer line;
@@ -30,9 +30,15 @@ namespace MiniGame.StickRun
 
         protected virtual void Start()
         {
-            StartCoroutine(IdleCoroutine());
+            StartCoroutine(Active());
         }
 
+        IEnumerator Active()
+        {
+            yield return new WaitForSeconds(activeDelay);
+            StartCoroutine(IdleCoroutine());
+        }
+        
         public void PlayAttack(bool loop = true, Action callback = null)
         {
             currentEntry = anim.state.SetAnimation(0, attackAnim, loop);

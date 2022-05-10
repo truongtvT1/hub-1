@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:d7364dc706ea89dac0255e80842b7bd1:af1054fdf194c9babb10e8b3bc0b818f:8ec99907093743ab40a94425b0dfd3c9$
+# $TexturePacker:SmartUpdate:c2cd204502b59bf288f3afc125dc5a06:80c758218db4b5d19afa308af261279e:8ec99907093743ab40a94425b0dfd3c9$
 #
 :format=40300
 :texture=memory.png
@@ -13,16 +13,25 @@
 :borders=disabled
 :alphahandling=ClearTransparentPixels
 
-banana;1;6;252;195; 0.5;0.5; 0;0;0;0
+banana;867;560;252;195; 0.5;0.5; 0;0;0;0
 banner blue;1;967;390;1080; 0.5;0.5; 0;0;0;0
 banner green;393;967;384;1080; 0.5;0.5; 0;0;0;0
 banner pink;779;967;384;1080; 0.5;0.5; 0;0;0;0
 banner purple;1165;967;384;1080; 0.5;0.5; 0;0;0;0
 banner yellow;1551;967;381;1080; 0.5;0.5; 0;0;0;0
-grape;1;203;177;251; 0.5;0.5; 0;0;0;0
-orange;1;710;197;255; 0.5;0.5; 0;0;0;0
-pallete 1;180;204;420;250; 0.5;0.5; 0;0;0;0
-pallete 2;1;456;423;252; 0.5;0.5; 0;0;0;0
-pallete 4;200;713;423;252; 0.5;0.5; 0;0;0;0
-peach;426;503;221;208; 0.5;0.5; 0;0;0;0
-watermelon;255;37;270;165; 0.5;0.5; 0;0;0;0
+grape;426;151;177;251; 0.5;0.5; 0;0;0;0
+obstacle anchor;836;298;197;198; 0.5;0.5; 0;0;0;0
+obstacle bomb 1;148;35;103;110; 0.5;0.5; 0;0;0;0
+obstacle bomb 2;253;10;33;39; 0.5;0.5; 0;0;0;0
+obstacle box;1;10;145;135; 0.5;0.5; 0;0;0;0
+obstacle helm;605;171;229;231; 0.5;0.5; 0;0;0;0
+obstacle tnt 1;253;51;143;94; 0.5;0.5; 0;0;0;0
+obstacle tnt 2;398;51;134;94; 0.5;0.5; 0;0;0;0
+orange;1;401;197;255; 0.5;0.5; 0;0;0;0
+pallete 1;294;715;420;250; 0.5;0.5; 0;0;0;0
+pallete 2;1;147;423;252; 0.5;0.5; 0;0;0;0
+pallete 4;200;404;423;252; 0.5;0.5; 0;0;0;0
+peach;716;757;221;208; 0.5;0.5; 0;0;0;0
+warning sign 1;625;498;240;215; 0.5;0.5; 0;0;0;0
+warning sign 2;1;658;291;307; 0.5;0.5; 0;0;0;0
+watermelon;605;4;270;165; 0.5;0.5; 0;0;0;0

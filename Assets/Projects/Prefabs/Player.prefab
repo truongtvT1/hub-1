@@ -125,10 +125,10 @@ MonoBehaviour:
   rigidbody2D: {fileID: 3584323495458657357}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 336
+    m_Bits: 848
   wallLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 584
   playerLayer:
     serializedVersion: 2
     m_Bits: 8

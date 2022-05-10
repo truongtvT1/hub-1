@@ -20,7 +20,7 @@ namespace MiniGame.SquidGame
         public SpriteRenderer skull;
         public float moveSpeed;
         private Coroutine _coroutineRed,_coroutineGreen;
-        private float difficulty, delayGreen = .3f, delayRed = .3f;
+        private float difficulty, delayGreen = .1f, delayRed = .1f;
         private float rdValue;
         public void Init(SquidGameController controller, List<string> skin, Color color, float difficulty)
         {
@@ -33,8 +33,6 @@ namespace MiniGame.SquidGame
             skull.sortingOrder = anim.GetSortingOrder();
             skull.sprite = skullSprites[Random.Range(0, skullSprites.Length)];
             skull.gameObject.SetActive(false);
-            moveSpeed = Random.value > 0.5f ? moveSpeed + Random.Range(0, difficulty/2) : moveSpeed - Random.Range(0, difficulty/2);
-            moveSpeed += moveSpeed * Random.Range(0,difficulty);
             var distance = Random.Range(1f, 3f);
             anim.transform.parent.transform.position = start.position + new Vector3(distance, 0);
             _controller = controller;

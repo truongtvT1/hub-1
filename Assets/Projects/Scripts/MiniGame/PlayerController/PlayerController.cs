@@ -33,7 +33,7 @@ namespace MiniGame
         private MoveDirection _touchDirection = MoveDirection.None;
         private bool _holdJump, _isJetpackingLeft, _isJetpackingRight;
         private AIBrain brain;
-        private List<string> currentSkin;
+        private List<string> currentSkin = new List<string>();
         private Color currentColor;
         private const float minEasyTime = 3.5f;
         private const float minNormalTime = 2.5f;
@@ -66,17 +66,19 @@ namespace MiniGame
         private void Start()
         {
             Movement.Init(this);
-            currentSkin = GameDataManager.Instance.GetSkinInGame();
-            currentColor = GameDataManager.Instance.GetCurrentColor(); 
-            Init(currentSkin,currentColor);
+            Init();
         }
 
-        public void Init(List<string> skin, Color color)
+        public void Init()
         {
             if (!IsBot)
             {
-                Animation.SetSkin(skin);
-                Animation.SetSkinColor(color);
+                currentSkin = GameDataManager.Instance.GetSkinInGame();
+                currentColor = GameDataManager.Instance.GetCurrentColor();
+                Debug.Log("current skin = " + currentSkin[0]);
+                Debug.Log("current Color = " + currentColor);
+                Animation.SetSkin(currentSkin);
+                Animation.SetSkinColor(currentColor);
             }
         }
         
