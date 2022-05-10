@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Projects.Scripts.Hub;
 using Projects.Scripts.Popup;
 using Projects.Scripts.Scriptable;
 using ThirdParties.Truongtv;
@@ -16,7 +15,6 @@ namespace Projects.Scripts.Menu.Customize
     {
         [SerializeField] private ScrollRect scroll;
         [SerializeField] private SkinItemGroup prefab;
-        [SerializeField] private CharacterAnimationGraphic customCharacter;
         [SerializeField] private Button tryButton, buyByTicketButton, buyByAdButton, selectButton;
         [SerializeField] private GameObject selected;
         [SerializeField] private TextMeshProUGUI priceTicketText;
@@ -57,14 +55,19 @@ namespace Projects.Scripts.Menu.Customize
                 group.Init(new Vector2(20-i*20,-240*i),scroll);
                 for (var j = 0; j <  3;j++)
                 {
+                    var item = group.items[j].GetComponent<SkinItem>();
                     if (i * 3 + j < _skins.Count)
                     {
-                        group.items[j].GetComponent<SkinItem>().Init(_skins[i * 3 + j],_group,OnSkinSelected);
-                        _itemList.Add(group.items[j].GetComponent<SkinItem>());
+
+                        
+                        item.Init(_skins[i * 3 + j],_group,OnSkinSelected);
+                        _itemList.Add(item);
                     }
                     else
                     {
-                        group.items[j].GetComponent<SkinItem>().Hide();
+                        item.Hide();
+
+                    
                     }
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);
@@ -152,6 +155,7 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnSelectButtonClick()
         {
+            GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);
             MenuController.Instance.UpdateCharacter();
             foreach (var item in _itemList)
             {

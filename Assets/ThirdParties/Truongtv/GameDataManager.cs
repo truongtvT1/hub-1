@@ -21,7 +21,7 @@ namespace ThirdParties.Truongtv
         [SerializeField, FoldoutGroup("Game Data")]
         public ShopData shopData;
         [SerializeField, FoldoutGroup("Game Data")] public RemoteConfigValue remoteConfigValue;
-        [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] private List<string> startSkin;
+        [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinName))] public List<string> startSkin;
         [SerializeField, FoldoutGroup("Start Data"),ValueDropdown(nameof(GetAllSkinColors))] public Color startColor;
         
         private static GameDataManager _instance;

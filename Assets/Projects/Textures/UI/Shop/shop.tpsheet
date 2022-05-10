@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:ebc377d559eeffae50fecf62d3754477:a794b0375b54034d2f98f2ad488fd92c:b9c857228db46a10f00394dbfaca6f74$
+# $TexturePacker:SmartUpdate:c44147873d676200e3b58bf7bbdfdfb8:6899412be93bfe9cd6bc6f701a069232:b9c857228db46a10f00394dbfaca6f74$
 #
 :format=40300
 :texture=shop.png
@@ -13,45 +13,36 @@
 :borders=disabled
 :alphahandling=ClearTransparentPixels
 
-$2;351;735;106;44; 0.5;0.5; 0;0;0;0
 10times1;923;2015;842;32; 0.5;0.5; 0;0;0;0
 10times2;923;1993;828;18; 0.5;0.5; 0;0;0;0
-50;2005;1701;40;34; 0.5;0.5; 0;0;0;0
 80080-playstation-angel-symmetry-light-game-video-halo copy 3;923;1453;537;536; 0.5;0.5; 0;0;0;0
-80080-playstation-angel-symmetry-light-game-video-halo copy 4;1464;1197;537;536; 0.5;0.5; 0;0;0;0
-ads icon;235;1089;66;57; 0.5;0.5; 0;0;0;0
-back;1412;813;149;124; 0.5;0.5; 0;0;0;0
+80080-playstation-angel-symmetry-light-game-video-halo copy 4;1464;1045;537;536; 0.5;0.5; 0;0;0;0
+ads icon;419;1088;66;57; 0.5;0.5; 0;0;0;0
+back;1;728;149;124; 0.5;0.5; 0;0;0;0
 chest;1769;1821;265;226; 0.5;0.5; 0;0;0;0
-Draw 1;235;1235;105;33; 0.5;0.5; 0;0;0;0
-Draw 10;351;912;123;33; 0.5;0.5; 0;0;0;0
-Drop Rate;1904;995;142;31; 0.5;0.5; 0;0;0;0
-Get a S Equipment in 10 times;1;1406;485;35; 0.5;0.5; 0;0;0;0
 medium green 2;1464;1865;297;124; 0.5;0.5; 0;0;0;0
 medium yellow;1464;1737;297;124; 0.5;0.5; 0;0;0;0
 pack 1 back;923;728;485;721; 0.5;0.5; 0;0;0;0
-pack 1;1412;1099;191;45; 0.5;0.5; 0;0;0;0
 pack 2 back;1;3;485;721; 0.5;0.5; 0;0;0;0
-pack 2;1607;1099;190;45; 0.5;0.5; 0;0;0;0
-percent;351;949;126;313; 0.5;0.5; 0;0;0;0
+pack1_icon;1765;1585;245;232; 0.5;0.5; 0;0;0;0
+pack2_icon;1;861;339;284; 0.5;0.5; 0;0;0;0
 popup back1;1;1445;918;602; 0.5;0.5; 0;0;0;0
-Relic Epics Equipment Epics Equipment Rare Equipment Good Equip;490;1126;426;315; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy 2;1765;1739;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy 3;1850;1739;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy;1935;1739;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1;1751;820;81;78; 0.5;0.5; 0;0;0;0
-rule detail;235;1150;87;81; 0.5;0.5; 0;0;0;0
-rule details;1412;1148;390;45; 0.5;0.5; 0;0;0;0
-setting;1751;902;149;124; 0.5;0.5; 0;0;0;0
-shop;1597;1034;180;61; 0.5;0.5; 0;0;0;0
-ticket back 2;490;537;390;536; 0.5;0.5; 0;0;0;0
-ticket back;1;1100;230;253; 0.5;0.5; 0;0;0;0
-ticket pack 1;351;783;108;125; 0.5;0.5; 0;0;0;0
-ticket pack 2;351;1266;130;136; 0.5;0.5; 0;0;0;0
-ticket pack 3;1904;854;137;137; 0.5;0.5; 0;0;0;0
-ticket pack 4;1597;879;150;151; 0.5;0.5; 0;0;0;0
-ticket pack 5;1412;941;181;154; 0.5;0.5; 0;0;0;0
-ticket pack 6;1806;1030;194;163; 0.5;0.5; 0;0;0;0
-ticket pack 7;1;737;346;336; 0.5;0.5; 0;0;0;0
-ticket packs;490;1077;393;45; 0.5;0.5; 0;0;0;0
-treasure;1;1357;296;45; 0.5;0.5; 0;0;0;0
-x;235;1272;106;81; 0.5;0.5; 0;0;0;0
+Rounded Rectangle 1 copy 2;1665;1606;81;78; 0.5;0.5; 0;0;0;0
+Rounded Rectangle 1 copy 3;344;866;81;78; 0.5;0.5; 0;0;0;0
+Rounded Rectangle 1 copy;419;774;81;78; 0.5;0.5; 0;0;0;0
+Rounded Rectangle 1;490;37;81;78; 0.5;0.5; 0;0;0;0
+rule detail;1574;1603;87;81; 0.5;0.5; 0;0;0;0
+setting;154;728;149;124; 0.5;0.5; 0;0;0;0
+skin_back_white;490;286;244;226; 0.5;0.5; 0;0;0;0
+ticket back 2;490;856;390;536; 0.5;0.5; 0;0;0;0
+ticket back;1;1188;230;253; 0.5;0.5; 0;0;0;0
+ticket pack 1;307;732;108;125; 0.5;0.5; 0;0;0;0
+ticket pack 2;344;948;130;136; 0.5;0.5; 0;0;0;0
+ticket pack 3;307;1149;137;137; 0.5;0.5; 0;0;0;0
+ticket pack 4;307;1290;150;151; 0.5;0.5; 0;0;0;0
+ticket pack 5;688;128;181;154; 0.5;0.5; 0;0;0;0
+ticket pack 6;490;119;194;163; 0.5;0.5; 0;0;0;0
+ticket pack 7;504;516;346;336; 0.5;0.5; 0;0;0;0
+ticket packs;490;1396;393;45; 0.5;0.5; 0;0;0;0
+treasure;1464;1688;296;45; 0.5;0.5; 0;0;0;0
+x;1464;1603;106;81; 0.5;0.5; 0;0;0;0

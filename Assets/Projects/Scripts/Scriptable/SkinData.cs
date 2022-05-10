@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 #if UNITY_EDITOR
 using Newtonsoft.Json;
 #endif
 
 using Sirenix.OdinInspector;
 using Spine.Unity;
+using ThirdParties.Truongtv;
+using Truongtv.Utilities;
 using UnityEngine;
+using Random = System.Random;
 
 namespace Projects.Scripts.Scriptable
 {
@@ -26,7 +30,6 @@ namespace Projects.Scripts.Scriptable
         public const string CloakPrefix = "wing/";
         public List<Color> skinColors;
         public int sTierTicket = 150, aTierTicket = 100, bTierTicket = 50, cTierTicket = 30, colorTicket = 5;
-
         public List<string> GetAllSkinName()
         {
             var result = new List<string>();
@@ -40,6 +43,33 @@ namespace Projects.Scripts.Scriptable
             return result;
         }
 
+        public List<SkinInfo> GetSkinByRank(int number,SkinRank rank)
+        {
+            var list = new List<SkinInfo>();
+            list.AddRange(hairSkins);
+            list.AddRange(gloveSkins);
+            list.AddRange(bodySkins);
+            list.AddRange(glassSkins);
+            list.AddRange(cloakSkins);
+            var startData = GameDataManager.Instance.startSkin;
+            list.RemoveAll(a => startData.Contains(a.skinName)||a.rank!=rank);
+            list.Shuffle();
+            return list.GetRange(0,number);
+        }
+        public List<SkinInfo> GetRandomSkin(int number)
+        {
+            var list = new List<SkinInfo>();
+            list.AddRange(hairSkins);
+            list.AddRange(gloveSkins);
+            list.AddRange(bodySkins);
+            list.AddRange(glassSkins);
+            list.AddRange(cloakSkins);
+            var startData = GameDataManager.Instance.startSkin;
+            list.RemoveAll(a => startData.Contains(a.skinName));
+            list.Shuffle();
+            return list.GetRange(0,number);
+        }
+        
         private List<string> GetAllSkinsByName(string prefix)
         {
             var total = GetAllSkinName();
