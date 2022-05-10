@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using Projects.Scripts.Hub.Component;
 using Projects.Scripts.Menu;
 using Sirenix.OdinInspector;
@@ -35,20 +36,33 @@ namespace Projects.Scripts.Popup
 
             foreach (var chestItem in chestItemList)
             {
-                chestItem.Init(GameDataManager.Instance.shopData,this);
+                chestItem.Init(GameDataManager.Instance.shopData, this);
             }
-
         }
 
-        public void UpdateChestProgress()
+        public void UpdateChestProgress(int from, int to)
         {
-            var count = GameDataManager.Instance.GetTotalChestOpen() % 10;
-            chestProgress.fillAmount = fillProgress[count];
+            chestProgress.fillAmount = fillProgress[to % 10];
+            Debug.Log(to);
+            // int count = from;
+            // if (to / 10 > 0)
+            // {
+            //     chestProgress.fillAmount = fillProgress[count];
+            //     DOTween.To(() => count, x => count = x, to, 0.5f)
+            //         .OnStart(() => { chestProgress.fillAmount = fillProgress[count]; })
+            //         .OnUpdate(() => { })
+            //         .OnComplete(() => { chestProgress.fillAmount = fillProgress; });
+            // }
+            // else
+            // {
+            // }
         }
     }
 
     public enum ShopType
     {
-        Chest,Pack,Ticket
+        Chest,
+        Pack,
+        Ticket
     }
 }

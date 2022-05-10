@@ -43,6 +43,19 @@ namespace Projects.Scripts.Scriptable
             return result;
         }
 
+        public List<SkinInfo> GetSkinByRank(int number,SkinRank rank)
+        {
+            var list = new List<SkinInfo>();
+            list.AddRange(hairSkins);
+            list.AddRange(gloveSkins);
+            list.AddRange(bodySkins);
+            list.AddRange(glassSkins);
+            list.AddRange(cloakSkins);
+            var startData = GameDataManager.Instance.startSkin;
+            list.RemoveAll(a => startData.Contains(a.skinName)||a.rank!=rank);
+            list.Shuffle();
+            return list.GetRange(0,number);
+        }
         public List<SkinInfo> GetRandomSkin(int number)
         {
             var list = new List<SkinInfo>();
@@ -54,12 +67,7 @@ namespace Projects.Scripts.Scriptable
             var startData = GameDataManager.Instance.startSkin;
             list.RemoveAll(a => startData.Contains(a.skinName));
             list.Shuffle();
-            var result = new List<SkinInfo>();
-            for (var i = 0; i < number; i++)
-            {
-                result.Add(list[i]);
-            }
-            return result;
+            return list.GetRange(0,number);
         }
         
         private List<string> GetAllSkinsByName(string prefix)

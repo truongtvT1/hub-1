@@ -21,7 +21,7 @@ namespace Projects.Scripts.Popup
         private void Awake()
         {
             closeButton.onClick.AddListener(Close);
-            closeAction = _close;
+            
             
         }
 
@@ -51,8 +51,13 @@ namespace Projects.Scripts.Popup
         }
         public void Init(List<SkinInfo> skinList,Action closePopup = null)
         {
-            _close = closePopup;
+            closeAction += closePopup;
             closeButton.gameObject.SetActive(false);
+            graphic.AnimationState.SetAnimation(0, idle, true);
+            foreach (var item in chestItemList)
+            {
+                item.gameObject.SetActive(false);
+            }
             openCompleteAction = () =>
             {
                 OnOpen(skinList);

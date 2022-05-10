@@ -9,9 +9,10 @@ using UnityEngine;
 public class ChestItem : MonoBehaviour
 {
     [SerializeField] private SkinItem item;
-        
+    [SerializeField] private GameObject border;
     public void Init(SkinInfo skin,Transform chestTransform,float delay)
     {
+        border.SetActive(false);
         item.gameObject.SetActive(true);
         item.transform.position = chestTransform.position;
         item.transform.localScale = Vector3.zero;
@@ -21,5 +22,9 @@ public class ChestItem : MonoBehaviour
         sequence.Join(item.transform.DOLocalMove(Vector3.zero, 0.5f));
         sequence.SetDelay(delay);
         sequence.Play();
+        sequence.OnComplete(() =>
+        {
+            border.SetActive(true);
+        });
     }
 }

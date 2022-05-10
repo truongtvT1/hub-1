@@ -10,6 +10,7 @@ using TMPro;
 using Truongtv.PopUpController;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Projects.Scripts.Hub.Component
 {
@@ -21,6 +22,7 @@ namespace Projects.Scripts.Hub.Component
         private ShopData _shopData;
         private ChestData _item;
         private PopupShop _shop;
+        private SkinData _data;
         private List<string> GetALlShopTicketId()
         {
             return ShopData.Instance.GetAllShopChestId();
@@ -30,6 +32,7 @@ namespace Projects.Scripts.Hub.Component
         {
             _shopData = shopData;
             _shop = popupShop;
+            _data = GameDataManager.Instance.skinData;
             _item = _shopData.shopChestList.Find(a => a.shopId == shopId);
             
             button.onClick.RemoveAllListeners();
@@ -91,12 +94,46 @@ namespace Projects.Scripts.Hub.Component
 
         private void PurchaseSuccess()
         {
-            GameDataManager.Instance.UpdateChestOpenNumber(_item.numberItemReward);
+            
             Init(_shopData,_shop);
-            _shop.UpdateChestProgress();
-            // show open chest
-            var listItem = GameDataManager.Instance.skinData.GetRandomSkin(_item.numberItemReward);
-            PopupMenuController.Instance.ShowPopupOpenChest(listItem);
+            var listItem = new List<SkinInfo>();
+            var lastChestOpen = GameDataManager.Instance.GetTotalChestOpen();
+            
+            var numberSTier = 0;
+            if (lastChestOpen % 10 + _item.numberItemReward > 10)
+            {
+                numberSTier = (lastChestOpen % 10 + _item.numberItemReward) / 10;
+                listItem.AddRange(_data.GetSkinByRank(numberSTier,SkinRank.S));
+            }
+            for (var i = 0; i < _item.numberItemReward-numberSTier; i++)
+            {
+                var r = Random.Range(0, 100f);
+                if (r < _shopData.sPercent)
+                {
+                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.S));
+                }
+                else if (r < _shopData.aPercent)
+                {
+                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.A));
+                }
+                else if (r < _shopData.bPercent)
+                {
+                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.B));
+                }
+                else
+                {
+                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.C));
+                }
+            }
+            GameDataManager.Instance.UpdateChestOpenNumber(_item.numberItemReward);
+            foreach (var item in listItem)
+            {
+                GameDataManager.Instance.UnlockSkin(item.skinName);
+            }
+            PopupMenuController.Instance.ShowPopupOpenChest(listItem, () =>
+            {
+                _shop.UpdateChestProgress(lastChestOpen % 10,lastChestOpen % 10 + _item.numberItemReward);
+            });
 
 
 

@@ -128,6 +128,15 @@ TextureImporter:
   - first:
       213: -8343581773329175713
     second: x
+  - first:
+      213: 1067720603436743962
+    second: pack1_icon
+  - first:
+      213: -412809489920830920
+    second: pack2_icon
+  - first:
+      213: 1924099703828337175
+    second: skin_back_white
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -205,27 +214,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: $2
-      rect:
-        serializedVersion: 2
-        x: 351
-        y: 735
-        width: 106
-        height: 44
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b24c305cee1d6df20800000000000000
-      internalID: 3447173388236473387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: 10times1
       rect:
         serializedVersion: 2
@@ -268,27 +256,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: 50
-      rect:
-        serializedVersion: 2
-        x: 2005
-        y: 1701
-        width: 40
-        height: 34
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7cc5a7d25a86c0320800000000000000
-      internalID: 2525508549689892039
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: 80080-playstation-angel-symmetry-light-game-video-halo copy 3
       rect:
         serializedVersion: 2
@@ -314,7 +281,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1464
-        y: 1197
+        y: 1045
         width: 537
         height: 536
       alignment: 0
@@ -334,8 +301,8 @@ TextureImporter:
       name: ads icon
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1089
+        x: 419
+        y: 1088
         width: 66
         height: 57
       alignment: 0
@@ -355,8 +322,8 @@ TextureImporter:
       name: back
       rect:
         serializedVersion: 2
-        x: 1412
-        y: 813
+        x: 1
+        y: 728
         width: 149
         height: 124
       alignment: 0
@@ -389,90 +356,6 @@ TextureImporter:
       bones: []
       spriteID: e22dcbed197e37cf0800000000000000
       internalID: -255606140136795602
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Draw 1
-      rect:
-        serializedVersion: 2
-        x: 235
-        y: 1235
-        width: 105
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 09b483f4bea874270800000000000000
-      internalID: 8234703186921278352
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Draw 10
-      rect:
-        serializedVersion: 2
-        x: 351
-        y: 912
-        width: 123
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 388c44cc0322f3bc0800000000000000
-      internalID: -3801281967496574845
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Drop Rate
-      rect:
-        serializedVersion: 2
-        x: 1904
-        y: 995
-        width: 142
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0efdc3ae193413cb0800000000000000
-      internalID: -4886049826741100576
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Get a S Equipment in 10 times
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 1406
-        width: 485
-        height: 35
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 57eefe193ef680660800000000000000
-      internalID: 7352249414879014517
       vertices: []
       indices: 
       edges: []
@@ -541,27 +424,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pack 1
-      rect:
-        serializedVersion: 2
-        x: 1412
-        y: 1099
-        width: 191
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2728827e1e498b840800000000000000
-      internalID: 5240101864412316274
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: pack 2 back
       rect:
         serializedVersion: 2
@@ -583,13 +445,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pack 2
+      name: pack1_icon
       rect:
         serializedVersion: 2
-        x: 1607
-        y: 1099
-        width: 190
-        height: 45
+        x: 1765
+        y: 1585
+        width: 245
+        height: 232
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -597,20 +459,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 860809d3d0f0e4a80800000000000000
-      internalID: -8480824498750193560
+      spriteID: a1d76375b3e41de00800000000000000
+      internalID: 1067720603436743962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: percent
+      name: pack2_icon
       rect:
         serializedVersion: 2
-        x: 351
-        y: 949
-        width: 126
-        height: 313
+        x: 1
+        y: 861
+        width: 339
+        height: 284
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -618,8 +480,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 609cfb695fa647c70800000000000000
-      internalID: 8967910361030183174
+      spriteID: 832db51c4f7654af0800000000000000
+      internalID: -412809489920830920
       vertices: []
       indices: 
       edges: []
@@ -646,32 +508,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Relic Epics Equipment Epics Equipment Rare Equipment Good Equip
-      rect:
-        serializedVersion: 2
-        x: 490
-        y: 1126
-        width: 426
-        height: 315
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a49c2b03e50995180800000000000000
-      internalID: -9126104435671250614
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Rounded Rectangle 1 copy 2
       rect:
         serializedVersion: 2
-        x: 1765
-        y: 1739
+        x: 1665
+        y: 1606
         width: 81
         height: 78
       alignment: 0
@@ -691,8 +532,8 @@ TextureImporter:
       name: Rounded Rectangle 1 copy 3
       rect:
         serializedVersion: 2
-        x: 1850
-        y: 1739
+        x: 344
+        y: 866
         width: 81
         height: 78
       alignment: 0
@@ -712,8 +553,8 @@ TextureImporter:
       name: Rounded Rectangle 1 copy
       rect:
         serializedVersion: 2
-        x: 1935
-        y: 1739
+        x: 419
+        y: 774
         width: 81
         height: 78
       alignment: 0
@@ -733,8 +574,8 @@ TextureImporter:
       name: Rounded Rectangle 1
       rect:
         serializedVersion: 2
-        x: 1751
-        y: 820
+        x: 490
+        y: 37
         width: 81
         height: 78
       alignment: 0
@@ -754,8 +595,8 @@ TextureImporter:
       name: rule detail
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1150
+        x: 1574
+        y: 1603
         width: 87
         height: 81
       alignment: 0
@@ -772,32 +613,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rule details
-      rect:
-        serializedVersion: 2
-        x: 1412
-        y: 1148
-        width: 390
-        height: 45
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc63831c43190e280800000000000000
-      internalID: -9016046798229719347
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: setting
       rect:
         serializedVersion: 2
-        x: 1751
-        y: 902
+        x: 154
+        y: 728
         width: 149
         height: 124
       alignment: 0
@@ -814,13 +634,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: shop
+      name: skin_back_white
       rect:
         serializedVersion: 2
-        x: 1597
-        y: 1034
-        width: 180
-        height: 61
+        x: 490
+        y: 286
+        width: 244
+        height: 226
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -828,8 +648,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b9159919cf9cbdaa0800000000000000
-      internalID: -6135087980750483045
+      spriteID: 7125f1f7c76c3ba10800000000000000
+      internalID: 1924099703828337175
       vertices: []
       indices: 
       edges: []
@@ -839,7 +659,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 490
-        y: 537
+        y: 856
         width: 390
         height: 536
       alignment: 0
@@ -860,7 +680,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 1100
+        y: 1188
         width: 230
         height: 253
       alignment: 0
@@ -880,8 +700,8 @@ TextureImporter:
       name: ticket pack 1
       rect:
         serializedVersion: 2
-        x: 351
-        y: 783
+        x: 307
+        y: 732
         width: 108
         height: 125
       alignment: 0
@@ -901,8 +721,8 @@ TextureImporter:
       name: ticket pack 2
       rect:
         serializedVersion: 2
-        x: 351
-        y: 1266
+        x: 344
+        y: 948
         width: 130
         height: 136
       alignment: 0
@@ -922,8 +742,8 @@ TextureImporter:
       name: ticket pack 3
       rect:
         serializedVersion: 2
-        x: 1904
-        y: 854
+        x: 307
+        y: 1149
         width: 137
         height: 137
       alignment: 0
@@ -943,8 +763,8 @@ TextureImporter:
       name: ticket pack 4
       rect:
         serializedVersion: 2
-        x: 1597
-        y: 879
+        x: 307
+        y: 1290
         width: 150
         height: 151
       alignment: 0
@@ -964,8 +784,8 @@ TextureImporter:
       name: ticket pack 5
       rect:
         serializedVersion: 2
-        x: 1412
-        y: 941
+        x: 688
+        y: 128
         width: 181
         height: 154
       alignment: 0
@@ -985,8 +805,8 @@ TextureImporter:
       name: ticket pack 6
       rect:
         serializedVersion: 2
-        x: 1806
-        y: 1030
+        x: 490
+        y: 119
         width: 194
         height: 163
       alignment: 0
@@ -1006,8 +826,8 @@ TextureImporter:
       name: ticket pack 7
       rect:
         serializedVersion: 2
-        x: 1
-        y: 737
+        x: 504
+        y: 516
         width: 346
         height: 336
       alignment: 0
@@ -1028,7 +848,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 490
-        y: 1077
+        y: 1396
         width: 393
         height: 45
       alignment: 0
@@ -1048,8 +868,8 @@ TextureImporter:
       name: treasure
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1357
+        x: 1464
+        y: 1688
         width: 296
         height: 45
       alignment: 0
@@ -1069,8 +889,8 @@ TextureImporter:
       name: x
       rect:
         serializedVersion: 2
-        x: 235
-        y: 1272
+        x: 1464
+        y: 1603
         width: 106
         height: 81
       alignment: 0

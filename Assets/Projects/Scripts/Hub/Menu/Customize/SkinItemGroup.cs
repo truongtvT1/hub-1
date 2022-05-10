@@ -9,7 +9,7 @@ namespace Projects.Scripts.Menu
     [RequireComponent(typeof(HorizontalLayoutGroup))]
     public class SkinItemGroup : MonoBehaviour
     {
-        public List<SkinItem> items;
+        public List<GameObject> items;
         private Vector2 _startPos;
         private ScrollRect _scroll;
         private float _moveLength;

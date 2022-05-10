@@ -47,6 +47,7 @@ namespace Projects.Scripts.Menu
             shopButton.onClick.AddListener(OnShopButtonClick);
             mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
+            ticketText.text = $"{GameDataManager.Instance.GetTotalTicket()}";
             GameServiceManager.ShowBanner();
         }
 

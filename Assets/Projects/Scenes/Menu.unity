@@ -4537,6 +4537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ticket effect
       objectReference: {fileID: 0}
+    - target: {fileID: 6391767746313565534, guid: 2915c95b156a5b543a52e243536ae3a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6391767746313565535, guid: 2915c95b156a5b543a52e243536ae3a4, type: 3}
       propertyPath: m_RootOrder
       value: 5
