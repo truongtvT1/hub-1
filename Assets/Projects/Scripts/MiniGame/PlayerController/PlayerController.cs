@@ -19,7 +19,7 @@ namespace MiniGame
         Hell = 3
     }
     
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : MonoBehaviour, IPlayerRanking
     {
         public PlayerMovement Movement;
         public CharacterAnimation Animation;
@@ -33,6 +33,7 @@ namespace MiniGame
         private MoveDirection _touchDirection = MoveDirection.None;
         private bool _holdJump, _isJetpackingLeft, _isJetpackingRight;
         private AIBrain brain;
+        private RankIngame rankInfo;
         private List<string> currentSkin = new List<string>();
         private Color currentColor;
         private const float minEasyTime = 3.5f;
@@ -43,7 +44,10 @@ namespace MiniGame
         private const float maxNormalTime = 6.5f;
         private const float maxHardTime = 4.5f;
         private const float maxHellTime = 2.5f;
-        
+        private const float easyTargetDistance = 2.5f;
+        private const float normalTargetDistance = 2f;
+        private const float hardTargetDistance = 1.5f;
+        private const float hellTargetDistance = 1f;
         
         
         public bool IsDead
@@ -75,8 +79,6 @@ namespace MiniGame
             {
                 currentSkin = GameDataManager.Instance.GetSkinInGame();
                 currentColor = GameDataManager.Instance.GetCurrentColor();
-                Debug.Log("current skin = " + currentSkin[0]);
-                Debug.Log("current Color = " + currentColor);
                 Animation.SetSkin(currentSkin);
                 Animation.SetSkinColor(currentColor);
             }
@@ -92,18 +94,22 @@ namespace MiniGame
                 case BotDifficulty.Easy:
                     minTimeToThink = minEasyTime;
                     maxTimeToThink = maxEasyTime;
+                    targetDistance = easyTargetDistance;
                     break;
                 case BotDifficulty.Normal:
                     minTimeToThink = minNormalTime;
                     maxTimeToThink = maxNormalTime;
+                    targetDistance = normalTargetDistance;
                     break;
                 case BotDifficulty.Hard:
                     minTimeToThink = minHardTime;
                     maxTimeToThink = maxHardTime;
+                    targetDistance = hardTargetDistance;
                     break;
                 case BotDifficulty.Hell:
                     minTimeToThink = minHellTime;
                     maxTimeToThink = maxHellTime;
+                    targetDistance = hellTargetDistance;
                     break;
             }
             brain.Init(this, brainData);
@@ -272,7 +278,13 @@ namespace MiniGame
             //anim die
             CurrentHp = 0;
             StopAllCoroutines();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+
+        public void Revive()
+        {
+            CurrentHp = MaxHp;
+            gameObject.SetActive(true);
         }
         
         #region AI Action
@@ -360,6 +372,34 @@ namespace MiniGame
         {
             _touchDirection = MoveDirection.None;
             _holdJump = false;
+        }
+
+        public void InitRank(RankIngame rankInfo)
+        {
+            this.rankInfo = rankInfo;
+        }
+
+        public int GetRank()
+        {
+            return rankInfo.rank;
+        }
+        
+        public void Score(int score)
+        {
+            rankInfo.score += score;
+            if (LeaderBoardInGame.Instance != null)
+            {
+                LeaderBoardInGame.scoreAction.Invoke(rankInfo);
+            }
+        }
+
+        public void Finish()
+        {
+            rankInfo.isFinish = true;
+            if (LeaderBoardInGame.Instance != null)
+            {
+                LeaderBoardInGame.finishAction.Invoke(rankInfo);
+            }
         }
     }
 

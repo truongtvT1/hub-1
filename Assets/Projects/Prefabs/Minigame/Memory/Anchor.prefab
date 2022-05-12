@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8052131680452419619}
   - component: {fileID: 3363976179554662419}
   - component: {fileID: 560133892556115501}
+  - component: {fileID: 6116180785667900042}
   m_Layer: 9
   m_Name: obstacle anchor
   m_TagString: Untagged
@@ -96,8 +97,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 2
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -209,6 +210,18 @@ PolygonCollider2D:
       - {x: 0.33499998, y: 0.66999996}
       - {x: 0.315, y: 0.65}
       - {x: 0.255, y: 0.65}
+--- !u!114 &6116180785667900042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392427178080859313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22c4a69bfea40608e8ea94cbd256786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8004456056033071627
 GameObject:
   m_ObjectHideFlags: 0

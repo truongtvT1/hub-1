@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
+using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using TMPro;
@@ -20,6 +21,7 @@ namespace MiniGame.MemoryMatter
         [SerializeField] private List<Transform> stairsList;
         [SerializeField] private List<SpriteRenderer> fruitList;
         [SerializeField] private List<Sprite> fruitSprites;
+        [SerializeField] private GameObject UIContainer;
         [FoldoutGroup("Character")] public PlayerController playerPrefabs;
         [SerializeField,FoldoutGroup("Bot")] private int maxBot = 8;
         [SerializeField,FoldoutGroup("Bot")] private PlayerController botPrefab;
@@ -38,16 +40,16 @@ namespace MiniGame.MemoryMatter
         [SerializeField] private float timeToStart;
         
         private int currentRound = 0, currentTurn = 0, indexObj;
-        private bool isShowing, isHiding;
+        private bool isShowing, isHiding, isObjFalling;
         private float timeCounter;
         private GamePlayController _gamePlayController;
         private List<int> lastShownObjIndex = new List<int>();
+        private List<PlayerSkin> cacheBotSkin; 
         private float cacheShowDuration, cacheTurnDuration, deltaDifficulty;
         private int cacheMaxTurn, cacheMaxNumberObjs;
-        private List<BotSkin> cacheBotSkin;
-        private List<string> playerSkin;
-        private Color playerColor;
-        
+        private int objCount = 0;
+        private float countTimeObj = 0;
+
         private void Awake()
         {
             settingButton.onClick.AddListener(() =>
@@ -67,29 +69,55 @@ namespace MiniGame.MemoryMatter
             cacheMaxNumberObjs = maxNumberObjToShowPerTurn;
             _gamePlayController = GetComponent<GamePlayController>();
             listBot = new List<PlayerController>(maxBot);
-            cacheBotSkin = new List<BotSkin>();
             Hide();
         }
 
         private async void Start()
         {
-            playerSkin = GameDataManager.Instance.GetSkinInGame();
-            playerColor = GameDataManager.Instance.GetCurrentColor(); 
+            var currentColor = GameDataManager.Instance.GetCurrentColor();
+            var currentSkin = GameDataManager.Instance.GetSkinInGame();
+            var playerInfo = new RankIngame
+            {
+                isBot = false,
+                isFinish = false,
+                playerSkin = new PlayerSkin
+                {
+                    color = currentColor,
+                    skin = currentSkin
+                },
+                name = "Me",
+                rank = 0,
+                score = 0
+            };
+            LeaderBoardInGame.Instance.ListRanking.Add(playerInfo);
+            _gamePlayController.player.InitRank(playerInfo);
             for (int i = 0; i < maxBot; i++)
             {
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var color = GameDataManager.Instance.RandomColor();
-                var skin = new BotSkin();
+                var skin = new PlayerSkin();
                 skin.color = color;
                 skin.skin = listSkin;
-                cacheBotSkin.Add(skin);
+                string botName = RandomNameAndCountryPicker.Instance.GetRandomPlayerInfo().playerName;
+                RankIngame botInfo = new RankIngame
+                {
+                    isBot = true,
+                    isFinish = false,
+                    score = 0,
+                    rank = 0,
+                    name = botName,
+                    playerSkin = skin
+                };
+                LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
                 var rd = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
                 var bot = Instantiate(botPrefab);
                 await Task.Delay(10);
                 bot.transform.position = new Vector3(rd,spawnRange[0].position.y, bot.transform.position.z);
                 listBot.Add(bot);
                 bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),listSkin,color);
+                bot.InitRank(botInfo);
             }
+            LeaderBoardInGame.Instance.Init(LevelGoal.Score);
         }
 
         private void Update()
@@ -159,36 +187,26 @@ namespace MiniGame.MemoryMatter
                 DOTween.KillAll(true);
                 StopAllCoroutines();
                 await Task.Delay(2500);
-                SceneManager.LoadScene("Menu");
-                GameDataManager.Instance.ResetSkinInGame();
+                UIContainer.SetActive(false);
+                InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("memory")));
                 return;
             }
             currentRound++;
             
-            if (_gamePlayController.player == null)
+            if (_gamePlayController.player.IsDead)
             {
                 var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
-                var player = Instantiate(playerPrefabs);
-                player.Animation.SetVisible();
-                await Task.Delay(10);
-                player.Animation.SetVisible(true);
-                player.transform.position = new Vector3(rd1, spawnRange[0].position.y,player.transform.position.z);
-                player.Init();
-                _gamePlayController.player = player;
+                _gamePlayController.player.transform.position = new Vector3(rd1, spawnRange[0].position.y,_gamePlayController.player.transform.position.z);
+                _gamePlayController.player.Revive();
             }
             
             for (int i = 0; i < listBot.Count; i++)
             {
-                if (listBot[i] == null)
+                if (listBot[i].IsDead)
                 {
                     var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
-                    var bot = Instantiate(botPrefab);
-                    bot.Animation.SetVisible();
-                    await Task.Delay(10);
-                    bot.Animation.SetVisible(true);
-                    bot.transform.position = new Vector3(rd1,spawnRange[0].position.y, bot.transform.position.z);
-                    bot.BotInit(botBrainData[Random.Range(0,botBrainData.Length)], (BotDifficulty) Random.Range(0,4),cacheBotSkin[i].skin,cacheBotSkin[i].color);
-                    listBot[i] = bot;
+                    listBot[i].transform.position = new Vector3(rd1,spawnRange[0].position.y, listBot[i].transform.position.z);
+                    listBot[i].Revive();
                 }
             }
             
@@ -213,7 +231,8 @@ namespace MiniGame.MemoryMatter
                 return;
             }
 
-            await Task.Delay(1000);
+            await Task.Delay(2000);
+            LeaderBoardInGame.Instance.Hide();
             Show();
             currentTurn++;
             
@@ -224,6 +243,17 @@ namespace MiniGame.MemoryMatter
             StopAllCoroutines();
             StartCoroutine(CountTime(turnDuration, 0, f =>
             {
+                if (countTimeObj < trapDuration)
+                {
+                    countTimeObj += Time.deltaTime;
+                }
+                else
+                {
+                    if (objCount < trapAmountPerTurn && !isObjFalling)
+                    {
+                        ObjectFall();
+                    }
+                }
                 if (timeShow < showDuration && isShowing)
                 {
                     timeShow += Time.deltaTime;
@@ -280,9 +310,7 @@ namespace MiniGame.MemoryMatter
         }
 
 
-        private int objCount = 0;
-        private float countTimeObj = 0;
-
+        
         void Result()
         {
             indexObj = Random.Range(0, fruitList.Count);
@@ -315,14 +343,6 @@ namespace MiniGame.MemoryMatter
             {
                 timeCounterText.text = "" + (int) (showDuration - f);
                 timeCounterText.transform.root.gameObject.SetActive(true);
-                if (countTimeObj < trapDuration && objCount < trapAmountPerTurn)
-                {
-                    countTimeObj += Time.deltaTime;
-                }
-                else
-                {
-                    ObjectFall();
-                }
             }, () =>
             {
                 timeCounterText.transform.root.gameObject.SetActive(false);
@@ -342,19 +362,23 @@ namespace MiniGame.MemoryMatter
 
             StartCoroutine(CountTime(resultDuration, 0, time =>
                 {
-                    if (countTimeObj < trapDuration && objCount < trapAmountPerTurn)
-                    {
-                        countTimeObj += Time.deltaTime;
-                    }
-                    else
-                    {
-                        ObjectFall();
-                    }
                 },callback: async () =>
             {
                 await Task.Delay(2500);
                 //Score player
-                
+                for (int i = 0; i < listBot.Count; i++)
+                {
+                    if (!listBot[i].IsDead)
+                    {
+                        listBot[i].Score(1);
+                    }
+                }
+                if (!_gamePlayController.player.IsDead)
+                {
+                    _gamePlayController.player.Score(1);
+                }
+                LeaderBoardInGame.Instance.UpdateBoard();
+                LeaderBoardInGame.Instance.Show();
                 currentTurn = 0;
                 NextRound();
             }
@@ -363,23 +387,19 @@ namespace MiniGame.MemoryMatter
 
         async void ObjectFall()
         {
-            var amount = Random.Range(0, trapAmountPerTurn + 1 - objCount);
-            GameObject item = null;
-            List<Vector3> rdPos = new List<Vector3>();
-            for (int i = 0; i < amount; i++)
-            {
-                item = warningPool.nextThing;
-                rdPos.Add(new Vector3(Random.Range(spawnRange[1].position.x, spawnRange[0].position.x), 0));
-                item.transform.position = new Vector3(rdPos[i].x,warningPool.transform.position.y);
-            }
-            objCount += amount;
+            isObjFalling = true;
+            var pos = Random.Range(spawnRange[1].position.x, spawnRange[0].position.x);
+            var warning = warningPool.nextThing;
+            warning.transform.position = new Vector3(pos,warningPool.transform.position.y);
+            objCount++;
             await Task.Delay(500);
-            for (int i = 0; i < amount; i++)
-            {
-                item = trapPool[Random.Range(0,trapPool.Length)].nextThing;
-                item.transform.position = new Vector3(rdPos[i].x,spawnRange[0].position.y);
-            }
+            var item = trapPool[Random.Range(0,trapPool.Length)].nextThing;
+            item.SetActive(false);
+            item.transform.position = new Vector3(pos,spawnRange[0].position.y);
+            item.SetActive(true);
+            await Task.Delay(1000);
             countTimeObj = 0;
+            isObjFalling = false;
         }
         
         IEnumerator CountTime(float duration, float delay, Action<float> onCounting = null, Action callback = null, Func<bool> waitUntil = null)

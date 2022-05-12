@@ -11,8 +11,11 @@ namespace Projects.Scripts.Hub
     public class CharacterAnimationGraphic : MonoBehaviour
     {
         private SkeletonGraphic _skeletonGraphic;
+        [SerializeField] private SkeletonDataAsset _skeletonDataAsset;
         [SerializeField,SpineSkin] private string baseSkin;
         [SerializeField, SpineAnimation] private string idleAnim, changeClothesAnim;
+        [SerializeField, ValueDropdown(nameof(GetAllAnimationName))]
+        private List<string> winAnimations;
         private Skin _characterSkin;
         private SkeletonData _skeletonData;
         private List<string> _skinList;
@@ -21,10 +24,29 @@ namespace Projects.Scripts.Hub
         private void Awake()
         {
             _skeletonGraphic = GetComponent<SkeletonGraphic>();
-            _skeletonData = _skeletonGraphic.Skeleton.Data;
+            
+            _skeletonData = _skeletonDataAsset.GetSkeletonData(true);
             if (!string.IsNullOrEmpty(idleAnim))
                 _skeletonGraphic.AnimationState.SetAnimation(0, idleAnim, true);
         }
+        
+        List<string> GetAllAnimationName()
+        {
+            if (_skeletonData == null)
+            {
+                _skeletonData = _skeletonDataAsset.GetSkeletonData(true);
+            }
+            
+            var listName = new List<string>();
+            var listAnimation = _skeletonData.Animations.Items;
+            for (int i = 0; i < listAnimation.Length; i++)
+            {
+                listName.Add(listAnimation[i].Name);
+            }
+
+            return listName;
+        }
+        
         public void SetSkinColor(Color color)
         {
             _color = color;
@@ -63,6 +85,16 @@ namespace Projects.Scripts.Hub
                         _skeletonGraphic.AnimationState.SetAnimation(0, idleAnim, true);
                 };
             }
+        }
+
+        public void PlayMixWin()
+        {
+            var r = UnityEngine.Random.Range(0, winAnimations.Count);
+            var entry = _skeletonGraphic.AnimationState.SetAnimation(1, winAnimations[r], false);
+            entry.Complete += trackEntry =>
+            {
+                PlayMixWin();
+            };
         }
         
         #region private

@@ -72,3 +72,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 7acc9fa61cc3eb043a02281c82a46efb, type: 2}
       TrueState: 
       FalseState: Idle
+    - transitionType: 0
+      Decisions:
+      - {fileID: 11400000, guid: 7a2193c0fa0907f479a7f1c5a33c00d6, type: 2}
+      - {fileID: 11400000, guid: 659d8049f17b1734c9afa61f597fa139, type: 2}
+      TrueState: Jump
+      FalseState: 

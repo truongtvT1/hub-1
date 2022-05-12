@@ -13,7 +13,7 @@ namespace Projects.Scripts.Data
 
         [SerializeField, ShowIf("@this.scene == null")]
         public UnityEngine.Object scene;
-
+        
         [ReadOnly] public string gameScene;
         [HideInInspector] public bool mostPlay, recentPlay;
         [HideInInspector] public int total, win, lose;

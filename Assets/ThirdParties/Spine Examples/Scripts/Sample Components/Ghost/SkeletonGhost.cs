@@ -79,7 +79,7 @@ namespace Spine.Unity.Examples {
 				if (ghostShader == null)
 					ghostShader = Shader.Find(GhostingShaderName);
 
-				skeletonRenderer = transform.GetComponent<SkeletonPartsRenderer>();
+				skeletonRenderer = GetComponent<SkeletonPartsRenderer>();
 				meshFilter = GetComponent<MeshFilter>();
 				meshRenderer = GetComponent<MeshRenderer>();
 				nextSpawnTime = Time.time + spawnInterval;

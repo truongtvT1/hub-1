@@ -30,7 +30,7 @@ namespace MiniGame.StickRun
         public GameObject gateFinish;
         [SerializeField] private int maxTimeRevive = 3;
         [SerializeField] private int maxBotNumbers = 3;
-        private List<BotSkin> cacheBotSkin = new List<BotSkin>();
+        private List<PlayerSkin> cacheBotSkin = new List<PlayerSkin>();
         public static StickRunGameController Instance
         {
             get => instance;
@@ -208,7 +208,7 @@ namespace MiniGame.StickRun
             {
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var color = GameDataManager.Instance.RandomColor();
-                cacheBotSkin.Add(new BotSkin(color,listSkin));
+                cacheBotSkin.Add(new PlayerSkin(color,listSkin));
                 var bot = Instantiate(botPrefabs);
                 bot.name = "bot" + i;
                 yield return new WaitUntil(() => bot);

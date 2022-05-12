@@ -129,6 +129,17 @@ namespace ThirdParties.Truongtv
             }
             return _userInfo.times[key];
         }
+
+        public int GetTotalTrohpy()
+        {
+            return GetCurrencyValue("trophy");
+        }
+
+        public void UpdateTrophy(int value)
+        {
+            UpdateCurrency("trophy",value);
+        }
+        
         public int GetTotalTicket()
         {
             return GetCurrencyValue("ticket");

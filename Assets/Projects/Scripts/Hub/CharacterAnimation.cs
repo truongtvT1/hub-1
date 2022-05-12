@@ -54,7 +54,6 @@ namespace Projects.Scripts.Hub
         private void Start()
         {
             _skeletonData = skeletonAnimation.skeleton.Data;
-            skeletonAnimation.Initialize(true);
             Random.InitState(DateTime.UtcNow.Millisecond);
         }
 
@@ -103,7 +102,6 @@ namespace Projects.Scripts.Hub
             {
                 _characterSkin.AddSkin(_skeletonData.FindSkin(_skinList[i]));
             }
-
             UpdateCombineSkin();
         }
 

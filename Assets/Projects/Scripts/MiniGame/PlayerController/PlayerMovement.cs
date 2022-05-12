@@ -74,14 +74,14 @@ namespace MiniGame
                     {
                         moveDirection = MoveDirection.Left;
                     }
-                    var scale = transform.localScale;
-                    totalDisplay.localScale= new Vector3(Mathf.Abs(scale.x)*(int)moveDirection,scale.y,scale.z);
                     if (Mathf.Abs(transform.position.x - target.position.x) <= _controller.GetTargetDistance())
                     {
                         _controller.SetReachTarget();
                     }
                     else
                     {
+                        var scale = transform.localScale;
+                        totalDisplay.localScale= new Vector3(Mathf.Abs(scale.x)*(int)moveDirection,scale.y,scale.z);
                         _controller.SetReachTarget(false);
                     }
                 }
@@ -127,6 +127,8 @@ namespace MiniGame
                 _moveEffectSpawnRunning = false;
                 CancelInvoke(nameof(RunEffect));
             }
+            
+            
             
             if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius*(int)moveDirection,0,0f),  wallLayer))
             {
@@ -263,8 +265,12 @@ namespace MiniGame
             boundSize = new Vector2(boundSize.x - 0.1f, boundSize.y);
             RaycastHit2D hit2D = Physics2D.BoxCast(gameObject.GetComponent<Collider2D>().bounds.center, boundSize,
                 0, Vector2.down, 0.1f, groundLayer);
+            if (hit2D)
+            {
+                return !hit2D.collider.isTrigger;
+            }
 
-            return hit2D.collider != null && !hit2D.collider.isTrigger;
+            return false;
         }
 
         public bool CheckIsOnOtherPlayer()
@@ -279,7 +285,13 @@ namespace MiniGame
         
         public bool CheckCollidingObject()
         {
-            if (Physics2D.OverlapPoint(groundCheckPoint.position + new Vector3(ballRadius * (int)moveDirection, 0, 0), wallLayer))
+            var boundSize = GetComponent<Collider2D>().bounds.size;
+            var hit1 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection, boundSize.y * 3/4, 0),
+                Vector2.right * (int) moveDirection,.1f, wallLayer);
+            var hit2 = Physics2D.Raycast(groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection, boundSize.y/2, 0),
+                Vector2.right * (int) moveDirection,.1f, wallLayer);
+            
+            if (hit1 != null || hit2 != null)
             {
                 return true;
             }
@@ -353,6 +365,7 @@ namespace MiniGame
         }
         public void SetForceInstant(Vector2 force)
         {
+            Debug.Log("add force " + name + " " + force);
             rigidbody2D.AddForce(force,ForceMode2D.Impulse);
         }
         #endregion
@@ -374,12 +387,17 @@ namespace MiniGame
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(0,-.05f), .01f);
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.25f,-0.02f), .01f);
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.25f,-0.02f), .01f);
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.35f,0.1f), .01f);
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.35f,0.1f), .01f);
-            Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(ballRadius * (int)moveDirection, ballRadius, 0), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(0,-.05f), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.25f,-0.02f), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.25f,-0.02f), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(.35f,0.1f), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(-.35f,0.1f), .01f);
+            // Gizmos.DrawSphere(groundCheckPoint.transform.position + new Vector3(ballRadius * (int)moveDirection, ballRadius, 0), .01f);
+            Vector2 boundSize = gameObject.GetComponent<Collider2D>().bounds.size;
+            boundSize = new Vector2(boundSize.x - 0.1f, boundSize.y);
+            Gizmos.DrawWireCube(gameObject.GetComponent<Collider2D>().bounds.center,boundSize);
+            Gizmos.DrawRay(groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection, boundSize.y/2, 0),groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection + .1f, boundSize.y/2, 0));
+            Gizmos.DrawRay(groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection, boundSize.y * 3/4, 0),groundCheckPoint.position + new Vector3(ballRadius * (int) moveDirection + .1f, boundSize.y * 3/4 , 0));
         }
     }
 }

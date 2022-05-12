@@ -4197,7 +4197,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll: {fileID: 3236331117889026448}
   prefab: {fileID: 6353484252669449831, guid: 352e42d26a9c9cf46be04f5a221ec806, type: 3}
-  customCharacter: {fileID: 3236331118612527661}
   tryButton: {fileID: 4005919201713167997}
   buyByTicketButton: {fileID: 7766346077985974665}
   buyByAdButton: {fileID: 2301298138611989969}
@@ -5636,7 +5635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3236331118402863872
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6248,9 +6247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaca4af9ac2b485bb9b2ce5691e593dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skeletonDataAsset: {fileID: 11400000, guid: f4ecef79612d5e0449325c349354159b, type: 2}
   baseSkin: base_00
   idleAnim: idle
   changeClothesAnim: test_clothes
+  winAnimations: []
 --- !u!1 &3236331118636628383
 GameObject:
   m_ObjectHideFlags: 0
@@ -6321,7 +6322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll: {fileID: 3236331117883339948}
   prefab: {fileID: 6353484252669449831, guid: 0b6f62b9614d03b438fc138dca317db3, type: 3}
-  customCharacter: {fileID: 3236331118612527661}
   tryButton: {fileID: 7201213704572517640}
   buyByTicketButton: {fileID: 5453785138138698118}
   buyByAdButton: {fileID: 5555027009684190323}
@@ -6398,7 +6398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll: {fileID: 3236331118507447487}
   prefab: {fileID: 6353484252669449831, guid: 130f2caab77adff4aad08290e6d97e1c, type: 3}
-  customCharacter: {fileID: 3236331118612527661}
   tryButton: {fileID: 329755641619435791}
   buyByTicketButton: {fileID: 9090433719661362778}
   buyByAdButton: {fileID: 7704731232876637643}
@@ -7085,7 +7084,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll: {fileID: 3236331118391023357}
   prefab: {fileID: 6353484252669449831, guid: 91fab7ad94f38c4458e32cd0402a2009, type: 3}
-  customCharacter: {fileID: 3236331118612527661}
   tryButton: {fileID: 3229553096860860078}
   buyByTicketButton: {fileID: 8399339699527656417}
   buyByAdButton: {fileID: 4602285551016564182}
@@ -7299,7 +7297,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scroll: {fileID: 3236331118044990066}
   prefab: {fileID: 6353484252669449831, guid: 0d3d090328b14be4ba2909075a99b282, type: 3}
-  customCharacter: {fileID: 3236331118612527661}
   tryButton: {fileID: 8375813656607554142}
   buyByTicketButton: {fileID: 2714320229658276968}
   buyByAdButton: {fileID: 5840045623315160727}

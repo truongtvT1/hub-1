@@ -9,9 +9,12 @@ public class ActionJump : AIAction
     public override void PerformAction(AIBrain _brain)
     {
         base.PerformAction(_brain);
+        if (_brain.PlayerController.IsGrounded())
+        {
+            _brain.PlayerController.JumpEnd();
+        }
         if (jumpTime < maxJumpTime)
         {
-            Jump(_brain);
             jumpTime += Time.deltaTime;
         }
         else
@@ -19,6 +22,12 @@ public class ActionJump : AIAction
             _brain.PlayerController.JumpEnd();
             jumpTime = 0;
         }
+    }
+
+    protected override void OneTimeAction(AIBrain _brain)
+    {
+        base.OneTimeAction(_brain);
+        Jump(_brain);
     }
 
     void Jump(AIBrain brain)

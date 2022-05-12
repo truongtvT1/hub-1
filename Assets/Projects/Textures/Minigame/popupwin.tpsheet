@@ -1,0 +1,29 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:a0ed560ef9efb3d7cd24b603285ec7e1:6ebf531d02d16e77d7769e0ff3614852:2a18feea880b2edb2f08a467742af800$
+#
+:format=40300
+:texture=popupwin.png
+:size=2048x1024
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+back2;1172;662;384;78; 0.5;0.5; 0;0;0;0
+finger;1980;847;60;78; 0.5;0.5; 0;0;0;0
+Group 1;1914;868;64;57; 0.5;0.5; 0;0;0;0
+medium green 2;1723;597;297;124; 0.5;0.5; 0;0;0;0
+medium yellow;1723;471;297;124; 0.5;0.5; 0;0;0;0
+platform top;1172;834;740;189; 0.5;0.5; 0;0;0;0
+platform topa;1;428;1169;595; 0.5;0.5; 0;0;0;0
+Rounded Rectangle 1;1172;742;618;90; 0.5;0.5; 0;0;0;0
+ticket;1914;800;51;66; 0.5;0.5; 0;0;0;0
+Win Lose;1914;927;114;96; 0.5;0.5; 0;0;0;0
+x2;1792;723;163;75; 0.5;0.5; 0;0;0;0
+x3;1558;665;163;75; 0.5;0.5; 0;0;0;0
+x4;1558;588;163;75; 0.5;0.5; 0;0;0;0
+x5;1172;585;163;75; 0.5;0.5; 0;0;0;0

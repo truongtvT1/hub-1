@@ -3300,9 +3300,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaca4af9ac2b485bb9b2ce5691e593dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skeletonDataAsset: {fileID: 11400000, guid: f4ecef79612d5e0449325c349354159b, type: 2}
   baseSkin: base_00
   idleAnim: idle
   changeClothesAnim: test_clothes
+  winAnimations: []
 --- !u!114 &1264771984
 MonoBehaviour:
   m_ObjectHideFlags: 0

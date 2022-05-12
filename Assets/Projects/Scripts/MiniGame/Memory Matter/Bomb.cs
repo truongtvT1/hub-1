@@ -8,7 +8,7 @@ namespace MiniGame.MemoryMatter
     {
         public ParticleSystem blowFx, waitFx;
         public float duration, blowRadius, force;
-        
+        public Rigidbody2D rigidBody;
 
         private void OnEnable()
         {
@@ -17,22 +17,13 @@ namespace MiniGame.MemoryMatter
 
         IEnumerator Boom()
         {
-            transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-            var renderer = transform.GetChild(0).GetChild(0).GetComponent<Renderer>();
-            if (renderer)
-            {
-                renderer.enabled = true;
-            }
+            rigidBody.gameObject.SetActive(true);
             blowFx.gameObject.SetActive(false);
             waitFx.gameObject.SetActive(true);
             yield return new WaitForSeconds(duration);
             waitFx.gameObject.SetActive(false);
             blowFx.gameObject.SetActive(true);
-            transform.GetChild(0).GetComponent<Renderer>().enabled = false;
-            if (renderer)
-            {
-                renderer.enabled = false;
-            }
+            rigidBody.gameObject.SetActive(false);
             CircleCast();
             yield return new WaitUntil(() => !blowFx.isPlaying);
             gameObject.SetActive(false);
@@ -40,7 +31,7 @@ namespace MiniGame.MemoryMatter
 
         void CircleCast()
         {
-            var hit = Physics2D.CircleCastAll(transform.GetChild(0).position, blowRadius,transform.right,0);
+            var hit = Physics2D.CircleCastAll(rigidBody.transform.position, blowRadius,rigidBody.transform.right,0);
             if (hit.Length != 0)
             {
                 for (int i = 0; i < hit.Length; i++)
@@ -48,15 +39,14 @@ namespace MiniGame.MemoryMatter
                     if (hit[i].collider.CompareTag("Player"))
                     {
                         var player = hit[i].transform.GetComponent<PlayerMovement>();
-                        player.SetForce((player.transform.position - transform.GetChild(0).position.normalized) * force, true);
+                        player.SetForce((player.transform.position - rigidBody.transform.position) * force, true);
                     }
                     else
                     {
                         var rigidBody = hit[i].collider.attachedRigidbody;
                         if (rigidBody != null)
                         {
-                            Debug.Log("bloom " + hit[i].collider.name);
-                            rigidBody.AddForce((hit[i].transform.position - transform.GetChild(0).position).normalized * force, ForceMode2D.Impulse);
+                            rigidBody.AddForce((hit[i].transform.position - this.rigidBody.transform.position) * force, ForceMode2D.Impulse);
                         }
                     }
                 }
@@ -66,7 +56,7 @@ namespace MiniGame.MemoryMatter
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.GetChild(0).position ,blowRadius);
+            Gizmos.DrawWireSphere(rigidBody.transform.position ,blowRadius);
         }
     }
 }

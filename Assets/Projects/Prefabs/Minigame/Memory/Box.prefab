@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 6573424219283797502}
   - component: {fileID: 5251931692026574926}
   - component: {fileID: 5802695693509263266}
+  - component: {fileID: 1105505587896609085}
   m_Layer: 9
   m_Name: obstacle box
   m_TagString: Untagged
@@ -127,8 +128,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 2
+  m_LinearDrag: 0.1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -171,3 +172,15 @@ PolygonCollider2D:
       - {x: 0.685, y: -0.525}
       - {x: 0.685, y: 0.065}
       - {x: 0.72499996, y: 0.36499998}
+--- !u!114 &1105505587896609085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6625474573852062452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a22c4a69bfea40608e8ea94cbd256786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
