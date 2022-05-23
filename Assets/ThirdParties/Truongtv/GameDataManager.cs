@@ -130,7 +130,7 @@ namespace ThirdParties.Truongtv
             return _userInfo.times[key];
         }
 
-        public int GetTotalTrohpy()
+        public int GetTotalTrophy()
         {
             return GetCurrencyValue("trophy");
         }
@@ -369,18 +369,15 @@ namespace ThirdParties.Truongtv
         }
         public void UpdateMiniGameCountPlayed(string miniGame)
         {
-            var count = GetCurrencyValue(miniGame + "_played") + 1;
-            UpdateCurrency(miniGame,count);
+            UpdateCurrency(miniGame,1);
         }
         public void UpdateMiniGameWinCount(string miniGame)
         {
-            var count = GetCurrencyValue(miniGame + "_win") + 1;
-            UpdateCurrency(miniGame,count);
+            UpdateCurrency(miniGame + "_win",1);
         }
         public void UpdateMiniGameLoseCount(string miniGame)
         {
-            var count = GetCurrencyValue(miniGame + "_lose") + 1;
-            UpdateCurrency(miniGame,count);
+            UpdateCurrency(miniGame + "_lose",1);
         }
 
         public void UpdateLastPlayed(string miniGame)

@@ -77,8 +77,7 @@ public class ParticleGold : MonoBehaviour {
         
         system.startSpeed = UnityEngine.Random.Range(minSpeed, maxSpeed);
         system.Play();
-        
-        SoundManager.Instance.PlaySfx(soundCoinExplosion);
+        if (SoundManager.Instance && soundCoinExplosion != null) SoundManager.Instance.PlaySfx(soundCoinExplosion);
     }
 
     private IEnumerator IEPlaySound()
@@ -86,7 +85,7 @@ public class ParticleGold : MonoBehaviour {
         for (int i = 0; i < 4; i++)
         {
             yield return new WaitForSeconds(UnityEngine.Random.Range(0f, 0.3f));
-            SoundManager.Instance.PlaySfx(soundCoin);
+            if (SoundManager.Instance && soundCoin != null) SoundManager.Instance.PlaySfx(soundCoin);
         }
     }
 }

@@ -1,83 +1,83 @@
 
 ninja_underwater.png
-size: 2048,256
+size: 2048,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 L_eye
-  rotate: false
-  xy: 164, 13
+  rotate: true
+  xy: 1633, 288
   size: 24, 34
   orig: 26, 36
   offset: 1, 1
   index: -1
 R_eye
-  rotate: false
-  xy: 130, 9
+  rotate: true
+  xy: 1593, 280
   size: 32, 38
   orig: 34, 40
   offset: 1, 1
   index: -1
 body
   rotate: true
-  xy: 1348, 22
+  xy: 1451, 121
   size: 86, 111
   orig: 86, 111
   offset: 0, 0
   index: -1
 effect_water
   rotate: false
-  xy: 1054, 28
+  xy: 1281, 28
   size: 226, 52
   orig: 226, 52
   offset: 0, 0
   index: -1
 hand_L
   rotate: true
-  xy: 1282, 2
+  xy: 1509, 4
   size: 78, 64
   orig: 80, 66
   offset: 1, 1
   index: -1
 hand_R
-  rotate: true
-  xy: 1461, 30
+  rotate: false
+  xy: 1564, 143
   size: 78, 64
   orig: 80, 66
   offset: 1, 1
   index: -1
 head
   rotate: false
-  xy: 1323, 110
+  xy: 1451, 209
   size: 140, 140
   orig: 142, 142
   offset: 1, 1
   index: -1
 leaf
-  rotate: false
-  xy: 1054, 82
+  rotate: true
+  xy: 1281, 82
   size: 267, 168
   orig: 267, 168
   offset: 0, 0
   index: -1
 leg_L
   rotate: false
-  xy: 2, 12
+  xy: 1451, 84
   size: 62, 35
   orig: 64, 37
   offset: 1, 1
   index: -1
 leg_R
   rotate: false
-  xy: 66, 12
+  xy: 1593, 314
   size: 62, 35
   orig: 64, 37
   offset: 1, 1
   index: -1
 water
   rotate: false
-  xy: 2, 49
-  size: 1050, 201
-  orig: 1050, 201
+  xy: 2, 2
+  size: 1277, 347
+  orig: 1277, 347
   offset: 0, 0
   index: -1

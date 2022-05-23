@@ -900,10 +900,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 618949801218578994, guid: 248457b6384f04949b510811a811074a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4062542246636544723, guid: 248457b6384f04949b510811a811074a, type: 3}
       propertyPath: m_Name
       value: InGamePopup
       objectReference: {fileID: 0}
+    - target: {fileID: 4062542246636544733, guid: 248457b6384f04949b510811a811074a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1198954215}
     - target: {fileID: 4062542246636544734, guid: 248457b6384f04949b510811a811074a, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -986,6 +994,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4062542246636544734, guid: 248457b6384f04949b510811a811074a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970966388353657964, guid: 248457b6384f04949b510811a811074a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

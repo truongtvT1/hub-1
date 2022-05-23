@@ -1,5 +1,74 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &34726073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34726074}
+  - component: {fileID: 34726076}
+  - component: {fileID: 34726075}
+  m_Layer: 3
+  m_Name: head collider
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &34726074
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34726073}
+  m_LocalRotation: {x: -0, y: -0, z: 0.68514514, w: 0.72840655}
+  m_LocalPosition: {x: -0.00011444092, y: 1.1719273, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 136148416963457230}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &34726076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34726073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1fd8daaed7b64148a34acb96ba14ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skeletonRenderer: {fileID: 4790866046350456655}
+  boneName: head
+  followXYPosition: 1
+  followZPosition: 1
+  followBoneRotation: 1
+  followSkeletonFlip: 1
+  followLocalScale: 0
+  maintainedAxisOrientation: 1
+  initializeOnAwake: 1
+--- !u!58 &34726075
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 34726073}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.66, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.65
 --- !u!1 &136148416963457266
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +101,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 136148417569452607}
+  - {fileID: 34726074}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69,7 +139,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.16}
+  m_Offset: {x: -0.18, y: 1.16}
   m_Size: {x: 1.3, y: 2.64}
   m_Direction: 0
 --- !u!114 &6703807856467603640
@@ -107,7 +177,9 @@ MonoBehaviour:
   - stop_pose3
   - stop_pose4
   - stop_pose5
-  dodgeAnimations: []
+  dodgeAnimations:
+  - dodge
+  - dodge2
   runScareAnim: run_scare
   runNaruto: run_naruto
   stun: stun
@@ -129,9 +201,9 @@ MonoBehaviour:
   anim: {fileID: 6703807856467603640}
   collider: {fileID: 2313282585178127176}
   moveDirection: 0
-  sprintingCollider: {x: 0, y: 0}
-  mountIcon: {fileID: 0}
-  headCollider: {fileID: 0}
+  sprintingCollider: {x: 0.7, y: 0}
+  mountIcon: {fileID: 7143005920548490792}
+  headCollider: {fileID: 34726075}
   isSprinting: 0
   isHoldingSprint: 0
   isNormalRun: 0
@@ -141,7 +213,7 @@ MonoBehaviour:
   isBot: 0
   itemLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   sprintRate: 0
   sprintDuration: 0
   botVision: 0
@@ -272,7 +344,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c3c6af040084fa749ab0fe4e459a0ce8, type: 2}
+  - {fileID: 2100000, guid: 048b6a328f97ffd4c97d434b4f617ab6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -290,8 +362,8 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -287656607
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4790866046350456655
@@ -322,11 +394,13 @@ MonoBehaviour:
   fixDrawOrder: 0
   addNormals: 0
   calculateTangents: 0
-  maskInteraction: 0
+  maskInteraction: 2
   maskMaterials:
-    materialsMaskDisabled: []
+    materialsMaskDisabled:
+    - {fileID: 2100000, guid: c3c6af040084fa749ab0fe4e459a0ce8, type: 2}
     materialsInsideMask: []
-    materialsOutsideMask: []
+    materialsOutsideMask:
+    - {fileID: 2100000, guid: 048b6a328f97ffd4c97d434b4f617ab6, type: 2}
   disableRenderingOnOverride: 1
   _animationName: idle
   loop: 1
