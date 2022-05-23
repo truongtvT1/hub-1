@@ -44,12 +44,30 @@ namespace Projects.Scripts.Scriptable
         public PurchaseType purchaseType;
         [ShowIf(nameof(purchaseType), PurchaseType.Iap),ValueDropdown(nameof(GetAllSkuItem))] public string skuId;
         [ShowIf(nameof(purchaseType), PurchaseType.Ad)] public int freePerDay,coolDown;
-
-        [ShowIf(nameof(purchaseType), PurchaseType.Ticket)] public int price;
-        [SerializeField,HideIf(nameof(purchaseType), PurchaseType.Ticket)] public RewardData reward;
+        public RewardData reward;
         private string[] GetAllSkuItem()
         {
             return ShopData.Instance.GetAllSkuItem();
+        }
+
+        [Button]
+        private void SetUpHairAndSuitRankS()
+        {
+            var list = new List<SkinInfo>();
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.HairPrefix));
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.SuitPrefix));
+            reward.skinList = list.Select(a => a.skinName).ToList();
+        }
+        [Button]
+        private void SetUpFullRankS()
+        {
+            var list = new List<SkinInfo>();
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.HairPrefix));
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.SuitPrefix));
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.GlassPrefix));
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.GlovePrefix));
+            list.AddRange(SkinData.Instance.GetAllSkinByRankAndType(SkinRank.S,SkinData.CloakPrefix));
+            reward.skinList = list.Select(a => a.skinName).ToList();
         }
     }
     public enum PurchaseType
@@ -57,13 +75,13 @@ namespace Projects.Scripts.Scriptable
         Iap,Ad,Ticket
     }
 
+ 
     [Serializable]
     public class RewardData
     {
         public int ticket;
-        public List<string> skinList;
-        
-        
+        public bool blockAd;
+        [ReadOnly]public List<string> skinList;
     }
 
     [Serializable]
@@ -71,7 +89,6 @@ namespace Projects.Scripts.Scriptable
     {
         public string shopId;
         public PurchaseType purchaseType;
-        [ShowIf(nameof(purchaseType), PurchaseType.Iap),ValueDropdown(nameof(GetAllSkuItem))] public string skuId;
         [ShowIf(nameof(purchaseType), PurchaseType.Ad)] public int freePerDay,coolDown;
         [ShowIf(nameof(purchaseType), PurchaseType.Ticket)] public int price;
         public int numberItemReward;

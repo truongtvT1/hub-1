@@ -181,21 +181,6 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../Sprites/Shop/$2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>27,11,53,22</rect>
-                <key>scale9Paddings</key>
-                <rect>27,11,53,22</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Sprites/Shop/10times1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -226,23 +211,9 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/Shop/50.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>10,9,20,17</rect>
-                <key>scale9Paddings</key>
-                <rect>10,9,20,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Sprites/Shop/80080-playstation-angel-symmetry-light-game-video-halo copy 3.png</key>
             <key type="filename">../Sprites/Shop/80080-playstation-angel-symmetry-light-game-video-halo copy 4.png</key>
+            <key type="filename">../Sprites/Shop/eff_pack3.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -254,81 +225,6 @@
                 <rect>134,134,269,268</rect>
                 <key>scale9Paddings</key>
                 <rect>134,134,269,268</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/Draw 1.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>26,8,53,17</rect>
-                <key>scale9Paddings</key>
-                <rect>26,8,53,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/Draw 10.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>31,8,61,17</rect>
-                <key>scale9Paddings</key>
-                <rect>31,8,61,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/Drop Rate.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>36,8,71,15</rect>
-                <key>scale9Paddings</key>
-                <rect>36,8,71,15</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/Get a S Equipment in 10 times.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>121,9,243,17</rect>
-                <key>scale9Paddings</key>
-                <rect>121,9,243,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/Relic Epics Equipment Epics Equipment Rare Equipment Good Equip.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>107,79,213,157</rect>
-                <key>scale9Paddings</key>
-                <rect>107,79,213,157</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -412,8 +308,24 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../Sprites/Shop/noad 2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>59,64,117,128</rect>
+                <key>scale9Paddings</key>
+                <rect>59,64,117,128</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../Sprites/Shop/pack 1 back.png</key>
             <key type="filename">../Sprites/Shop/pack 2 back.png</key>
+            <key type="filename">../Sprites/Shop/pack_3_back.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -428,8 +340,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/Shop/pack 1.png</key>
-            <key type="filename">../Sprites/Shop/pack 2.png</key>
+            <key type="filename">../Sprites/Shop/pack1_icon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -438,13 +349,13 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>48,11,95,23</rect>
+                <rect>61,58,123,116</rect>
                 <key>scale9Paddings</key>
-                <rect>48,11,95,23</rect>
+                <rect>61,58,123,116</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/Shop/percent.png</key>
+            <key type="filename">../Sprites/Shop/pack2_icon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -453,9 +364,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,78,63,157</rect>
+                <rect>85,71,169,142</rect>
                 <key>scale9Paddings</key>
-                <rect>32,78,63,157</rect>
+                <rect>85,71,169,142</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -489,7 +400,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../Sprites/Shop/rule details.png</key>
+            <key type="filename">../Sprites/Shop/skin_back_white.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -498,24 +409,9 @@
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>98,11,195,23</rect>
+                <rect>61,57,122,113</rect>
                 <key>scale9Paddings</key>
-                <rect>98,11,195,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">../Sprites/Shop/shop.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>45,15,90,31</rect>
-                <key>scale9Paddings</key>
-                <rect>45,15,90,31</rect>
+                <rect>61,57,122,113</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

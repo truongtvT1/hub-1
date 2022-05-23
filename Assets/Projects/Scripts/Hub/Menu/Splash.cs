@@ -1,4 +1,5 @@
 using System;
+using Projects.Scripts.Hub;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,6 +17,6 @@ public class Splash : MonoBehaviour
             GameDataManager.Instance.CreateUserInfo();
         }
 
-        SceneManager.LoadScene("Menu");
+        Loading.Instance.LoadMenu();
     }
 }

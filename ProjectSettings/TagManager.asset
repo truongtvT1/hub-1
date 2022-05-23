@@ -18,7 +18,7 @@ TagManager:
   - DamageToPlayer
   - BG1
   - BG2
-  - 
+  - Loading
   - 
   - 
   - 
@@ -61,4 +61,7 @@ TagManager:
     locked: 0
   - name: Notification
     uniqueID: 1229125091
+    locked: 0
+  - name: Loading
+    uniqueID: 2485361297
     locked: 0

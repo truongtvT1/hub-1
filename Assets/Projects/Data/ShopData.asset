@@ -25,21 +25,18 @@ MonoBehaviour:
   shopChestList:
   - shopId: chest_1
     purchaseType: 1
-    skuId: 
     freePerDay: 3
     coolDown: 300
     price: 0
     numberItemReward: 1
   - shopId: chest_2
     purchaseType: 2
-    skuId: 
     freePerDay: 0
     coolDown: 0
     price: 50
     numberItemReward: 1
   - shopId: chest_3
     purchaseType: 2
-    skuId: 
     freePerDay: 0
     coolDown: 0
     price: 300
@@ -54,18 +51,68 @@ MonoBehaviour:
     skuId: t1.pack.1
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 1000
-      skinList: []
+      blockAd: 1
+      skinList:
+      - hair/hair_02
+      - hair/hair_10
+      - hair/hair_12
+      - hair/hair_15
+      - hair/hair_27
+      - hair/hair_33
+      - body/body_08
+      - body/body_10
+      - body/body_13
+      - body/body_15
+      - body/body_19
+      - body/body_21
+      - body/body_26
+      - body/body_29
+      - body/body_39
+      - body/body_40
   - shopId: pack_2
     purchaseType: 0
     skuId: t1.pack.2
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 500
+      blockAd: 1
+      skinList:
+      - hair/hair_02
+      - hair/hair_10
+      - hair/hair_12
+      - hair/hair_15
+      - hair/hair_27
+      - hair/hair_33
+      - body/body_08
+      - body/body_10
+      - body/body_13
+      - body/body_15
+      - body/body_19
+      - body/body_21
+      - body/body_26
+      - body/body_29
+      - body/body_39
+      - body/body_40
+      - glass/glass_04
+      - glass/glass_12
+      - glass/glass_14
+      - glass/glass_19
+      - glass/glass_20
+      - gloves/glove_01
+      - wing/w_07
+      - wing/w_09
+      - wing/w_16
+  - shopId: pack_3
+    purchaseType: 0
+    skuId: t1.block_ad
+    freePerDay: 0
+    coolDown: 0
+    reward:
+      ticket: 0
+      blockAd: 1
       skinList: []
   shopTicketList:
   - shopId: ticket_1
@@ -73,61 +120,61 @@ MonoBehaviour:
     skuId: 
     freePerDay: 3
     coolDown: 300
-    price: 0
     reward:
       ticket: 50
+      blockAd: 0
       skinList: []
   - shopId: ticket_2
     purchaseType: 0
     skuId: t1.ticket.300
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 300
+      blockAd: 0
       skinList: []
   - shopId: ticket_3
     purchaseType: 0
     skuId: t1.ticket.500
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 500
+      blockAd: 0
       skinList: []
   - shopId: ticket_4
     purchaseType: 0
     skuId: t1.ticket.1100
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 1100
+      blockAd: 0
       skinList: []
   - shopId: ticket_5
     purchaseType: 0
     skuId: t1.ticket.2400
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 2400
+      blockAd: 0
       skinList: []
   - shopId: ticket_6
     purchaseType: 0
     skuId: t1.ticket.6250
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 6250
+      blockAd: 0
       skinList: []
   - shopId: ticket_7
     purchaseType: 0
     skuId: t1.ticket.14000
     freePerDay: 0
     coolDown: 0
-    price: 0
     reward:
       ticket: 14000
+      blockAd: 0
       skinList: []

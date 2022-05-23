@@ -18,7 +18,6 @@ namespace Truongtv.PopUpController
 
         [SerializeField] private Toast toast;
 
-        [SerializeField] private PopupNoInternet noInternet;
        // private Button _blackButton;
         #endregion
         private static PopupController _instance;
@@ -106,13 +105,5 @@ namespace Truongtv.PopUpController
             toast.gameObject.SetActive(true);
             toast.Initialized(description);
         }
-
-        public void ShowNoInternet()
-        {
-            noInternet.Init();
-            noInternet.gameObject.SetActive(true);
-            noInternet.Show(this);
-        }
-       
     }
 }

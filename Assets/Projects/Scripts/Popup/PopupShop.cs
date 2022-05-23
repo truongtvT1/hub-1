@@ -19,6 +19,7 @@ namespace Projects.Scripts.Popup
         [SerializeField, BoxGroup("Chest")] private List<ShopChestItem> chestItemList;
         [SerializeField, BoxGroup("Chest")] private Image chestProgress;
         [SerializeField, BoxGroup("Chest")] private float[] fillProgress;
+        [SerializeField, BoxGroup("Pack")] private List<ShopPackItem> packItemList;
         [SerializeField, BoxGroup("Ticket")] private List<ShopTicketItem> ticketItemList;
 
         private void Awake()
@@ -38,6 +39,10 @@ namespace Projects.Scripts.Popup
             foreach (var chestItem in chestItemList)
             {
                 chestItem.Init(GameDataManager.Instance.shopData, this);
+            }
+            foreach (var packItem in packItemList)
+            {
+                packItem.Init(GameDataManager.Instance.shopData);
             }
         }
 
