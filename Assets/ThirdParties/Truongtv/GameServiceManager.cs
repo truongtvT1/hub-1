@@ -11,11 +11,10 @@ using ThirdParties.Truongtv.RemoteConfig;
 using ThirdParties.Truongtv.Utilities;
 #endif
 using Truongtv.PopUpController;
+
 using UnityEngine;
 #if UNITY_EDITOR
-using System.IO;
-using System.Xml;
-
+using UnityEditor;
 #endif
 namespace ThirdParties.Truongtv
 {
@@ -27,25 +26,19 @@ namespace ThirdParties.Truongtv
     [RequireComponent(typeof(IapManager))]
     public class GameServiceManager : MonoBehaviour
     {
-        #if UNITY_EDITOR
-        [SerializeField, OnValueChanged(nameof(OnAdServiceChange))]
-        private AdService adService;
+#if UNITY_EDITOR
+        [SerializeField] private AdService adService;
 
-        [SerializeField, OnValueChanged(nameof(OnLogServiceChange))]
-        private LogService logService;
+        [SerializeField] private LogService logService;
 
-        [SerializeField, OnValueChanged(nameof(OnRemoteServiceChange))]
-        private RemoteConfigService remoteConfigService;
+        [SerializeField] private RemoteConfigService remoteConfigService;
 
-        [SerializeField, OnValueChanged(nameof(OnRateServiceChange))]
-        private RatingService ratingService;
+        [SerializeField] private RatingService ratingService;
 
-        [SerializeField, OnValueChanged(nameof(OnCloudMessagingServiceChange))]
-        private CloudMessagingService cloudMessagingService;
+        [SerializeField] private CloudMessagingService cloudMessagingService;
 
-        [SerializeField, OnValueChanged(nameof(OnIapServiceChange))]
-        private IapService iapService;
-        #endif
+        [SerializeField] private IapService iapService;
+#endif
         private AdManager _adManager;
         private LogEventManager _logEventManager;
         private RatingHelper _ratingHelper;
@@ -53,8 +46,9 @@ namespace ThirdParties.Truongtv
         private MobileNotification _mobileNotification;
         private IapManager _iapManager;
         private static GameServiceManager _instance;
-        
+
         private DateTime _lastTimeShowAd;
+
         #region public
 
         #region Ads Service
@@ -73,22 +67,26 @@ namespace ThirdParties.Truongtv
         {
             _instance.ShowInterstitialAdPrivate(adResult);
         }
+
         public static void ShowRewardedAd(string location, Action adResult = null)
         {
-            _instance.ShowRewardedAdPrivate(location,adResult);
+            _instance.ShowRewardedAdPrivate(location, adResult);
         }
+
         #endregion
 
         #region Log Event
+
         public static void LogEvent(string eventName, Dictionary<string, object> parameters)
         {
-            _instance.LogEventPrivate(eventName,parameters);
+            _instance.LogEventPrivate(eventName, parameters);
         }
-        
+
         public static void LogEvent(string eventName)
         {
             _instance.LogEventPrivate(eventName);
         }
+
         public static void SetUserProperties(string userProperty, string value)
         {
             _instance.SetUserPropertiesPrivate(userProperty, value);
@@ -109,17 +107,19 @@ namespace ThirdParties.Truongtv
 
         public static void PurchaseProduct(string sku, Action<bool, string> pAction)
         {
-            _instance.PurchaseProductPrivate(sku,pAction);
+            _instance.PurchaseProductPrivate(sku, pAction);
         }
 
         public static string GetItemLocalPriceString(string sku)
         {
             return _instance.GetItemLocalPriceStringPrivate(sku);
         }
+
         public static void RestorePurchase()
         {
             _instance.RestorePurchasePrivate();
         }
+
         #endregion
 
         #region Mobile Notification
@@ -136,14 +136,12 @@ namespace ThirdParties.Truongtv
 
         #endregion
 
-       
         #endregion
 
         #region Private Function
 
         #region unity
 
-        
         private void Awake()
         {
             if (_instance != null)
@@ -176,7 +174,6 @@ namespace ThirdParties.Truongtv
             _mobileNotification.Init();
 #endif
         }
-        
 
         #endregion
 
@@ -186,22 +183,22 @@ namespace ThirdParties.Truongtv
         {
             _logEventManager.LogEvent(eventName, parameters);
         }
+
         private void LogEventPrivate(string eventName)
         {
             _logEventManager.LogEvent(eventName);
         }
+
         private void SetUserPropertiesPrivate(string userProperty, string value)
         {
             _logEventManager.SetUserProperties(userProperty, value);
         }
-        
-        
 
         #endregion
 
         #region Ad
 
-         private void ShowBannerPrivate()
+        private void ShowBannerPrivate()
         {
 #if UNITY_IOS|| UNITY_IPHONE
             if (GameDataManager.Instance.remoteConfigValue.versionReview.Equals(Application.version))
@@ -214,15 +211,16 @@ namespace ThirdParties.Truongtv
             {
                 return;
             }
+
             _adManager.ShowBanner();
         }
 
-        public void HideBannerPrivate()
+        private void HideBannerPrivate()
         {
             _adManager.HideBanner();
         }
 
-        public void ShowInterstitialAdPrivate(
+        private void ShowInterstitialAdPrivate(
             Action adResult = null)
         {
             adResult?.Invoke();
@@ -231,10 +229,11 @@ namespace ThirdParties.Truongtv
                 return;
             }
 
-            if (GameDataManager.Instance.IsPurchaseBlockAd() ||GameDataManager.Instance.cheated)
+            if (GameDataManager.Instance.IsPurchaseBlockAd() || GameDataManager.Instance.cheated)
             {
                 return;
             }
+
             if (_adManager.IsInterstitialLoaded() && DateTime.Now.Subtract(_lastTimeShowAd).TotalSeconds <
                 GameDataManager.Instance.remoteConfigValue.blockAdTime)
             {
@@ -242,32 +241,35 @@ namespace ThirdParties.Truongtv
                 {
                     if (result)
                         _lastTimeShowAd = DateTime.Now;
-                    
                 });
                 //show popup support us
                 LogEvent("ads_interstitial");
             }
         }
-        public void ShowRewardedAdPrivate(string location, Action adResult = null)
+
+        private void ShowRewardedAdPrivate(string location, Action adResult = null)
         {
             if (GameDataManager.Instance.cheated)
             {
                 adResult?.Invoke();
                 return;
             }
+
             LogEvent("ads_reward_click", new Dictionary<string, object>
             {
                 {"reward_for", location}
             });
             if (Application.internetReachability == NetworkReachability.NotReachable)
             {
-                PopupController.Instance.ShowNoInternet();
+                PopupController.Instance.ShowToast(
+                    "No internet connection. Make sure to turn on your Wifi/Mobile data and try again.");
                 LogEvent("ads_reward_fail", new Dictionary<string, object>
                 {
                     {"cause", "no_internet"}
                 });
                 return;
             }
+
             if (!_adManager.IsRewardVideoLoaded())
             {
                 PopupController.Instance.ShowToast("Ads is still coming. Please try again later.");
@@ -277,6 +279,7 @@ namespace ThirdParties.Truongtv
                 });
                 return;
             }
+
             _adManager.ShowRewardedAd(result =>
             {
                 if (!result)
@@ -287,6 +290,7 @@ namespace ThirdParties.Truongtv
                     });
                     return;
                 }
+
                 _lastTimeShowAd = DateTime.Now;
                 LogEvent("ads_reward_complete", new Dictionary<string, object>
                 {
@@ -295,8 +299,6 @@ namespace ThirdParties.Truongtv
                 adResult?.Invoke();
             });
         }
-        
-        
 
         #endregion
 
@@ -320,13 +322,14 @@ namespace ThirdParties.Truongtv
         #endregion
 
         #region Rate
+
         private void RatePrivate()
         {
             _ratingHelper.Rate();
         }
-        
 
         #endregion
+
         #region Remote Config
 
         private void OnFetchComplete(Action<RemoteConfigManager> fetch)
@@ -337,17 +340,27 @@ namespace ThirdParties.Truongtv
         #endregion
 
         #endregion
+
         #region Private Editor
 
-        
-
 #if UNITY_EDITOR
-        private void OnAdServiceChange()
+        [OnInspectorGUI] private void Space2() { GUILayout.Space(20); }
+        [Button(ButtonSizes.Large), GUIColor(0, 1, 0), HideIf(nameof(IsServiceUpToDate))] [InitializeOnLoadMethod]
+        private void UpdateService()
         {
+            if(IsServiceUpToDate()) return;
             var symbolList = DefineSymbol.GetAllDefineSymbols();
             symbolList.Remove(DefineSymbol.MaxSymbol);
             symbolList.Remove(DefineSymbol.AdMobSymbol);
             symbolList.Remove(DefineSymbol.IronSourceSymbol);
+            symbolList.Remove(DefineSymbol.LogUnity);
+            symbolList.Remove(DefineSymbol.LogFirebase);
+            symbolList.Remove(DefineSymbol.RemoteFirebase);
+            symbolList.Remove(DefineSymbol.RemoteUnity);
+            symbolList.Remove(DefineSymbol.InAppReview);
+            symbolList.Remove(DefineSymbol.FirebaseMessaging);
+            symbolList.Remove(DefineSymbol.IAP);
+            symbolList.Remove(DefineSymbol.UDP);
             switch (adService)
             {
                 case AdService.None:
@@ -365,15 +378,6 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("adS_service", adService.ToString());
-            DefineSymbol.UpdateDefineSymbols(symbolList);
-        }
-
-        private void OnLogServiceChange()
-        {
-            var symbolList = DefineSymbol.GetAllDefineSymbols();
-            symbolList.Remove(DefineSymbol.LogUnity);
-            symbolList.Remove(DefineSymbol.LogFirebase);
             switch (logService)
             {
                 case LogService.None:
@@ -386,15 +390,6 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("log", logService.ToString());
-            DefineSymbol.UpdateDefineSymbols(symbolList);
-        }
-
-        private void OnRemoteServiceChange()
-        {
-            var symbolList = DefineSymbol.GetAllDefineSymbols();
-            symbolList.Remove(DefineSymbol.RemoteFirebase);
-            symbolList.Remove(DefineSymbol.RemoteUnity);
             switch (remoteConfigService)
             {
                 case RemoteConfigService.None:
@@ -407,41 +402,16 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("remote_config", remoteConfigService.ToString());
-            DefineSymbol.UpdateDefineSymbols(symbolList);
-        }
-
-        private void OnRateServiceChange()
-        {
-            var symbolList = DefineSymbol.GetAllDefineSymbols();
-            symbolList.Remove(DefineSymbol.InAppReview);
             if (ratingService == RatingService.InApp)
             {
                 symbolList.Add(DefineSymbol.InAppReview);
             }
 
-            SaveProperties("rate", ratingService.ToString());
-            DefineSymbol.UpdateDefineSymbols(symbolList);
-        }
-
-        private void OnCloudMessagingServiceChange()
-        {
-            var symbolList = DefineSymbol.GetAllDefineSymbols();
-            symbolList.Remove(DefineSymbol.InAppReview);
             if (cloudMessagingService == CloudMessagingService.Firebase)
             {
                 symbolList.Add(DefineSymbol.FirebaseMessaging);
             }
 
-            SaveProperties("cloud_message", cloudMessagingService.ToString());
-            DefineSymbol.UpdateDefineSymbols(symbolList);
-        }
-
-        private void OnIapServiceChange()
-        {
-            var symbolList = DefineSymbol.GetAllDefineSymbols();
-            symbolList.Remove(DefineSymbol.IAP);
-            symbolList.Remove(DefineSymbol.UDP);
             switch (iapService)
             {
                 case IapService.None:
@@ -454,32 +424,97 @@ namespace ThirdParties.Truongtv
                     break;
             }
 
-            SaveProperties("iap", iapService.ToString());
             DefineSymbol.UpdateDefineSymbols(symbolList);
         }
 
-        private static void SaveProperties(string property, string value)
+        private bool IsServiceUpToDate()
         {
-            var XmlPath = "ThirdParties/Truongtv/CustomService.xml";
-            var path = Path.Combine(Application.dataPath, XmlPath);
-            if (!File.Exists(path))
+            var symbolList = DefineSymbol.GetAllDefineSymbols();
+            switch (adService)
             {
-                throw new FileNotFoundException();
+                case AdService.None:
+                    if (symbolList.Contains(DefineSymbol.AdMobSymbol)) return false;
+                    if (symbolList.Contains(DefineSymbol.IronSourceSymbol)) return false;
+                    if (symbolList.Contains(DefineSymbol.MaxSymbol)) return false;
+                    break;
+                case AdService.AdMob:
+                    if (!symbolList.Contains(DefineSymbol.AdMobSymbol)) return false;
+
+                    break;
+                case AdService.IronSource:
+                    if (!symbolList.Contains(DefineSymbol.IronSourceSymbol)) return false;
+                    break;
+                case AdService.Max:
+                    if (!symbolList.Contains(DefineSymbol.MaxSymbol)) return false;
+                    break;
             }
 
-            var document = new XmlDocument();
-            document.Load(path);
-            var node = document.DocumentElement.SelectSingleNode(property);
-            if (node == null)
+            switch (logService)
             {
-                node = document.CreateNode(XmlNodeType.Element, property, "");
-                node.InnerText = value;
-                document.DocumentElement.AppendChild(node);
+                case LogService.None:
+                    if (symbolList.Contains(DefineSymbol.LogFirebase)) return false;
+                    if (symbolList.Contains(DefineSymbol.LogUnity)) return false;
+                    break;
+                case LogService.Firebase:
+
+                    if (!symbolList.Contains(DefineSymbol.LogFirebase)) return false;
+                    break;
+                case LogService.Unity:
+                    if (!symbolList.Contains(DefineSymbol.LogUnity)) return false;
+                    break;
             }
 
-            node.InnerText = value;
-            document.Save(path);
+            switch (remoteConfigService)
+            {
+                case RemoteConfigService.None:
+                    if (symbolList.Contains(DefineSymbol.RemoteFirebase)) return false;
+                    if (symbolList.Contains(DefineSymbol.RemoteUnity)) return false;
+                    break;
+                case RemoteConfigService.Firebase:
+                    if (!symbolList.Contains(DefineSymbol.RemoteFirebase)) return false;
+                    break;
+                case RemoteConfigService.Unity:
+                    if (!symbolList.Contains(DefineSymbol.RemoteUnity)) return false;
+                    break;
+            }
+
+            switch (ratingService)
+            {
+                case RatingService.OpenLink:
+                    if (symbolList.Contains(DefineSymbol.InAppReview)) return false;
+                    break;
+                case RatingService.InApp:
+                    if (!symbolList.Contains(DefineSymbol.InAppReview)) return false;
+                    break;
+            }
+
+            switch (cloudMessagingService)
+            {
+                case CloudMessagingService.None:
+                    if (symbolList.Contains(DefineSymbol.FirebaseMessaging)) return false;
+                    break;
+                case CloudMessagingService.Firebase:
+                    if (!symbolList.Contains(DefineSymbol.FirebaseMessaging)) return false;
+                    break;
+            }
+
+            switch (iapService)
+            {
+                case IapService.None:
+                    if (symbolList.Contains(DefineSymbol.IAP)) return false;
+                    if (symbolList.Contains(DefineSymbol.UDP)) return false;
+                    break;
+                case IapService.IAP:
+                    if (!symbolList.Contains(DefineSymbol.IAP)) return false;
+                    break;
+                case IapService.UDP:
+                    if (!symbolList.Contains(DefineSymbol.UDP)) return false;
+                    break;
+            }
+
+            return true;
         }
+       
 #endif
 
         #endregion

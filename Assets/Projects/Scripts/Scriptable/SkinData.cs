@@ -15,7 +15,7 @@ using Random = System.Random;
 namespace Projects.Scripts.Scriptable
 {
     [CreateAssetMenu(fileName = "SkinData", menuName = "Truongtv/GameData/SkinData", order = 0)]
-    public class SkinData : ScriptableObject
+    public class SkinData : SingletonScriptableObject<SkinData>
     {
         [SerializeField] private SkeletonDataAsset skeleton;
         [SerializeField] public List<SkinInfo> hairSkins;
@@ -56,20 +56,33 @@ namespace Projects.Scripts.Scriptable
             list.Shuffle();
             return list.GetRange(0,number);
         }
-        public List<SkinInfo> GetRandomSkin(int number)
+
+        public List<SkinInfo> GetAllSkinByRankAndType(SkinRank rank,string prefix)
         {
             var list = new List<SkinInfo>();
-            list.AddRange(hairSkins);
-            list.AddRange(gloveSkins);
-            list.AddRange(bodySkins);
-            list.AddRange(glassSkins);
-            list.AddRange(cloakSkins);
-            var startData = GameDataManager.Instance.startSkin;
-            list.RemoveAll(a => startData.Contains(a.skinName));
-            list.Shuffle();
-            return list.GetRange(0,number);
+            if (prefix.Equals(HairPrefix))
+            {
+                list.AddRange(hairSkins);
+            }
+            else if (prefix.Equals(GlovePrefix))
+            {
+                list.AddRange(gloveSkins);
+            }
+            else if (prefix.Equals(SuitPrefix))
+            {
+                list.AddRange(bodySkins);
+            }
+            else if (prefix.Equals(GlassPrefix))
+            {
+                list.AddRange(glassSkins);
+            }
+            else if (prefix.Equals(CloakPrefix))
+            {
+                list.AddRange(cloakSkins);
+            }
+            list.RemoveAll(a =>a.rank!=rank);
+            return list;
         }
-        
         private List<string> GetAllSkinsByName(string prefix)
         {
             var total = GetAllSkinName();

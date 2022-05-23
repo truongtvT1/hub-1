@@ -495,7 +495,7 @@ namespace MiniGame.SquidGame
         {
             // GameDataManager.Instance.SetSquidGameLevel(level + 1);
             // Debug.Log("current squid level: " + (level + 1));
-            SceneManager.LoadScene("Menu");
+            Loading.Instance.LoadMenu();
             GameDataManager.Instance.ResetSkinInGame();
         }
 

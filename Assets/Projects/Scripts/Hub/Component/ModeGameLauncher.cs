@@ -43,7 +43,7 @@ namespace Projects.Scripts.Hub.Component
         {
             GameDataManager.Instance.UpdateLastPlayed(_info.gameId);
             GameDataManager.Instance.UpdateMiniGameCountPlayed(_info.gameId);
-            SceneManager.LoadScene(_info.GetScene);
+            Loading.Instance.LoadMiniGame(_info);
         }
     }
 }

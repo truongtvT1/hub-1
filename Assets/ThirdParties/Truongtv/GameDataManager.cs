@@ -39,7 +39,7 @@ namespace ThirdParties.Truongtv
         }
         public bool IsPurchaseBlockAd()
         {
-            return false;
+            return _userInfo.purchased;
         }
         #region UserInfo
 
@@ -350,6 +350,12 @@ namespace ThirdParties.Truongtv
         public void UpdateChestOpenNumber(int value)
         {
             UpdateCurrency("chest", value);
+        }
+
+        public void SetPurchased()
+        {
+            _userInfo.purchased = true;
+            SaveUserInfo();
         }
         #endregion
 

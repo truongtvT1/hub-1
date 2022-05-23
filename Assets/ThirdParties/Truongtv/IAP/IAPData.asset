@@ -64,4 +64,7 @@ MonoBehaviour:
   - skuId: t1.offer.9
     productType: 0
     defaultValue: 7.99$
+  - skuId: t1.block_ad
+    productType: 1
+    defaultValue: 1.49$
   iosSkuId: []

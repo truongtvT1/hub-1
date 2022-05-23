@@ -17,6 +17,7 @@ namespace Projects.Scripts.Data
         public List<string> unlockedSkins;
         public UserRanking ranking;
         public string lastPlayed;
+        public bool purchased;
         public UserInfo()
         {
             times = new Dictionary<string, DateTime> {{"date_create", DateTime.Now}};

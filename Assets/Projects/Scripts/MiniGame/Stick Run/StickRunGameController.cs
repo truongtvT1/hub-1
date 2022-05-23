@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Base;
 using Com.LuisPedroFonseca.ProCamera2D;
+using Projects.Scripts.Hub;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -78,7 +79,7 @@ namespace MiniGame.StickRun
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }, () =>
                 {
-                    SceneManager.LoadScene("Menu");
+                    Loading.Instance.LoadMenu();
                 }, null);
             });
         }
@@ -240,7 +241,7 @@ namespace MiniGame.StickRun
             GameServiceManager.ShowInterstitialAd(() =>
             {
                 GameDataManager.Instance.ResetSkinInGame();
-                SceneManager.LoadScene("Menu");
+                Loading.Instance.LoadMenu();
             });
         }
         
@@ -250,7 +251,7 @@ namespace MiniGame.StickRun
             GameServiceManager.ShowInterstitialAd(() =>
             {
                 GameDataManager.Instance.ResetSkinInGame();
-                SceneManager.LoadScene("Menu");
+                Loading.Instance.LoadMenu();
             });
         }
         

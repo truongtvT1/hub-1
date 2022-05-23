@@ -16,8 +16,7 @@ namespace Projects.Scripts.Popup
         [SerializeField] private Button closeButton;
         [SerializeField] private SkeletonGraphic graphic;
         [SerializeField, SpineAnimation] private string idle, open, idle2;
-        private Action _close;
-        private Action _start;
+        [SerializeField] private GameObject effect,spark;
         private void Awake()
         {
             closeButton.onClick.AddListener(Close);
@@ -39,6 +38,8 @@ namespace Projects.Scripts.Popup
                         chestItemList[i].gameObject.SetActive(true);
                         chestItemList[i].Init(skinList[i],chestTransform,i*0.25f);
                     }
+                    effect.SetActive(true);
+                    
 
                     for (var i = skinList.Count; i < chestItemList.Count; i++)
                     {
@@ -53,6 +54,8 @@ namespace Projects.Scripts.Popup
         {
             closeAction += closePopup;
             closeButton.gameObject.SetActive(false);
+            effect.SetActive(false);
+            spark.SetActive(false);
             graphic.AnimationState.SetAnimation(0, idle, true);
             foreach (var item in chestItemList)
             {
@@ -69,6 +72,7 @@ namespace Projects.Scripts.Popup
         private IEnumerator ShowClose(float delay)
         {
             yield return new WaitForSeconds(delay);
+            spark.SetActive(true);
             closeButton.gameObject.SetActive(true);
         }
     }

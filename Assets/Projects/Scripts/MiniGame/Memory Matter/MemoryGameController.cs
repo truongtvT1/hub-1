@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
 using RandomNameAndCountry.Scripts;
+using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using TMPro;
@@ -59,7 +60,7 @@ namespace MiniGame.MemoryMatter
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }, () =>
                 {
-                    SceneManager.LoadScene("Menu");
+                    Loading.Instance.LoadMenu();
                 }, null);
             });
             deltaDifficulty = (float) _difficulty / 10;
@@ -189,6 +190,8 @@ namespace MiniGame.MemoryMatter
                 await Task.Delay(2500);
                 UIContainer.SetActive(false);
                 InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("memory")));
+                Loading.Instance.LoadMenu();
+                GameDataManager.Instance.ResetSkinInGame();
                 return;
             }
             currentRound++;

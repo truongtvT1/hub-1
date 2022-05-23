@@ -20,6 +20,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private PopupShop popupShop;
         [SerializeField] private PopupChooseMode popupChooseMode;
         [SerializeField] private PopupOpenChest popupOpenChest;
+        [SerializeField] private PopupReceivePack popupReceivePack;
         private PopupController _controller;
 
         private void Awake()
@@ -80,6 +81,13 @@ namespace Projects.Scripts.Menu
             popupOpenChest.gameObject.SetActive(true);
             popupOpenChest.Init(skinList,onClose);
             popupOpenChest.Show(_controller);
+        }
+
+        public void ShowPopupReceivePack(Sprite sprite,Action moveToCustomizeCharacter = null)
+        {
+            popupReceivePack.gameObject.SetActive(true);
+            popupReceivePack.Init(sprite,moveToCustomizeCharacter);
+            popupReceivePack.Show(_controller);
         }
     }
 }
