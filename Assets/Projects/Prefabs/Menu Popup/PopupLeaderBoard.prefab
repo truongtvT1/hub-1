@@ -624,10 +624,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 3877527178181727562}
+  backGroundButton: {fileID: 0}
   scroll: {fileID: 3877527178185140604}
   prefab: {fileID: 4987743418559136929, guid: 6e3828a88bf404645aa3311885e92a31, type: 3}
   backButton: {fileID: 3877527179411307878}
   itemContainer: {fileID: 3877527179326999638}
+  rankRate: {fileID: 11400000, guid: cc8c42f7a1c3e334590be7dfedd6c2dd, type: 2}
+  rank1Trophy: 3
+  rank2Trophy: 2
+  rank3Trophy: 1
 --- !u!1 &3877527179326999639
 GameObject:
   m_ObjectHideFlags: 0

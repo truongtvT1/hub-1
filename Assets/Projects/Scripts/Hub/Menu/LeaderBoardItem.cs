@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Projects.Scripts.Data;
+using ThirdParties.Truongtv;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,9 +30,17 @@ public class LeaderBoardItem : MonoBehaviour
         rect.localPosition = pos;
         _startPos = pos;
         _scroll = scroll;
-        _moveLength = _scroll.content.sizeDelta.y- _scroll.GetComponent<RectTransform>().sizeDelta.y;
+        _moveLength = _scroll.content.sizeDelta.y - _scroll.GetComponent<RectTransform>().sizeDelta.y;
         if (ranking != null)
         {
+            if (ranking.id == GameDataManager.Instance.GetUserRanking().id)
+            {
+                rankText.color = Color.yellow;
+                userNameText.color = Color.yellow;
+                trophyText.color = Color.yellow;
+                winText.color = Color.yellow;
+                loseText.color = Color.yellow;
+            }
             rankText.text = ""+ranking.rank;
             userNameText.text = ranking.userName;
             trophyText.text = ""+ranking.trophy;

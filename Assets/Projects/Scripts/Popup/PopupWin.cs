@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using DG.Tweening;
 using MiniGame;
 using Projects.Scripts.Data;
@@ -16,23 +17,22 @@ namespace Projects.Scripts.Popup
     {
         [SerializeField] private TextMeshProUGUI trophyText, ticketText, winText, loseText, rankingText;
         [SerializeField] private CharacterAnimationGraphic top1Skeleton, top2Skeleton, top3Skeleton;
-        [SerializeField] private Button watchAdButton, continueButton;
+        [SerializeField] private Button watchAdButton, replayButton, backButton;
         [SerializeField] private Transform finger, cupTransform, ticketTransform;
         [SerializeField] private ParticleGold ticketFx, cupFx;
         [SerializeField] private float bonusDuration;
-        private int currentTrophy, currentTicket, xValue = -1, currentIndex = 0;
+        private int currentTrophy, currentTicket, ticketReward, trophyReward, xValue = -1, currentIndex = 0;
         private Sequence _increaseTicket, _increaseTrophy;
 
         private void Awake()
         {
-            continueButton.onClick.AddListener(() =>
+            backButton.onClick.AddListener(() =>
             {
                 GameServiceManager.ShowInterstitialAd(() =>
                 {
-                    //TODO: reward ticket & trophy
-
                     GameDataManager.Instance.ResetSkinInGame();
                     Close();
+                    Loading.Instance.LoadMenu();
                 });
             });
             watchAdButton.onClick.AddListener(OnWatchAdClick);
@@ -80,38 +80,81 @@ namespace Projects.Scripts.Popup
 
         public void Init(MiniGameInfo info)
         {
-            if (GamePlayController.Instance != null)
+            replayButton.onClick.RemoveAllListeners();
+            replayButton.onClick.AddListener(() =>
             {
-                var rank = GamePlayController.Instance.player.GetRank();
-                if (rank <= 3)
+                //TODO: matching then reload scene 
+                Loading.Instance.LoadMiniGame(info);
+                GameDataManager.Instance.ResetSkinInGame();
+                Close();
+            });
+
+            openCompleteAction = () =>
+            {
+                if (GamePlayController.Instance)
                 {
-                    UpdateTicket(info.rank3.ticket);
-                    UpdateTrophy(info.rank3.trophy);
-                    GameDataManager.Instance.UpdateMiniGameWinCount(info.gameId);
+                    if (GamePlayController.Instance.player)
+                    {
+                        var rank = GamePlayController.Instance.player.GetRank();
+                        Ranked(rank);
+                    }
+                    else if (GamePlayController.Instance.GetPlayerInfo() != null)
+                    {
+                        var rank = GamePlayController.Instance.GetPlayerInfo().rank;
+                        Ranked(rank);
+                    }
+                }
+                else if (LeaderBoardInGame.Instance)
+                {
+                    foreach (var rankInGame in LeaderBoardInGame.Instance.ListRanking)
+                    {
+                        if (!rankInGame.isBot)
+                        {
+                            Ranked(rankInGame.rank);
+                            break;
+                        }
+                    }
+                }
+            };
+            
+            void Ranked(int rank)
+            {
+                if (rank > 3)
+                {
+                    ticketReward = 1;
+                    trophyReward = 0;
+                    GameDataManager.Instance.UpdateMiniGameLoseCount(info.gameId);
                 }
                 else
                 {
                     if (rank == 1)
                     {
-                        UpdateTicket(info.rank1.ticket);
-                        UpdateTrophy(info.rank1.trophy);
+                        ticketReward = info.rank1.ticket;
+                        trophyReward = info.rank1.trophy;
+                    }
+                    else if (rank == 2)
+                    {
+                        ticketReward = info.rank2.ticket;
+                        trophyReward = info.rank2.trophy;
                     }
                     else
                     {
-                        UpdateTicket(info.rank2.ticket);
-                        UpdateTrophy(info.rank2.trophy);
+                        ticketReward = info.rank3.ticket;
+                        trophyReward = info.rank3.trophy;
                     }
-                    GameDataManager.Instance.UpdateMiniGameLoseCount(info.gameId);
+                    GameDataManager.Instance.UpdateMiniGameWinCount(info.gameId);
                 }
+                UpdateTicket(ticketReward);
+                UpdateTrophy(trophyReward);
             }
-
-            var startPos = -312f;
+            
+            var startPos = -394f;
             finger.DOLocalMoveX(startPos, bonusDuration)
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine)
                 .OnUpdate(() =>
                 {
-                    if (finger.localPosition.x >= startPos && finger.localPosition.x < startPos + 6 + 159)
+                    if (finger.localPosition.x >= startPos && finger.localPosition.x < startPos + 5 + 160)
                     {
                         xValue = 2;
                     }
@@ -123,11 +166,16 @@ namespace Projects.Scripts.Popup
                     else if (finger.localPosition.x >= startPos + 6 + 159 * 2 &&
                              finger.localPosition.x < startPos + 6 + 159 * 3)
                     {
-                        xValue = 4;
+                        xValue = 5;
+                    }
+                    else if (finger.localPosition.x >= startPos + 6 + 159 * 3 &&
+                            finger.localPosition.x < startPos + 6 + 159 * 4)
+                    {
+                        xValue = 3;
                     }
                     else
                     {
-                        xValue = 5;
+                        xValue = 2;
                     }
                 });
             currentTicket = GameDataManager.Instance.GetTotalTicket();
@@ -155,14 +203,21 @@ namespace Projects.Scripts.Popup
         void OnWatchAdClick()
         {
             finger.DOKill();
-            GameServiceManager.ShowRewardedAd("win_bonus", () =>
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForBonusWin, async () =>
             {
                 //TODO: random x value
                 //TODO: reward ticket & trophy
+                
                 Debug.Log("xValue = " + xValue);
+                UpdateTicket(ticketReward * (xValue - 1));
+
+                await Task.Delay(2000);
                 GameDataManager.Instance.ResetSkinInGame();
                 Close();
+                Loading.Instance.LoadMenu();
             });
         }
+        
+        
     }
 }

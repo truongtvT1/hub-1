@@ -152,6 +152,8 @@ MonoBehaviour:
   timeStable: 0
   timeSprinting: 0
   distanceToObj: 0
+  sprintToSafeAreaDuration: 2
+  timeSprintToSafeArea: 0
 --- !u!1 &4643669625068483956
 GameObject:
   m_ObjectHideFlags: 0

@@ -46,7 +46,6 @@ namespace Projects.Scripts.Popup
 
         public void SetChangeClothes()
         {
-
             character.ChangeClothes();
         }
         #region ButtonEvent

@@ -199,10 +199,11 @@ namespace Projects.Scripts.Hub
             return PlayAnim("jump_down", 0, loop, callback: callback);
         }
 
-        public TrackEntry PlayStopPose(bool loop = false, int trackIndex = 0, Action callback = null)
+        public TrackEntry PlayStopPose(bool loop = false, Action callback = null)
         {
             var rdAnim = stopAnimations[Random.Range(0, stopAnimations.Count)];
-            return PlayAnim(rdAnim, trackIndex,loop, callback: callback);
+            PlayAnim(rdAnim, 0,loop, callback: callback);
+            return PlayAnim(rdAnim, 1,loop, callback: callback);
         }
         
         public TrackEntry PlayDie(bool loop = false, int trackIndex = 0, Action callback = null)

@@ -17,33 +17,63 @@ MonoBehaviour:
   - gameId: squid_game
     name: RED, GREEN LIGHT
     bg: {fileID: 21300000, guid: d68621a920f27764a90ccffb20061a82, type: 3}
-    loadingBg: {fileID: 21300000, guid: 2dbd8d473f266c34e964237714e92b66, type: 3}
+    loadingBg: {fileID: 21300000, guid: 85928339899e65b48bdbece8b4edecca, type: 3}
+    rank1:
+      ticket: 10
+      trophy: 3
+    rank2:
+      ticket: 8
+      trophy: 2
+    rank3:
+      ticket: 2
+      trophy: 1
+    ticketToUnlock: 0
     scene: {fileID: 102900000, guid: 75232a711945ec94b9531e1f3bb373cd, type: 3}
     gameScene: Red Light
     mostPlay: 0
-    recentPlay: 0
+    recentPlay: 1
     total: 0
-    win: 0
-    lose: 0
+    win: 1
+    lose: 3
   - gameId: memory_brain
     name: 'DEVIL FRUIT: MEMORY'
     bg: {fileID: 21300000, guid: 83aaec1f1cf97a94dae2fe531d093c74, type: 3}
-    loadingBg: {fileID: 21300000, guid: 2dbd8d473f266c34e964237714e92b66, type: 3}
+    loadingBg: {fileID: 21300000, guid: 85928339899e65b48bdbece8b4edecca, type: 3}
+    rank1:
+      ticket: 10
+      trophy: 3
+    rank2:
+      ticket: 8
+      trophy: 2
+    rank3:
+      ticket: 2
+      trophy: 1
+    ticketToUnlock: 0
     scene: {fileID: 102900000, guid: 9d7210bbfe4909f4fb7edc03754f09b3, type: 3}
     gameScene: Memory Matter
     mostPlay: 0
-    recentPlay: 1
+    recentPlay: 0
     total: 0
-    win: 0
+    win: 1
     lose: 0
   - gameId: sausage_run
     name: NINJA RACE
     bg: {fileID: 21300000, guid: b9f805f35d606c542b2905253213d359, type: 3}
-    loadingBg: {fileID: 21300000, guid: 2dbd8d473f266c34e964237714e92b66, type: 3}
+    loadingBg: {fileID: 21300000, guid: 85928339899e65b48bdbece8b4edecca, type: 3}
+    rank1:
+      ticket: 10
+      trophy: 3
+    rank2:
+      ticket: 8
+      trophy: 2
+    rank3:
+      ticket: 2
+      trophy: 1
+    ticketToUnlock: 10
     scene: {fileID: 102900000, guid: eb354a8ef08145f46ba1b1633f8153a4, type: 3}
     gameScene: Stickman Run
     mostPlay: 0
     recentPlay: 0
     total: 0
-    win: 0
+    win: 1
     lose: 0

@@ -146,6 +146,12 @@ TextureImporter:
   - first:
       213: -1807574880973921542
     second: noad 2
+  - first:
+      213: 4245802243892369783
+    second: Rounded1
+  - first:
+      213: -1140405993913419640
+    second: Rounded2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -311,7 +317,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1953
-        y: 738
+        y: 912
         width: 66
         height: 57
       alignment: 0
@@ -580,7 +586,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rounded Rectangle 1 copy 2
+      name: Rounded1
       rect:
         serializedVersion: 2
         x: 1665
@@ -594,20 +600,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61883ac1815355d20800000000000000
-      internalID: 3266575482403129366
+      spriteID: 779d2c545ae1cea30800000000000000
+      internalID: 4245802243892369783
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Rounded Rectangle 1 copy 3
+      name: Rounded2
       rect:
         serializedVersion: 2
         x: 1953
-        y: 963
-        width: 81
-        height: 78
+        y: 973
+        width: 73
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -615,50 +621,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04c1b0ded1e389580800000000000000
-      internalID: -8820231571953214400
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rounded Rectangle 1 copy
-      rect:
-        serializedVersion: 2
-        x: 1953
-        y: 881
-        width: 81
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 348a2471783c019e0800000000000000
-      internalID: -1652606078266726333
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rounded Rectangle 1
-      rect:
-        serializedVersion: 2
-        x: 1953
-        y: 799
-        width: 81
-        height: 78
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 86596aa4b4e5b7cc0800000000000000
-      internalID: -3712269790368852632
+      spriteID: 88870196ac67c20f0800000000000000
+      internalID: -1140405993913419640
       vertices: []
       indices: 
       edges: []

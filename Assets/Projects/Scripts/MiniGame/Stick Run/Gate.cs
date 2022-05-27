@@ -11,6 +11,7 @@ namespace MiniGame.StickRun
                 var player = other.GetComponent<StickmanPlayerController>();
                 if (player)
                 {
+                    player.Finish();
                     if (!player.isBot)
                     {
                         StickRunGameController.Instance.Win();

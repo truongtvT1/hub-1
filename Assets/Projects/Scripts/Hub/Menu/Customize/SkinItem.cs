@@ -45,26 +45,25 @@ namespace Projects.Scripts.Menu.Customize
                 case SkinRank.C:
                     bg.color = C;
                     break;
-                
             }
-
-            ;
+            var unlock = GameDataManager.Instance.IsSkinUnlock(item.skinName);
+            locked.SetActive(!unlock);
             skin.Initialize(true);    
             if (canClick)
             {
                 if (group != null)
                 {
                     _toggle.group = group;
+                    _toggle.interactable = true;
+                
+                    _toggle.onValueChanged.AddListener(value=>
+                    {
+                        OnToggle(value, onItemToggle);
+                    });
+                    var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
+                    _toggle.isOn = on;
+                    _toggle.onValueChanged.Invoke(on);
                 }
-                _toggle.interactable = true;
-            
-                _toggle.onValueChanged.AddListener(value=>
-                {
-                    OnToggle(value, onItemToggle);
-                });
-                var on = GameDataManager.Instance.GetSkinInGame().Contains(item.skinName);
-                _toggle.isOn = on;
-                _toggle.onValueChanged.Invoke(on);
             }
             else
             {

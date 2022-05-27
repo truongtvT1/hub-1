@@ -4,6 +4,7 @@ using Projects.Scripts.Hub;
 using Projects.Scripts.Popup;
 using ThirdParties.Truongtv;
 using TMPro;
+using Truongtv.PopUpController;
 using Truongtv.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -99,11 +100,12 @@ namespace Projects.Scripts.Menu
             else
             {
                 // show not enough ticket
+                PopupController.Instance.ShowToast("Not Enough Tickets");
             }
         }
         private void OnChangeColorByAdButtonClick()
         {
-            GameServiceManager.ShowRewardedAd("customize_change_color",ChangeColor);
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForCustomSkinColor,ChangeColor);
         }
 
         private void ChangeColor()

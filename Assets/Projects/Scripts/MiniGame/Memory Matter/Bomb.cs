@@ -39,7 +39,9 @@ namespace MiniGame.MemoryMatter
                     if (hit[i].collider.CompareTag("Player"))
                     {
                         var player = hit[i].transform.GetComponent<PlayerMovement>();
-                        player.SetForce((player.transform.position - rigidBody.transform.position) * force, true);
+                        Vector2 vForce = player.transform.position - rigidBody.transform.position;
+                        Debug.Log("vForce magnitude " + player.name + " " + vForce.normalized * force / Mathf.Sqrt(vForce.sqrMagnitude));
+                        player.SetForce(vForce * force / Mathf.Sqrt(vForce.sqrMagnitude), true);
                     }
                     else
                     {

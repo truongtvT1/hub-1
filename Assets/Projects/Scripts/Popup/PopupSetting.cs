@@ -1,4 +1,5 @@
 using System;
+using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using ThirdParties.Truongtv.SoundManager;
@@ -75,7 +76,8 @@ namespace Projects.Scripts.Popup
             GameServiceManager.ShowInterstitialAd(() =>
             {
                 homeCallback?.Invoke();
-                SceneManager.LoadScene("Menu");
+                Close();
+                Loading.Instance.LoadMenu();
             });
         }
         

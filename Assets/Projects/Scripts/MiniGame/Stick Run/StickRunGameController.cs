@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Base;
 using Com.LuisPedroFonseca.ProCamera2D;
 using Projects.Scripts.Hub;
+using RandomNameAndCountry.Scripts;
+using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,16 +15,15 @@ using Random = UnityEngine.Random;
 
 namespace MiniGame.StickRun
 {
-    public class StickRunGameController : MonoBehaviour
+    public class StickRunGameController : GamePlayController
     {
-        public Button settingButton;
-        public GameObject holdToRunFastText;
+        [FoldoutGroup("UI")] public Button settingButton;
+        [FoldoutGroup("UI")] public GameObject holdToRunFastText;
+        [FoldoutGroup("UI")] public GameObject camera;
         public List<StickmanPlayerController> listBot = new List<StickmanPlayerController>();
         public StickmanPlayerController botPrefabs;
         public GameDifficulty difficulty;
-        public GameState state = GameState.None;
-        public StickmanPlayerController player;
-        public StickmanPlayerController playerPrefab;
+        public StickmanPlayerController playerStickman;
         public Vector2 startPos;
         public Pool[] trapPoolEasy;
         public Pool[] trapPoolNormal;
@@ -31,15 +32,17 @@ namespace MiniGame.StickRun
         public GameObject gateFinish;
         [SerializeField] private int maxTimeRevive = 3;
         [SerializeField] private int maxBotNumbers = 3;
-        private List<PlayerSkin> cacheBotSkin = new List<PlayerSkin>();
+
         public static StickRunGameController Instance
         {
             get => instance;
         }
 
+
+        private List<PlayerSkin> cacheBotSkin = new List<PlayerSkin>();
         private int deadTime;
         private Transform checkPoint;
-        private static StickRunGameController instance = null;
+        private static StickRunGameController instance;
         private float deltaDifficulty, mapLength;
         private bool isHoldingSprint, isFirstTap;
         
@@ -76,10 +79,11 @@ namespace MiniGame.StickRun
             {
                 InGamePopupController.Instance.ShowPopupSetting(() =>
                 {
+                    GameDataManager.Instance.ResetSkinInGame();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }, () =>
                 {
-                    Loading.Instance.LoadMenu();
+                    GameDataManager.Instance.ResetSkinInGame();
                 }, null);
             });
         }
@@ -91,9 +95,10 @@ namespace MiniGame.StickRun
 
         IEnumerator Init()
         {
+            GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart,new Dictionary<string, object>{{"stick_run",difficulty.ToString()}});
             deadTime = 0;
             var camBoundaries = ProCamera2D.Instance.GetComponent<ProCamera2DNumericBoundaries>();
-            //gen map
+            #region gen map
             int count = 0;
             float pos = _mapStartOffset;
             float delta = 3f; //sai so ngau nhien khoang cach giua cac obj
@@ -111,17 +116,20 @@ namespace MiniGame.StickRun
                         if (lastObj != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
-                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll"))
+                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
+                                || lastObj.name.Equals(trap.name))
                             {
+                                Destroy(trap);
                                 continue;
                             }
                         }
                         lastObj = trap;
+                        Debug.Log($"pos object {count} : {pos}");
+                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         if (trap.TryGetComponent(out AutoMoving movingItem))
                         {
                             movingItem.UpdateListPoint();
                         }
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         pos += OBJECT_AVGWIDTH + EASY_MAPLENGTH/EASY_OBJECT_AMOUNT + Random.Range(-delta, delta);
                         count++;
                     }
@@ -136,17 +144,20 @@ namespace MiniGame.StickRun
                         if (lastObj != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                             || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
-                            || lastObj.name.Contains("Roll") && trap.name.Contains("Roll"))
+                            || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
+                            || lastObj.name.Equals(trap.name))
                             {
+                                Destroy(trap);
                                 continue;
                             }
                         }
                         lastObj = trap;
+                        Debug.Log($"pos object {count} : {pos}");
+                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         if (trap.TryGetComponent(out AutoMoving movingItem))
                         {
                             movingItem.UpdateListPoint();
                         }
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         pos += OBJECT_AVGWIDTH + NORMAL_MAPLENGTH/NORMAL_OBJECT_AMOUNT + Random.Range(-delta, delta);
                         count++;
                     }
@@ -161,17 +172,19 @@ namespace MiniGame.StickRun
                         if (lastObj != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
-                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll"))
+                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
+                                || lastObj.name.Equals(trap.name))
                             {
+                                Destroy(trap);
                                 continue;
                             }
                         }
                         lastObj = trap;
+                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         if (trap.TryGetComponent(out AutoMoving movingItem))
                         {
                             movingItem.UpdateListPoint();
                         }
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         pos += OBJECT_AVGWIDTH + HARD_MAPLENGTH/HARD_OBJECT_AMOUNT + Random.Range(-delta, delta);
                         count++;
                     }
@@ -186,23 +199,44 @@ namespace MiniGame.StickRun
                         if (lastObj != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
-                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll"))
+                                || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
+                                || lastObj.name.Equals(trap.name))
                             {
+                                Destroy(trap);
                                 continue;
                             }
                         }
                         lastObj = trap;
+                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         if (trap.TryGetComponent(out AutoMoving movingItem))
                         {
                             movingItem.UpdateListPoint();
                         }
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
                         pos += OBJECT_AVGWIDTH + HELL_MAPLENGTH/HELL_OBJECT_AMOUNT + Random.Range(-delta, delta);
                         count++;
                     }
                     break;
             }
+            #endregion
             
+            //init leader board
+            var skin = GameDataManager.Instance.GetSkinInGame();
+            var skinColor = GameDataManager.Instance.GetCurrentColor();
+            var playerInfo = new RankIngame
+            {
+                isBot = false,
+                isFinish = false,
+                playerSkin = new PlayerSkin
+                {
+                    color = skinColor,
+                    skin = skin
+                },
+                name = "Me",
+                rank = maxBotNumbers + 1,
+                score = 0
+            };
+            playerStickman.InitRank(playerInfo);
+            LeaderBoardInGame.Instance.ListRanking.Add(playerInfo);
             
             //init bot
             for (int i = 0; i < maxBotNumbers; i++)
@@ -217,8 +251,26 @@ namespace MiniGame.StickRun
                 var botController = bot.GetComponent<StickmanPlayerController>();
                 var difficulty = (int) this.difficulty;
                 botController.Init(listSkin,color,(BotDifficulty) difficulty);
+                string botName = RandomNameAndCountryPicker.Instance.GetRandomPlayerInfo().playerName;
+                RankIngame botInfo = new RankIngame
+                {
+                    isBot = true,
+                    isFinish = false,
+                    score = 0,
+                    rank = maxBotNumbers + 1,
+                    name = botName,
+                    playerSkin = new PlayerSkin
+                    {
+                        skin = listSkin,
+                        color = color
+                    }
+                };
+                botController.InitRank(botInfo);
+                LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
                 listBot.Add(botController);
             }
+            LeaderBoardInGame.Instance.Init(LevelGoal.Racing);
+            LeaderBoardInGame.Instance.Show();
             yield return new WaitUntil(() => isFirstTap);
             holdToRunFastText.gameObject.SetActive(false);
             state = GameState.Playing;
@@ -238,28 +290,24 @@ namespace MiniGame.StickRun
         {
             state = GameState.End;
             await Task.Delay(2000);
-            GameServiceManager.ShowInterstitialAd(() =>
-            {
-                GameDataManager.Instance.ResetSkinInGame();
-                Loading.Instance.LoadMenu();
-            });
+            camera.SetActive(false);
+            InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run")));
         }
         
         public void EndGame()
         {
             state = GameState.End;
-            GameServiceManager.ShowInterstitialAd(() =>
-            {
-                GameDataManager.Instance.ResetSkinInGame();
-                Loading.Instance.LoadMenu();
-            });
+            LeaderBoardInGame.Instance.OnMainPlayerDie(playerStickman.GetRankInfo());
+            LeaderBoardInGame.Instance.UpdateBoard();
+            camera.SetActive(false);
+            InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run")));
         }
         
         private void Update()
         {
             if (state == GameState.Playing)
             {
-                player.TouchSprint(isHoldingSprint);
+                playerStickman.TouchSprint(isHoldingSprint);
             }
         }
 

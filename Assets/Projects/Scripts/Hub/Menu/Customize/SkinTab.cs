@@ -4,6 +4,7 @@ using Projects.Scripts.Popup;
 using Projects.Scripts.Scriptable;
 using ThirdParties.Truongtv;
 using TMPro;
+using Truongtv.PopUpController;
 using Truongtv.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,16 +59,13 @@ namespace Projects.Scripts.Menu.Customize
                     var item = group.items[j].GetComponent<SkinItem>();
                     if (i * 3 + j < _skins.Count)
                     {
-
-                        
+                     
                         item.Init(_skins[i * 3 + j],_group,OnSkinSelected);
                         _itemList.Add(item);
                     }
                     else
                     {
                         item.Hide();
-
-                    
                     }
                 }
                 scroll.onValueChanged.AddListener(group.UpdateLayoutPosition);
@@ -120,10 +118,15 @@ namespace Projects.Scripts.Menu.Customize
 
         private void OnTryButtonClick()
         {
-            GameServiceManager.ShowRewardedAd("customize_try_skin", () =>
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForCustomTrySkin, () =>
             {
                 GameDataManager.Instance.TrySkin(_selected.item.skinName);
-                OnSelectButtonClick();
+                MenuController.Instance.UpdateCharacter();
+                foreach (var item in _itemList)
+                {
+                    item.SetSelected();
+                }
+                _controller.SetChangeClothes();
             });
         }
 
@@ -140,12 +143,13 @@ namespace Projects.Scripts.Menu.Customize
             else
             {
                 // show not enough ticket
+                PopupController.Instance.ShowToast("Not Enough Tickets");
             }
         }
 
         private void OnBuyByAdButtonClick()
         {
-            GameServiceManager.ShowRewardedAd("customize_unlock_skin", () =>
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForCustomUnlockSkin, () =>
             {
                 GameDataManager.Instance.UnlockSkin(_selected.item.skinName);
                 GameDataManager.Instance.UpdateCurrentSkin(_selected.item.skinName);

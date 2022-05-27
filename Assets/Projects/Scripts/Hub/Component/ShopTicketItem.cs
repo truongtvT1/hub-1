@@ -40,7 +40,7 @@ namespace Projects.Scripts.Hub.Component
                 var remain = _item.freePerDay - count;
                 if (_item.freePerDay - count > 0)
                 {
-                    var timeRemain = GameDataManager.Instance.GetLastTimeClaimFreeChest().AddSeconds(_item.coolDown)
+                    var timeRemain = GameDataManager.Instance.GetLastTimeClaimFreeTicket().AddSeconds(_item.coolDown)
                         .Subtract(DateTime.Now);
                     if (timeRemain.TotalSeconds > 0)
                     {
@@ -69,10 +69,9 @@ namespace Projects.Scripts.Hub.Component
 
         private void BuyByAd()
         {
-            GameServiceManager.ShowRewardedAd("shop_free_ticket", () =>
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForShopFreeTicket, () =>
             {
-                var count = GameDataManager.Instance.GetFreeTicketCountInDay()+1;
-                GameDataManager.Instance.UpdateFreeTicketCountInDay(count);
+                GameDataManager.Instance.UpdateFreeTicketCountInDay(1);
                 PurchaseSuccess();
             });
         }

@@ -22,12 +22,16 @@ namespace MiniGame.SquidGame
         private Coroutine _coroutineRed,_coroutineGreen;
         private float difficulty, delayGreen = .1f, delayRed = .1f;
         private float rdValue;
+        private RankIngame rankInfo;
+        
         public void Init(SquidGameController controller, List<string> skin, Color color, float difficulty)
         {
             isReady = false;
             isWin = false;
             this.difficulty = difficulty;
             rdValue = Random.value;
+            delayGreen = 0.4f - Random.Range(0,difficulty);
+            delayRed = 0.4f - Random.Range(0,difficulty);
             anim.SetSkin(skin);
             anim.SetSkinColor(color);
             skull.sortingOrder = anim.GetSortingOrder();
@@ -78,6 +82,21 @@ namespace MiniGame.SquidGame
                 .Pause();
         }
 
+        public void InitRank(RankIngame rankInfo)
+        {
+            this.rankInfo = rankInfo;
+        }
+
+        public void Finish()
+        {
+            rankInfo.isFinish = true;
+            if (LeaderBoardInGame.Instance != null)
+            {
+                LeaderBoardInGame.finishAction.Invoke(rankInfo);
+                LeaderBoardInGame.Instance.Show(.5f);
+            }
+        }
+        
         private bool tempMoving = false;
 
         private void Update()
@@ -87,7 +106,7 @@ namespace MiniGame.SquidGame
                 if (HitFinishLine() && !isWin)
                 {
                     isWin = true;
-                    _controller.playerRank++;
+                    Finish();
                 }
 
                 if (!isWin && HitByMeteor())
@@ -119,10 +138,6 @@ namespace MiniGame.SquidGame
             return false;
         }
         
-        public void RunOrWalk()
-        {
-            
-        }
         
         IEnumerator RedLight()
         {
@@ -130,7 +145,7 @@ namespace MiniGame.SquidGame
             {
                 yield break;
             }
-            var rd = Random.Range(0, delayRed - Random.Range(0,difficulty));
+            var rd = Random.Range(0, delayRed);
             yield return new WaitForSeconds(rd);
             if (_coroutineGreen != null)
             {
@@ -139,7 +154,6 @@ namespace MiniGame.SquidGame
             isMoving = false;
             anim.transform.parent.DOPause();
             anim.PlayStopPose();
-            anim.PlayStopPose(trackIndex:1);
         }
 
         IEnumerator GreenLight()
@@ -148,7 +162,7 @@ namespace MiniGame.SquidGame
             {
                 yield break;
             }
-            var rd = Random.Range(0, delayGreen - Random.Range(0,difficulty));
+            var rd = Random.Range(0, delayGreen);
             yield return new WaitForSeconds(rd);
             if (_coroutineRed != null)
             {

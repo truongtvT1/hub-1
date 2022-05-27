@@ -14,17 +14,18 @@ namespace Projects.Scripts.Hub
         [SerializeField] private float loadingDuration;
         [SerializeField] private Ease loadingCurve;
         [SerializeField] private Sprite baseBackground;
-
-        public static Loading Instance;
+        private static Loading _instance;
+        public static Loading Instance => _instance;
         private void Awake()
         {
-            if (Instance != null)
+            if (_instance != null)
                 Destroy(gameObject);
-            Instance = this ;
+            _instance = this ;
         }
         public void LoadMenu()
         {
             background.sprite = baseBackground;
+            background.SetNativeSize();
             progressBar.fillAmount = 0f;
             container.SetActive(true);
             var op = SceneManager.LoadSceneAsync("Menu");
@@ -43,6 +44,7 @@ namespace Projects.Scripts.Hub
         public void LoadMiniGame(MiniGameInfo info,float duration =0f)
         {
             background.sprite = info.loadingBg;
+            background.SetNativeSize();
             progressBar.fillAmount = 0f;
             container.SetActive(true);
             var op = SceneManager.LoadSceneAsync(info.gameScene);

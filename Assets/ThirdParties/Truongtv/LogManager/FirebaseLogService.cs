@@ -19,7 +19,9 @@ namespace ThirdParties.Truongtv.LogManager
         public void LogEvent(string eventName)
         {
             FirebaseAnalytics.LogEvent(eventName);
+            Debug.Log("FirebaseLogService: event "+eventName);
         }
+
         public void LogEvent(string eventName, Dictionary<string, object> parameter)
         {
             var paramList = new List<Parameter>();
@@ -37,8 +39,9 @@ namespace ThirdParties.Truongtv.LogManager
                 {
                     paramList.Add(new Parameter(keyValuePair.Key,keyValuePair.Value.ToString()));
                 }
-                FirebaseAnalytics.LogEvent(eventName,paramList.ToArray());
+                Debug.Log("FirebaseLogService: event "+eventName+"| key: "+keyValuePair.Key+" |value: "+keyValuePair.Value);
             }
+            FirebaseAnalytics.LogEvent(eventName,paramList.ToArray());
         }
 
         

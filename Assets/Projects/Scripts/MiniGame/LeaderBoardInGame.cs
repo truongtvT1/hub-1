@@ -17,6 +17,7 @@ namespace MiniGame
         private static LeaderBoardInGame _instance;
         private int currentRank;
         public static Action<RankIngame> scoreAction, finishAction;
+
         public static LeaderBoardInGame Instance
         {
             get => _instance;
@@ -24,15 +25,16 @@ namespace MiniGame
 
         public List<RankIngame> ListRanking
         {
-            get 
+            get
             {
                 if (listRanking == null)
                 {
                     listRanking = new List<RankIngame>();
                     return listRanking;
                 }
+
                 return listRanking;
-            } 
+            }
         }
 
         private void Awake()
@@ -45,6 +47,7 @@ namespace MiniGame
             {
                 Destroy(_instance.gameObject);
             }
+
             listRanking = new List<RankIngame>();
             scoreAction = OnPlayerScore;
             finishAction = OnPlayerFinish;
@@ -64,7 +67,17 @@ namespace MiniGame
             currentRank++;
             UpdateBoard();
         }
-        
+
+        public void OnMainPlayerDie(RankIngame rankIngame)
+        {
+            for (int i = 0; i < listRanking.Count; i++)
+            {
+                listRanking[i].rank = i + 1;
+            }
+            var player = listRanking.Find(_ => _.name == rankIngame.name);
+            player.rank = listRanking.Count;
+        }
+
         public void Init(LevelGoal goalType)
         {
             this.goalType = goalType;
@@ -79,11 +92,11 @@ namespace MiniGame
                 boardRows[i].gameObject.SetActive(true);
                 if (goalType == LevelGoal.Score)
                 {
-                    boardRows[i].UpdateScore(listRanking[i], listRanking[i].isBot);
+                    boardRows[i].UpdateScore(listRanking[i]);
                 }
                 else
                 {
-                    boardRows[i].UpdateFinish(listRanking[i], listRanking[i].isBot);
+                    boardRows[i].UpdateFinish(listRanking[i]);
                 }
             }
         }
@@ -95,7 +108,7 @@ namespace MiniGame
                 listRanking = listRanking.OrderBy(_ => _.rank).ToList();
                 for (int i = 0; i < boardRows.Count; i++)
                 {
-                    boardRows[i].UpdateFinish(listRanking[i], listRanking[i].isBot);
+                    boardRows[i].UpdateFinish(listRanking[i]);
                 }
             }
             else
@@ -104,29 +117,29 @@ namespace MiniGame
                 for (int i = 0; i < boardRows.Count; i++)
                 {
                     listRanking[i].rank = i + 1;
-                    boardRows[i].UpdateScore(listRanking[i], listRanking[i].isBot);
+                    boardRows[i].UpdateScore(listRanking[i]);
                 }
             }
         }
 
-        public void Show()
+        public void Show(float alpha = 1)
         {
-            canvasGroup.alpha = 1;
+            if (canvasGroup) canvasGroup.alpha = alpha != 1 ? alpha : 1;
         }
-        
+
         public void Hide()
         {
-            canvasGroup.alpha = 0;
+            if (canvasGroup) canvasGroup.alpha = 0;
         }
     }
-    
+
     [Serializable]
     public enum LevelGoal
     {
         Racing,
         Score
     }
-    
+
     [Serializable]
     public class RankIngame
     {

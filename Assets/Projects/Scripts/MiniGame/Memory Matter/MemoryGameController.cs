@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Projects.Scripts.Data;
 using RandomNameAndCountry.Scripts;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
@@ -18,12 +19,12 @@ namespace MiniGame.MemoryMatter
 {
     public class MemoryGameController : MonoBehaviour
     {
+        [SerializeField] private GameObject tutorialObj;
         [SerializeField] private Button settingButton;
         [SerializeField] private List<Transform> stairsList;
         [SerializeField] private List<SpriteRenderer> fruitList;
         [SerializeField] private List<Sprite> fruitSprites;
         [SerializeField] private GameObject UIContainer;
-        [FoldoutGroup("Character")] public PlayerController playerPrefabs;
         [SerializeField,FoldoutGroup("Bot")] private int maxBot = 8;
         [SerializeField,FoldoutGroup("Bot")] private PlayerController botPrefab;
         [SerializeField,FoldoutGroup("Bot")] private List<PlayerController> listBot;
@@ -50,20 +51,23 @@ namespace MiniGame.MemoryMatter
         private int cacheMaxTurn, cacheMaxNumberObjs;
         private int objCount = 0;
         private float countTimeObj = 0;
-
+        private int level;
+        private MiniGameInfo gameInfo;
         private void Awake()
         {
             settingButton.onClick.AddListener(() =>
             {
                 InGamePopupController.Instance.ShowPopupSetting(() =>
                 {
+                    StopAllCoroutines();
+                    GameDataManager.Instance.ResetSkinInGame();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }, () =>
                 {
-                    Loading.Instance.LoadMenu();
+                    StopAllCoroutines();
+                    GameDataManager.Instance.ResetSkinInGame();
                 }, null);
             });
-            deltaDifficulty = (float) _difficulty / 10;
             cacheShowDuration = showDuration;
             cacheTurnDuration = turnDuration;
             cacheMaxTurn = maxTurn;
@@ -75,6 +79,18 @@ namespace MiniGame.MemoryMatter
 
         private async void Start()
         {
+            gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("squid"));
+            level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
+            var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
+            for (int i = 1; i <= enumCount; i++)
+            {
+                if ((i - 1) * 3 < level && level <= i * 3)
+                {
+                    _difficulty = (GameDifficulty) (i - 1);
+                    break;
+                }
+            } 
+            deltaDifficulty = (float) _difficulty / 10;
             var currentColor = GameDataManager.Instance.GetCurrentColor();
             var currentSkin = GameDataManager.Instance.GetSkinInGame();
             var playerInfo = new RankIngame
@@ -125,14 +141,15 @@ namespace MiniGame.MemoryMatter
         {
             if (timeToStart >= 0 && _gamePlayController.state == GameState.None)
             {
-                timeCounterText.transform.root.gameObject.SetActive(true);
+                timeCounterText.transform.parent.gameObject.SetActive(true);
                 timeCounterText.text = "" + (int) timeToStart;
                 timeToStart -= Time.deltaTime;
             }
             else if (_gamePlayController.state != GameState.Playing && _gamePlayController.state != GameState.End) 
             {
-                _gamePlayController.StartGame("memory_game");
-                timeCounterText.transform.root.gameObject.SetActive(false);
+                _gamePlayController.StartGame("memory_game",_difficulty.ToString());
+                tutorialObj.SetActive(false);
+                timeCounterText.transform.parent.gameObject.SetActive(false);
                 timeCounterText.text = "";
                 NextRound();
             }
@@ -172,6 +189,23 @@ namespace MiniGame.MemoryMatter
         
         async void NextRound()
         {
+            //Score player
+            if (currentRound != 0)
+            {
+                for (int i = 0; i < listBot.Count; i++)
+                {
+                    if (!listBot[i].IsDead)
+                    {
+                        listBot[i].Score(1);
+                    }
+                }
+                if (!_gamePlayController.player.IsDead)
+                {
+                    _gamePlayController.player.Score(1);
+                }
+                LeaderBoardInGame.Instance.UpdateBoard();
+                LeaderBoardInGame.Instance.Show();
+            }
             Refresh();
             ReassignParam();
             countTimeObj = 0;
@@ -180,7 +214,6 @@ namespace MiniGame.MemoryMatter
             {
                 listBot[i].SetTarget(null);
             }
-            
             if (currentRound == maxRound)
             {
                 //Show popup Game over
@@ -190,12 +223,11 @@ namespace MiniGame.MemoryMatter
                 await Task.Delay(2500);
                 UIContainer.SetActive(false);
                 InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("memory")));
-                Loading.Instance.LoadMenu();
-                GameDataManager.Instance.ResetSkinInGame();
                 return;
             }
             currentRound++;
             
+            await Task.Delay(500);
             if (_gamePlayController.player.IsDead)
             {
                 var rd1 = Random.Range(spawnRange[0].position.x, spawnRange[1].position.x);
@@ -222,7 +254,10 @@ namespace MiniGame.MemoryMatter
             DOTween.KillAll(true);
             foreach (var bot in listBot)
             {
-                Destroy(bot.gameObject);
+                if (bot)
+                {
+                    Destroy(bot.gameObject);
+                }
             }
         }
 
@@ -291,7 +326,20 @@ namespace MiniGame.MemoryMatter
                 // Bỏ random obj đã show 
                 List<SpriteRenderer> temp = new List<SpriteRenderer>();
                 temp.AddRange(fruitList);
-                temp.RemoveAt(lastShownObjIndex[Random.Range(0,lastShownObjIndex.Count)]);
+                int count = 0;
+                for (int i = 0; i < lastShownObjIndex.Count; i++)
+                {
+                    if (count > 1)
+                    {
+                        break;
+                    }
+                    var item = fruitList[lastShownObjIndex[i]];
+                    if (item != null && temp.Contains(item))
+                    {
+                        temp.Remove(item);
+                        count++;
+                    }
+                }
                 var objsToShow = temp.OrderBy(_ => random.Next()).Take(num).ToList();
                 for (int i = 0; i < objsToShow.Count; i++)
                 {
@@ -345,10 +393,10 @@ namespace MiniGame.MemoryMatter
             StartCoroutine(CountTime(showDuration, 0.5f, f =>
             {
                 timeCounterText.text = "" + (int) (showDuration - f);
-                timeCounterText.transform.root.gameObject.SetActive(true);
+                timeCounterText.transform.parent.gameObject.SetActive(true);
             }, () =>
             {
-                timeCounterText.transform.root.gameObject.SetActive(false);
+                timeCounterText.transform.parent.gameObject.SetActive(false);
                 timeCounterText.text = "";
                 resultObj.transform.parent.gameObject.SetActive(false);
                 
@@ -368,20 +416,6 @@ namespace MiniGame.MemoryMatter
                 },callback: async () =>
             {
                 await Task.Delay(2500);
-                //Score player
-                for (int i = 0; i < listBot.Count; i++)
-                {
-                    if (!listBot[i].IsDead)
-                    {
-                        listBot[i].Score(1);
-                    }
-                }
-                if (!_gamePlayController.player.IsDead)
-                {
-                    _gamePlayController.player.Score(1);
-                }
-                LeaderBoardInGame.Instance.UpdateBoard();
-                LeaderBoardInGame.Instance.Show();
                 currentTurn = 0;
                 NextRound();
             }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Projects.Scripts.Hub;
 using ThirdParties.Truongtv;
@@ -11,13 +12,14 @@ namespace Projects.Scripts.Menu
 {
     public class MenuController : MonoBehaviour
     {
-        public static MenuController Instance;
+        private static MenuController _instance;
+        public static MenuController Instance => _instance;
         
         private void Awake()
         {
-            if (Instance != null)
+            if (_instance != null)
                 Destroy(gameObject);
-            Instance = this;
+            _instance = this;
         }
 
         [SerializeField] private Button playButton,
@@ -33,7 +35,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private CharacterAnimationGraphic mainCharacter;
         [SerializeField] private ParticleGold ticketEffect;
         [SerializeField] private TextMeshProUGUI ticketText, userNameText, userTrophyText;
-        [SerializeField] private Image userAvatar;
+        [SerializeField] private CharacterAnimationGraphic userAvatar;
 
         private void Start()
         {
@@ -50,7 +52,18 @@ namespace Projects.Scripts.Menu
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
             ticketText.text = GameDataManager.Instance.GetTotalTicket() + "";
             userNameText.text = GameDataManager.Instance.GetUserName();
-            userTrophyText.text = GameDataManager.Instance.GetUserRanking().trophy + "";
+            userTrophyText.text = GameDataManager.Instance.GetTotalTrophy() + "";
+            userAvatar.SetSkin(GameDataManager.Instance.GetCurrentSkin());
+            userAvatar.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
+            if (GameDataManager.Instance.IsFirstOpen())
+            {
+                PopupMenuController.Instance.ShowPopupChooseMode();
+            }
+            if (GameDataManager.Instance.CheckCanUnlockNewMode() != null)
+            {
+                PopupMenuController.Instance.ShowPopupChooseMode();
+                //TODO: tutorial for unlock new mode
+            }
             GameServiceManager.ShowBanner();
         }
 
@@ -100,10 +113,20 @@ namespace Projects.Scripts.Menu
 
         #endregion
 
-        public void UpdateCharacter()
+        public void UpdatePlayerName()
+        {
+            userNameText.text = GameDataManager.Instance.GetUserName();
+        }
+        
+        public async void UpdateCharacter()
         {
             mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
             mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
+            userAvatar.Freeze(false);
+            userAvatar.SetSkin(GameDataManager.Instance.GetCurrentSkin());
+            userAvatar.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
+            await Task.Delay(100);
+            userAvatar.Freeze();
         }
 
         public void AddTicket(int value)

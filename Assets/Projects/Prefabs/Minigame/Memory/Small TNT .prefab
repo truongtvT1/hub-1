@@ -200,7 +200,7 @@ MonoBehaviour:
   waitFx: {fileID: 8057147842814684019}
   duration: 3
   blowRadius: 1.5
-  force: 8
+  force: 6
   rigidBody: {fileID: 1814266652404012060}
 --- !u!1001 &6777676262323416323
 PrefabInstance:

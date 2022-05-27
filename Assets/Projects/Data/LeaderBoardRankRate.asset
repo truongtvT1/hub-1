@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e25cd747e864c94a488a76f95ef00cb, type: 3}
+  m_Name: LeaderBoardRankRate
+  m_EditorClassIdentifier: 
+  ranks:
+  - rank1Rate: 0.6
+    rank2Rate: 0.25
+    rank3Rate: 0.13
+    rank4Rate: 0.02
+  - rank1Rate: 0.56
+    rank2Rate: 0.27
+    rank3Rate: 0.14
+    rank4Rate: 0.03
+  - rank1Rate: 0.52
+    rank2Rate: 0.29
+    rank3Rate: 0.15
+    rank4Rate: 0.04
+  - rank1Rate: 0.48
+    rank2Rate: 0.31
+    rank3Rate: 0.17
+    rank4Rate: 0.06
+  - rank1Rate: 0.44
+    rank2Rate: 0.33
+    rank3Rate: 0.17
+    rank4Rate: 0.06
+  - rank1Rate: 0.4
+    rank2Rate: 0.35
+    rank3Rate: 0.18
+    rank4Rate: 0.07
+  - rank1Rate: 0.36
+    rank2Rate: 0.37
+    rank3Rate: 0.19
+    rank4Rate: 0.08
+  - rank1Rate: 0.32
+    rank2Rate: 0.39
+    rank3Rate: 0.2
+    rank4Rate: 0.09
+  - rank1Rate: 0.28
+    rank2Rate: 0.41
+    rank3Rate: 0.21
+    rank4Rate: 0.1
+  - rank1Rate: 0.24
+    rank2Rate: 0.43
+    rank3Rate: 0.22
+    rank4Rate: 0.11

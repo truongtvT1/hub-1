@@ -13,17 +13,20 @@ namespace Projects.Scripts.Data
         public Dictionary<string, int> currencies;
         public List<string> currentSkin,trySkin;
         public string currentSkinColor;
-        public Dictionary<string, GameDifficulty> difficult;
         public List<string> unlockedSkins;
+        public List<string> unlockedMode;
         public UserRanking ranking;
+        public List<UserRanking> fakeRankingData;
         public string lastPlayed;
-        public bool purchased;
+        public bool purchased, firstOpen;
         public UserInfo()
         {
             times = new Dictionary<string, DateTime> {{"date_create", DateTime.Now}};
             currencies = new Dictionary<string, int>();
-            difficult = new Dictionary<string, GameDifficulty>();
+            unlockedMode = new List<string>();
             ranking = new UserRanking();
+            fakeRankingData = new List<UserRanking>();
+            firstOpen = true;
         }
 
         public void InitSkin(List<string> currentSkinList,Color color)

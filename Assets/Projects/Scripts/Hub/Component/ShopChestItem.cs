@@ -74,7 +74,7 @@ namespace Projects.Scripts.Hub.Component
         }
         private void BuyByAd()
         {
-            GameServiceManager.ShowRewardedAd("shop_free_chest", () =>
+            GameServiceManager.ShowRewardedAd(GameServiceManager.eventConfig.rewardForShopFreeDrawChest, () =>
             {
                 GameDataManager.Instance.UpdateFreeChestCountInDay(1);
                 PurchaseSuccess();
@@ -94,13 +94,11 @@ namespace Projects.Scripts.Hub.Component
 
         private void PurchaseSuccess()
         {
-            
             Init(_shopData,_shop);
             var listItem = new List<SkinInfo>();
             var lastChestOpen = GameDataManager.Instance.GetTotalChestOpen();
-            
-            var numberSTier = 0;
-            if (lastChestOpen % 10 + _item.numberItemReward > 10)
+            int numberSTier = 0;
+            if (lastChestOpen % 10 + _item.numberItemReward >= 10)
             {
                 numberSTier = (lastChestOpen % 10 + _item.numberItemReward) / 10;
                 listItem.AddRange(_data.GetSkinByRank(numberSTier,SkinRank.S));
@@ -110,19 +108,39 @@ namespace Projects.Scripts.Hub.Component
                 var r = Random.Range(0, 100f);
                 if (r < _shopData.sPercent)
                 {
-                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.S));
+                    var item = _data.GetSkinByRank(1, SkinRank.S);
+                    while (listItem.Contains(item[0]))
+                    {
+                        item = _data.GetSkinByRank(1, SkinRank.S);
+                    }
+                    listItem.Add(item[0]);
                 }
                 else if (r < _shopData.aPercent)
                 {
-                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.A));
+                    var item = _data.GetSkinByRank(1, SkinRank.A);
+                    while (listItem.Contains(item[0]))
+                    {
+                        item = _data.GetSkinByRank(1, SkinRank.A);
+                    }
+                    listItem.Add(item[0]);
                 }
                 else if (r < _shopData.bPercent)
                 {
-                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.B));
+                    var item = _data.GetSkinByRank(1, SkinRank.B);
+                    while (listItem.Contains(item[0]))
+                    {
+                        item = _data.GetSkinByRank(1, SkinRank.B);
+                    }
+                    listItem.Add(item[0]);
                 }
                 else
                 {
-                    listItem.AddRange(_data.GetSkinByRank(1,SkinRank.C));
+                    var item = _data.GetSkinByRank(1, SkinRank.C);
+                    while (listItem.Contains(item[0]))
+                    {
+                        item = _data.GetSkinByRank(1, SkinRank.C);
+                    }
+                    listItem.Add(item[0]);
                 }
             }
             GameDataManager.Instance.UpdateChestOpenNumber(_item.numberItemReward);
@@ -130,9 +148,13 @@ namespace Projects.Scripts.Hub.Component
             {
                 GameDataManager.Instance.UnlockSkin(item.skinName);
             }
+            _shop.UpdateChestProgress(lastChestOpen % 10,lastChestOpen % 10 + _item.numberItemReward);
             PopupMenuController.Instance.ShowPopupOpenChest(listItem, () =>
             {
-                _shop.UpdateChestProgress(lastChestOpen % 10,lastChestOpen % 10 + _item.numberItemReward);
+                if (_item.numberItemReward == 10)
+                {
+                    PopupMenuController.Instance.ShowPopupCustomizeCharacter();
+                }
             });
 
 

@@ -19,8 +19,8 @@ namespace Projects.Scripts.Data
         public string name;
         public Sprite bg, loadingBg;
         public Reward rank1, rank2, rank3;
-        [SerializeField]
-        private int ticketToUnlock;
+
+        public int ticketToUnlock;
         [SerializeField, ShowIf("@this.scene == null")]
         public UnityEngine.Object scene;
         [ReadOnly] public string gameScene;

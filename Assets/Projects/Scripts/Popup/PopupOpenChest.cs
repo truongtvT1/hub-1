@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Projects.Scripts.Scriptable;
 using Spine.Unity;
 using Truongtv.PopUpController;
@@ -13,16 +14,9 @@ namespace Projects.Scripts.Popup
     {
         [SerializeField] private List<ChestItem> chestItemList;
         [SerializeField] private Transform chestTransform;
-        [SerializeField] private Button closeButton;
         [SerializeField] private SkeletonGraphic graphic;
         [SerializeField, SpineAnimation] private string idle, open, idle2;
-        [SerializeField] private GameObject effect,spark;
-        private void Awake()
-        {
-            closeButton.onClick.AddListener(Close);
-            
-            
-        }
+        [SerializeField] private GameObject spark;
 
         private void OnOpen(List<SkinInfo> skinList)
         {
@@ -32,29 +26,27 @@ namespace Projects.Scripts.Popup
                 var entry2 = graphic.AnimationState.SetAnimation(0, open, false);
                 entry2.Complete += entry3 =>
                 {
-                    graphic.AnimationState.SetAnimation(0, idle2, true);
+                    graphic.AnimationState.SetAnimation(0, idle2, true).Complete+= entry1 =>
+                    {
+                        backGroundButton.onClick.AddListener(Close);
+                    };
                     for (var i = 0; i < skinList.Count; i++)
                     {
                         chestItemList[i].gameObject.SetActive(true);
                         chestItemList[i].Init(skinList[i],chestTransform,i*0.25f);
                     }
-                    effect.SetActive(true);
                     
-
                     for (var i = skinList.Count; i < chestItemList.Count; i++)
                     {
                         chestItemList[i].gameObject.SetActive(false);
                     }
-
                     StartCoroutine(ShowClose((skinList.Count + 2) * 0.25f));
                 };
             };
         }
         public void Init(List<SkinInfo> skinList,Action closePopup = null)
         {
-            closeAction += closePopup;
-            closeButton.gameObject.SetActive(false);
-            effect.SetActive(false);
+            closeAction = closePopup;
             spark.SetActive(false);
             graphic.AnimationState.SetAnimation(0, idle, true);
             foreach (var item in chestItemList)
@@ -65,15 +57,17 @@ namespace Projects.Scripts.Popup
             {
                 OnOpen(skinList);
             };
-            
-            
+        }
+
+        private void OnDisable()
+        {
+            closeAction = null;
         }
 
         private IEnumerator ShowClose(float delay)
         {
             yield return new WaitForSeconds(delay);
             spark.SetActive(true);
-            closeButton.gameObject.SetActive(true);
         }
     }
 }

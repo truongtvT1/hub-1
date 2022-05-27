@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using Spine.Unity;
 using UnityEngine;
@@ -33,11 +34,15 @@ namespace MiniGame.StickRun
             await Task.Delay((int)attackDuration/2 * 1000);            
             ninja.state.SetEmptyAnimation(1,.02f);
             ninja.state.SetAnimation(1, ninjaIdle, true);
-            damageObj.SetActive(false);
+            if (damageObj) damageObj.SetActive(false);
             isAttacking = false;
         }
 
-        
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
+
         IEnumerator AttackCoroutine()
         {
             yield return new WaitForSeconds(attackDelay);

@@ -12,22 +12,19 @@ namespace MiniGame
     public class GamePlayController : MonoBehaviour
     {
         [FoldoutGroup("Character")] public PlayerController player;
-        [SerializeField, FoldoutGroup("UI")] private Button pauseButton;
+        [SerializeField, FoldoutGroup("UI")] protected Button pauseButton;
         private static GamePlayController _instance;
         public static GamePlayController Instance => _instance;
         public GameState state = GameState.None;
-        protected void Awake()
+        protected RankIngame playerInfo;
+
+        protected virtual void Awake()
         {
             if (_instance != null)
             {
                 Destroy(_instance.gameObject);
             }
-
             _instance = this;
-        }
-
-        protected void Start()
-        {
             if (pauseButton) 
             {
                 pauseButton.onClick.AddListener(() =>
@@ -37,14 +34,29 @@ namespace MiniGame
                 });
             }
         }
+
+        protected virtual void Start()
+        {
+            
+        }
         
-        public void StartGame(string game = null, int level = 0)
+        public void StartGame(string game = null, string difficulty = "")
         {
             state = GameState.Playing;
-            // GameServiceManager.Instance.LogEvent("level_start", new Dictionary<string, object> {{game, "lv_" + level}});
+            GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart, new Dictionary<string, object> {{game,difficulty}});
         }
 
-        public async void Respawn(Vector3 position)
+        public virtual async void Respawn(Vector3 position)
+        {
+            
+        }
+        
+        public virtual RankIngame GetPlayerInfo()
+        {
+            return playerInfo;
+        }
+
+        public virtual void Win()
         {
             
         }

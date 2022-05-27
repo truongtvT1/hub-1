@@ -1577,6 +1577,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1482726716555187675, guid: 248457b6384f04949b510811a811074a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4062542246636544723, guid: 248457b6384f04949b510811a811074a, type: 3}
       propertyPath: m_Name
       value: InGamePopup
@@ -2069,14 +2073,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffdd6ff8dddc4aeea2aee120728400ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  pauseButton: {fileID: 0}
+  state: 0
   settingButton: {fileID: 42937902}
   holdToRunFastText: {fileID: 487961224}
+  camera: {fileID: 849478608}
   listBot: []
   botPrefabs: {fileID: 4643669624193923003, guid: 623662f91eafcdb448f9e5e51e7067e1, type: 3}
-  difficulty: 1
-  state: 0
-  player: {fileID: 3584323497454831843}
-  playerPrefab: {fileID: 136148416963457267, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
+  difficulty: 2
+  playerStickman: {fileID: 3584323497454831843}
   startPos: {x: -5, y: -1.86}
   trapPoolEasy:
   - {fileID: 735961892}
@@ -2595,6 +2601,63 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thing: {fileID: 1505225719546493023, guid: 933a2fbb90bee79488078e16c87f976a, type: 3}
+--- !u!1001 &1237648409
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3933062202430836177, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_Name
+      value: RandomNamesCountry
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
 --- !u!1 &1255320526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,6 +4064,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3421967819113523797, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c3c6af040084fa749ab0fe4e459a0ce8, type: 2}
     - target: {fileID: 6977310741292516977, guid: adbc85c8dd4c9334e9268fe076f8ec0b, type: 3}
       propertyPath: m_Mesh
       value: 

@@ -60,7 +60,14 @@ namespace Projects.Scripts.Hub
                 ChangeSlotColor("body");
             }
         }
-      
+
+        public void Freeze(bool freeze = true)
+        {
+            _skeletonGraphic.Skeleton.SetToSetupPose();
+            _skeletonGraphic.Initialize(true);
+            _skeletonGraphic.freeze = freeze;
+        }
+        
         public void SetSkin(List<string> skinList)
         {
             _skinList = skinList;

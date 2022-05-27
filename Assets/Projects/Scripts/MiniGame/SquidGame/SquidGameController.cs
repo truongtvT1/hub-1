@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Projects.Scripts.Data;
 using Projects.Scripts.Hub;
+using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using Spine;
 using Spine.Unity;
@@ -19,21 +21,22 @@ using Random = UnityEngine.Random;
 
 namespace MiniGame.SquidGame
 {
-    public class SquidGameController : MonoBehaviour
+    public class SquidGameController : GamePlayController
     {
         [FoldoutGroup("UI")] public Transform holdToMove, container;
         [FoldoutGroup("UI")] public SpriteRenderer warningSprite;
         [FoldoutGroup("UI")] public TextMeshProUGUI gameTimeCountText;
         [FoldoutGroup("UI")] public Image greenProgress;
-        [FoldoutGroup("UI")] public Button pauseButton;
         public float gameDuration, greenDuration, redDuration, moveSpeed;
         public GameDifficulty difficulty;
-        [SerializeField,Range(0, .3f)] private float difficultyDelta;
+        [SerializeField, Range(0, .3f)] private float difficultyDelta;
         private int maxMeteorPerTurn;
         public Vector2 fallRange;
         public GameObject meteorPrefab;
+
         [SpineAnimation(dataField = nameof(animBoss))]
         public string idle, redLight, greenLight, warning;
+
         public CharacterAnimation playerAnimation;
         public SkeletonAnimation animBoss, animStaff1, animStaff2;
         public float shootSpeed = 18f;
@@ -46,10 +49,6 @@ namespace MiniGame.SquidGame
         public AudioSource audio;
         public AudioMixerGroup pitchBend;
         public AudioClip greenLightSound, redLightSound;
-        public int playerRank;
-        public GameState state = GameState.None;
-        public static SquidGameController Instance => _instance;
-        private static SquidGameController _instance;
         private bool isHoldingMove, canKillBall;
         private float gameTimeCount, backUpPitchShift, progressImageWitdh;
         private int level;
@@ -57,27 +56,26 @@ namespace MiniGame.SquidGame
         private List<SquidPlayer> npcToKill = new List<SquidPlayer>();
         private List<SquidPlayer> listToKill1 = new List<SquidPlayer>();
         private List<SquidPlayer> listToKill2 = new List<SquidPlayer>();
-        
-        private void Awake()
+        private MiniGameInfo gameInfo;
+        protected override void Awake()
         {
-            if (_instance == null)
-            {
-                _instance = this;
-            }
-            else
-            {
-                Destroy(_instance.gameObject);
-            }
-
+            base.Awake();
             pauseButton.onClick.AddListener(() =>
             {
                 InGamePopupController.Instance.ShowPopupSetting(
-                    () => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); },
+                    () =>
+                    {
+                        GameDataManager.Instance.ResetSkinInGame();
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    },
                     () =>
                     {
                         // update result
+                        GameDataManager.Instance.UpdateMiniGameLoseCount(GameDataManager.Instance.miniGameData
+                            .miniGameList.Find(_ => _.gameId.Contains("squid")).gameId);
+                        GameDataManager.Instance.ResetSkinInGame();
                     },
-                    () => {});
+                    () => { });
             });
             audio.outputAudioMixerGroup = pitchBend;
             audio.clip = greenLightSound;
@@ -94,15 +92,24 @@ namespace MiniGame.SquidGame
             pitchBend.audioMixer.SetFloat("pitchBend", backUpPitchShift);
         }
 
-        private void Start()
+        protected override void Start()
         {
-            // level = GameDataManager.Instance.GetSquidGameLevel();
-            difficultyDelta = (float) difficulty/10;
-            Debug.Log("difficult delta: " + difficultyDelta);
+            gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("squid"));
+            level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
+            var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
+            for (int i = 1; i <= enumCount; i++)
+            {
+                if ((i - 1) * 3 < level && level <= i * 3)
+                {
+                    difficulty = (GameDifficulty) (i - 1);
+                    break;
+                }
+            } 
+            difficultyDelta = (float) difficulty / 10;
             StartCoroutine(Init());
-            GameServiceManager.LogEvent("level_start", new Dictionary<string, object> {{"red_line", level}});
+            GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart, new Dictionary<string, object> {{"red_line", difficulty.ToString()}});
         }
-        
+
         IEnumerator Init()
         {
             greenProgress.rectTransform.localPosition =
@@ -118,16 +125,26 @@ namespace MiniGame.SquidGame
             var color = GameDataManager.Instance.GetCurrentColor();
             playerAnimation.SetSkin(skin);
             playerAnimation.SetSkinColor(color);
-
+            playerInfo = new RankIngame
+            {
+                isBot = false,
+                isFinish = false,
+                playerSkin = new PlayerSkin
+                {
+                    color = color,
+                    skin = skin
+                },
+                name = "Me",
+                rank = 11,
+                score = 0
+            };
+            LeaderBoardInGame.Instance.ListRanking.Add(playerInfo);
             var distance = Random.Range(1f, 2f);
             playerTransform.position = start.position + new Vector3(distance, 0);
             playerTransform.DOMoveX(start.position.x, moveSpeed)
                 .SetSpeedBased(true)
                 .SetEase(Ease.Linear)
-                .OnStart(() =>
-                {
-                    playerAnimation.PlayRun();
-                })
+                .OnStart(() => { playerAnimation.PlayRun(); })
                 .OnComplete(() => { playerAnimation.PlayIdle(); });
 
             //init npc
@@ -136,12 +153,28 @@ namespace MiniGame.SquidGame
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var skinColor = GameDataManager.Instance.RandomColor();
                 listNPC[i].Init(this, listSkin, skinColor, difficultyDelta);
+                string botName = RandomNameAndCountryPicker.Instance.GetRandomPlayerInfo().playerName;
+                RankIngame botInfo = new RankIngame
+                {
+                    isBot = true,
+                    isFinish = false,
+                    score = 0,
+                    rank = 11,
+                    name = botName,
+                    playerSkin = new PlayerSkin
+                    {
+                        skin = listSkin,
+                        color = skinColor
+                    }
+                };
+                listNPC[i].InitRank(botInfo);
+                LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
             }
 
             yield return new WaitUntil(() => !listNPC.Exists(p => !p.isReady));
             holdToMove.gameObject.SetActive(true);
             holdToMove.transform.parent.GetComponent<CustomButton>().enabled = true;
-
+            LeaderBoardInGame.Instance.Init(LevelGoal.Racing);
             //wait for player start
             yield return new WaitUntil(() => isHoldingMove);
             state = GameState.Playing;
@@ -180,7 +213,6 @@ namespace MiniGame.SquidGame
         {
             if (e.Data.Name.Equals("attack"))
             {
-                
                 for (int i = 0; i < listToKill1.Count; i++)
                 {
                     var item = listToKill1[i];
@@ -206,11 +238,12 @@ namespace MiniGame.SquidGame
             }
         }
 
+
         void GreenLight()
         {
-            animBoss.state.SetAnimation(0, greenLight, false).Complete += entry =>
+            onGreenLight?.Invoke();
             {
-                onGreenLight?.Invoke();
+            animBoss.state.SetAnimation(0, greenLight, false).Complete += entry =>
                 animBoss.state.SetAnimation(0, greenLight, true);
             };
             listToKill1 = new List<SquidPlayer>();
@@ -234,28 +267,29 @@ namespace MiniGame.SquidGame
                 {
                     closestXPos = playerAnimation.transform.position.x;
                 }
-                
-                if (count >= meteorFallCount * greenDuration/maxMeteorPerTurn + 1.5f/(int)difficulty)
+
+                if (count >= meteorFallCount * greenDuration / maxMeteorPerTurn + 1.5f / (int) difficulty)
                 {
                     if (meteorFallCount < maxMeteorPerTurn)
                     {
                         var meteor = Instantiate(meteorPrefab);
                         var posY = Random.Range(fallRange.x, fallRange.y);
-                        meteor.transform.position = new Vector3(Random.Range(animBoss.transform.position.x + 2f, closestXPos),posY);
+                        meteor.transform.position =
+                            new Vector3(Random.Range(animBoss.transform.position.x + 2f, closestXPos), posY);
                         meteor.GetComponent<Meteor>().Init(posY);
                         meteorFallCount++;
                     }
                 }
-                
-                if (count / greenDuration >= 2 / 3f && !isWarning)
+
+                if (count / greenDuration >= 2/3f && !isWarning)
                 {
                     greenProgress.color = Color.red;
                     isWarning = true;
                     warningSprite.DOFade(50 / 255f, .3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
                     animBoss.state.SetAnimation(0, warning, true);
                 }
-                
-                
+
+
                 greenProgress.rectTransform.localPosition = new Vector3(
                     progressImageWitdh * count / greenDuration - progressImageWitdh,
                     greenProgress.rectTransform.localPosition.y);
@@ -349,6 +383,7 @@ namespace MiniGame.SquidGame
                                     animStaff2.state.SetAnimation(0, "attack", false)
                                         .Complete += entry => { animStaff2.state.SetAnimation(0, "idle", true); };
                                 }
+
                                 npcToKill = new List<SquidPlayer>();
                             }
                         }
@@ -395,13 +430,15 @@ namespace MiniGame.SquidGame
         private void KillBall()
         {
             StopAllCoroutines();
+            LeaderBoardInGame.Instance.OnMainPlayerDie(playerInfo);
+            LeaderBoardInGame.Instance.UpdateBoard();
             OnAttack();
         }
 
         private async void OnAttack()
         {
             state = GameState.End;
-            
+
             //lose
             blowEffect.gameObject.SetActive(true);
             blowEffect.Play(true);
@@ -422,13 +459,10 @@ namespace MiniGame.SquidGame
 
         void Lose()
         {
-            GameServiceManager.ShowInterstitialAd(() =>
-            {
-                LoadMainMenu();
-            });
+            InGamePopupController.Instance.ShowPopupWin(gameInfo);
         }
 
-        void Win()
+        public override void Win()
         {
             StopAllCoroutines();
             state = GameState.End;
@@ -440,7 +474,7 @@ namespace MiniGame.SquidGame
                 .OnStart(() =>
                 {
                     playerAnimation.PlayRun();
-                    playerAnimation.PlayRun(trackIndex:1);
+                    playerAnimation.PlayRun(trackIndex: 1);
                 });
             StartCoroutine(Cheers());
         }
@@ -449,72 +483,26 @@ namespace MiniGame.SquidGame
         {
             yield return new WaitForSeconds(2f);
             playerAnimation.PlayWin();
-            playerAnimation.PlayWin(trackIndex:1);
+            playerAnimation.PlayWin(trackIndex: 1);
             audio.outputAudioMixerGroup = pitchBend;
             yield return new WaitForSeconds(1.5f);
-            LoadMainMenu();
-            // SoundInGameManager.Instance.PlayBallWinSound();
-            // SoundInGameManager.Instance.PlayWinSound(() =>
-            // {
-            //     //load popup win
-            //     int coin = 0;
-            //     if (finalRank == 1)
-            //     {
-            //         coin = 2000 + level * 100;
-            //     }
-            //     else if (finalRank == 2)
-            //     {
-            //         coin = 1500 + level * 100;
-            //
-            //     }
-            //     else if (finalRank == 3)
-            //     {
-            //         coin = 1000 + level * 100;
-            //     }
-            //     else
-            //     {
-            //         coin = 500;
-            //     }
-            //     PopupInGameController.Instance.OpenPopupWin(finalRank,coin,level, () =>
-            //         {
-            //             GameDataManager.Instance.UpdateCoin(coin * 2);
-            //             LoadMainMenu();
-            //         },
-            //         () =>
-            //         {
-            //             AdManager.Instance.ShowInterstitialAd(() =>
-            //             {
-            //                 GameDataManager.Instance.UpdateCoin(coin);
-            //                 LoadMainMenu();
-            //             });
-            //         });
-            // });
+            InGamePopupController.Instance.ShowPopupWin(gameInfo);
         }
 
-        void LoadMainMenu()
-        {
-            // GameDataManager.Instance.SetSquidGameLevel(level + 1);
-            // Debug.Log("current squid level: " + (level + 1));
-            Loading.Instance.LoadMenu();
-            GameDataManager.Instance.ResetSkinInGame();
-        }
-
-        private int finalRank, meteorFallCount;
+        private int meteorFallCount;
         private float timeToMeteorFall;
         private float closestXPos = 100;
+
         private void Update()
         {
             if (state == GameState.Playing)
             {
-                if (finalRank != playerRank)
-                {
-                    finalRank = playerRank;
-                }
 
                 if (HitFinishLine())
                 {
-                    playerRank++;
-                    finalRank = playerRank;
+                    playerInfo.isFinish = true;
+                    LeaderBoardInGame.finishAction.Invoke(playerInfo);
+                    LeaderBoardInGame.Instance.Show(.75f);
                     Win();
                 }
 
@@ -548,15 +536,16 @@ namespace MiniGame.SquidGame
 
         bool HitByMeteor()
         {
-            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position + new Vector3(0,.1f), Vector2.left, .2f,1 << 9);
+            RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position + new Vector3(0, .1f), Vector2.left,
+                .2f, 1 << 9);
             if (hit)
             {
-                return hit;    
+                return hit;
             }
 
             return false;
         }
-        
+
         bool HitFinishLine()
         {
             RaycastHit2D hit = Physics2D.Raycast(playerAnimation.transform.position, Vector2.left, .2f, 1 << 0);
@@ -577,7 +566,6 @@ namespace MiniGame.SquidGame
                 if (release)
                 {
                     playerAnimation.PlayStopPose();
-                    playerAnimation.PlayStopPose(trackIndex:1);
                 }
                 else
                 {
@@ -596,7 +584,7 @@ namespace MiniGame.SquidGame
                     else
                     {
                         playerAnimation.PlayRun();
-                        playerAnimation.PlayRun(trackIndex:1);
+                        playerAnimation.PlayRun(trackIndex: 1);
                     }
                 }
             }

@@ -26,7 +26,7 @@ namespace MiniGame
                     newClone.SetActive(false);  
                     things.Add(newClone);  
                     PoolMember poolMember = newClone.AddComponent<PoolMember>();  
-                    poolMember.pool = this;  
+                    poolMember.pool = this;
                 }
 
                 GameObject clone = null;

@@ -13,7 +13,7 @@ namespace ThirdParties.Truongtv.LogManager
             #else
             _logService = new EditorLogService();
             #endif
-            _logService.Init();
+            _logService?.Init();
         }
         public void LogEvent(string eventName, Dictionary<string,object> parameters)
         {

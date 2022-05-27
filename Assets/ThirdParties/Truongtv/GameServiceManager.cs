@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+#if USING_LOG_FIREBASE || USING_REMOTE_FIREBASE
+using Firebase;
+using Firebase.Extensions;
+#endif
+using Projects.Scripts.Data;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv.AdsManager;
 using ThirdParties.Truongtv.IAP;
@@ -11,10 +16,11 @@ using ThirdParties.Truongtv.RemoteConfig;
 using ThirdParties.Truongtv.Utilities;
 #endif
 using Truongtv.PopUpController;
-
+using Unity.Collections;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 #endif
 namespace ThirdParties.Truongtv
 {
@@ -38,7 +44,9 @@ namespace ThirdParties.Truongtv
         [SerializeField] private CloudMessagingService cloudMessagingService;
 
         [SerializeField] private IapService iapService;
+
 #endif
+        [SerializeField] private LogEventConfig EventConfig;
         private AdManager _adManager;
         private LogEventManager _logEventManager;
         private RatingHelper _ratingHelper;
@@ -50,6 +58,8 @@ namespace ThirdParties.Truongtv
         private DateTime _lastTimeShowAd;
 
         #region public
+
+        public static LogEventConfig eventConfig;
 
         #region Ads Service
 
@@ -149,6 +159,7 @@ namespace ThirdParties.Truongtv
             _instance = this;
             if (Application.isPlaying)
                 DontDestroyOnLoad(gameObject);
+            eventConfig = EventConfig;
             _adManager = GetComponent<AdManager>();
             _logEventManager = GetComponent<LogEventManager>();
             _ratingHelper = GetComponent<RatingHelper>();
@@ -164,9 +175,17 @@ namespace ThirdParties.Truongtv
 #if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
              FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
             {
-                remoteConfigManager.Init();
-                logEventManager.Init();
-                mobileNotification.Init();
+                var dependencyStatus = task.Result;
+                if (dependencyStatus == DependencyStatus.Available) {
+                    _remoteConfigManager.Init();
+                    _logEventManager.Init();
+                    _mobileNotification.Init();
+                } 
+                else {
+                    Debug.LogError(String.Format(
+                      "Could not resolve all Firebase dependencies: {0}", dependencyStatus));
+                    // Firebase Unity SDK is not safe to use here.
+                }
             });
 #else
             _remoteConfigManager.Init();
@@ -255,7 +274,7 @@ namespace ThirdParties.Truongtv
                 return;
             }
 
-            LogEvent("ads_reward_click", new Dictionary<string, object>
+            LogEvent(eventConfig.rewardAdClick, new Dictionary<string, object>
             {
                 {"reward_for", location}
             });
@@ -263,7 +282,7 @@ namespace ThirdParties.Truongtv
             {
                 PopupController.Instance.ShowToast(
                     "No internet connection. Make sure to turn on your Wifi/Mobile data and try again.");
-                LogEvent("ads_reward_fail", new Dictionary<string, object>
+                LogEvent(eventConfig.rewardAdFail, new Dictionary<string, object>
                 {
                     {"cause", "no_internet"}
                 });
@@ -273,7 +292,7 @@ namespace ThirdParties.Truongtv
             if (!_adManager.IsRewardVideoLoaded())
             {
                 PopupController.Instance.ShowToast("Ads is still coming. Please try again later.");
-                LogEvent("ads_reward_fail", new Dictionary<string, object>
+                LogEvent(eventConfig.rewardAdFail, new Dictionary<string, object>
                 {
                     {"cause", "no_fill"}
                 });
@@ -284,7 +303,7 @@ namespace ThirdParties.Truongtv
             {
                 if (!result)
                 {
-                    LogEvent("ads_reward_fail", new Dictionary<string, object>
+                    LogEvent(eventConfig.rewardAdFail, new Dictionary<string, object>
                     {
                         {"cause", "not_complete"}
                     });
@@ -292,7 +311,7 @@ namespace ThirdParties.Truongtv
                 }
 
                 _lastTimeShowAd = DateTime.Now;
-                LogEvent("ads_reward_complete", new Dictionary<string, object>
+                LogEvent(eventConfig.rewardAdComplete, new Dictionary<string, object>
                 {
                     {"reward_for", location}
                 });
@@ -344,11 +363,17 @@ namespace ThirdParties.Truongtv
         #region Private Editor
 
 #if UNITY_EDITOR
-        [OnInspectorGUI] private void Space2() { GUILayout.Space(20); }
-        [Button(ButtonSizes.Large), GUIColor(0, 1, 0), HideIf(nameof(IsServiceUpToDate))] [InitializeOnLoadMethod]
+        [OnInspectorGUI]
+        private void Space2()
+        {
+            GUILayout.Space(20);
+        }
+
+        [Button(ButtonSizes.Large), GUIColor(0, 1, 0), HideIf(nameof(IsServiceUpToDate))]
+        [InitializeOnLoadMethod]
         private void UpdateService()
         {
-            if(IsServiceUpToDate()) return;
+            if (IsServiceUpToDate()) return;
             var symbolList = DefineSymbol.GetAllDefineSymbols();
             symbolList.Remove(DefineSymbol.MaxSymbol);
             symbolList.Remove(DefineSymbol.AdMobSymbol);
@@ -514,7 +539,7 @@ namespace ThirdParties.Truongtv
 
             return true;
         }
-       
+
 #endif
 
         #endregion

@@ -1,4 +1,6 @@
-﻿using Projects.Scripts.Data;
+﻿using DG.Tweening;
+using Projects.Scripts.Data;
+using Projects.Scripts.Menu;
 using ThirdParties.Truongtv;
 using TMPro;
 using UnityEngine;
@@ -10,10 +12,11 @@ namespace Projects.Scripts.Hub.Component
     public class ModeGameLauncher : MonoBehaviour
     {
         [SerializeField] private Image gameBg,titleBg;
-        [SerializeField] private TextMeshProUGUI  winText, loseText,nameText;
-        [SerializeField] private GameObject mostPlayObj,lastPlayObj,onObj,offObj;
+        [SerializeField] private TextMeshProUGUI  winText, loseText,nameText, unlockText;
+        [SerializeField] private GameObject mostPlayObj,lastPlayObj,onObj,offObj,lockedObj;
         [SerializeField] private Button button;
         private MiniGameInfo _info;
+        private bool canUnlock;
         public void Init(Color color, MiniGameInfo info=null)
         {
             _info = info;
@@ -23,6 +26,13 @@ namespace Projects.Scripts.Hub.Component
                 offObj.SetActive(true);
                 button.interactable = false;
                 return;
+            }
+
+            if (!GameDataManager.Instance.IsModeUnlock(_info))
+            {
+                lockedObj.SetActive(true);
+                unlockText.text = $"UNLOCK WITH {_info.ticketToUnlock} TICKETS";
+                canUnlock = GameDataManager.Instance.GetTotalTicket() >= _info.ticketToUnlock;
             }
             titleBg.color = color;
             onObj.SetActive(true);
@@ -41,6 +51,16 @@ namespace Projects.Scripts.Hub.Component
         }
         private void OnPlayButtonClick()
         {
+            if (lockedObj.activeSelf)
+            {
+                if (canUnlock)
+                {
+                    GameDataManager.Instance.UnlockMode(_info);
+                    MenuController.Instance.UseTicket(_info.ticketToUnlock);
+                    lockedObj.SetActive(false);
+                }
+                return;
+            }
             GameDataManager.Instance.UpdateLastPlayed(_info.gameId);
             GameDataManager.Instance.UpdateMiniGameCountPlayed(_info.gameId);
             Loading.Instance.LoadMiniGame(_info);

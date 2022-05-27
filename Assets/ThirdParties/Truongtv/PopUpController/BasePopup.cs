@@ -15,6 +15,7 @@ namespace Truongtv.PopUpController
     {
         [SerializeField] private Transform container;
         private PopupDisplayType displayType = PopupDisplayType.FadeIn;
+        [SerializeField] protected Button backGroundButton;
         protected const float DURATION = 0.5f;
         private Canvas _canvasPopup;
         private CanvasGroup _canvasGroup;

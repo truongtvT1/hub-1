@@ -68,11 +68,12 @@ namespace ThirdParties.Truongtv.RemoteConfig
             var defaults = new  Dictionary<string, object>();
             FirebaseRemoteConfig.DefaultInstance.SetDefaultsAsync(defaults);
             var timeSpan = TimeSpan.Zero;
-//#if !UNITY_EDITOR
+#if !UNITY_EDITOR
             timeSpan = TimeSpan.FromHours(12);
-//#endif
+#endif
             FirebaseRemoteConfig.DefaultInstance.FetchAsync(timeSpan).ContinueWithOnMainThread(FetchComplete);
         }
+        
         private void FetchComplete(Task fetchTask) {
             if (fetchTask.IsCanceled) {
                 Debug.Log("Fetch canceled.");

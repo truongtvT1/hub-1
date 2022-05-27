@@ -170,6 +170,12 @@ TextureImporter:
   - first:
       213: -4463891961754665666
     second: Win Lose
+  - first:
+      213: -1807574880973921542
+    second: noad 2
+  - first:
+      213: -6359460096447166733
+    second: ticket pack 4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -271,8 +277,8 @@ TextureImporter:
       name: ava
       rect:
         serializedVersion: 2
-        x: 920
-        y: 1199
+        x: 904
+        y: 941
         width: 203
         height: 197
       alignment: 0
@@ -293,7 +299,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 753
-        y: 1092
+        y: 1132
         width: 149
         height: 124
       alignment: 0
@@ -481,8 +487,8 @@ TextureImporter:
       name: haptic icon
       rect:
         serializedVersion: 2
-        x: 1051
-        y: 962
+        x: 1925
+        y: 1001
         width: 102
         height: 75
       alignment: 0
@@ -523,8 +529,8 @@ TextureImporter:
       name: i
       rect:
         serializedVersion: 2
-        x: 1055
-        y: 1127
+        x: 1156
+        y: 1252
         width: 68
         height: 70
       alignment: 0
@@ -544,8 +550,8 @@ TextureImporter:
       name: icon no ads
       rect:
         serializedVersion: 2
-        x: 753
-        y: 962
+        x: 1109
+        y: 1010
         width: 117
         height: 128
       alignment: 0
@@ -628,8 +634,8 @@ TextureImporter:
       name: light
       rect:
         serializedVersion: 2
-        x: 0
-        y: 17
+        x: 1228
+        y: 436
         width: 695
         height: 640
       alignment: 0
@@ -670,8 +676,8 @@ TextureImporter:
       name: medium black
       rect:
         serializedVersion: 2
-        x: 1232
-        y: 1550
+        x: 1410
+        y: 1614
         width: 161
         height: 109
       alignment: 0
@@ -713,7 +719,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 716
+        y: 233
         width: 684
         height: 201
       alignment: 0
@@ -733,8 +739,8 @@ TextureImporter:
       name: mode game back
       rect:
         serializedVersion: 2
-        x: 1155
-        y: 659
+        x: 0
+        y: 566
         width: 703
         height: 351
       alignment: 0
@@ -754,8 +760,8 @@ TextureImporter:
       name: Most played
       rect:
         serializedVersion: 2
-        x: 753
-        y: 1250
+        x: 1232
+        y: 1621
         width: 158
         height: 38
       alignment: 0
@@ -775,8 +781,8 @@ TextureImporter:
       name: music icon
       rect:
         serializedVersion: 2
-        x: 1123
-        y: 1039
+        x: 1925
+        y: 642
         width: 75
         height: 77
       alignment: 0
@@ -788,6 +794,27 @@ TextureImporter:
       bones: []
       spriteID: 7fdf7f61e55e0ce20800000000000000
       internalID: 3368944713548168695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: noad 2
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 1140
+        width: 234
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af261a209343ae6e0800000000000000
+      internalID: -1807574880973921542
       vertices: []
       indices: 
       edges: []
@@ -838,8 +865,8 @@ TextureImporter:
       name: popup back2
       rect:
         serializedVersion: 2
-        x: 1220
-        y: 1012
+        x: 1232
+        y: 1078
         width: 801
         height: 526
       alignment: 0
@@ -859,8 +886,8 @@ TextureImporter:
       name: Rectangle 1
       rect:
         serializedVersion: 2
-        x: 697
-        y: 527
+        x: 0
+        y: 101
         width: 683
         height: 130
       alignment: 0
@@ -898,32 +925,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: rose
-      rect:
-        serializedVersion: 2
-        x: 1410
-        y: 1561
-        width: 173
-        height: 162
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f03a00b5ddf3dfdf0800000000000000
-      internalID: -144889393058897137
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: setting
       rect:
         serializedVersion: 2
-        x: 904
-        y: 1073
+        x: 753
+        y: 1006
         width: 149
         height: 124
       alignment: 0
@@ -943,8 +949,8 @@ TextureImporter:
       name: shop icon
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1313
+        x: 1925
+        y: 916
         width: 93
         height: 83
       alignment: 0
@@ -964,8 +970,8 @@ TextureImporter:
       name: sound icon
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1118
+        x: 1925
+        y: 721
         width: 85
         height: 81
       alignment: 0
@@ -986,9 +992,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1593
-        y: 1540
+        y: 1606
         width: 447
-        height: 267
+        height: 201
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1027,8 +1033,8 @@ TextureImporter:
       name: tick back
       rect:
         serializedVersion: 2
-        x: 1055
-        y: 1059
+        x: 1156
+        y: 1184
         width: 66
         height: 66
       alignment: 0
@@ -1045,11 +1051,32 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: ticket pack 4
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 869
+        width: 134
+        height: 135
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f6cef37cb8aeb7a0800000000000000
+      internalID: -6359460096447166733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: ticket
       rect:
         serializedVersion: 2
-        x: 1125
-        y: 1201
+        x: 1925
+        y: 804
         width: 85
         height: 110
       alignment: 0
@@ -1090,8 +1117,8 @@ TextureImporter:
       name: Win Lose
       rect:
         serializedVersion: 2
-        x: 980
-        y: 999
+        x: 1156
+        y: 1324
         width: 69
         height: 72
       alignment: 0
@@ -1112,7 +1139,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 753
-        y: 1218
+        y: 1258
         width: 152
         height: 30
       alignment: 0
@@ -1132,8 +1159,8 @@ TextureImporter:
       name: x
       rect:
         serializedVersion: 2
-        x: 872
-        y: 990
+        x: 1109
+        y: 927
         width: 106
         height: 81
       alignment: 0

@@ -365,7 +365,6 @@ namespace MiniGame
         }
         public void SetForceInstant(Vector2 force)
         {
-            Debug.Log("add force " + name + " " + force);
             rigidbody2D.AddForce(force,ForceMode2D.Impulse);
         }
         #endregion

@@ -21,7 +21,7 @@ namespace Projects.Scripts.Popup
         [SerializeField, BoxGroup("Chest")] private float[] fillProgress;
         [SerializeField, BoxGroup("Pack")] private List<ShopPackItem> packItemList;
         [SerializeField, BoxGroup("Ticket")] private List<ShopTicketItem> ticketItemList;
-
+        [SerializeField] private TextMeshProUGUI getLegendItemInText;
         private void Awake()
         {
             closeButton.onClick.AddListener(Close);
@@ -30,7 +30,9 @@ namespace Projects.Scripts.Popup
 
         public void Init(ShopType shopType)
         {
-            chestProgress.fillAmount = fillProgress[GameDataManager.Instance.GetTotalChestOpen() % 10];
+            int chestOpen = GameDataManager.Instance.GetTotalChestOpen() % 10;
+            getLegendItemInText.text = $"Get a <b><color=#FFCF03>S</color></b> Equipment in {10 - chestOpen % 10} times";
+            chestProgress.fillAmount = fillProgress[chestOpen];
             foreach (var ticketItem in ticketItemList)
             {
                 ticketItem.Init(GameDataManager.Instance.shopData);
@@ -48,20 +50,20 @@ namespace Projects.Scripts.Popup
 
         public void UpdateChestProgress(int from, int to)
         {
-            chestProgress.fillAmount = fillProgress[to % 10];
-            Debug.Log(to);
-            // int count = from;
-            // if (to / 10 > 0)
-            // {
-            //     chestProgress.fillAmount = fillProgress[count];
-            //     DOTween.To(() => count, x => count = x, to, 0.5f)
-            //         .OnStart(() => { chestProgress.fillAmount = fillProgress[count]; })
-            //         .OnUpdate(() => { })
-            //         .OnComplete(() => { chestProgress.fillAmount = fillProgress; });
-            // }
-            // else
-            // {
-            // }
+            getLegendItemInText.text = $"Get a <b><color=#FFCF03>S</color></b> equipment in {10 - to % 10} times";
+            if (to - from != 10)
+            {
+                DOTween.To(() => chestProgress.fillAmount, x => chestProgress.fillAmount = x, fillProgress[to % 10], 1f);
+            }
+            else
+            {
+                DOTween.To(() => chestProgress.fillAmount, x => chestProgress.fillAmount = x, fillProgress[9], 1f)
+                    .OnComplete(() =>
+                    {
+                        DOTween.To(() => chestProgress.fillAmount, x => chestProgress.fillAmount = x, fillProgress[from % 10],
+                            .5f);
+                    });
+            }
         }
     }
 

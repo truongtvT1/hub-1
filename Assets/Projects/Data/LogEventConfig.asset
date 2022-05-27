@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f06c06b7772a45f5a3e6859b89332e2d, type: 3}
+  m_Name: LogEventConfig
+  m_EditorClassIdentifier: 
+  levelStart: level_start
+  levelWin: level_win
+  levelLose: level_lose
+  interstitial: ads_interstitial
+  rewardAdClick: ads_reward_click
+  rewardAdComplete: ads_reward_complete
+  rewardAdFail: ads_reward_fail
+  rewardForShopFreeTicket: shop_free_ticket
+  rewardForShopFreeDrawChest: shop_free_chest
+  rewardForCustomSkinColor: custom_skin_color
+  rewardForCustomTrySkin: custom_try_skin
+  rewardForCustomUnlockSkin: custom_unlock_skin
+  rewardForBonusWin: bonus_win

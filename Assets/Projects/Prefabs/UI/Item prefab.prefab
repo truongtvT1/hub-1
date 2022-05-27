@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 6815667206992095199}
   - component: {fileID: 8230276723929627968}
   - component: {fileID: 8857574708392184281}
+  - component: {fileID: 2292282960475630691}
   m_Layer: 0
   m_Name: SkeletonGraphic (Character)
   m_TagString: Untagged
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85b887af7e6c3f45a2e2d2920d641bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b66cf7a186d13054989b33a5c90044e4, type: 2}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -241,11 +242,96 @@ MonoBehaviour:
       useClipping: 1
       zSpacing: 0
       pmaVertexColors: 1
-      tintBlack: 0
+      tintBlack: 1
       canvasGroupTintBlack: 0
       calculateTangents: 0
       addNormals: 0
       immutableTriangles: 0
+--- !u!114 &2292282960475630691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5990818979824666187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b065d5236fd2644ca3a4637ffdc25b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ForceMaterial: {fileID: 2100000, guid: a56c3c5def87cf047beb832bf5257b63, type: 2}
+  ActiveChange: 1
+  __MainTex2: {fileID: 0}
+  _Alpha: 1
+  Light: 1
+  LightSize: 0.5
+  UseShinyCurve: 1
+  ShinyLightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.000007780734
+      value: -0.4416301
+      inSlope: 3.6074991
+      outSlope: 3.6074991
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.4310643
+      value: 1.113406
+      inSlope: 2.413712
+      outSlope: 2.413712
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5258899
+      value: 1.229086
+      inSlope: -0.051003218
+      outSlope: -0.051003218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6136486
+      value: 1.113075
+      inSlope: -3.1223154
+      outSlope: -3.1223154
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9367767
+      value: -0.4775873
+      inSlope: -2.509676
+      outSlope: -2.509676
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.144408
+      value: -0.4976555
+      inSlope: -0.09665305
+      outSlope: -0.09665305
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 1
+    m_PostInfinity: 1
+    m_RotationOrder: 4
+  AnimationSpeedReduction: 3
+  Intensity: 1
+  OnlyLight: 0
+  LightBump: 0.05
+  ShaderChange: 1
+  ActiveUpdate: 1
 --- !u!1 &6363029034204626470
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,7 +421,7 @@ GameObject:
   - component: {fileID: 6363029034333909690}
   - component: {fileID: 2009293659416598460}
   m_Layer: 0
-  m_Name: Hair Item prefab
+  m_Name: Item prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,9 +550,9 @@ MonoBehaviour:
   selected: {fileID: 6363029034204626470}
   locked: {fileID: 6363029034837164816}
   bg: {fileID: 5484864699795415642}
-  S: {r: 0, g: 0.89411765, b: 1, a: 1}
-  A: {r: 1, g: 0.84705883, b: 0, a: 1}
-  B: {r: 0.7137255, g: 0.14117648, b: 0.39607844, a: 1}
+  S: {r: 1, g: 0.84705883, b: 0, a: 1}
+  A: {r: 0.02745098, g: 0.8666667, b: 0.14509805, a: 1}
+  B: {r: 0.06666667, g: 0.60784316, b: 0.9529412, a: 1}
   C: {r: 0.13725491, g: 0.06666667, b: 0.2784314, a: 1}
   item:
     skinName: 

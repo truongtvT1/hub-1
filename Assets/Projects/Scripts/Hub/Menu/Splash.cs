@@ -16,7 +16,6 @@ public class Splash : MonoBehaviour
         {
             GameDataManager.Instance.CreateUserInfo();
         }
-
         Loading.Instance.LoadMenu();
     }
 }

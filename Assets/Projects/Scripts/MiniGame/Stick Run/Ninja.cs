@@ -33,6 +33,11 @@ namespace MiniGame.StickRun
             StartCoroutine(Active());
         }
 
+        protected virtual void OnDestroy()
+        {    
+            StopAllCoroutines();
+        }
+
         IEnumerator Active()
         {
             yield return new WaitForSeconds(activeDelay);

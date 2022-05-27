@@ -7,19 +7,19 @@ namespace MiniGame
         public TextMeshProUGUI nameText, scoreText;
         public GameObject finishTick;
 
-        public void UpdateScore(RankIngame rankIngame, bool isBot = true)
+        public void UpdateScore(RankIngame rankIngame)
         {
             nameText.text = rankIngame.name;
             scoreText.text = rankIngame.score + "";
-            SetThisToPlayerRank(!isBot);
+            SetThisToPlayerRank(!rankIngame.isBot);
         }
 
-        public void UpdateFinish(RankIngame rankIngame, bool isBot = true)
+        public void UpdateFinish(RankIngame rankIngame)
         {
             nameText.text = rankIngame.name;
             scoreText.gameObject.SetActive(false);
             finishTick.SetActive(rankIngame.isFinish);
-            SetThisToPlayerRank(!isBot);
+            SetThisToPlayerRank(!rankIngame.isBot);
         }
         
         private void SetThisToPlayerRank(bool enable = true)

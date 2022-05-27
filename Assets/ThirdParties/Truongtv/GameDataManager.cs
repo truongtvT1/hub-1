@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using MiniGame;
 using Projects.Scripts.Data;
 using Projects.Scripts.Scriptable;
+using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv.RemoteConfig;
 using UnityEngine;
@@ -47,17 +50,64 @@ namespace ThirdParties.Truongtv
         {
             return ES3.KeyExists("user_info");
         }
+
+        public bool IsFirstOpen()
+        {
+            return _userInfo.firstOpen;
+        }
+        
         public void LoadUserInfo()
         {
             _userInfo = ES3.Load<UserInfo>("user_info");
+            _userInfo.firstOpen = false;
+            SaveUserInfo();
         }
         public void CreateUserInfo()
         {
             _userInfo = new UserInfo();
             _userInfo.InitSkin(startSkin,startColor);
+            UnlockMode(miniGameData.miniGameList.Find(_ => _.gameId.Contains("squid")));
+            UnlockMode(miniGameData.miniGameList.Find(_ => _.gameId.Contains("memory")));
+            CreateFakeRankingData();
             SaveUserInfo();
         }
 
+        public void CreateFakeRankingData()
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                var rank = new UserRanking();
+                rank.id += new System.Random().Next(0,9);
+                rank.userName = RandomNameAndCountryPicker.Instance.GetRandomPlayerInfo().playerName;
+                rank.trophy = 0;
+                rank.win = 0;
+                rank.lose = 0;
+                _userInfo.fakeRankingData.Add(rank);
+            } 
+        }
+
+        public DateTime GetTimeUpdateLeaderBoard()
+        {
+            return GetTime("leader_board_updated");
+        }
+
+        public void UpdateTimeShowLeaderBoard()
+        {
+            SetTime("leader_board_updated");
+        }
+
+        public List<UserRanking> GetUserFakeRankData()
+        {
+            return _userInfo.fakeRankingData;
+        }
+
+        public void UpdateUserFakeRankData(List<UserRanking> fakeRankings)
+        {
+            _userInfo.fakeRankingData = new List<UserRanking>();
+            _userInfo.fakeRankingData.AddRange(fakeRankings);
+            SaveUserInfo();
+        }
+        
         public UserRanking GetUserRanking()
         {
             return _userInfo.ranking;
@@ -189,11 +239,11 @@ namespace ThirdParties.Truongtv
             {
                 list = UpdateSkinForList(list, item);
             }
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                Debug.Log("skin " + list[i]);
-            }
+            //
+            // for (int i = 0; i < list.Count; i++)
+            // {
+            //     Debug.Log("skin " + list[i]);
+            // }
             return list;
         }
 
@@ -361,9 +411,45 @@ namespace ThirdParties.Truongtv
 
         #region Mode Game
 
+        public MiniGameInfo CheckCanUnlockNewMode()
+        {
+            var count = miniGameData.miniGameList.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (!IsModeUnlock(miniGameData.miniGameList[i]) && GetTotalTicket() >= miniGameData.miniGameList[i].ticketToUnlock)
+                {
+                    return miniGameData.miniGameList[i];
+                }
+            }
+            return null;
+        }
+
+        public bool IsModeUnlock(MiniGameInfo gameInfo)
+        {
+            return _userInfo.unlockedMode.Contains(gameInfo.gameId);
+        }
+
+        public void UnlockMode(MiniGameInfo gameInfo)
+        {
+            _userInfo.unlockedMode.Add(gameInfo.gameId);
+        }
+        
         public int GetMiniGameCountPlayed(string miniGame)
         {
             return GetCurrencyValue(miniGame+"_played");
+        }
+        public int GetMiniGameMasterPoint(string miniGame)
+        {
+            var mp = GetCurrencyValue(miniGame + "_masterPoint");
+            if (mp == 0)
+            {
+                mp = 1;
+            }
+            else if (mp > Enum.GetValues(typeof(GameDifficulty)).Length * 3)
+            {
+                mp = Enum.GetValues(typeof(GameDifficulty)).Length * 3;
+            }
+            return mp;
         }
         public int GetMiniGameWinCount(string miniGame)
         {
@@ -379,10 +465,14 @@ namespace ThirdParties.Truongtv
         }
         public void UpdateMiniGameWinCount(string miniGame)
         {
+            _userInfo.ranking.win++;
+            UpdateCurrency(miniGame+"_masterPoint",1);
             UpdateCurrency(miniGame + "_win",1);
         }
         public void UpdateMiniGameLoseCount(string miniGame)
         {
+            _userInfo.ranking.lose++;
+            UpdateCurrency(miniGame+"_masterPoint",-1);
             UpdateCurrency(miniGame + "_lose",1);
         }
 

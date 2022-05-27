@@ -22,7 +22,7 @@ namespace MiniGame.StickRun
         public bool isSprinting, isHoldingSprint, isNormalRun, isCollideWall, isInSpecialTrap, isDead, isBot;
         public LayerMask itemLayer;
         private BotDifficulty botDifficulty;
-
+        private RankIngame rankInfo;
         [TitleGroup("Bot"), SerializeField, ShowIf(nameof(isBot))]
         private float sprintRate,
             sprintDuration,
@@ -30,22 +30,17 @@ namespace MiniGame.StickRun
             minimumDistanceToSprint,
             timeStable,
             timeSprinting,
-            distanceToObj;
+            distanceToObj,
+            sprintToSafeAreaDuration = 2.5f,
+            timeSprintToSafeArea;
 
+        private bool isPassingObj;
         private Tween tween;
         private Vector2 cacheColliderSize, cacheOffsetCollider, cacheHeadColliderOffset, runLine;
         private Transform checkPoint;
         private Color currentColor;
         private List<string> currentSkin = new List<string>();
 
-        private const float _EASY_NORMALSPEED = 1;
-        private const float _NORMAL_NORMALSPEED = 1.3f;
-        private const float _HARD_NORMALSPEED = 1.6f;
-        private const float _HELL_NORMALSPEED = 1.9f;
-        private const float _EASY_SPRINTSPEED = 3;
-        private const float _NORMAL_SPRINTSPEED = 3.3f;
-        private const float _HARD_SPRINTSPEED = 3.6f;
-        private const float _HELL_SPRINTSPEED = 3.9f;
         private const float _EASY_SPRINTRATE = 2f;
         private const float _NORMAL_SPRINTRATE = 1.5f;
         private const float _HARD_SPRINTRATE = 1f;
@@ -54,7 +49,6 @@ namespace MiniGame.StickRun
         private const float _NORMAL_SPRINTDURATION = 3.2f;
         private const float _HARD_SPRINTDURATION = 3.4f;
         private const float _HELL_SPRINTDURATION = 3.6f;
-
         private void Awake()
         {
             cacheColliderSize = collider.size;
@@ -135,17 +129,15 @@ namespace MiniGame.StickRun
         void Refresh()
         {
             anim.PlayIdle();
-            // anim.SetSkin(currentSkin);
-            // anim.SetSkinColor(currentColor);
         }
 
         void NormalRun()
         {
             isNormalRun = true;
             isSprinting = false;
-            tween = transform.DOMoveX(transform.position.x + (int) moveDirection * 100f, normalSpeed)
+            transform.DOKill();
+            transform.DOMoveX(transform.position.x + (int) moveDirection * 100000f, normalSpeed)
                 .SetSpeedBased(true)
-                .SetRelative(true)
                 .Play();
             if (Random.value > 0.75f)
             {
@@ -167,9 +159,9 @@ namespace MiniGame.StickRun
         {
             isSprinting = true;
             isNormalRun = false;
-            tween = transform.DOMoveX(transform.position.x + (int) moveDirection * 100f, sprintSpeed)
+            transform.DOKill();
+            transform.DOMoveX(transform.position.x + (int) moveDirection * 100000f, sprintSpeed)
                 .SetSpeedBased(true)
-                .SetRelative(true)
                 .Play();
             anim.PlayRunFast();
             if (Random.value > 0.5f)
@@ -198,7 +190,7 @@ namespace MiniGame.StickRun
                 Physics2D.Raycast(
                     transform.position + new Vector3(cacheColliderSize.x / 2 + .1f,
                         cacheColliderSize.y / 2 + cacheOffsetCollider.y), Vector2.right, botVision, itemLayer);
-            if (hit)
+            if (hit && hit.collider.isTrigger)
             {
                 distance = hit.distance;
             }
@@ -208,6 +200,25 @@ namespace MiniGame.StickRun
 
         #endregion
 
+        public void InitRank(RankIngame rankInfo)
+        {
+            this.rankInfo = rankInfo;
+        }
+
+        public RankIngame GetRankInfo()
+        {
+            return rankInfo;
+        }
+        
+        public void Finish()
+        {
+            rankInfo.isFinish = true;
+            if (LeaderBoardInGame.Instance != null)
+            {
+                LeaderBoardInGame.finishAction.Invoke(rankInfo);
+            }
+        }
+        
         private void Update()
         {
             if (StickRunGameController.Instance.state == GameState.Playing && !isDead)
@@ -246,22 +257,39 @@ namespace MiniGame.StickRun
                     {
                         moveDirection = MoveDirection.Right;
                         distanceToObj = DetectDistanceToObject();
-                        // if (distanceToObj != 0)
-                        // {
-                        // if (distanceToObj <= minimumDistanceToSprint)
-                        // {
-                        //     if (timeSprinting >= sprintDuration)
-                        //     {
-                        //         isHoldingSprint = false;
-                        //         NormalRun();
-                        //     }
-                        //     
-                        //     timeSprinting += Time.deltaTime;
-                        //     isHoldingSprint = true;
-                        //     Sprint();
-                        // }
-                        // }
-                        // else
+                        if (distanceToObj != 0 || isPassingObj)
+                        {
+                            if (distanceToObj <= minimumDistanceToSprint && !isPassingObj)
+                            {
+                                isPassingObj = true;
+                                isHoldingSprint = true;
+                                isSprinting = false;
+                                isNormalRun = true;
+                                timeSprinting = 0;
+                                timeStable = 0;
+                            }
+                            
+                            if (distanceToObj == 0)
+                            {
+                                timeSprintToSafeArea += Time.deltaTime;
+                                if (timeSprintToSafeArea >= sprintToSafeAreaDuration)
+                                {
+                                    isPassingObj = false;
+                                    timeSprintToSafeArea = 0;
+                                }
+                            }
+                            if (!isHoldingSprint && !isNormalRun)
+                            {
+                                NormalRun();
+                                timeSprinting = 0;
+                            }
+                            else if (isHoldingSprint && !isSprinting)
+                            {
+                                Sprint();
+                                timeStable = 0;
+                            }
+                        }
+                        else
                         {
                             if (timeStable >= sprintRate)
                             {
@@ -277,9 +305,9 @@ namespace MiniGame.StickRun
                             }
                             else if (timeStable == 0 && timeSprinting == 0)
                             {
-                                isHoldingSprint = false;
+                                isHoldingSprint = true;
                                 isSprinting = false;
-                                isNormalRun = false;
+                                isNormalRun = true;
                             }
 
                             if (!isHoldingSprint && !isNormalRun)

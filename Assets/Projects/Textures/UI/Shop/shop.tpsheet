@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:996306c7f662d45cf7c9e5aebbe8ae0a:b37927b0571831f3c9d5bc2740aff4c6:b9c857228db46a10f00394dbfaca6f74$
+# $TexturePacker:SmartUpdate:32736e5e9f4c3fc3ec351ce4895ccdbf:9d9dae27c50159e17319fc5b0f705b96:b9c857228db46a10f00394dbfaca6f74$
 #
 :format=40300
 :texture=shop.png
@@ -17,7 +17,7 @@
 10times2;923;1993;828;18; 0.5;0.5; 0;0;0;0
 80080-playstation-angel-symmetry-light-game-video-halo copy 3;923;1453;537;536; 0.5;0.5; 0;0;0;0
 80080-playstation-angel-symmetry-light-game-video-halo copy 4;1464;1045;537;536; 0.5;0.5; 0;0;0;0
-ads icon;1953;738;66;57; 0.5;0.5; 0;0;0;0
+ads icon;1953;912;66;57; 0.5;0.5; 0;0;0;0
 back;1376;192;149;124; 0.5;0.5; 0;0;0;0
 chest;1769;1821;265;226; 0.5;0.5; 0;0;0;0
 eff_pack3;923;913;537;536; 0.5;0.5; 0;0;0;0
@@ -30,10 +30,8 @@ pack1_icon;1765;1585;245;232; 0.5;0.5; 0;0;0;0
 pack2_icon;1;32;339;284; 0.5;0.5; 0;0;0;0
 pack_3_back;887;188;485;721; 0.5;0.5; 0;0;0;0
 popup back1;1;1445;918;602; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy 2;1665;1606;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy 3;1953;963;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1 copy;1953;881;81;78; 0.5;0.5; 0;0;0;0
-Rounded Rectangle 1;1953;799;81;78; 0.5;0.5; 0;0;0;0
+Rounded1;1665;1606;81;78; 0.5;0.5; 0;0;0;0
+Rounded2;1953;973;73;68; 0.5;0.5; 0;0;0;0
 rule detail;1574;1603;87;81; 0.5;0.5; 0;0;0;0
 setting;1465;64;149;124; 0.5;0.5; 0;0;0;0
 skin_back_white;1618;90;244;226; 0.5;0.5; 0;0;0;0
