@@ -31,10 +31,10 @@ MonoBehaviour:
     scene: {fileID: 102900000, guid: 75232a711945ec94b9531e1f3bb373cd, type: 3}
     gameScene: Red Light
     mostPlay: 0
-    recentPlay: 1
+    recentPlay: 0
     total: 0
-    win: 1
-    lose: 3
+    win: 0
+    lose: 0
   - gameId: memory_brain
     name: 'DEVIL FRUIT: MEMORY'
     bg: {fileID: 21300000, guid: 83aaec1f1cf97a94dae2fe531d093c74, type: 3}
@@ -54,7 +54,7 @@ MonoBehaviour:
     mostPlay: 0
     recentPlay: 0
     total: 0
-    win: 1
+    win: 0
     lose: 0
   - gameId: sausage_run
     name: NINJA RACE
@@ -75,5 +75,26 @@ MonoBehaviour:
     mostPlay: 0
     recentPlay: 0
     total: 0
-    win: 1
+    win: 0
+    lose: 0
+  - gameId: steal_ball
+    name: STEAL DRAGON BALL
+    bg: {fileID: 21300000, guid: 39e94ddb9314121418f96dbd24f9d998, type: 3}
+    loadingBg: {fileID: 21300000, guid: 85928339899e65b48bdbece8b4edecca, type: 3}
+    rank1:
+      ticket: 10
+      trophy: 3
+    rank2:
+      ticket: 8
+      trophy: 2
+    rank3:
+      ticket: 5
+      trophy: 1
+    ticketToUnlock: 15
+    scene: {fileID: 102900000, guid: 9972c77a4fa2c8d4db4972b7b2cbdcdb, type: 3}
+    gameScene: Steal Dragon Ball
+    mostPlay: 0
+    recentPlay: 1
+    total: 0
+    win: 0
     lose: 0

@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Projects/Scenes/Stickman Run.unity
     guid: eb354a8ef08145f46ba1b1633f8153a4
+  - enabled: 1
+    path: Assets/Projects/Scenes/Steal Dragon Ball.unity
+    guid: 9972c77a4fa2c8d4db4972b7b2cbdcdb
   m_configObjects: {}

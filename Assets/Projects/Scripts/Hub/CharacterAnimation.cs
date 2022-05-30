@@ -40,7 +40,7 @@ namespace Projects.Scripts.Hub
         private string runNaruto;
 
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
-        private string stun;
+        private string runSteal;
 
         [SerializeField, SpineAnimation(dataField = nameof(skeletonAnimation))]
         private string getHit;
@@ -183,6 +183,11 @@ namespace Projects.Scripts.Hub
             return PlayAnim("run2", 0, loop, callback: callback);
         }
 
+        public TrackEntry PlayStealBall(bool loop = true, Action callback = null)
+        {
+            return PlayAnim(runSteal, 1, loop, callback: callback);
+        }
+        
         public TrackEntry PlayJumpUp(bool loop = true, Action callback = null)
         {
             return PlayAnim(jumpUpAnimations[0], 0, loop, callback: callback);

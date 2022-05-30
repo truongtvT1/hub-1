@@ -1,0 +1,18 @@
+#
+# Sprite sheet data for Unity.
+#
+# To import these sprites into your Unity project, download "TexturePackerImporter":
+# https://www.codeandweb.com/texturepacker/unity
+#
+# $TexturePacker:SmartUpdate:85e189382624c1a5a26b314a6778ec85:ec82473ce9e6eccb34c2dfa69d65ecee:9a945acdeaddc93ee9c81d2ede23b4b0$
+#
+:format=40300
+:texture=steal-ball.png
+:size=512x1024
+:pivotpoints=enabled
+:borders=disabled
+:alphahandling=ClearTransparentPixels
+
+egg_nest_1;1;457;390;282; 0.5;0.5; 0;0;0;0
+egg_nest_2;1;741;391;282; 0.5;0.5; 0;0;0;0
+egg_nest_shadow;1;238;382;217; 0.5;0.5; 0;0;0;0
