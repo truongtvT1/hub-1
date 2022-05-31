@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace MiniGame.Steal_Ball
 {
     public class BallNest : MonoBehaviour
     {
-        public float offsetX = .5f, offsetY = .5f;
+        public float subOffsetX = .5f;
+        public float subOffsetY = .5f;
+        public float ballCheckInterval = .5f;
         private PlayerStealBallController controller;
         private List<Ball> listBall = new List<Ball>();
         
@@ -35,8 +38,13 @@ namespace MiniGame.Steal_Ball
                 {
                     listBall.Remove(temp[i]);
                 }
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(ballCheckInterval);
             }
+        }
+
+        public bool IsBallInNest(Ball ball)
+        {
+            return listBall.Contains(ball);
         }
         
         public void OnBallStolen()
@@ -46,9 +54,10 @@ namespace MiniGame.Steal_Ball
         
         public void OnBallRelease(Ball ball)
         {
+            //TODO: fx glow
             ball.transform.SetParent(transform.parent);
-            var offset = new Vector2(offsetX, offsetY);
-            ball.transform.position = (Vector2) transform.position + offset + Random.insideUnitCircle;
+            var offset = new Vector2(subOffsetX, subOffsetY);
+            ball.transform.position = (Vector2) transform.position - offset + Random.insideUnitCircle;
             listBall.Add(ball);
         }
     }

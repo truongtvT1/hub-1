@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MoreMountains.Tools;
 using Projects.Scripts.Hub;
-using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using UnityEngine;
 using UnityEngine.AI;
@@ -38,7 +37,6 @@ namespace MiniGame.Steal_Ball
             agent = GetComponent<NavMeshAgent>();
             agent.updateUpAxis = false;
             agent.updateRotation = false;
-            // agent.autoBraking = true;
         }
 
         private void Start()
@@ -60,6 +58,10 @@ namespace MiniGame.Steal_Ball
             ballNest = ballCollection;
             ballNest.Init(this);
             this.brain = brain;
+            if (IsBot)
+            {
+                agent.autoBraking = true;
+            }
         }
 
         void SetDestination(Transform target)
@@ -82,7 +84,7 @@ namespace MiniGame.Steal_Ball
         {
             for (int i = 0; i < listBall.Count; i++)
             {
-                if (listBall[i].state == Ball.State.Unavailable)
+                if (listBall[i].state == Ball.State.Unavailable || ballNest.IsBallInNest(listBall[i]))
                 {
                     continue;
                 }
@@ -99,7 +101,7 @@ namespace MiniGame.Steal_Ball
         bool CheckReachBallNest()
         {
             return Vector3.SqrMagnitude(transform.position - (ballNest.transform.position + driftPos)) <=
-                    agent.stoppingDistance * 5;
+                    agent.stoppingDistance * 10;
         }
 
         public void ReleaseBall()
@@ -186,7 +188,6 @@ namespace MiniGame.Steal_Ball
             }
             else
             {
-                CheckHit();
                 if (agent.hasPath)
                 {
                     anim.PlayRun();
@@ -200,6 +201,8 @@ namespace MiniGame.Steal_Ball
             
         }
 
+        
+        
         private void CheckHit()
         {
             if (!target)
