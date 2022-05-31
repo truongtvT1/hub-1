@@ -13,9 +13,9 @@ namespace MiniGame
     {
         [FoldoutGroup("Character")] public PlayerController player;
         [SerializeField, FoldoutGroup("UI")] protected Button pauseButton;
-        private static GamePlayController _instance;
         public static GamePlayController Instance => _instance;
         public GameState state = GameState.None;
+        private static GamePlayController _instance;
         protected RankIngame playerInfo;
 
         protected virtual void Awake()
@@ -63,6 +63,8 @@ namespace MiniGame
         
         #region Controller
         
+        #region Button
+
         public void TouchMoveLeft(bool release)
         {
             if (player != null && state != GameState.Playing && !player.IsDie()) return;
@@ -95,6 +97,15 @@ namespace MiniGame
             player.Jump(release);
         }
 
+
+        #endregion
+
+        #region JoyStick
+
+        
+
+        #endregion
+        
         #endregion
     }
 }

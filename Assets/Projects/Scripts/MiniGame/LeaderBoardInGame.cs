@@ -147,5 +147,20 @@ namespace MiniGame
         public string name;
         public int rank, score;
         public bool isBot, isFinish;
+
+        public RankIngame()
+        {
+            
+        }
+        
+        public RankIngame(List<string> skin, Color color, string name, bool isBot, int rank)
+        {
+            this.name = name;
+            this.isBot = isBot;
+            this.rank = rank;
+            isFinish = false;
+            playerSkin = new PlayerSkin(color,skin);
+            score = 0;
+        }
     }
 }
