@@ -49,21 +49,22 @@ namespace MiniGame.Steal_Ball
         IEnumerator Force(Vector3 force)
         {
             isForcedMove = true;
-            var cachePos = transform.position;
+            var cachePos = agent.transform.position;
             var targetPos = cachePos;
             float lerpTime = 0;
             var agentDrift = 0.0001f; // minimal
             driftPos = agentDrift * Random.insideUnitCircle;
-            Debug.Log($"stopping distance {agent.stoppingDistance}");
-            while (Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos)) > agent.stoppingDistance)
+            var distance = Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos));
+            while (distance > agent.stoppingDistance)
             {
-                targetPos = Vector3.Lerp(transform.position,
+                targetPos = Vector3.Lerp(agent.transform.position,
                     cachePos + force + driftPos,
                     Mathf.Clamp01(lerpTime * TargetLerpSpeed * (1 - Smoothing)));
                 agent.Warp(targetPos);
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+                agent.transform.position = new Vector3(agent.transform.position.x, agent.transform.position.y, agent.transform.position.y);
                 lerpTime += Time.deltaTime;
-                Debug.Log($"distance {Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos))}");
+                distance = Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos));
+                Debug.Log("distance = " + distance);
                 yield return null;
             }
             isForcedMove = false;
@@ -95,7 +96,8 @@ namespace MiniGame.Steal_Ball
             }
         }
 
-        void SetDestination(Transform target)
+        [Button]
+        public void SetDestination(Transform target)
         {
             var agentDrift = 0.0001f; // minimal
             driftPos = agentDrift * Random.insideUnitCircle;
@@ -228,6 +230,11 @@ namespace MiniGame.Steal_Ball
             }
             else
             {
+                if (isForcedMove)
+                {
+                    return;
+                }
+                
                 if (agent.hasPath)
                 {
                     anim.PlayRun();
