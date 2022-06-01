@@ -1,10 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MoreMountains.Tools;
 using Projects.Scripts.Hub;
-using ThirdParties.Truongtv;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -20,9 +19,9 @@ namespace MiniGame.Steal_Ball
         [SerializeField,Range(0, 0.99f)] private float Smoothing = 0.25f;
         [SerializeField] private float TargetLerpSpeed = 1;
         [SerializeField] private List<Ball> listBall = new List<Ball>();
-
+        [SerializeField] private bool isHoldingBall, isMoving, isReachTarget, isForcedMove;
+        
         private AIBrain brain;
-        private bool isHoldingBall, isMoving, isReachTarget;
         private NavMeshAgent agent;
         private Vector3 TargetDirection;
         private float LerpTime = 0;
@@ -37,8 +36,39 @@ namespace MiniGame.Steal_Ball
             agent = GetComponent<NavMeshAgent>();
             agent.updateUpAxis = false;
             agent.updateRotation = false;
+            brain = GetComponentInChildren<AIBrain>();
+            // agent.autoBraking = true;
         }
 
+        [Button]
+        public void Test(Vector3 force)
+        {
+            StartCoroutine(Force(force));
+        }
+
+        IEnumerator Force(Vector3 force)
+        {
+            isForcedMove = true;
+            var cachePos = transform.position;
+            var targetPos = cachePos;
+            float lerpTime = 0;
+            var agentDrift = 0.0001f; // minimal
+            driftPos = agentDrift * Random.insideUnitCircle;
+            Debug.Log($"stopping distance {agent.stoppingDistance}");
+            while (Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos)) > agent.stoppingDistance)
+            {
+                targetPos = Vector3.Lerp(transform.position,
+                    cachePos + force + driftPos,
+                    Mathf.Clamp01(lerpTime * TargetLerpSpeed * (1 - Smoothing)));
+                agent.Warp(targetPos);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
+                lerpTime += Time.deltaTime;
+                Debug.Log($"distance {Vector3.SqrMagnitude(agent.transform.position - (cachePos + force + driftPos))}");
+                yield return null;
+            }
+            isForcedMove = false;
+        }
+        
         private void Start()
         {
             var temp = GameObject.FindGameObjectsWithTag("Ball");
@@ -51,16 +81,17 @@ namespace MiniGame.Steal_Ball
             }
         }
         
-        public void Init(List<string> skin, Color color, BallNest ballCollection, AIBrain brain = null)
+        public void Init(List<string> skin, Color color, BallNest ballCollection, BrainStateData brainData = null)
         {
             anim.SetSkin(skin);
             anim.SetSkinColor(color);
             ballNest = ballCollection;
             ballNest.Init(this);
-            this.brain = brain;
             if (IsBot)
             {
-                agent.autoBraking = true;
+                brain.InitSteal(this, brainData);
+                brain.ResetBrain();
+                brain.ActiveBrain();
             }
         }
 
@@ -76,7 +107,6 @@ namespace MiniGame.Steal_Ball
             {
                 display.transform.localScale = new Vector3(-1, 1, 1);
             }
-            
             agent.SetDestination(target.position + driftPos);
         }
 
@@ -101,7 +131,7 @@ namespace MiniGame.Steal_Ball
         bool CheckReachBallNest()
         {
             return Vector3.SqrMagnitude(transform.position - (ballNest.transform.position + driftPos)) <=
-                    agent.stoppingDistance * 10;
+                    agent.stoppingDistance * 5;
         }
 
         public void ReleaseBall()
@@ -110,17 +140,27 @@ namespace MiniGame.Steal_Ball
             anim.ClearTrack(1);
             ballOnHand.Release();
             ballNest.OnBallRelease(ballOnHand);
-            ballOnHand.transform.localScale = Vector3.one;
             ballOnHand = null;
             Score(1);
             isHoldingBall = false;
         }
 
+        void MoveTo(Vector3 offset)
+        {
+            
+        }
+        
         private void Update()
         {
             if (!IsBot)
             {
                 #region Movement
+
+                if (isForcedMove)
+                {
+                    return;
+                }
+                
                 MovementVector = Vector3.zero;
 
                 if (Input.GetKey(KeyCode.UpArrow))
@@ -153,7 +193,7 @@ namespace MiniGame.Steal_Ball
                 MovementVector += driftPos;
                 TargetDirection = Vector3.Lerp(
                     TargetDirection, 
-                    MovementVector, 
+                    MovementVector,  
                     Mathf.Clamp01(LerpTime * TargetLerpSpeed * (1 - Smoothing))
                 );
                 agent.Move(TargetDirection * agent.speed * Time.deltaTime);
@@ -201,8 +241,6 @@ namespace MiniGame.Steal_Ball
             
         }
 
-        
-        
         private void CheckHit()
         {
             if (!target)

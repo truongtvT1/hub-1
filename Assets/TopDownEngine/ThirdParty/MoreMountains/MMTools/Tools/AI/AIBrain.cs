@@ -1,4 +1,5 @@
 ﻿using MiniGame;
+using MiniGame.Steal_Ball;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,6 +31,11 @@ namespace MoreMountains.Tools
 	    protected AIState _initialState;
         
 	    private PlayerController _playerController;
+        public PlayerController PlayerController => _playerController;
+
+        private PlayerStealBallController _playerStealBall;
+
+        public PlayerStealBallController PlayerStealBall => _playerStealBall;
 
         /// <summary>
         /// On awake we set our brain for all states
@@ -39,14 +45,13 @@ namespace MoreMountains.Tools
             this.stateData = stateData;
             _playerController = playerController;
         }
-        public PlayerController PlayerController
-        {
-            get
-            {
-                return _playerController;
-            }
-        }
 
+        public virtual void InitSteal(PlayerStealBallController playerSteal, BrainStateData stateData)
+        {
+            this.stateData = stateData;
+            _playerStealBall = playerSteal;
+        }
+        
         public virtual void ActiveBrain(string initState = null)
         {
             brainActive = true;

@@ -12,7 +12,7 @@ namespace MiniGame.Steal_Ball
         public float subOffsetY = .5f;
         public float ballCheckInterval = .5f;
         private PlayerStealBallController controller;
-        private List<Ball> listBall = new List<Ball>();
+        [SerializeField] private List<Ball> listBall = new List<Ball>();
         
         public void Init(PlayerStealBallController controller)
         {
@@ -56,9 +56,16 @@ namespace MiniGame.Steal_Ball
         {
             //TODO: fx glow
             ball.transform.SetParent(transform.parent);
-            var offset = new Vector2(subOffsetX, subOffsetY);
-            ball.transform.position = (Vector2) transform.position - offset + Random.insideUnitCircle;
-            listBall.Add(ball);
+            var rd = Random.insideUnitCircle;
+            var offset = new Vector2(rd.x > 0 ? - subOffsetX : subOffsetX, rd.y > 0 ? - subOffsetY : subOffsetY);
+            ball.transform.position = (Vector2) transform.position + offset + rd;
+            ball.transform.rotation = Quaternion.Euler(Vector3.zero);
+            ball.transform.localScale = Vector3.one;
+
+            if (!listBall.Contains(ball))
+            {
+                listBall.Add(ball);
+            }
         }
     }
 }

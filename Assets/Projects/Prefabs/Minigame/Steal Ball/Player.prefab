@@ -414,6 +414,8 @@ MonoBehaviour:
   IsBot: 0
   Smoothing: 0.25
   TargetLerpSpeed: 1
+  listBall: []
+  ballOnHand: {fileID: 0}
 --- !u!114 &8059026632645989131
 MonoBehaviour:
   m_ObjectHideFlags: 0

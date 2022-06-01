@@ -6,7 +6,10 @@ using Projects.Scripts.Data;
 using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using Truongtv.Utilities;
 using UnityEngine;
+using UnityEngine.AI;
+using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
 
 namespace MiniGame.Steal_Ball
 {
@@ -16,10 +19,12 @@ namespace MiniGame.Steal_Ball
         [FoldoutGroup("Object"), SerializeField] private BallNest[] ballNest;
         [FoldoutGroup("Object"), SerializeField] private Pool[] ballPool;
         [FoldoutGroup("Object"), SerializeField] private Pool[] obstaclePool;
+        [FoldoutGroup("Object"), SerializeField] private NavMeshBuilder navMeshBuilder;
         [FoldoutGroup("Bot"), SerializeField] private PlayerStealBallController botPrefab;
         [FoldoutGroup("Bot"), SerializeField] private List<PlayerStealBallController> listBot = new List<PlayerStealBallController>();
-        [FoldoutGroup("Bot"), SerializeField] private List<AIBrain> botBrain = new List<AIBrain>();
+        [FoldoutGroup("Bot"), SerializeField] private List<BrainStateData> botBrain = new List<BrainStateData>();
         [FoldoutGroup("GamePlay"), SerializeField] private GameDifficulty difficulty;
+        [FoldoutGroup("GamePlay"), SerializeField] private float gameDuration, ballDropDuration;
         [FoldoutGroup("GamePlay"), SerializeField] private int level;
         
         private MiniGameInfo gameInfo;
@@ -89,6 +94,16 @@ namespace MiniGame.Steal_Ball
                 listBot[i].InitRank(botInfo);
                 LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
             }
+            
+            //generate map
+            
+            //bake new nav mesh
+            
+        }
+
+        void BakeNavMesh()
+        {
+            
         }
     }
 }
