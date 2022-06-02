@@ -70,6 +70,7 @@ namespace MiniGame.Steal_Ball
             {
                 if (GamePlayController.Instance.state == GameState.End)
                 {
+                    anim.PlayIdle();
                     return;
                 }
 
@@ -159,6 +160,7 @@ namespace MiniGame.Steal_Ball
                 {
                     brain.ResetBrain();
                     brain.DeActiveBrain();
+                    agent.ResetPath();
                 }
 
                 if (agent.hasPath)

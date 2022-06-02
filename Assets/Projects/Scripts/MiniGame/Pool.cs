@@ -22,7 +22,8 @@ namespace MiniGame
             {  
                 if (things.Count < 1 || things.TrueForAll(_ => _.activeSelf))
                 {
-                    GameObject newClone = (GameObject) Instantiate(thing, transform, true);  
+                    GameObject newClone = (GameObject) Instantiate(thing, transform, false);
+                    newClone.transform.localPosition = Vector3.zero;
                     newClone.SetActive(false);  
                     things.Add(newClone);  
                     PoolMember poolMember = newClone.AddComponent<PoolMember>();  

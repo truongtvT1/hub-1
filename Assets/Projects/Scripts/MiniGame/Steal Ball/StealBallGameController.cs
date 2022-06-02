@@ -73,6 +73,7 @@ namespace MiniGame.Steal_Ball
 
         IEnumerator Init()
         {
+            gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration).ToString(@"mm\:ss");
             //generate map
             surface2D.BuildNavMesh();
             var countObstacle = Random.Range(3, 6);
@@ -145,7 +146,6 @@ namespace MiniGame.Steal_Ball
                 bot.InitRank(botInfo);
                 LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
             }
-            gameTimeCountText.text = gameDuration.ToString(@"ss");
             StartCoroutine(Extended.CountTime(5, 0, count =>
             {
                 timeStartText.text = TimeSpan.FromSeconds(5 - count).ToString(@"ss");
@@ -169,7 +169,7 @@ namespace MiniGame.Steal_Ball
                 {
                     DropBall();
                 }
-                gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration - timeCount).ToString(@"ss");
+                gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration - timeCount).ToString(@"mm\:ss");
                 timeCount += Time.deltaTime;
             }
         }
@@ -184,16 +184,18 @@ namespace MiniGame.Steal_Ball
             }
             var ball = ballPool[Random.Range(0, ballPool.Length)].nextThing;
             await Task.Delay(10);
-            ball.transform.position = new Vector3(rdPos.x,rdPos.y + 15f,-10f);
-            ball.transform.DOMoveY(rdPos.y, 1f).SetEase(Ease.InOutSine)
+            ballCount++;
+            ball.transform.position = new Vector3(rdPos.x,rdPos.y + 10f,-5f);
+            ball.SetActive(true);
+            ball.transform.DOMoveY(rdPos.y, 1f).SetEase(Ease.InSine)
                 .OnComplete(() =>
                 {
-                    var item = ball.GetComponent<Ball>();
-                    onDropBall?.Invoke(item);
                     isDropingBall = false;
+                    var item = ball.GetComponent<Ball>();
                     item.shadow.SetActive(true);
+                    ball.GetComponent<UpdateZByY>().enabled = true;
+                    onDropBall?.Invoke(item);
                 });
-            ballCount++;
         }
         
         Vector3 area1XRange = new Vector3(-9, -3);
