@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Base;
 using Com.LuisPedroFonseca.ProCamera2D;
+using Projects.Scripts.Data;
 using Projects.Scripts.Hub;
 using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
@@ -32,7 +33,7 @@ namespace MiniGame.StickRun
         public GameObject gateFinish;
         [SerializeField] private int maxTimeRevive = 3;
         [SerializeField] private int maxBotNumbers = 3;
-
+        private MiniGameInfo gameInfo;
         public static StickRunGameController Instance
         {
             get => instance;
@@ -75,6 +76,7 @@ namespace MiniGame.StickRun
             {
                 Destroy(instance.gameObject);
             }
+            gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run"));
             settingButton.onClick.AddListener(() =>
             {
                 InGamePopupController.Instance.ShowPopupSetting(() =>
@@ -83,6 +85,7 @@ namespace MiniGame.StickRun
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }, () =>
                 {
+                    GameDataManager.Instance.UpdateMiniGameLoseCount(gameInfo.gameId);
                     GameDataManager.Instance.ResetSkinInGame();
                 }, null);
             });
@@ -291,7 +294,7 @@ namespace MiniGame.StickRun
             state = GameState.End;
             await Task.Delay(2000);
             camera.SetActive(false);
-            InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run")));
+            InGamePopupController.Instance.ShowPopupWin(gameInfo);
         }
         
         public void EndGame()
@@ -300,7 +303,7 @@ namespace MiniGame.StickRun
             LeaderBoardInGame.Instance.OnMainPlayerDie(playerStickman.GetRankInfo());
             LeaderBoardInGame.Instance.UpdateBoard();
             camera.SetActive(false);
-            InGamePopupController.Instance.ShowPopupWin(GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run")));
+            InGamePopupController.Instance.ShowPopupWin(gameInfo);
         }
         
         private void Update()

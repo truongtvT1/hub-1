@@ -60,6 +60,7 @@ namespace MiniGame.SquidGame
         protected override void Awake()
         {
             base.Awake();
+            gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("squid"));
             pauseButton.onClick.AddListener(() =>
             {
                 InGamePopupController.Instance.ShowPopupSetting(
@@ -71,8 +72,7 @@ namespace MiniGame.SquidGame
                     () =>
                     {
                         // update result
-                        GameDataManager.Instance.UpdateMiniGameLoseCount(GameDataManager.Instance.miniGameData
-                            .miniGameList.Find(_ => _.gameId.Contains("squid")).gameId);
+                        GameDataManager.Instance.UpdateMiniGameLoseCount(gameInfo.gameId);
                         GameDataManager.Instance.ResetSkinInGame();
                     },
                     () => { });
@@ -94,7 +94,7 @@ namespace MiniGame.SquidGame
 
         protected override void Start()
         {
-            gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("squid"));
+            
             level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
             var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
             for (int i = 1; i <= enumCount; i++)

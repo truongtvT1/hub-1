@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -31,6 +32,7 @@ namespace Truongtv.Utilities
         {
             return ((layerMask.value & (1 << obj.layer)) > 0);
         }
+        
         private  static readonly System.Random rng = new System.Random();
         public static void Shuffle<T>(this IList<T> list)
         {
@@ -55,6 +57,23 @@ namespace Truongtv.Utilities
         {
             Random.InitState(DateTime.UtcNow.Millisecond);
             return Random.Range(min, max);
+        }
+
+        public static IEnumerator CountTime(float duration, float delay, Action<float> onCounting = null, Action callback = null, Func<bool> waitUntil = null)
+        {
+            if (waitUntil != null)
+            {
+                yield return new WaitUntil(waitUntil);
+            }
+            yield return new WaitForSeconds(delay);
+            float time = 0;
+            while (time < duration)
+            {
+                time += Time.deltaTime;
+                onCounting?.Invoke(time);
+                yield return null;
+            }
+            callback?.Invoke();
         }
     }
     

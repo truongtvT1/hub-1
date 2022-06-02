@@ -7,6 +7,13 @@ namespace MiniGame.Steal_Ball
     {
         public State state = State.Available;
         public GameObject shadow;
+
+        private void Awake()
+        {
+            shadow.SetActive(false);
+        }
+
+        
         
         [Serializable]
         public enum State

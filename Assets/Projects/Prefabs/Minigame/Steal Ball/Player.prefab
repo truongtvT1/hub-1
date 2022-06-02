@@ -350,7 +350,6 @@ GameObject:
   - component: {fileID: 8059026632645989128}
   - component: {fileID: 8059026632645989134}
   - component: {fileID: 8059026632645989131}
-  - component: {fileID: 8059026632645989129}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -382,7 +381,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 8059026632645989132}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.43
+  m_Radius: 0.61
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -407,14 +406,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab5ecee41faa4e4695dd3548c52a1814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   hand: {fileID: 8059026632366314031}
+  ballTarget: {fileID: 0}
+  minTimeToThink: 0
+  maxTimeToThink: 0
+  IsBot: 0
   anim: {fileID: 8059026632645989131}
   display: {fileID: 8059026634316290426}
-  IsBot: 0
   Smoothing: 0.25
   TargetLerpSpeed: 1
   listBall: []
+  isHoldingBall: 0
+  isMoving: 0
+  isReachTarget: 0
+  isForcedMove: 0
   ballOnHand: {fileID: 0}
 --- !u!114 &8059026632645989131
 MonoBehaviour:
@@ -440,20 +445,6 @@ MonoBehaviour:
   runNaruto: 
   runSteal: run_steal
   getHit: 
---- !u!114 &8059026632645989129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8059026632645989132}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129405a5c7b1c8341bfa200c17f04fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  localPostion: 0
-  zeroZ: 0
 --- !u!1 &8059026633373683579
 GameObject:
   m_ObjectHideFlags: 0

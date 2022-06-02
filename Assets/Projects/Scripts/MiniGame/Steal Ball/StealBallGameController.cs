@@ -1,37 +1,62 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using MoreMountains.Tools;
+using System.Threading.Tasks;
+using DG.Tweening;
 using Projects.Scripts.Data;
 using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using TMPro;
 using Truongtv.Utilities;
 using UnityEngine;
 using UnityEngine.AI;
-using NavMeshBuilder = UnityEditor.AI.NavMeshBuilder;
+using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 namespace MiniGame.Steal_Ball
 {
     public class StealBallGameController : GamePlayController
     {
+        [FoldoutGroup("UI"), SerializeField] private TextMeshProUGUI gameTimeCountText, timeStartText;
         [FoldoutGroup("Character")] public PlayerStealBallController playerSaiyan;
+        [FoldoutGroup("Object"), SerializeField] private Transform container;
         [FoldoutGroup("Object"), SerializeField] private BallNest[] ballNest;
         [FoldoutGroup("Object"), SerializeField] private Pool[] ballPool;
         [FoldoutGroup("Object"), SerializeField] private Pool[] obstaclePool;
-        [FoldoutGroup("Object"), SerializeField] private NavMeshBuilder navMeshBuilder;
+        [FoldoutGroup("Object"), SerializeField] private float objectOffset = 2.5f;
+        [FoldoutGroup("Object"), SerializeField] private NavMeshSurface surface2D;
         [FoldoutGroup("Bot"), SerializeField] private PlayerStealBallController botPrefab;
         [FoldoutGroup("Bot"), SerializeField] private List<PlayerStealBallController> listBot = new List<PlayerStealBallController>();
         [FoldoutGroup("Bot"), SerializeField] private List<BrainStateData> botBrain = new List<BrainStateData>();
         [FoldoutGroup("GamePlay"), SerializeField] private GameDifficulty difficulty;
-        [FoldoutGroup("GamePlay"), SerializeField] private float gameDuration, ballDropDuration;
-        [FoldoutGroup("GamePlay"), SerializeField] private int level;
+        [FoldoutGroup("GamePlay"), SerializeField] private float gameDuration;
+        [FoldoutGroup("GamePlay"), SerializeField] private int maxBallDrop, level;
+        public static Action<Ball> onDropBall;
         
+        private float timeCount;
+        private int ballCount;
+        private bool isDropingBall;
         private MiniGameInfo gameInfo;
-
+        
         protected override void Start()
         {
             base.Start();
+            pauseButton.onClick.RemoveAllListeners();
+            pauseButton.onClick.AddListener(() =>
+            {
+                InGamePopupController.Instance.ShowPopupSetting(() =>
+                {
+                    StopAllCoroutines();
+                    GameDataManager.Instance.ResetSkinInGame();
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                }, () =>
+                {
+                    StopAllCoroutines();
+                    state = GameState.End;
+                    GameDataManager.Instance.ResetSkinInGame();
+                }, null);
+            });
             gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("steal"));
             level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
             var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
@@ -48,6 +73,31 @@ namespace MiniGame.Steal_Ball
 
         IEnumerator Init()
         {
+            //generate map
+            surface2D.BuildNavMesh();
+            var countObstacle = Random.Range(3, 6);
+            int k = 0;
+            for (int i = 0; i < countObstacle; i++)
+            {
+                if (k > 2)
+                {
+                    k = 0;
+                }
+                var pos = RandomPos(k);
+                while (!CheckValidPos(pos))
+                {
+                    pos = RandomPos(k);
+                    yield return null;
+                }
+                var item = obstaclePool[i].nextThing;
+                item.transform.SetParent(container);
+                item.transform.position = pos;
+                yield return new WaitUntil(() => item);
+                var wait = surface2D.BuildNavMeshAsync();
+                k++;
+                yield return wait.isDone;
+            }
+            
             //init player
             var skin = GameDataManager.Instance.GetSkinInGame();
             var color = GameDataManager.Instance.GetCurrentColor();
@@ -71,11 +121,12 @@ namespace MiniGame.Steal_Ball
             //init bot
             for (int i = 1; i < ballNest.Length; i++)
             {
-                var bot = Instantiate(botPrefab,ballNest[i].transform.position, Quaternion.identity);
+                var bot = Instantiate(botPrefab,container,false);
+                bot.transform.position = ballNest[i].transform.position;
                 yield return new WaitUntil(() => bot != null);
                 var listSkin = GameDataManager.Instance.RandomSkinList();
                 var skinColor = GameDataManager.Instance.RandomColor();
-                bot.Init(listSkin,skinColor,ballNest[i],botBrain[(int) difficulty]);
+                bot.Init(listSkin,skinColor,ballNest[i],(BotDifficulty) (int) difficulty,botBrain[(int) difficulty]);
                 listBot.Add(bot);
                 string botName = RandomNameAndCountryPicker.Instance.GetRandomPlayerInfo().playerName;
                 RankIngame botInfo = new RankIngame
@@ -91,19 +142,103 @@ namespace MiniGame.Steal_Ball
                         color = skinColor
                     }
                 };
-                listBot[i].InitRank(botInfo);
+                bot.InitRank(botInfo);
                 LeaderBoardInGame.Instance.ListRanking.Add(botInfo);
             }
-            
-            //generate map
-            
-            //bake new nav mesh
-            
+            gameTimeCountText.text = gameDuration.ToString(@"ss");
+            StartCoroutine(Extended.CountTime(5, 0, count =>
+            {
+                timeStartText.text = TimeSpan.FromSeconds(5 - count).ToString(@"ss");
+            }, () =>
+            {
+                timeStartText.gameObject.SetActive(false);
+                state = GameState.Playing;
+            }));
         }
 
-        void BakeNavMesh()
+        private void Update()
         {
-            
+            if (state == GameState.Playing)
+            {
+                if (timeCount >= gameDuration)
+                {
+                    state = GameState.End;
+                }
+
+                if (timeCount >= ballCount * gameDuration / maxBallDrop && !isDropingBall)
+                {
+                    DropBall();
+                }
+                gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration - timeCount).ToString(@"ss");
+                timeCount += Time.deltaTime;
+            }
         }
+
+        async void DropBall()
+        {
+            isDropingBall = true;
+            var rdPos = RandomPos(ballCount % 3);
+            while (!CheckValidPos(rdPos))
+            {
+                rdPos = RandomPos(ballCount % 3);
+            }
+            var ball = ballPool[Random.Range(0, ballPool.Length)].nextThing;
+            await Task.Delay(10);
+            ball.transform.position = new Vector3(rdPos.x,rdPos.y + 15f,-10f);
+            ball.transform.DOMoveY(rdPos.y, 1f).SetEase(Ease.InOutSine)
+                .OnComplete(() =>
+                {
+                    var item = ball.GetComponent<Ball>();
+                    onDropBall?.Invoke(item);
+                    isDropingBall = false;
+                    item.shadow.SetActive(true);
+                });
+            ballCount++;
+        }
+        
+        Vector3 area1XRange = new Vector3(-9, -3);
+        Vector3 area1YRange = new Vector3(-1,1);
+        Vector3 area2XRange = new Vector3(3, 9);
+        Vector3 area2YRange = new Vector3(-1,1);
+        Vector3 area3XRange = new Vector3(-3, 3);
+        Vector3 area3YRange = new Vector3(-5,5);
+        Vector3 lastPos;
+        
+        Vector3 RandomPos(int areaIndex)
+        {
+            Vector3 pos;
+            if (areaIndex == 0)
+            {
+                pos = new Vector3(Random.Range(area1XRange.x,area1XRange.y)
+                                ,Random.Range(area1YRange.x,area1YRange.y));
+            }
+            else if (areaIndex == 1)
+            {
+                pos = new Vector3(Random.Range(area2XRange.x,area2XRange.y)
+                    ,Random.Range(area2YRange.x,area2YRange.y));
+            }
+            else
+            {
+                pos = new Vector3(Random.Range(area3XRange.x,area3XRange.y)
+                    ,Random.Range(area3YRange.x,area3YRange.y));
+            }
+
+            if (Vector3.SqrMagnitude(pos - lastPos) < objectOffset)
+            {
+                pos = new Vector3();
+            }
+            lastPos = pos;
+            return pos;
+        }
+        
+        bool CheckValidPos(Vector3 pos)
+        {
+            if (NavMesh.SamplePosition(pos, out NavMeshHit hit, 10f, NavMesh.GetAreaFromName("Not Walkable")))
+            {
+                return true;
+            }
+            return false;
+        }
+        
     }
 }
