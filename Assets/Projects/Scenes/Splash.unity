@@ -441,8 +441,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adService: 0
-  logService: 0
-  remoteConfigService: 0
+  logService: 1
+  remoteConfigService: 1
   ratingService: 0
   cloudMessagingService: 0
   iapService: 1

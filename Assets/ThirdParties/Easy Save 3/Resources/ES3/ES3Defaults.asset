@@ -37,6 +37,7 @@ MonoBehaviour:
     - spine-unity
     - MoreMountains.NiceVibrations.Demos
     - Google.Play.Core
+    - NavMeshComponents
     - Google.Play.Common
     - Purchasing.Common
     - Sirenix.OdinInspector.CompatibilityLayer
@@ -45,6 +46,7 @@ MonoBehaviour:
     - PsdPlugin
     - Sirenix.OdinInspector.CompatibilityLayer.Editor
     - spine-unity-editor
+    - NavMeshComponentsEditor
     - MoreMountains.NiceVibrations.Editor
     - spine-unity-examples-editor
     showAdvancedSettings: 1
