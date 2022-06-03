@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 439730636363633181}
   - component: {fileID: 439730636363633179}
   - component: {fileID: 439730636363633178}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ship 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &439730636363633182
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439730636363633183}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.79, y: -0.95, z: -0.95}
+  m_LocalPosition: {x: -3.79, y: -0.95, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -137,9 +137,9 @@ PolygonCollider2D:
       - {x: 1.3750105, y: 0.10390949}
       - {x: 0.87377745, y: 0.013013959}
       - {x: -0.84305394, y: 0.0111426115}
-      - {x: -1.5894156, y: -0.038345218}
-      - {x: -1.5313272, y: -0.51308846}
-      - {x: -1.4346716, y: -0.74022114}
+      - {x: -1.284708, y: 0.018787503}
+      - {x: -1.1980534, y: -0.46547794}
+      - {x: -1.1204422, y: -0.74022114}
       - {x: -0.81, y: -0.78499997}
       - {x: -0.71999997, y: -0.84499997}
       - {x: -0.71, y: -1.025}

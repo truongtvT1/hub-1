@@ -13,12 +13,12 @@ GameObject:
   - component: {fileID: 7776556565299686553}
   - component: {fileID: 7776556565299686552}
   - component: {fileID: 7776556565299686555}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Stone 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7776556565299686554
 Transform:
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7776556565299686557}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 1.97, z: 1.97}
+  m_LocalPosition: {x: -0.75, y: 1.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -131,11 +131,11 @@ PolygonCollider2D:
       - {x: 0.9417867, y: -0.20588344}
       - {x: 0.91178656, y: -0.1258837}
       - {x: 0.86883503, y: 0.029999971}
-      - {x: 0.71, y: 0.17000002}
-      - {x: -0.67411643, y: 0.16349465}
-      - {x: -1.057127, y: 0.17409712}
-      - {x: -1.0435929, y: -0.17000002}
-      - {x: -1.0259426, y: -0.33588344}
+      - {x: 0.6629319, y: 0.24060196}
+      - {x: -0.6270483, y: 0.26351434}
+      - {x: -0.80413616, y: 0.24469906}
+      - {x: -0.9141556, y: -0.14646596}
+      - {x: -0.88473845, y: -0.32999998}
       - {x: -0.61, y: -0.42}
       - {x: -0.48999998, y: -0.39999998}
       - {x: -0.42, y: -0.45}

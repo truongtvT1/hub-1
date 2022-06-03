@@ -54,7 +54,7 @@ MonoBehaviour:
     mostPlay: 0
     recentPlay: 0
     total: 0
-    win: 0
+    win: 1
     lose: 0
   - gameId: sausage_run
     name: NINJA RACE
@@ -88,7 +88,7 @@ MonoBehaviour:
       ticket: 8
       trophy: 2
     rank3:
-      ticket: 5
+      ticket: 2
       trophy: 1
     ticketToUnlock: 15
     scene: {fileID: 102900000, guid: 9972c77a4fa2c8d4db4972b7b2cbdcdb, type: 3}

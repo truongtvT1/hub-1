@@ -30,7 +30,7 @@ namespace MiniGame.Steal_Ball
         private Vector3 TargetDirection;
         private float LerpTime = 0;
         private Vector3 LastDirection;
-        private Vector3 MovementVector;
+        private Vector3 MovementVector, JoyStickVector;
         private Vector3 driftPos;
         private BallNest ballNest;
         [SerializeField] private Ball ballOnHand;
@@ -80,9 +80,8 @@ namespace MiniGame.Steal_Ball
                 {
                     return;
                 }
-
+#if UNITY_EDITOR
                 MovementVector = Vector3.zero;
-
                 if (Input.GetKey(KeyCode.UpArrow))
                 {
                     MovementVector += Vector3.up;
@@ -104,8 +103,31 @@ namespace MiniGame.Steal_Ball
                 {
                     MovementVector += Vector3.down;
                 }
-
                 MovementVector.Normalize();
+#else
+                MovementVector = Vector3.zero;
+                if (JoyStickVector.x < 0)
+                {
+                    MovementVector += Vector3.left;
+                    display.transform.localScale = new Vector3(-1, 1, 1);
+                }
+                if (JoyStickVector.x > 0)
+                {
+                    MovementVector += Vector3.right;
+                    display.transform.localScale = Vector3.one;
+                }
+
+                if (JoyStickVector.y < 0)
+                {
+                    MovementVector += Vector3.down;
+                }
+                if (JoyStickVector.y > 0)
+                {
+                    MovementVector += Vector3.up;
+                }
+                
+                MovementVector.Normalize();
+#endif
                 if (MovementVector != LastDirection)
                 {
                     LerpTime = 0;
@@ -115,15 +137,12 @@ namespace MiniGame.Steal_Ball
                 var agentDrift = 0.0001f; // minimal
                 driftPos = agentDrift * Random.insideUnitCircle;
                 MovementVector += driftPos;
-                TargetDirection = Vector3.Lerp(
-                    TargetDirection,
-                    MovementVector,
-                    Mathf.Clamp01(LerpTime * TargetLerpSpeed * (1 - Smoothing))
-                );
+                TargetDirection = Vector3.Lerp(TargetDirection
+                    , MovementVector
+                    ,LerpTime * TargetLerpSpeed * (1 - Smoothing));
                 agent.Move(TargetDirection * agent.speed * Time.deltaTime);
                 transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.y);
                 LerpTime += Time.deltaTime;
-
                 #endregion
 
                 var ball = CheckReachBall();
@@ -175,18 +194,20 @@ namespace MiniGame.Steal_Ball
         }
 
 
-        public void Init(List<string> skin, Color color, BallNest ballCollection,
+        public void Init(List<string> skin, Color color, BallNest ballCollection,int priority,
             BotDifficulty difficulty = BotDifficulty.Easy, BrainStateData brainData = null)
         {
             anim.SetSkin(skin);
             anim.SetSkinColor(color);
             ballNest = ballCollection;
             ballNest.Init(this);
+            agent.avoidancePriority -= 5 * priority;
             if (IsBot)
             {
                 brain.InitSteal(this, brainData);
                 brain.ResetBrain();
                 brain.ActiveBrain();
+                agent.autoBraking = true;
                 switch (difficulty)
                 {
                     case BotDifficulty.Easy:
@@ -210,6 +231,7 @@ namespace MiniGame.Steal_Ball
                         break;
                 }
             }
+
             StealBallGameController.onDropBall += ball =>
             {
                 if (!listBall.Contains(ball))
@@ -321,6 +343,8 @@ namespace MiniGame.Steal_Ball
 
         void GetBallToSetTarget()
         {
+            float minDistance = 1000;
+            int index = -1;
             for (int i = 0; i < listBall.Count; i++)
             {
                 if (listBall[i].state == Ball.State.Unavailable || ballNest.IsBallInNest(listBall[i]))
@@ -328,11 +352,46 @@ namespace MiniGame.Steal_Ball
                     continue;
                 }
 
-                SetBallTarget(listBall[i]);
-                break;
+                var distance = Vector3.SqrMagnitude(listBall[i].transform.position - transform.position);
+                if (minDistance >= distance)
+                {
+                    index = i;
+                    minDistance = distance;
+                }
+            }
+            if (index != -1)
+            {
+                SetBallTarget(listBall[index]);
             }
         }
 
+        public void GetOtherBallToSetTarget()
+        {
+            float minDistance = 1000;
+            int index = -1;
+            for (int i = 0; i < listBall.Count; i++)
+            {
+                if (ballTarget == listBall[i])
+                {
+                    continue;
+                }
+                if (listBall[i].state == Ball.State.Unavailable || ballNest.IsBallInNest(listBall[i]))
+                {
+                    continue;
+                }
+                var distance = Vector3.SqrMagnitude(listBall[i].transform.position - transform.position);
+                if (minDistance >= distance)
+                {
+                    index = i;
+                    minDistance = distance;
+                }
+            }
+            if (index != -1)
+            {
+                SetBallTarget(listBall[index]);
+            }
+        }
+        
         public bool HasBallToTarget()
         {
             GetBallToSetTarget();
@@ -393,5 +452,21 @@ namespace MiniGame.Steal_Ball
                 LeaderBoardInGame.scoreAction.Invoke(rankInfo);
             }
         }
+
+        #region Controller
+
+        public void TouchMove(Vector3 moveVector, bool isRelease = false)
+        {
+            if (isRelease)
+            {
+                JoyStickVector = Vector3.zero;
+            }
+            else
+            {
+                JoyStickVector = moveVector;
+            }
+        }
+
+        #endregion
     }
 }

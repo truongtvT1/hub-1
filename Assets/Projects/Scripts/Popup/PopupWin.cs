@@ -103,6 +103,17 @@ namespace Projects.Scripts.Popup
                         var rank = GamePlayController.Instance.GetPlayerInfo().rank;
                         Ranked(rank);
                     }
+                    else if (LeaderBoardInGame.Instance)
+                    {
+                        foreach (var rankInGame in LeaderBoardInGame.Instance.ListRanking)
+                        {
+                            if (!rankInGame.isBot)
+                            {
+                                Ranked(rankInGame.rank);
+                                break;
+                            }
+                        }
+                    }
                 }
                 else if (LeaderBoardInGame.Instance)
                 {
@@ -144,6 +155,8 @@ namespace Projects.Scripts.Popup
                     }
                     GameDataManager.Instance.UpdateMiniGameWinCount(info.gameId);
                 }
+                Debug.Log($"give {ticketReward} ticket");
+                Debug.Log($"give {trophyReward} trophy");
                 UpdateTicket(ticketReward);
                 UpdateTrophy(trophyReward);
             }

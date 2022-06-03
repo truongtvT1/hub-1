@@ -41,7 +41,7 @@ namespace MiniGame.StickRun
 
 
         private List<PlayerSkin> cacheBotSkin = new List<PlayerSkin>();
-        private int deadTime;
+        private int deadTime, level;
         private Transform checkPoint;
         private static StickRunGameController instance;
         private float deltaDifficulty, mapLength;
@@ -77,6 +77,16 @@ namespace MiniGame.StickRun
                 Destroy(instance.gameObject);
             }
             gameInfo = GameDataManager.Instance.miniGameData.miniGameList.Find(_ => _.gameId.Contains("run"));
+            level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
+            var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
+            for (int i = 1; i <= enumCount; i++)
+            {
+                if ((i - 1) * 3 < level && level <= i * 3)
+                {
+                    difficulty = (GameDifficulty) (i - 1);
+                    break;
+                }
+            }
             settingButton.onClick.AddListener(() =>
             {
                 InGamePopupController.Instance.ShowPopupSetting(() =>
@@ -99,6 +109,7 @@ namespace MiniGame.StickRun
         IEnumerator Init()
         {
             GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart,new Dictionary<string, object>{{"stick_run",difficulty.ToString()}});
+            
             deadTime = 0;
             var camBoundaries = ProCamera2D.Instance.GetComponent<ProCamera2DNumericBoundaries>();
             #region gen map

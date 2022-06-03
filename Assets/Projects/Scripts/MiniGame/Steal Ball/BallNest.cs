@@ -10,7 +10,7 @@ namespace MiniGame.Steal_Ball
     {
         public float subOffsetX = .5f;
         public float subOffsetY = .5f;
-        public float ballCheckInterval = .5f;
+        public float ballCheckInterval = .1f;
         [SerializeField] private PlayerStealBallController controller;
         [SerializeField] private List<Ball> listBall = new List<Ball>();
         
