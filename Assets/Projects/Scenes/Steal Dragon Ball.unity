@@ -2548,7 +2548,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 299dfca5a02d96c408bbe91f29e0e583, type: 2}
   difficulty: 0
   gameDuration: 90
-  maxBallDrop: 12
+  maxBallDrop: 30
   level: 0
 --- !u!4 &1478267025
 Transform:

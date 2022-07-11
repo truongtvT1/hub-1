@@ -13,8 +13,8 @@ namespace Projects.Scripts.Popup
 {
     public class PopupChooseMode : BasePopup
     {
-        [SerializeField] private ModeGameLauncher prefab;
-        [SerializeField] private Transform prefabContainer;
+        [SerializeField] private ModeGameLauncher modeGamePrefab;
+        [SerializeField] private Transform modeContainer;
         [SerializeField] private Button closeButton;
         [SerializeField] private List<Color> colors;
         private List<MiniGameInfo> _miniGameList;
@@ -25,18 +25,19 @@ namespace Projects.Scripts.Popup
         }
         public void Init()
         {
-            prefabContainer.RemoveAllChild();
+            _miniGameList = new List<MiniGameInfo>(GameDataManager.Instance.miniGameData.miniGameList);
+            modeContainer.RemoveAllChild();
             PrepareData();
             for (var i = 0; i < GameDataManager.Instance.miniGameData.maxGameCount; i++)
             {
                 if (i < _miniGameList.Count)
                 {
-                    var item = Instantiate(prefab, prefabContainer);
+                    var item = Instantiate(modeGamePrefab, modeContainer);
                     item.Init(colors[i],_miniGameList[i]);
                 }
                 else
                 {
-                    var item = Instantiate(prefab, prefabContainer);
+                    var item = Instantiate(modeGamePrefab, modeContainer);
                     item.Init(Color.clear);
                 }
             }
@@ -44,7 +45,6 @@ namespace Projects.Scripts.Popup
 
         private void PrepareData()
         {
-            _miniGameList = new List<MiniGameInfo>(GameDataManager.Instance.miniGameData.miniGameList);
             var lastPlayed = GameDataManager.Instance.GetLastPlayed();
             var max = 0;
             foreach (var info in _miniGameList)
@@ -59,7 +59,7 @@ namespace Projects.Scripts.Popup
 
             foreach (var info in _miniGameList)
             {
-                info.mostPlay = (max == info.total)&&max>0;
+                info.mostPlay = (max == info.total) && max>0;
             }
         }
     }

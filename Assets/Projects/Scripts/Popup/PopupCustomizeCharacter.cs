@@ -34,8 +34,8 @@ namespace Projects.Scripts.Popup
             skinList = GameDataManager.Instance.GetSkinInGame();
             color = GameDataManager.Instance.GetCurrentColor();
             UpdateCharacter();
-            skinToggle.isOn = true;
-            skinToggle.onValueChanged.Invoke(true);
+            hairToggle.isOn = true;
+            hairToggle.onValueChanged.Invoke(true);
         }
 
         public void UpdateCharacter()

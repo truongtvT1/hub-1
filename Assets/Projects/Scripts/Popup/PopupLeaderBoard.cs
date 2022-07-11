@@ -74,7 +74,7 @@ namespace Projects.Scripts.Popup
             _ranks = _ranks.OrderByDescending(_ => _.trophy).ToList();
             itemContainer.RemoveAllChild();
             var rect = scroll.content.sizeDelta;
-            rect.y = 792 + 79.2f;
+            rect.y = 772;
             scroll.content.sizeDelta = rect;
             for (var i = 0; i < _ranks.Count; i++)
             {

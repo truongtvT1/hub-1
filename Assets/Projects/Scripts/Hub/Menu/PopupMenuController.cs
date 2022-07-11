@@ -18,7 +18,7 @@ namespace Projects.Scripts.Menu
         [SerializeField] private PopupUserInfo popupUserInfo;
         [SerializeField] private PopupRule popupRule;
         [SerializeField] private PopupShop popupShop;
-        [SerializeField] private PopupChooseMode popupChooseMode;
+        // [SerializeField] private PopupChooseMode popupChooseMode;
         [SerializeField] private PopupOpenChest popupOpenChest;
         [SerializeField] private PopupReceivePack popupReceivePack;
         private PopupController _controller;
@@ -71,9 +71,9 @@ namespace Projects.Scripts.Menu
         }
         public void ShowPopupChooseMode()
         {
-            popupChooseMode.gameObject.SetActive(true);
-            popupChooseMode.Init();
-            popupChooseMode.Show(_controller);
+            // popupChooseMode.gameObject.SetActive(true);
+            // popupChooseMode.Init();
+            // popupChooseMode.Show(_controller);
         }
 
         public void ShowPopupOpenChest(List<SkinInfo> skinList,Action onClose = null)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DG.Tweening;
+using MiniGame;
 using Projects.Scripts.Hub.Component;
 using Projects.Scripts.Menu;
 using Sirenix.OdinInspector;
@@ -15,6 +16,7 @@ namespace Projects.Scripts.Popup
     public class PopupShop : BasePopup
     {
         [SerializeField, BoxGroup("UI")] private Button closeButton;
+        [SerializeField, BoxGroup("UI")] private Scrollbar scroll;
         [SerializeField, BoxGroup("Chest")] private Button ruleButton;
         [SerializeField, BoxGroup("Chest")] private List<ShopChestItem> chestItemList;
         [SerializeField, BoxGroup("Chest")] private Image chestProgress;
@@ -37,7 +39,6 @@ namespace Projects.Scripts.Popup
             {
                 ticketItem.Init(GameDataManager.Instance.shopData);
             }
-
             foreach (var chestItem in chestItemList)
             {
                 chestItem.Init(GameDataManager.Instance.shopData, this);
@@ -45,6 +46,19 @@ namespace Projects.Scripts.Popup
             foreach (var packItem in packItemList)
             {
                 packItem.Init(GameDataManager.Instance.shopData);
+            }
+
+            if (shopType == ShopType.Pack)
+            {
+                DOTween.To(() => scroll.value, value => scroll.value = value, .5f, .5f).SetEase(Ease.InSine);
+            }
+            else if (shopType == ShopType.Chest)
+            {
+                DOTween.To(() => scroll.value, value => scroll.value = value, 0f, .5f).SetEase(Ease.InSine);
+            }
+            else
+            {
+                DOTween.To(() => scroll.value, value => scroll.value = value, 1f, .5f).SetEase(Ease.InSine);
             }
         }
 

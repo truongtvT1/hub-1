@@ -154,6 +154,13 @@ namespace MiniGame.Steal_Ball
             {
                 playerSaiyan.TouchMove(Vector3.zero, true);
             });
+            for (int i = 0; i < 7; i++)
+            {
+                DropBall();
+                yield return new WaitForSeconds(0.011f);
+            }
+            ballCount = 0;
+            maxBallDrop -= 7;
             StartCoroutine(Extended.CountTime(5, 0, count =>
             {
                 timeStartText.text = TimeSpan.FromSeconds(5 - count).ToString(@"ss");

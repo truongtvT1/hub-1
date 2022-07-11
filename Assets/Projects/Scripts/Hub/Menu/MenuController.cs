@@ -2,9 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Projects.Scripts.Data;
 using Projects.Scripts.Hub;
+using Projects.Scripts.Hub.Component;
+using Projects.Scripts.Popup;
+using Sirenix.Utilities;
 using ThirdParties.Truongtv;
 using TMPro;
+using Truongtv.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +17,21 @@ namespace Projects.Scripts.Menu
 {
     public class MenuController : MonoBehaviour
     {
+        [SerializeField] private Button settingButton,
+            switchButton,
+            ticketButton,
+            noAdButton,
+            roomButton,
+            userInfoButton,
+            leaderBoardButton,
+            shopButton;
+        [SerializeField] private ParticleGold ticketEffect;
+        [SerializeField] private TextMeshProUGUI ticketText, userNameText, userTrophyText;
+        [SerializeField] private CharacterAnimationGraphic userAvatar;
+        [SerializeField] private ModeGameLauncher modeGamePrefab;
+        [SerializeField] private Transform modeContainer;
+        [SerializeField] private List<Color> modeGameColors;
+        private List<MiniGameInfo> _miniGameList;
         private static MenuController _instance;
         public static MenuController Instance => _instance;
         
@@ -22,39 +42,23 @@ namespace Projects.Scripts.Menu
             _instance = this;
         }
 
-        [SerializeField] private Button playButton,
-            settingButton,
-            switchButton,
-            specialOfferButton,
-            noAdButton,
-            roomButton,
-            userInfoButton,
-            leaderBoardButton,
-            shopButton;
-
-        [SerializeField] private CharacterAnimationGraphic mainCharacter;
-        [SerializeField] private ParticleGold ticketEffect;
-        [SerializeField] private TextMeshProUGUI ticketText, userNameText, userTrophyText;
-        [SerializeField] private CharacterAnimationGraphic userAvatar;
 
         private void Start()
         {
-            playButton.onClick.AddListener(OnPlayButtonClick);
             settingButton.onClick.AddListener(OnSettingButtonClick);
             switchButton.onClick.AddListener(OnSwitchButtonClick);
-            specialOfferButton.onClick.AddListener(OnSpecialOfferButtonClick);
+            ticketButton.onClick.AddListener(OnTicketButtonClick);
             noAdButton.onClick.AddListener(OnNoAdButtonClick);
             roomButton.onClick.AddListener(OnRoomButtonClick);
             userInfoButton.onClick.AddListener(OnUserInfoButtonClick);
             leaderBoardButton.onClick.AddListener(OnLeaderBoardButtonClick);
             shopButton.onClick.AddListener(OnShopButtonClick);
-            mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
-            mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
             ticketText.text = GameDataManager.Instance.GetTotalTicket() + "";
             userNameText.text = GameDataManager.Instance.GetUserName();
             userTrophyText.text = GameDataManager.Instance.GetTotalTrophy() + "";
             userAvatar.SetSkin(GameDataManager.Instance.GetCurrentSkin());
             userAvatar.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
+            InitModeGame();
             if (GameDataManager.Instance.IsFirstOpen())
             {
                 PopupMenuController.Instance.ShowPopupChooseMode();
@@ -67,20 +71,58 @@ namespace Projects.Scripts.Menu
             GameServiceManager.ShowBanner();
         }
 
+        public void InitModeGame()
+        {
+            _miniGameList = new List<MiniGameInfo>(GameDataManager.Instance.miniGameData.miniGameList);
+            modeContainer.RemoveAllChild();
+            PrepareData();
+            var count = GameDataManager.Instance.miniGameData.maxGameCount;
+            for (var i = 0; i < count; i++)
+            {
+                if (i < _miniGameList.Count)
+                {
+                    var item = Instantiate(modeGamePrefab, modeContainer);
+                    item.Init(modeGameColors[i],_miniGameList[i]);
+                }
+                else
+                {
+                    var item = Instantiate(modeGamePrefab, modeContainer);
+                    item.Init(Color.clear);
+                }
+            }
+        }
+
+        private void PrepareData()
+        {
+            var lastPlayed = GameDataManager.Instance.GetLastPlayed();
+            var max = 0;
+            foreach (var info in _miniGameList)
+            {
+                info.total = GameDataManager.Instance.GetMiniGameCountPlayed(info.gameId);
+                info.win = GameDataManager.Instance.GetMiniGameWinCount(info.gameId);
+                info.lose = GameDataManager.Instance.GetMiniGameLoseCount(info.gameId);
+                info.recentPlay = !lastPlayed.IsNullOrWhitespace()&&lastPlayed.Equals(info.gameId);
+                if (max < info.total)
+                    max = info.total;
+            }
+
+            foreach (var info in _miniGameList)
+            {
+                info.mostPlay = (max == info.total) && max>0;
+            }
+        }
+        
         #region Button Event
 
-        private void OnPlayButtonClick()
-        {
-            PopupMenuController.Instance.ShowPopupChooseMode();
-        }
 
         private void OnSwitchButtonClick()
         {
             PopupMenuController.Instance.ShowPopupCustomizeCharacter();
         }
 
-        private void OnSpecialOfferButtonClick()
+        private void OnTicketButtonClick()
         {
+            PopupMenuController.Instance.ShowPopupShop(ShopType.Ticket);
         }
 
         private void OnUserInfoButtonClick()
@@ -90,6 +132,7 @@ namespace Projects.Scripts.Menu
 
         private void OnNoAdButtonClick()
         {
+            PopupMenuController.Instance.ShowPopupShop(ShopType.Pack);
         }
 
         private void OnSettingButtonClick()
@@ -120,8 +163,6 @@ namespace Projects.Scripts.Menu
         
         public async void UpdateCharacter()
         {
-            mainCharacter.SetSkin(GameDataManager.Instance.GetSkinInGame());
-            mainCharacter.SetSkinColor(GameDataManager.Instance.GetCurrentColor());
             userAvatar.Freeze(false);
             userAvatar.SetSkin(GameDataManager.Instance.GetCurrentSkin());
             userAvatar.SetSkinColor(GameDataManager.Instance.GetCurrentColor());

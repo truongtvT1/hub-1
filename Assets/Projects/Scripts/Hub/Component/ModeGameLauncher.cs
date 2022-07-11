@@ -31,7 +31,7 @@ namespace Projects.Scripts.Hub.Component
             if (!GameDataManager.Instance.IsModeUnlock(_info))
             {
                 lockedObj.SetActive(true);
-                unlockText.text = $"UNLOCK WITH {_info.ticketToUnlock} TICKETS";
+                unlockText.text = $"UNLOCK WITH {_info.ticketToUnlock}";
                 canUnlock = GameDataManager.Instance.GetTotalTicket() >= _info.ticketToUnlock;
             }
             titleBg.color = color;

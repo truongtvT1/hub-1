@@ -1119,6 +1119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 3315976796197765671}
+  backGroundButton: {fileID: 0}
   trophyText: {fileID: 6185878402484718663}
   ticketText: {fileID: 6557424875031659189}
   winText: {fileID: 5900567143060246798}
@@ -6060,6 +6061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 4062542247427457651}
+  backGroundButton: {fileID: 0}
   closeButton: {fileID: 4062542247031201866}
   bgmToggle: {fileID: 4062542247619414552}
   sfxToggle: {fileID: 4062542246561062816}

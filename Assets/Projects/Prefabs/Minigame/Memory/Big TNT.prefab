@@ -48,8 +48,8 @@ MonoBehaviour:
   blowFx: {fileID: 7216313986465540388}
   waitFx: {fileID: 7661079010428305672}
   duration: 3
-  blowRadius: 2
-  force: 8
+  blowRadius: 3.5
+  force: 10
   rigidBody: {fileID: 7230113636725088403}
 --- !u!1 &3392862579189181084
 GameObject:

@@ -68,12 +68,12 @@ namespace MiniGame.Steal_Ball
         {
             if (!IsBot)
             {
-                if (GamePlayController.Instance.state == GameState.End)
+                if (GamePlayController.Instance.state != GameState.Playing)
                 {
                     anim.PlayIdle();
                     return;
                 }
-
+                
                 #region Movement
 
                 if (isForcedMove)
@@ -167,6 +167,15 @@ namespace MiniGame.Steal_Ball
             }
             else
             {
+                if (GamePlayController.Instance.state != GameState.Playing)
+                {
+                    brain.DeActiveBrain();
+                }
+                else
+                {
+                    brain.ActiveBrain();
+                }
+                
                 if (isForcedMove)
                 {
                     return;

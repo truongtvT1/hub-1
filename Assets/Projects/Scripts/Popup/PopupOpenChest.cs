@@ -26,10 +26,7 @@ namespace Projects.Scripts.Popup
                 var entry2 = graphic.AnimationState.SetAnimation(0, open, false);
                 entry2.Complete += entry3 =>
                 {
-                    graphic.AnimationState.SetAnimation(0, idle2, true).Complete+= entry1 =>
-                    {
-                        backGroundButton.onClick.AddListener(Close);
-                    };
+                    graphic.AnimationState.SetAnimation(0, idle2, true);
                     for (var i = 0; i < skinList.Count; i++)
                     {
                         chestItemList[i].gameObject.SetActive(true);
@@ -68,6 +65,7 @@ namespace Projects.Scripts.Popup
         {
             yield return new WaitForSeconds(delay);
             spark.SetActive(true);
+            backGroundButton.onClick.AddListener(Close);
         }
     }
 }
