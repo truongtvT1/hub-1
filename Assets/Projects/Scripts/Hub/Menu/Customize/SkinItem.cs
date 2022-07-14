@@ -82,6 +82,7 @@ namespace Projects.Scripts.Menu.Customize
         {
             if (value)
             {
+                SoundMenuController.Instance.PlayCustomizeSelect();
                 onItemToggle.Invoke(this);
                 
             }

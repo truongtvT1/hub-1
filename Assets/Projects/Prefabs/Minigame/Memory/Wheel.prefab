@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4821764745512240329}
   - component: {fileID: 1678799564443264683}
   - component: {fileID: 4464753080842778486}
+  - component: {fileID: 1518506083192028817}
   m_Layer: 9
   m_Name: obstacle helm
   m_TagString: Untagged
@@ -235,3 +236,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a22c4a69bfea40608e8ea94cbd256786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1518506083192028817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7941628999146869840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e909db97d4ff3dd4c8dc960c78d34f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  collideRaft: {fileID: 8300000, guid: d20cf5b7abf44664584af6566968772e, type: 3}
+  dropOnWater: {fileID: 8300000, guid: 9e9bd6b822666fd4ebf75665feb4f8e3, type: 3}

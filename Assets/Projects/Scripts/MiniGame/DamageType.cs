@@ -2,6 +2,6 @@
 {
     public enum DamageType
     {
-        Object,Water,Fire,Enemy
+        Object,Water,AxeBlade,Blade,SmashHammer,Spike,WoodBoard,Enemy
     }
 }

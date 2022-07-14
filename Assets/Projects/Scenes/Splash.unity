@@ -440,7 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9150f2bc1bf84a4a8ef6596cacc6dac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adService: 0
+  adService: 1
   logService: 1
   remoteConfigService: 1
   ratingService: 0
@@ -737,7 +737,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: -1809605999
   m_SortingOrder: 0
   m_TargetDisplay: 0

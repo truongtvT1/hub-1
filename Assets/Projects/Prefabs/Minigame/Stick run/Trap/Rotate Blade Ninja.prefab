@@ -538,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 2
   checkPoint: {fileID: 3014222947643105716}
 --- !u!114 &3014222948204820341
 MonoBehaviour:

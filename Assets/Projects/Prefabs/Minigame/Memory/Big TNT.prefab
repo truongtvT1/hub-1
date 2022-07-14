@@ -51,6 +51,7 @@ MonoBehaviour:
   blowRadius: 3.5
   force: 10
   rigidBody: {fileID: 7230113636725088403}
+  blowSound: {fileID: 8300000, guid: 833de248f57029b42bb1ae89253869ae, type: 3}
 --- !u!1 &3392862579189181084
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +64,7 @@ GameObject:
   - component: {fileID: 930565489528704746}
   - component: {fileID: 7230113636725088403}
   - component: {fileID: 7404303321932587848}
+  - component: {fileID: 8415807632228300112}
   m_Layer: 9
   m_Name: obstacle tnt 2
   m_TagString: Untagged
@@ -197,6 +199,26 @@ PolygonCollider2D:
       - {x: 0.28, y: -0.47}
       - {x: 0.39, y: -0.39999998}
       - {x: 0.48, y: -0.32999998}
+--- !u!114 &8415807632228300112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392862579189181084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e909db97d4ff3dd4c8dc960c78d34f55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  waterLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  collideRaft: {fileID: 8300000, guid: fd009e60f01b92b4187d85221fb23016, type: 3}
+  dropOnWater: {fileID: 0}
 --- !u!1001 &7216313986480383378
 PrefabInstance:
   m_ObjectHideFlags: 0

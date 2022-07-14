@@ -48,7 +48,7 @@ namespace MiniGame.SquidGame
         public List<SquidPlayer> listNPC;
         public AudioSource audio;
         public AudioMixerGroup pitchBend;
-        public AudioClip greenLightSound, redLightSound;
+        public AudioClip greenLightSound, redLightSound, fireBallHitSound, winSound;
         private bool isHoldingMove, canKillBall;
         private float gameTimeCount, backUpPitchShift, progressImageWitdh;
         private int level;
@@ -83,7 +83,6 @@ namespace MiniGame.SquidGame
             backUpPitchShift = pitchBendValue;
             cacheColor = greenProgress.color;
             progressImageWitdh = greenProgress.GetComponent<RectTransform>().rect.width;
-            maxMeteorPerTurn = (int) difficulty;
         }
 
         private void OnDestroy()
@@ -94,7 +93,7 @@ namespace MiniGame.SquidGame
 
         protected override void Start()
         {
-            
+            SoundManager.Instance.Pause(true);
             level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
             var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
             for (int i = 1; i <= enumCount; i++)
@@ -105,7 +104,9 @@ namespace MiniGame.SquidGame
                     break;
                 }
             } 
+            difficulty = GameDifficulty.Hard;
             difficultyDelta = (float) difficulty / 10;
+            maxMeteorPerTurn = (int) difficulty;
             StartCoroutine(Init());
             GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart, new Dictionary<string, object> {{"red_line", difficulty.ToString()}});
         }
@@ -220,6 +221,7 @@ namespace MiniGame.SquidGame
                     shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
                     shot.transform.DOMove(item.anim.transform.position, shootSpeed).SetSpeedBased(true).OnComplete(() =>
                     {
+                        SoundManager.Instance.PlaySfx(fireBallHitSound);
                         item.Kill();
                         Destroy(shot.gameObject);
                     });
@@ -231,6 +233,7 @@ namespace MiniGame.SquidGame
                     shot.transform.position = animStaff1.transform.GetChild(0).transform.position;
                     shot.transform.DOMove(playerAnimation.transform.position, 15f).SetSpeedBased(true).OnComplete(() =>
                     {
+                        SoundManager.Instance.PlaySfx(fireBallHitSound);
                         KillBall();
                         Destroy(shot.gameObject);
                     });
@@ -466,6 +469,7 @@ namespace MiniGame.SquidGame
         {
             StopAllCoroutines();
             state = GameState.End;
+            SoundManager.Instance.PlaySfx(winSound);
             animBoss.state.SetAnimation(0, idle, true);
             warningSprite.GetComponent<DOTweenAnimation>().DOKill(true);
             playerTransform.DOMoveX(end.position.x, moveSpeed)

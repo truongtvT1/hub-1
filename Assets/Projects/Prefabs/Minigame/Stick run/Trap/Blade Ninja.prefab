@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5496329116825267185}
   - component: {fileID: 5496329116825267186}
   - component: {fileID: 5496329116825267198}
+  - component: {fileID: 7888654743106574451}
   m_Layer: 0
   m_Name: Spine GameObject (ninja_blade2)
   m_TagString: Untagged
@@ -142,6 +143,102 @@ MonoBehaviour:
   partsRenderers:
   - {fileID: 5496329117192520611}
   - {fileID: 5496329117351053132}
+--- !u!82 &7888654743106574451
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5496329116825267187}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4566298310696162521, guid: f674713ff81f8594a8f315efef4371ec, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 7
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5496329117074905455
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +334,19 @@ MonoBehaviour:
   line: {fileID: 0}
   onStartAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5496329117132666600}
+        m_TargetAssemblyTypeName: MiniGame.StickRun.Ninja, Assembly-CSharp
+        m_MethodName: PlayAttackSound
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -247,6 +356,8 @@ MonoBehaviour:
   onIdleComplete:
     m_PersistentCalls:
       m_Calls: []
+  attackSound: {fileID: 8300000, guid: 7ba6bed156ec471479cccc7b7a5373f8, type: 3}
+  audioSource: {fileID: 7888654743106574451}
   flyBackAnim: fly_back
   bladeGhost: {fileID: 0}
 --- !u!61 &6150651779443724562
@@ -510,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 3
   checkPoint: {fileID: 5496329117996637535}
 --- !u!114 &5496329117351053131
 MonoBehaviour:

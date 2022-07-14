@@ -32,6 +32,7 @@ namespace Projects.Scripts.Menu
             _toggle.onValueChanged.AddListener(value=>{
                 if (value)
                 {
+                    SoundMenuController.Instance.PlayCustomizeSelect();
                     onColorSelected.Invoke(this);
                 }
             });

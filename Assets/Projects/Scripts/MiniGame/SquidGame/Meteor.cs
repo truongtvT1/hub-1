@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 
 namespace MiniGame.SquidGame
@@ -9,7 +10,7 @@ namespace MiniGame.SquidGame
         public GameObject effectGround, warning, meteor,trigger;
         public ParticleSystem bloomFx;
         public SpriteRenderer effectBlow;
-
+        public AudioClip impactGroundSound;
         public void Init(float y)
         {
             var spriteRenderer = meteor.GetComponent<SpriteRenderer>();
@@ -68,6 +69,7 @@ namespace MiniGame.SquidGame
             meteor.SetActive(true);
             tween.TogglePause();
             yield return new DOTweenCYInstruction.WaitForCompletion(meteor.GetComponent<DOTweenAnimation>().tween);
+            SoundManager.Instance.PlaySfx(impactGroundSound);
             bloomFx.gameObject.SetActive(true);
             effectBlow.gameObject.SetActive(false);
             effectGround.SetActive(true);

@@ -203,7 +203,7 @@ MonoBehaviour:
   layerToCast:
     serializedVersion: 2
     m_Bits: 8
-  damageType: 0
+  damageType: 1
   checkPoint: {fileID: 8373067668161842350}
   splashFXPrefab: {fileID: 11408854, guid: 99718ad3a57eb15449a485092fed8b1f, type: 3}
   SplashFXOffset: 0.2

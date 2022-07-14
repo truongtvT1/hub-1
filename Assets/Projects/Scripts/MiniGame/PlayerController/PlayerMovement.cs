@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Sirenix.OdinInspector;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Animation = Spine.Animation;
@@ -39,6 +40,8 @@ namespace MiniGame
 
         [SerializeField, FoldoutGroup("Check")] private float JumpCoyoteTime, jumpBufferTime;
 
+        [SerializeField, FoldoutGroup("Effect")]
+        private AudioClip landingSound;
         [SerializeField, FoldoutGroup("Effect")]
         private GameObject shadow;
         [SerializeField, FoldoutGroup("Effect")] private GameObject landingEffect, moveEffect;
@@ -96,6 +99,7 @@ namespace MiniGame
                 
                 if (lastGroundedTime<0f)
                 {
+                    SoundManager.Instance.PlaySfx(landingSound);
                     var obj = Instantiate(landingEffect);
                     obj.transform.SetParent(transform.parent);
                     obj.transform.localPosition = transform.localPosition + new Vector3(0, -0.67f, 0f);

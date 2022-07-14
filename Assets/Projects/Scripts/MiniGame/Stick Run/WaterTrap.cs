@@ -16,7 +16,7 @@ namespace MiniGame.StickRun
         public Vector2 boxCastSize;
         public Pool handPool;
         public LayerMask layerToCast;
-        public DamageType damageType;
+        public DamageType damageType = DamageType.Water;
         public Transform checkPoint;
         public Water2DSplashFX splashFXPrefab;
         public float SplashFXOffset = 0.2f;
@@ -168,9 +168,8 @@ namespace MiniGame.StickRun
                 {
                     var splash = _splashCache[_splash];
                     splash.transform.position = new Vector3(player.transform.position.x, player.transform.position.y - SplashFXOffset,100);
-                    splash.Play(2.5f, SplashFXSounds[Random.Range(0, SplashFXSounds.Length)], 5 * SplashFXPowerToVolume, SplashFXPowerToPitch / 5);
+                    splash.Play(2.5f, SplashFXSounds[Random.Range(0, SplashFXSounds.Length)], SplashFXPowerToVolume, SplashFXPowerToPitch / 5);
                     _splash = (_splash + 1) % _splashCache.Length;
-
                     player.Die(damageType, checkPoint, player.transform.position + new Vector3(0, -4f));
                 }
             };

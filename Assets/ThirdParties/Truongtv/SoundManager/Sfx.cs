@@ -14,5 +14,15 @@ namespace ThirdParties.Truongtv.SoundManager
             }
             PlayOnceShot(clip,delay,complete);
         }
+
+        public AudioClip GetAudioClip()
+        {
+            return AudioSource.clip;
+        }
+        
+        public bool IsLoop()
+        {
+            return AudioSource.loop;
+        }
     }
 }

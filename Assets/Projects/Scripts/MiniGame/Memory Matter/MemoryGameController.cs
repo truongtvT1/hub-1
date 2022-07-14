@@ -9,6 +9,7 @@ using RandomNameAndCountry.Scripts;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using ThirdParties.Truongtv.SoundManager;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,7 +41,7 @@ namespace MiniGame.MemoryMatter
         [SerializeField] private int maxTurn, maxRound, maxNumberObjToShowPerTurn;
         [SerializeField] private TextMeshProUGUI timeInGameText, timeCounterText;
         [SerializeField] private float timeToStart;
-        
+        [SerializeField] private AudioClip warningTrap, warningChosenFruit;
         private int currentRound = 0, currentTurn = 0, indexObj;
         private bool isShowing, isHiding, isObjFalling;
         private float timeCounter;
@@ -81,6 +82,7 @@ namespace MiniGame.MemoryMatter
 
         private async void Start()
         {
+            SoundInGameController.Instance.PlayMemoryBGM();
             level = GameDataManager.Instance.GetMiniGameMasterPoint(gameInfo.gameId);
             var enumCount = Enum.GetValues(typeof(GameDifficulty)).Length;
             for (int i = 1; i <= enumCount; i++)
@@ -219,6 +221,7 @@ namespace MiniGame.MemoryMatter
             {
                 //Show popup Game over
                 _gamePlayController.state = GameState.End;
+                SoundManager.Instance.StopBgm();
                 DOTween.KillAll(true);
                 StopAllCoroutines();
                 await Task.Delay(2500);
@@ -391,6 +394,7 @@ namespace MiniGame.MemoryMatter
 
             var showDuration = Mathf.RoundToInt(cacheShowDuration * (1 - deltaDifficulty) + 1f);
             StopAllCoroutines();
+            SoundManager.Instance.PlaySfx(warningChosenFruit);
             StartCoroutine(CountTime(showDuration, 0.5f, f =>
             {
                 timeCounterText.text = "" + (int) (showDuration - f);
@@ -430,6 +434,7 @@ namespace MiniGame.MemoryMatter
             var warning = warningPool.nextThing;
             warning.transform.position = new Vector3(pos,warningPool.transform.position.y);
             objCount++;
+            // SoundManager.Instance.PlaySfx(warningTrap);
             await Task.Delay(500);
             var item = trapPool[Random.Range(0,trapPool.Length)].nextThing;
             item.SetActive(false);

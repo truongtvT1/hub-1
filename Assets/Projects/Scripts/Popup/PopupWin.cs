@@ -4,6 +4,7 @@ using DG.Tweening;
 using MiniGame;
 using Projects.Scripts.Data;
 using Projects.Scripts.Hub;
+using Projects.Scripts.Menu;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
 using TMPro;
@@ -138,6 +139,7 @@ namespace Projects.Scripts.Popup
                 }
                 else
                 {
+                    SoundInGameController.Instance.PlayWin();
                     if (rank == 1)
                     {
                         ticketReward = info.rank1.ticket;
@@ -163,6 +165,10 @@ namespace Projects.Scripts.Popup
             
             var startPos = -394f;
             finger.DOLocalMoveX(startPos, bonusDuration)
+                .OnStart(() =>
+                {
+                    SoundInGameController.Instance.PlayRewardBonus();
+                })
                 .SetLoops(-1, LoopType.Yoyo)
                 .SetEase(Ease.InOutSine)
                 .OnUpdate(() =>
@@ -190,6 +196,10 @@ namespace Projects.Scripts.Popup
                     {
                         xValue = 2;
                     }
+                })
+                .OnKill(() =>
+                {
+                    SoundInGameController.Instance.StopRewardBonusSfx();
                 });
             currentTicket = GameDataManager.Instance.GetTotalTicket();
             currentTrophy = GameDataManager.Instance.GetTotalTrophy();
@@ -223,12 +233,8 @@ namespace Projects.Scripts.Popup
                 
                 Debug.Log("xValue = " + xValue);
                 UpdateTicket(ticketReward * (xValue - 1));
-
-                await Task.Delay(2000);
-                GameDataManager.Instance.ResetSkinInGame();
-                Close();
-                Loading.Instance.LoadMenu();
             });
+            
         }
         
         

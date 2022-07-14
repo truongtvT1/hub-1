@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 
 namespace MiniGame.MemoryMatter
@@ -9,18 +10,18 @@ namespace MiniGame.MemoryMatter
         public ParticleSystem blowFx, waitFx;
         public float duration, blowRadius, force;
         public Rigidbody2D rigidBody;
-
+        public AudioClip blowSound;
         private void OnEnable()
         {
             StartCoroutine(Boom());
         }
-
         IEnumerator Boom()
         {
             rigidBody.gameObject.SetActive(true);
             blowFx.gameObject.SetActive(false);
             waitFx.gameObject.SetActive(true);
             yield return new WaitForSeconds(duration);
+            SoundManager.Instance.PlaySfx(blowSound);
             waitFx.gameObject.SetActive(false);
             blowFx.gameObject.SetActive(true);
             rigidBody.gameObject.SetActive(false);
@@ -40,7 +41,6 @@ namespace MiniGame.MemoryMatter
                     {
                         var player = hit[i].transform.GetComponent<PlayerMovement>();
                         Vector2 vForce = player.transform.position - rigidBody.transform.position;
-                        Debug.Log("vForce magnitude " + player.name + " " + vForce.normalized * force / Mathf.Sqrt(vForce.sqrMagnitude));
                         player.SetForce(vForce * force / Mathf.Sqrt(vForce.sqrMagnitude), true);
                     }
                     else

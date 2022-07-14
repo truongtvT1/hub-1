@@ -4625,6 +4625,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94e8137a5fe3e9b47b201fca5b89d356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bgmMain: {fileID: 8300000, guid: 167e541ee30a362428eb9b9754993dd4, type: 3}
+  openChest: {fileID: 8300000, guid: 5f517197dc1788d4b8406b9e95befcfa, type: 3}
+  itemShow: {fileID: 8300000, guid: d54a6ad50f6f50f4191c7d74094c93c0, type: 3}
+  itemsShow: {fileID: 8300000, guid: 77ab7749e83bcf045bb344958d9da975, type: 3}
+  customizeClick: {fileID: 8300000, guid: 8d355405019e50b429fe04279e76990d, type: 3}
+  rewardBonus: {fileID: 8300000, guid: ccc77101c3d18564c8a15adffa086eeb, type: 3}
+  unlock: {fileID: 0}
 --- !u!114 &1794036828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4644,9 +4651,9 @@ MonoBehaviour:
   - {fileID: 1415660291}
   - {fileID: 167103728}
   - {fileID: 1385787055}
-  buttonSound: {fileID: 0}
-  popupOpenSound: {fileID: 0}
-  popupCloseSound: {fileID: 0}
+  buttonSound: {fileID: 8300000, guid: ea05dbf0fa164374ca0508c8113814ae, type: 3}
+  popupOpenSound: {fileID: 8300000, guid: 1fca3399d7efaf442adcfa4b5e7f1b31, type: 3}
+  popupCloseSound: {fileID: 8300000, guid: 790eda6382bba154d8f01d182fa951d5, type: 3}
   mixer: {fileID: 24100000, guid: f674713ff81f8594a8f315efef4371ec, type: 2}
 --- !u!4 &1794036829
 Transform:

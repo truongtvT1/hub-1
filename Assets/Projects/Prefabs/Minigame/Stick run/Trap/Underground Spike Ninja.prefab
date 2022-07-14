@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5313510204820187877}
   - component: {fileID: 5313510204820187899}
   - component: {fileID: 8490010627256415131}
+  - component: {fileID: 5204670487602905059}
   m_Layer: 9
   m_Name: Underground Spike Ninja
   m_TagString: Untagged
@@ -64,7 +65,19 @@ MonoBehaviour:
   line: {fileID: 0}
   onStartAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5313510204820187877}
+        m_TargetAssemblyTypeName: MiniGame.StickRun.Ninja, Assembly-CSharp
+        m_MethodName: PlayAttackSound
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackComplete:
     m_PersistentCalls:
       m_Calls: []
@@ -98,6 +111,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  attackSound: {fileID: 8300000, guid: 046ad43ae01732a4ba7370d5e5a09df0, type: 3}
+  audioSource: {fileID: 5204670487602905059}
 --- !u!114 &5313510204820187899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +156,102 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 7.09}
   m_EdgeRadius: 0
+--- !u!82 &5204670487602905059
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5313510204820187876}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4566298310696162521, guid: f674713ff81f8594a8f315efef4371ec, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 7
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5313510204821911889
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +371,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5313510204845970932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0696, y: -2.192, z: 0}
-  m_LocalScale: {x: 12.679321, y: 10.337184, z: 1}
+  m_LocalPosition: {x: -0.22, y: -1.95, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5313510205265906198}
   m_RootOrder: 3
@@ -306,8 +417,8 @@ SpriteMask:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 718074e4e56a5404e824bf8e6571ea7d, type: 3}
-  m_MaskAlphaCutoff: 0.2
+  m_Sprite: {fileID: 21300000, guid: 9bd1d79cacd6c7645bb8a951691d71ff, type: 3}
+  m_MaskAlphaCutoff: 0.202
   m_FrontSortingLayerID: 0
   m_BackSortingLayerID: 0
   m_FrontSortingLayer: 0
@@ -443,7 +554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 5
   checkPoint: {fileID: 5313510205982109221}
 --- !u!114 &5313510204870490499
 MonoBehaviour:
@@ -884,7 +995,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 5
   checkPoint: {fileID: 5313510205982109221}
 --- !u!114 &5313510205429755588
 MonoBehaviour:
@@ -1174,7 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 5
   checkPoint: {fileID: 5313510205982109221}
 --- !u!114 &5313510205802104965
 MonoBehaviour:
@@ -1366,7 +1477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b53b64d901f4a548d296816d860d326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 0
+  damageType: 5
   checkPoint: {fileID: 5313510205982109221}
 --- !u!114 &5313510206211259772
 MonoBehaviour:

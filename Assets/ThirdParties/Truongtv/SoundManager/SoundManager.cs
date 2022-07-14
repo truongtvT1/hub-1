@@ -61,6 +61,18 @@ namespace ThirdParties.Truongtv.SoundManager
             simple.Play(clip, isLoop,delay,onComplete);
         }
 
+        public void StopLoopSfx(AudioClip clip)
+        {
+            int count = sfxList.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (sfxList[i].IsLoop() && sfxList[i].GetAudioClip() == clip)
+                {
+                    sfxList[i].Stop();
+                }
+            }
+        }
+        
         public void PlayBgm(AudioClip clip)
         {
             if(!Bgm.Instance.IsPlaying())
@@ -73,6 +85,13 @@ namespace ThirdParties.Truongtv.SoundManager
                     Bgm.Instance.Play(clip);
             }
         }
+
+        public void StopBgm()
+        {
+            if(Bgm.Instance.IsPlaying())
+                Bgm.Instance.Stop();
+        }
+
         public void Pause(bool isPause)
         {
             if (isPause)

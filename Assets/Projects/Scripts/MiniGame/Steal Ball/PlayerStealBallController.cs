@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MoreMountains.Tools;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -24,7 +25,10 @@ namespace MiniGame.Steal_Ball
         [SerializeField] private float TargetLerpSpeed = 1;
         [SerializeField] private List<Ball> listBall = new List<Ball>();
         [SerializeField] private bool isHoldingBall, isMoving, isReachTarget, isForcedMove;
+        [SerializeField] private Ball ballOnHand;
 
+        [SerializeField, FoldoutGroup("Sound")] private AudioClip takeBallSound;
+        [SerializeField, FoldoutGroup("Sound")] private AudioClip releaseBallSound;
         private AIBrain brain;
         private NavMeshAgent agent;
         private Vector3 TargetDirection;
@@ -33,7 +37,6 @@ namespace MiniGame.Steal_Ball
         private Vector3 MovementVector, JoyStickVector;
         private Vector3 driftPos;
         private BallNest ballNest;
-        [SerializeField] private Ball ballOnHand;
         private RankIngame rankInfo;
         private const float minEasyTime = 1f;
         private const float minNormalTime = 0.5f;
@@ -315,6 +318,7 @@ namespace MiniGame.Steal_Ball
 
         public void TakeBall(Ball ball)
         {
+            SoundManager.Instance.PlaySfx(takeBallSound);
             isHoldingBall = true;
             ballOnHand = ball;
             anim.PlayStealBall();
@@ -327,6 +331,7 @@ namespace MiniGame.Steal_Ball
         public void ReleaseBall()
         {
             //release ball
+            SoundManager.Instance.PlaySfx(releaseBallSound);
             anim.ClearTrack(1);
             ballOnHand.Release();
             ballNest.OnBallRelease(ballOnHand);

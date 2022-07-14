@@ -9,6 +9,7 @@ using Projects.Scripts.Hub;
 using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -108,6 +109,7 @@ namespace MiniGame.StickRun
 
         IEnumerator Init()
         {
+            SoundInGameController.Instance.PlayStickBGM();
             GameServiceManager.LogEvent(GameServiceManager.eventConfig.levelStart,new Dictionary<string, object>{{"stick_run",difficulty.ToString()}});
             
             deadTime = 0;
@@ -127,7 +129,7 @@ namespace MiniGame.StickRun
                     {
                         var trap = trapPoolEasy[Random.Range(0, trapPoolEasy.Length)].nextThing;
                         yield return new WaitUntil(() => trap);
-                        if (lastObj != null){
+                        if (lastObj != null && trap != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
                                 || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
@@ -137,15 +139,21 @@ namespace MiniGame.StickRun
                                 continue;
                             }
                         }
-                        lastObj = trap;
-                        Debug.Log($"pos object {count} : {pos}");
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
-                        if (trap.TryGetComponent(out AutoMoving movingItem))
+
+                        if (trap != null)
                         {
-                            movingItem.UpdateListPoint();
+                            lastObj = trap;
+                            Debug.Log($"pos object {count} : {pos}");
+                            trap.transform.position =
+                                new Vector3(pos, trap.transform.position.y, trap.transform.position.z);
+                            if (trap.TryGetComponent(out AutoMoving movingItem))
+                            {
+                                movingItem.UpdateListPoint();
+                            }
+
+                            pos += OBJECT_AVGWIDTH + EASY_MAPLENGTH / EASY_OBJECT_AMOUNT + Random.Range(-delta, delta);
+                            count++;
                         }
-                        pos += OBJECT_AVGWIDTH + EASY_MAPLENGTH/EASY_OBJECT_AMOUNT + Random.Range(-delta, delta);
-                        count++;
                     }
                     break;
                 case GameDifficulty.Normal: 
@@ -155,8 +163,8 @@ namespace MiniGame.StickRun
                     {
                         var trap = trapPoolNormal[Random.Range(0, trapPoolNormal.Length)].nextThing;
                         yield return new WaitUntil(() => trap);
-                        if (lastObj != null){
-                            if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
+                        if (lastObj != null && trap != null){
+                            if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja")
                             || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
                             || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
                             || lastObj.name.Equals(trap.name))
@@ -165,15 +173,18 @@ namespace MiniGame.StickRun
                                 continue;
                             }
                         }
-                        lastObj = trap;
-                        Debug.Log($"pos object {count} : {pos}");
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
-                        if (trap.TryGetComponent(out AutoMoving movingItem))
+                        if (trap != null)
                         {
-                            movingItem.UpdateListPoint();
+                            lastObj = trap;
+                            Debug.Log($"pos object {count} : {pos}");
+                            trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
+                            if (trap.TryGetComponent(out AutoMoving movingItem))
+                            {
+                                movingItem.UpdateListPoint();
+                            }
+                            pos += OBJECT_AVGWIDTH + NORMAL_MAPLENGTH/NORMAL_OBJECT_AMOUNT + Random.Range(-delta, delta);
+                            count++;
                         }
-                        pos += OBJECT_AVGWIDTH + NORMAL_MAPLENGTH/NORMAL_OBJECT_AMOUNT + Random.Range(-delta, delta);
-                        count++;
                     }
                     break;
                 case GameDifficulty.Hard: 
@@ -183,7 +194,7 @@ namespace MiniGame.StickRun
                     {
                         var trap = trapPoolHard[Random.Range(0, trapPoolHard.Length)].nextThing;
                         yield return new WaitUntil(() => trap);
-                        if (lastObj != null){
+                        if (lastObj != null && trap != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
                                 || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
@@ -193,14 +204,20 @@ namespace MiniGame.StickRun
                                 continue;
                             }
                         }
-                        lastObj = trap;
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
-                        if (trap.TryGetComponent(out AutoMoving movingItem))
+
+                        if (trap != null)
                         {
-                            movingItem.UpdateListPoint();
+                            lastObj = trap;
+                            trap.transform.position =
+                                new Vector3(pos, trap.transform.position.y, trap.transform.position.z);
+                            if (trap.TryGetComponent(out AutoMoving movingItem))
+                            {
+                                movingItem.UpdateListPoint();
+                            }
+
+                            pos += OBJECT_AVGWIDTH + HARD_MAPLENGTH / HARD_OBJECT_AMOUNT + Random.Range(-delta, delta);
+                            count++;
                         }
-                        pos += OBJECT_AVGWIDTH + HARD_MAPLENGTH/HARD_OBJECT_AMOUNT + Random.Range(-delta, delta);
-                        count++;
                     }
                     break;
                 case GameDifficulty.Hell: 
@@ -210,7 +227,7 @@ namespace MiniGame.StickRun
                     {
                         var trap = trapPoolHell[Random.Range(0, trapPoolHell.Length)].nextThing;
                         yield return new WaitUntil(() => trap);
-                        if (lastObj != null){
+                        if (lastObj != null && trap != null){
                             if (lastObj.name.Contains("Wood Ninja") && trap.name.Contains("Wood Ninja") 
                                 || lastObj.name.Contains("Underground") && trap.name.Contains("Underground") 
                                 || lastObj.name.Contains("Roll") && trap.name.Contains("Roll")
@@ -220,14 +237,20 @@ namespace MiniGame.StickRun
                                 continue;
                             }
                         }
-                        lastObj = trap;
-                        trap.transform.position = new Vector3(pos, trap.transform.position.y,trap.transform.position.z);
-                        if (trap.TryGetComponent(out AutoMoving movingItem))
+
+                        if (trap != null)
                         {
-                            movingItem.UpdateListPoint();
+                            lastObj = trap;
+                            trap.transform.position =
+                                new Vector3(pos, trap.transform.position.y, trap.transform.position.z);
+                            if (trap.TryGetComponent(out AutoMoving movingItem))
+                            {
+                                movingItem.UpdateListPoint();
+                            }
+
+                            pos += OBJECT_AVGWIDTH + HELL_MAPLENGTH / HELL_OBJECT_AMOUNT + Random.Range(-delta, delta);
+                            count++;
                         }
-                        pos += OBJECT_AVGWIDTH + HELL_MAPLENGTH/HELL_OBJECT_AMOUNT + Random.Range(-delta, delta);
-                        count++;
                     }
                     break;
             }
@@ -303,6 +326,7 @@ namespace MiniGame.StickRun
         public async void Win()
         {
             state = GameState.End;
+            SoundManager.Instance.StopBgm();
             await Task.Delay(2000);
             camera.SetActive(false);
             InGamePopupController.Instance.ShowPopupWin(gameInfo);
@@ -311,6 +335,7 @@ namespace MiniGame.StickRun
         public void EndGame()
         {
             state = GameState.End;
+            SoundManager.Instance.StopBgm();
             LeaderBoardInGame.Instance.OnMainPlayerDie(playerStickman.GetRankInfo());
             LeaderBoardInGame.Instance.UpdateBoard();
             camera.SetActive(false);

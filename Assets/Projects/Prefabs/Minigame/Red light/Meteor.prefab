@@ -302,6 +302,7 @@ MonoBehaviour:
   trigger: {fileID: 3674623097337516636}
   bloomFx: {fileID: 382458772374219974}
   effectBlow: {fileID: 3674623096230974809}
+  impactGroundSound: {fileID: 8300000, guid: 09ea5a0fc00838b4493acff3b1b4059e, type: 3}
 --- !u!1 &3674623096564069159
 GameObject:
   m_ObjectHideFlags: 0

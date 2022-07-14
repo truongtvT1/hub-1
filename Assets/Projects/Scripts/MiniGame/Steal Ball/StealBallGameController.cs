@@ -8,6 +8,7 @@ using Projects.Scripts.Data;
 using RandomNameAndCountry.Scripts;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using ThirdParties.Truongtv.SoundManager;
 using TMPro;
 using Truongtv.Utilities;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace MiniGame.Steal_Ball
         [FoldoutGroup("GamePlay"), SerializeField] private GameDifficulty difficulty;
         [FoldoutGroup("GamePlay"), SerializeField] private float gameDuration;
         [FoldoutGroup("GamePlay"), SerializeField] private int maxBallDrop, level;
+        [FoldoutGroup("Sound"), SerializeField] private AudioClip dropBallSound;
+        [FoldoutGroup("Sound"), SerializeField] private AudioClip timeUp;
         public static Action<Ball> onDropBall;
         
         private float timeCount;
@@ -76,6 +79,7 @@ namespace MiniGame.Steal_Ball
 
         IEnumerator Init()
         {
+            SoundInGameController.Instance.PlayStealBGM();
             gameTimeCountText.text = TimeSpan.FromSeconds(gameDuration).ToString(@"mm\:ss");
             //generate map
             surface2D.BuildNavMesh();
@@ -177,6 +181,11 @@ namespace MiniGame.Steal_Ball
         {
             if (state == GameState.Playing)
             {
+                if (timeCount >= gameDuration - 6)
+                {
+                    SoundManager.Instance.StopBgm();
+                }
+                
                 if (timeCount >= gameDuration)
                 {
                     EndGame();
@@ -194,6 +203,7 @@ namespace MiniGame.Steal_Ball
         private async void EndGame()
         {
             state = GameState.End;
+            SoundManager.Instance.PlaySfx(timeUp);
             timeStartText.text = "TIME OVER!";
             timeStartText.gameObject.SetActive(true);
             LeaderBoardInGame.Instance.UpdateBoard();
@@ -214,6 +224,7 @@ namespace MiniGame.Steal_Ball
             ball.transform.DOMoveY(rdPos.y, 1f).SetEase(Ease.InSine)
                 .OnComplete(() =>
                 {
+                    SoundManager.Instance.PlaySfx(dropBallSound);
                     isDropingBall = false;
                     var item = ball.GetComponent<Ball>();
                     item.shadow.SetActive(true);
@@ -285,7 +296,6 @@ namespace MiniGame.Steal_Ball
                     valid = true;
                 }
             }
-            Debug.Log("new random pos " + pos);
             return pos;
         }
         

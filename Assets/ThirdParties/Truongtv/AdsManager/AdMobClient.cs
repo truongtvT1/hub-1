@@ -20,12 +20,12 @@ namespace ThirdParties.Truongtv.AdsManager
 {
     public class AdMobClient : IAdClient
     {
-        private const string InterstitialAdAndroidId = "ca-app-pub-9179752697212712/8978277136";
-        private const string InterstitialAdIosId = "ca-app-pub-9179752697212712/1797994375";
-        private const string RewardedAdAndroidId = "ca-app-pub-9179752697212712/2550924994";
-        private const string RewardedAdIosId = "ca-app-pub-9179752697212712/2664353483";
-        private const string BannerAdAndroidId = "ca-app-pub-9179752697212712/1806364127";
-        private const string BannerAdIosId = "ca-app-pub-9179752697212712/3111076047";
+        private const string InterstitialAdAndroidId = "ca-app-pub-9179752697212712/9036393906";
+        private const string InterstitialAdIosId = "ca-app-pub-9179752697212712/5229559578";
+        private const string RewardedAdAndroidId = "ca-app-pub-9179752697212712/1673457946";
+        private const string RewardedAdIosId = "ca-app-pub-9179752697212712/2603396235";
+        private const string BannerAdAndroidId = "ca-app-pub-9179752697212712/6170272006";
+        private const string BannerAdIosId = "ca-app-pub-9179752697212712/6204015307";
         private InterstitialAd _interstitialAd;
         private RewardedAd _rewardedAd;
         private BannerView bannerView;

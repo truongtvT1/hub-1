@@ -184,6 +184,7 @@ MonoBehaviour:
   ballRadius: 0.45
   JumpCoyoteTime: 0.2
   jumpBufferTime: 0.1
+  landingSound: {fileID: 8300000, guid: 2b06384a5b8114c488fe46c37024fb0b, type: 3}
   shadow: {fileID: 6836090009422560563}
   landingEffect: {fileID: 8857989155088102060, guid: 953bbf53c3fde9549a95894189ee9e8b, type: 3}
   moveEffect: {fileID: 0}

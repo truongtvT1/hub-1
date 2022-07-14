@@ -14,6 +14,7 @@ namespace MiniGame.StickRun
             currentEntry = anim.state.SetAnimation(0, prepareAttack, false);
             currentEntry.Complete += entry =>
             {
+                
                 PlayAttack(false,() =>
                 {
                     isAttacking = false;

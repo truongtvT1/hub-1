@@ -68,6 +68,7 @@ namespace Projects.Scripts.Menu
                 PopupMenuController.Instance.ShowPopupChooseMode();
                 //TODO: tutorial for unlock new mode
             }
+            SoundMenuController.Instance.PlayBgm();
             GameServiceManager.ShowBanner();
         }
 

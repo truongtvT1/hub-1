@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DG.Tweening;
 using Sirenix.OdinInspector;
 using Spine;
 using Spine.Unity;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,17 +19,19 @@ namespace MiniGame.StickRun
         public string attackAnim;
         [ShowIf(nameof(anim)),SerializeField, SpineAnimation(dataField = nameof(anim))]
         public string idleAnim;
-
+        
         public float activeDelay, attackDelay, idleDelay, moveSpeed, moveBackSpeed, idleDuration;
         public Ease moveNextEase = Ease.InQuint, moveBackEase = Ease.Linear;
         public Transform target, start, end;
         public LineRenderer line;
         public UnityEvent onStartAttack, onAttackComplete, onStartIdle, onIdleComplete;
+        public AudioClip attackSound;
+        public AudioSource audioSource;
         protected TrackEntry currentEntry;
         protected Tweener tweener;
         protected List<Vector3> listPoints = new List<Vector3>();
         protected bool isAttacking, isIdling;
-
+        
         protected virtual void Start()
         {
             StartCoroutine(Active());
@@ -84,6 +88,19 @@ namespace MiniGame.StickRun
             }
         }
 
+        public virtual void PlayAttackSound(float delay = 0)
+        {
+            StartCoroutine(StartAttackSound(delay));
+        }
+
+        IEnumerator StartAttackSound(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            audioSource.clip = attackSound;
+            audioSource.loop = false;
+            audioSource.Play();
+        }
+        
         protected virtual void Idle()
         {
             onStartIdle?.Invoke();

@@ -5,6 +5,7 @@ using DG.Tweening;
 using Projects.Scripts.Hub;
 using Sirenix.OdinInspector;
 using ThirdParties.Truongtv;
+using ThirdParties.Truongtv.SoundManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,8 +20,17 @@ namespace MiniGame.StickRun
         public Vector2 sprintingCollider;
         public SpriteRenderer mountIcon;
         public Collider2D headCollider;
+        public GameObject shadow;
         public bool isSprinting, isHoldingSprint, isNormalRun, isCollideWall, isInSpecialTrap, isDead, isBot;
         public LayerMask itemLayer;
+        public AudioClip walkSound, runSound, finishSound,
+            dieVerticalSlashSound,
+            dieHorizontalSlashSound,
+            dieSmashSound,
+            dieSpikeSound,
+            dieHoleSound,
+            dieWoodSound;
+        private AudioSource audioSource;
         private BotDifficulty botDifficulty;
         private RankIngame rankInfo;
         [TitleGroup("Bot"), SerializeField, ShowIf(nameof(isBot))]
@@ -33,7 +43,6 @@ namespace MiniGame.StickRun
             distanceToObj,
             sprintToSafeAreaDuration = 2.5f,
             timeSprintToSafeArea;
-
         private bool isPassingObj;
         private Tween tween;
         private Vector2 cacheColliderSize, cacheOffsetCollider, cacheHeadColliderOffset, runLine;
@@ -51,6 +60,7 @@ namespace MiniGame.StickRun
         private const float _HELL_SPRINTDURATION = 3.6f;
         private void Awake()
         {
+            audioSource = GetComponent<AudioSource>();
             cacheColliderSize = collider.size;
             cacheOffsetCollider = collider.offset;
             cacheHeadColliderOffset = headCollider.offset;
@@ -135,6 +145,8 @@ namespace MiniGame.StickRun
         {
             isNormalRun = true;
             isSprinting = false;
+            audioSource.clip = walkSound;
+            audioSource.Play();
             transform.DOKill();
             transform.DOMoveX(transform.position.x + (int) moveDirection * 100000f, normalSpeed)
                 .SetSpeedBased(true)
@@ -159,6 +171,8 @@ namespace MiniGame.StickRun
         {
             isSprinting = true;
             isNormalRun = false;
+            audioSource.clip = runSound;
+            audioSource.Play();
             transform.DOKill();
             transform.DOMoveX(transform.position.x + (int) moveDirection * 100000f, sprintSpeed)
                 .SetSpeedBased(true)
@@ -213,12 +227,14 @@ namespace MiniGame.StickRun
         public void Finish()
         {
             rankInfo.isFinish = true;
+            audioSource.Stop();
+            SoundManager.Instance.PlaySfx(finishSound);
             if (LeaderBoardInGame.Instance != null)
             {
                 LeaderBoardInGame.finishAction.Invoke(rankInfo);
             }
         }
-        
+
         private void Update()
         {
             if (StickRunGameController.Instance.state == GameState.Playing && !isDead)
@@ -345,6 +361,7 @@ namespace MiniGame.StickRun
             }
         }
 
+        
         public void Die(DamageType type, Transform checkPoint, Vector3 diePos, Ease ease = Ease.Linear)
         {
             if (isDead)
@@ -352,6 +369,8 @@ namespace MiniGame.StickRun
                 return;
             }
 
+            
+            audioSource.Stop();
             isDead = true;
             isInSpecialTrap = false;
             collider.enabled = false;
@@ -369,20 +388,38 @@ namespace MiniGame.StickRun
 
             this.checkPoint = checkPoint;
             transform.DOKill();
-            transform.DOMove(diePos, diePos != transform.position ? 0.5f : 0).SetEase(ease).OnComplete(() =>
-            {
-                switch (type)
+            transform.DOMove(diePos, diePos != transform.position ? 0.5f : 0).SetEase(ease)
+                .OnStart(() =>
                 {
-                    case DamageType.Water:
-                        anim.PlayDie(trackIndex: 1);
-                        anim.PlayDie(callback: () => { Respawn(); });
-                        break;
-                    case DamageType.Object:
-                        anim.PlayDie(trackIndex: 1);
-                        anim.PlayDie(callback: () => { Respawn(); });
-                        break;
-                }
-            });
+                    
+                    switch (type)
+                    {
+                        case DamageType.Water:
+                            SoundManager.Instance.PlaySfx(dieHoleSound);
+                            shadow.SetActive(false);
+                            break;
+                        case DamageType.Blade:
+                            SoundManager.Instance.PlaySfx(dieHorizontalSlashSound);
+                            break;
+                        case DamageType.Spike:
+                            SoundManager.Instance.PlaySfx(dieSpikeSound);
+                            break;
+                        case DamageType.AxeBlade:
+                            SoundManager.Instance.PlaySfx(dieVerticalSlashSound);
+                            break;
+                        case DamageType.WoodBoard:
+                            SoundManager.Instance.PlaySfx(dieWoodSound);
+                            break;
+                        case DamageType.SmashHammer:
+                            SoundManager.Instance.PlaySfx(dieSmashSound);
+                            break;
+                    }
+                })
+                .OnComplete(() =>
+                {
+                    anim.PlayDie(trackIndex: 1);
+                    anim.PlayDie(callback: () => { Respawn(); });
+                });
         }
 
         async void Respawn()
@@ -390,6 +427,7 @@ namespace MiniGame.StickRun
             if (isBot)
             {
                 await Task.Delay(2000);
+                shadow.SetActive(true);
                 collider.enabled = true;
                 headCollider.enabled = true;
                 transform.position = new Vector3(checkPoint.position.x, runLine.y);
@@ -401,6 +439,7 @@ namespace MiniGame.StickRun
                 if (StickRunGameController.Instance.CheckCanRevive())
                 {
                     await Task.Delay(2000);
+                    shadow.SetActive(true);
                     mountIcon.gameObject.SetActive(true);
                     collider.enabled = true;
                     headCollider.enabled = true;

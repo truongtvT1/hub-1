@@ -62,7 +62,7 @@ namespace RavingBots.Water2D
 			}
 			var splash = _splashCache[_splash];
 			splash.transform.position = new Vector3(other.bounds.center.x, other.bounds.min.y - SplashFXOffset,100);
-			splash.Play(2.5f, SplashFXSounds[Random.Range(0, SplashFXSounds.Length)], 5 * SplashFXPowerToVolume, SplashFXPowerToPitch / 5);
+			splash.Play(2.5f, SplashFXSounds[Random.Range(0, SplashFXSounds.Length)], SplashFXPowerToVolume, SplashFXPowerToPitch / 5);
 
 			_splash = (_splash + 1) % _splashCache.Length;
         }
