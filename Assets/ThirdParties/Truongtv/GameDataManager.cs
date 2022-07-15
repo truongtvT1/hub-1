@@ -462,17 +462,16 @@ namespace ThirdParties.Truongtv
         public void UpdateMiniGameCountPlayed(string miniGame)
         {
             UpdateCurrency(miniGame,1);
+            UpdateCurrency(miniGame+"_masterPoint",1);
         }
         public void UpdateMiniGameWinCount(string miniGame)
         {
             _userInfo.ranking.win++;
-            UpdateCurrency(miniGame+"_masterPoint",1);
             UpdateCurrency(miniGame + "_win",1);
         }
         public void UpdateMiniGameLoseCount(string miniGame)
         {
             _userInfo.ranking.lose++;
-            UpdateCurrency(miniGame+"_masterPoint",-1);
             UpdateCurrency(miniGame + "_lose",1);
         }
 

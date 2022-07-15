@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iapData: {fileID: 11400000, guid: 329ad386fee883547ac67e724d3c4fe9, type: 2}
-  fakeIap: 1
+  fakeIap: 0
 --- !u!4 &989416482 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3933062202430836178, guid: fa35c1fd658481548b6f57ebd0892d89, type: 3}
@@ -739,7 +739,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 1
   m_SortingLayerID: -1809605999
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!1 &1659235248
 GameObject:

@@ -25,7 +25,6 @@ namespace ThirdParties.Truongtv.IAP
         #region Usage
         public string GetItemLocalPriceString(string id)
         {
-            
             return _controller.products.WithID(id)?.metadata.localizedPriceString;
         }
 

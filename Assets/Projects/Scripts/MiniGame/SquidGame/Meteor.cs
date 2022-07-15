@@ -10,7 +10,8 @@ namespace MiniGame.SquidGame
         public GameObject effectGround, warning, meteor,trigger;
         public ParticleSystem bloomFx;
         public SpriteRenderer effectBlow;
-        public AudioClip impactGroundSound;
+        public AudioClip impactGroundSound,
+             warningSound;
         public void Init(float y)
         {
             var spriteRenderer = meteor.GetComponent<SpriteRenderer>();
@@ -63,6 +64,7 @@ namespace MiniGame.SquidGame
         
         private IEnumerator Fall()
         {
+            SoundManager.Instance.PlaySfx(warningSound);
             var tween = effectBlow.DOFade(50 / 255f, .2f).SetLoops(-1, LoopType.Yoyo).Play();
             yield return new WaitForSeconds(2f);
             warning.SetActive(false);

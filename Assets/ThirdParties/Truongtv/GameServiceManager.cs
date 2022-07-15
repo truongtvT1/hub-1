@@ -171,6 +171,7 @@ namespace ThirdParties.Truongtv
         private void Start()
         {
             _adManager.Init();
+            _iapManager.Init();
             OnFetchComplete(GameDataManager.Instance.remoteConfigValue.OnFetchComplete);
 #if USING_LOG_FIREBASE||USING_REMOTE_FIREBASE
              FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
@@ -253,9 +254,12 @@ namespace ThirdParties.Truongtv
                 return;
             }
 
-            if (_adManager.IsInterstitialLoaded() && DateTime.Now.Subtract(_lastTimeShowAd).TotalSeconds <
+            Debug.Log("last time show ad " + _lastTimeShowAd);
+            Debug.Log("is inter ad loaded : " + _adManager.IsInterstitialLoaded());
+            if (_adManager.IsInterstitialLoaded() && DateTime.Now.Subtract(_lastTimeShowAd).TotalSeconds >
                 GameDataManager.Instance.remoteConfigValue.blockAdTime)
             {
+                
                 _adManager.ShowInterstitialAd(result =>
                 {
                     if (result)

@@ -21,7 +21,7 @@ MonoBehaviour:
     defaultValue: 4.99$
   - skuId: t1.ticket.1100
     productType: 0
-    defaultValue: 9.99
+    defaultValue: 9.99$
   - skuId: t1.ticket.2400
     productType: 0
     defaultValue: 19.99$

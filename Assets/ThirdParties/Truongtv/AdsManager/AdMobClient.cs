@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GoogleMobileAds.Api;
-using GoogleMobileAds.Api.Mediation.AppLovin;
 using GoogleMobileAds.Common;
 using Truongtv.Services.Ad;
 #if UNITY_IOS|| UNITY_IPHONE
@@ -41,9 +40,9 @@ namespace ThirdParties.Truongtv.AdsManager
 
             #region AppLovin Mediation
 
-            AppLovin.SetHasUserConsent(true);
-            AppLovin.SetIsAgeRestrictedUser(true);
-            AppLovin.Initialize();
+            // AppLovin.SetHasUserConsent(true);
+            // AppLovin.SetIsAgeRestrictedUser(true);
+            // AppLovin.Initialize();
 
             #endregion
 
@@ -63,9 +62,9 @@ namespace ThirdParties.Truongtv.AdsManager
             {
                 ATTrackingStatusBinding.RequestAuthorizationTracking();
             }
-            #region Facebook Audience
-            AudienceNetwork.AdSettings.SetAdvertiserTrackingEnabled(false);
-            #endregion
+            // #region Facebook Audience
+            // AudienceNetwork.AdSettings.SetAdvertiserTrackingEnabled(false);
+            // #endregion
 #endif
         }
 

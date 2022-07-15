@@ -1,3 +1,4 @@
+using System;
 using ThirdParties.Truongtv.SoundManager;
 using Truongtv.Utilities;
 using UnityEngine;
@@ -27,5 +28,10 @@ public class ObjectSound : MonoBehaviour
                 playedSfx = true;
             }
         }
+    }
+
+    private void OnDisable()
+    {
+        playedSfx = false;
     }
 }

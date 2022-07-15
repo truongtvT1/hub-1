@@ -69,6 +69,7 @@ namespace ThirdParties.Truongtv.SoundManager
                 if (sfxList[i].IsLoop() && sfxList[i].GetAudioClip() == clip)
                 {
                     sfxList[i].Stop();
+                    break;
                 }
             }
         }

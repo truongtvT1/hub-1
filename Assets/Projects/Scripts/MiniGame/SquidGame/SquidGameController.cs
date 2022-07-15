@@ -104,7 +104,6 @@ namespace MiniGame.SquidGame
                     break;
                 }
             } 
-            difficulty = GameDifficulty.Hard;
             difficultyDelta = (float) difficulty / 10;
             maxMeteorPerTurn = (int) difficulty;
             StartCoroutine(Init());

@@ -29,10 +29,10 @@ namespace Projects.Scripts.Popup
         {
             backButton.onClick.AddListener(() =>
             {
+                SoundInGameController.Instance.StopRewardBonusSfx();
                 GameServiceManager.ShowInterstitialAd(() =>
                 {
                     GameDataManager.Instance.ResetSkinInGame();
-                    Close();
                     Loading.Instance.LoadMenu();
                 });
             });
@@ -85,9 +85,9 @@ namespace Projects.Scripts.Popup
             replayButton.onClick.AddListener(() =>
             {
                 //TODO: matching then reload scene 
+                SoundInGameController.Instance.StopRewardBonusSfx();
                 Loading.Instance.LoadMiniGame(info);
                 GameDataManager.Instance.ResetSkinInGame();
-                Close();
             });
 
             openCompleteAction = () =>
